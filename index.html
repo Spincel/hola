@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Una Expedición de Recuerdos ✦</title>
+  
+  <!-- OpenGraph para compartir en WhatsApp/Instagram con vista previa linda -->
+  <meta property="og:title" content="Hay un mensaje fragmentado para ti... ✦">
+  <meta property="og:description" content="Recorre el sendero de estrellas y reúne los 4 fragmentos ocultos.">
+  <meta property="og:type" content="website">
+
+  <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <!-- Fondo de Estrellas y Nebulosa -->
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- Botón de Audio Flotante (Mute/Unmute) -->
+  <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de música" title="Música de fondo">
+    <span class="audio-icon">🎵</span>
+    <span class="audio-wave"></span>
+  </button>
+
+  <!-- Barra Superior: Inventario de Fragmentos Celestes -->
+  <header id="fragments-hud" class="fragments-hud hidden">
+    <div class="hud-container">
+      <div class="hud-title">Fragmentos del Destino</div>
+      <div class="hud-slots">
+        <div class="hud-slot" id="slot-1" data-index="1">
+          <div class="slot-gem">✦</div>
+          <span class="slot-label">Luz</span>
+        </div>
+        <div class="hud-slot" id="slot-2" data-index="2">
+          <div class="slot-gem">✧</div>
+          <span class="slot-label">Risas</span>
+        </div>
+        <div class="hud-slot" id="slot-3" data-index="3">
+          <div class="slot-gem">⋆</div>
+          <span class="slot-label">Hilos</span>
+        </div>
+        <div class="hud-slot" id="slot-4" data-index="4">
+          <div class="slot-gem">❤</div>
+          <span class="slot-label">Latido</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de Fases -->
+  <main id="app-container" class="app-container">
+
+    <!-- ========================================== -->
+    <!-- FASE 0: INTRODUCCIÓN & AMBIENTE            -->
+    <!-- ========================================== -->
+    <section id="phase-intro" class="phase-section active">
+      <div class="glass-card intro-card">
+        <div class="celestial-badge" id="intro-badge">✦ Una Expedición de Recuerdos ✦</div>
+        <h1 class="intro-title" id="intro-title">El Mensaje Fragmentado</h1>
+        <p class="intro-subtitle" id="intro-subtitle">
+          Hay un mensaje muy especial que se fragmentó en el camino hacia ti. Para revelarlo, debes recorrer este sendero y reunir los 4 fragmentos ocultos...
+        </p>
+
+        <div class="headphones-hint" id="intro-headphones">
+          <span class="hint-icon">🎧</span>
+          <span>Ponte audífonos para una mejor experiencia</span>
+        </div>
+
+        <button id="start-btn" class="btn-celestial btn-pulse">
+          <span class="btn-text" id="intro-start-btn-text">Comenzar el viaje ✨</span>
+          <div class="btn-shimmer"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FASE 1: MINIJUEGO 1 - ENCUENTRA LAS LUCES  -->
+    <!-- ========================================== -->
+    <section id="phase-minigame1" class="phase-section">
+      <div class="minigame-header">
+        <span class="station-tag">Estación I</span>
+        <h2 class="station-title">Encuentra las Luces Ocultas</h2>
+        <p class="station-instruction">
+          Mueve la linterna en la oscuridad y toca los destellos para revelar los pensamientos escondidos.
+        </p>
+        <div class="counter-badge">
+          Destellos descubiertos: <span id="lights-count">0</span> / 4
+        </div>
+      </div>
+
+      <!-- Área de la Linterna -->
+      <div id="flashlight-area" class="flashlight-area">
+        <canvas id="flashlight-canvas"></canvas>
+        <div id="lights-container" class="lights-container">
+          <!-- Las luces interactivas se generan dinámicamente -->
+        </div>
+        <div class="flashlight-hint-touch">Toca o desliza en la pantalla para alumbrar 🔦</div>
+      </div>
+
+      <!-- Modal de Pensamiento Revelado -->
+      <div id="light-modal" class="custom-modal hidden">
+        <div class="modal-content glass-card glow-border">
+          <div class="modal-sparkle">✦</div>
+          <h3 id="modal-light-title" class="modal-title">Destello de Luz</h3>
+          <p id="modal-light-phrase" class="modal-phrase">«Frase»</p>
+          <button id="close-light-modal" class="btn-celestial-sm">Continuar explorando</button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Recompensa de Estación 1 -->
+      <div id="station1-reward" class="reward-card glass-card hidden">
+        <div class="reward-icon-burst">✦</div>
+        <h3 class="reward-title">¡Primer Fragmento Recuperado!</h3>
+        <p class="reward-subtitle">Fragmento I: Luz de la Mirada</p>
+        <div class="poem-box">
+          <p class="poem-line">En la noche más callada y fría,</p>
+          <p class="poem-line">bastó un destello de tu mirada</p>
+          <p class="poem-line">para entender que la luz no viene del sol,</p>
+          <p class="poem-line">sino de quien te hace sonreír con el alma.</p>
+        </div>
+        <button id="next-to-phase2" class="btn-celestial">Avanzar a la Estación II →</button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FASE 2: MINIJUEGO 2 - CUESTIONARIO         -->
+    <!-- ========================================== -->
+    <section id="phase-minigame2" class="phase-section">
+      <div class="minigame-header">
+        <span class="station-tag">Estación II</span>
+        <h2 class="station-title">Cuestionario de Cómplices</h2>
+        <p class="station-instruction">Solo quien guarda estos momentos en el corazón conoce las respuestas:</p>
+        <div class="trivia-progress">
+          <div class="progress-bar-fill" id="trivia-progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Trivia -->
+      <div class="trivia-card-container">
+        <div id="trivia-card" class="glass-card trivia-card">
+          <div class="question-number" id="question-step">Pregunta 1 de 3</div>
+          <h3 class="question-text" id="question-text">¿Cuál es nuestro superpoder secreto?</h3>
+
+          <div class="options-container" id="options-container">
+            <!-- Opciones generadas dinámicamente -->
+          </div>
+
+          <!-- Mensaje de error/intento tierno -->
+          <div id="trivia-feedback" class="trivia-feedback hidden"></div>
+        </div>
+
+        <!-- Polaroid revelada tras responder correctamente -->
+        <div id="polaroid-reveal" class="polaroid-wrapper hidden">
+          <div class="polaroid-card">
+            <div class="polaroid-img-frame">
+              <img id="polaroid-img" src="" alt="Recuerdo especial" loading="lazy">
+            </div>
+            <div class="polaroid-caption" id="polaroid-caption">Nuestra complicidad es única.</div>
+          </div>
+          <button id="next-question-btn" class="btn-celestial-sm mt-3">Siguiente Pregunta →</button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Recompensa de Estación 2 -->
+      <div id="station2-reward" class="reward-card glass-card hidden">
+        <div class="reward-icon-burst">✧</div>
+        <h3 class="reward-title">¡Segundo Fragmento Recuperado!</h3>
+        <p class="reward-subtitle">Fragmento II: Eco de Nuestras Risas</p>
+        <div class="poem-box">
+          <p class="poem-line">Entre anécdotas, bromas tontas y miradas cómplices,</p>
+          <p class="poem-line">construimos un lenguaje que solo dos personas entienden.</p>
+          <p class="poem-line">Y en cada risa compartida,</p>
+          <p class="poem-line">el tiempo parece detenerse a nuestro favor.</p>
+        </div>
+        <button id="next-to-phase3" class="btn-celestial">Avanzar a la Estación III →</button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FASE 3: MINIJUEGO 3 - LA CONSTELACIÓN      -->
+    <!-- ========================================== -->
+    <section id="phase-minigame3" class="phase-section">
+      <div class="minigame-header">
+        <span class="station-tag">Estación III</span>
+        <h2 class="station-title">Hilos del Destino</h2>
+        <p class="station-instruction">
+          Toca las estrellas numeradas en orden (del 1 al 7) para trazar la constelación oculta.
+        </p>
+        <div class="constellation-counter">
+          Siguiente estrella: <span id="next-star-num" class="highlight-star">1</span>
+        </div>
+      </div>
+
+      <!-- Tablero Interactivo de la Constelación -->
+      <div class="constellation-board-wrap">
+        <div id="constellation-board" class="constellation-board">
+          <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 400 400">
+            <!-- Líneas trazadas dinámicamente -->
+            <defs>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="glow" />
+                <feComposite in="SourceGraphic" in2="glow" operator="over" />
+              </filter>
+            </defs>
+            <g id="svg-lines"></g>
+          </svg>
+          <div id="stars-nodes" class="stars-nodes">
+            <!-- Nodos de estrellas 1 a 7 generados dinámicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Recompensa de Estación 3 -->
+      <div id="station3-reward" class="reward-card glass-card hidden">
+        <div class="reward-icon-burst">⋆</div>
+        <h3 class="reward-title">¡Constelación Completa!</h3>
+        <p class="reward-subtitle">Fragmentos III y IV Recuperados: Hilos del Destino & Latido Central</p>
+        <div class="poem-box">
+          <p class="poem-line">Dicen que la luz de las estrellas tarda milenios en llegar a la Tierra.</p>
+          <p class="poem-line">Quizás todas ellas brillaron en silencio a través del tiempo,</p>
+          <p class="poem-line">esperando el segundo exacto</p>
+          <p class="poem-line">en el que nuestros caminos se cruzaran.</p>
+        </div>
+        <button id="next-to-phase4" class="btn-celestial btn-pulse">¡Unir los 4 Fragmentos! ✦</button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FASE 4: EL CLÍMAX ESPECTACULAR             -->
+    <!-- ========================================== -->
+    <section id="phase-climax" class="phase-section">
+      <!-- Escenario de Unión de Fragmentos -->
+      <div id="fusion-stage" class="fusion-stage">
+        <div class="celestial-badge">✦ El Momento de la Verdad ✦</div>
+        <h2 class="climax-title">Ensamblando el Mensaje</h2>
+        <p class="climax-desc">
+          Los 4 fragmentos que reuniste están listos para unirse y revelar el secreto final.
+        </p>
+
+        <!-- Círculo Alquímico / Pedestal Cósmico -->
+        <div class="fusion-pedestal" id="fusion-pedestal">
+          <div class="fusion-ring ring-outer"></div>
+          <div class="fusion-ring ring-mid"></div>
+          <div class="fusion-core" id="fusion-core">
+            <span class="core-icon">✦</span>
+          </div>
+
+          <!-- Los 4 orbes que viajan -->
+          <div class="floating-orb orb-1" id="orb-1">✦</div>
+          <div class="floating-orb orb-2" id="orb-2">✧</div>
+          <div class="floating-orb orb-3" id="orb-3">⋆</div>
+          <div class="floating-orb orb-4" id="orb-4">❤</div>
+        </div>
+
+        <button id="fuse-btn" class="btn-celestial btn-pulse btn-lg">
+          ✦ Ensamblar los Fragmentos ✦
+        </button>
+      </div>
+
+      <!-- La Gran Revelación: Carta y Galería -->
+      <div id="revelation-stage" class="revelation-stage hidden">
+        <div class="glass-card romantic-letter-card">
+          <div class="letter-seal">❤</div>
+          <div class="letter-header">
+            <span class="letter-salutation" id="letter-salutation">Para la persona más especial de mi vida,</span>
+          </div>
+
+          <!-- Texto de la carta con efecto máquina de escribir -->
+          <div class="letter-body" id="letter-body"></div>
+
+          <button id="skip-typewriter-btn" class="skip-btn hidden">Leer todo de una vez</button>
+
+          <div class="letter-signature" id="letter-signature">
+            <span class="closing" id="letter-closing">Con todo mi amor,</span>
+            <span class="author-name" id="letter-author">Tu persona favorita</span>
+          </div>
+        </div>
+
+        <!-- Galería de Recuerdos / Fotos -->
+        <div class="memories-section" id="memories-section">
+          <h3 class="memories-title">✦ Destellos de Nuestra Historia ✦</h3>
+          <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Fotos inyectadas dinámicamente -->
+            </div>
+            <div class="carousel-nav">
+              <button id="carousel-prev" class="carousel-arrow" aria-label="Foto anterior">‹</button>
+              <div class="carousel-dots" id="carousel-dots"></div>
+              <button id="carousel-next" class="carousel-arrow" aria-label="Siguiente foto">›</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- La Gran Pregunta Final -->
+        <div class="proposal-container glass-card glow-border" id="proposal-container">
+          <div class="proposal-stars">✨ ❤ ✨</div>
+          <h2 class="proposal-question" id="final-question">
+            ¿Quieres ser mi novia y seguir construyendo este universo juntos?
+          </h2>
+
+          <div class="proposal-actions">
+            <button id="btn-yes" class="btn-celestial btn-love btn-pulse">
+              <span id="btn-yes-text">¡Sí, por siempre! ❤️</span>
+            </button>
+            <button id="btn-no" class="btn-playful">
+              <span id="btn-no-text">Déjame pensarlo... 😜</span>
+            </button>
+          </div>
+
+          <div id="no-playful-msg" class="no-playful-msg hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- MODAL DE CELEBRACIÓN FINAL (¡Dijo que SÍ!) -->
+    <!-- ========================================== -->
+    <div id="celebration-modal" class="celebration-modal hidden">
+      <div class="glass-card celebration-card">
+        <div class="celebration-badge" id="celeb-badge">✦ Promesa Sellada entre las Estrellas ✦</div>
+        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ! 💖🎉</h2>
+        <div class="celebration-hearts">💕 🌟 💖 🌟 💕</div>
+        <p class="celebration-text" id="celeb-message">
+          Este es solo el comienzo de nuestra historia. Prometo hacerte reír, cuidarte, apoyarte en cada sueño y quererte en cada versión de ti.
+        </p>
+
+        <div class="celebration-certificate">
+          <div class="cert-line">
+            <span>Fecha oficial de nuestro universo:</span>
+            <strong id="celeb-date"></strong>
+          </div>
+          <div class="cert-line">
+            <span>Para:</span>
+            <strong id="celeb-partner"></strong>
+          </div>
+          <div class="cert-line">
+            <span>De:</span>
+            <strong id="celeb-sender"></strong>
+          </div>
+        </div>
+
+        <button id="btn-download-capture" class="btn-celestial-sm">
+          📸 Guarda una captura de este momento
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
