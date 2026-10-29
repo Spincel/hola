@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Una Expedición de Recuerdos ✦</title>
+  <title>Martha ✦ Entre el Mar y las Estrellas</title>
   
-  <!-- OpenGraph para compartir en WhatsApp/Instagram con vista previa linda -->
-  <meta property="og:title" content="Hay un mensaje fragmentado para ti... ✦">
-  <meta property="og:description" content="Recorre el sendero de estrellas y reúne los 4 fragmentos ocultos.">
+  <meta property="og:title" content="Martha: Un mensaje entre el mar y las estrellas ✦">
+  <meta property="og:description" content="Una expedición interactiva de recuerdos y complicidad.">
   <meta property="og:type" content="website">
 
   <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
@@ -18,23 +17,22 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-  <!-- Fondo de Estrellas y Nebulosa -->
+  <!-- Canvas de fondo: Cielo estrellado y resplandor de marea -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
   <!-- Botón de Audio Flotante (Mute/Unmute) -->
-  <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de música" title="Música de fondo">
+  <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de sonido" title="Música y olas del mar">
     <span class="audio-icon">🎵</span>
-    <span class="audio-wave"></span>
   </button>
 
   <!-- Barra Superior: Inventario de Fragmentos Celestes -->
   <header id="fragments-hud" class="fragments-hud hidden">
     <div class="hud-container">
-      <div class="hud-title">Fragmentos del Destino</div>
+      <div class="hud-title">Fragmentos de la Marea</div>
       <div class="hud-slots">
         <div class="hud-slot" id="slot-1" data-index="1">
           <div class="slot-gem">✦</div>
-          <span class="slot-label">Luz</span>
+          <span class="slot-label">Brisa</span>
         </div>
         <div class="hud-slot" id="slot-2" data-index="2">
           <div class="slot-gem">✧</div>
@@ -46,287 +44,298 @@
         </div>
         <div class="hud-slot" id="slot-4" data-index="4">
           <div class="slot-gem">❤</div>
-          <span class="slot-label">Latido</span>
+          <span class="slot-label">Química</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Contenedor Principal de Fases -->
-  <main id="app-container" class="app-container">
+  <!-- Contenedor Único Fijo en Pantalla (Sin Scroll) -->
+  <main id="app-viewport" class="app-viewport">
 
     <!-- ========================================== -->
-    <!-- FASE 0: INTRODUCCIÓN & AMBIENTE            -->
+    <!-- ESCENA 0: INTRODUCCIÓN                     -->
     <!-- ========================================== -->
-    <section id="phase-intro" class="phase-section active">
-      <div class="glass-card intro-card">
-        <div class="celestial-badge" id="intro-badge">✦ Una Expedición de Recuerdos ✦</div>
-        <h1 class="intro-title" id="intro-title">El Mensaje Fragmentado</h1>
-        <p class="intro-subtitle" id="intro-subtitle">
-          Hay un mensaje muy especial que se fragmentó en el camino hacia ti. Para revelarlo, debes recorrer este sendero y reunir los 4 fragmentos ocultos...
+    <div id="scene-intro" class="stage-scene active">
+      <div class="glass-card compact-card">
+        <div class="ocean-badge" id="intro-badge">✦ Entre el Mar y las Estrellas ✦</div>
+        <h1 class="main-title" id="intro-title">El Mensaje de la Marea</h1>
+        <p class="subtitle" id="intro-subtitle">
+          Martha, hay un mensaje que llegó flotando desde el horizonte. Para descubrir el secreto que guarda, debes recorrer la costa y reunir 4 fragmentos estelares...
         </p>
 
         <div class="headphones-hint" id="intro-headphones">
           <span class="hint-icon">🎧</span>
-          <span>Ponte audífonos para una mejor experiencia</span>
+          <span>Ponte audífonos para escuchar las olas y la melodía</span>
         </div>
 
-        <button id="start-btn" class="btn-celestial btn-pulse">
-          <span class="btn-text" id="intro-start-btn-text">Comenzar el viaje ✨</span>
-          <div class="btn-shimmer"></div>
+        <button id="btn-start" class="btn-ocean btn-pulse">
+          <span id="intro-start-btn-text">Comenzar el viaje ✨</span>
         </button>
       </div>
-    </section>
+    </div>
 
     <!-- ========================================== -->
-    <!-- FASE 1: MINIJUEGO 1 - ENCUENTRA LAS LUCES  -->
+    <!-- ESCENA 1A: MINIJUEGO 1 - JUGAR LINTERNA    -->
     <!-- ========================================== -->
-    <section id="phase-minigame1" class="phase-section">
-      <div class="minigame-header">
-        <span class="station-tag">Estación I</span>
-        <h2 class="station-title">Encuentra las Luces Ocultas</h2>
-        <p class="station-instruction">
-          Mueve la linterna en la oscuridad y toca los destellos para revelar los pensamientos escondidos.
-        </p>
-        <div class="counter-badge">
-          Destellos descubiertos: <span id="lights-count">0</span> / 4
+    <div id="scene-m1-play" class="stage-scene">
+      <div class="glass-card game-card">
+        <div class="scene-header">
+          <span class="station-tag">Estación I</span>
+          <h2 class="scene-title">Destellos en la Marea</h2>
+          <p class="scene-instruction">
+            El mar brilla con bioluminiscencia. Mueve tu dedo o ratón y toca los 4 destellos en las olas.
+          </p>
+          <div class="counter-badge">
+            Destellos descubiertos: <span id="lights-count">0</span> / 4
+          </div>
+        </div>
+
+        <div id="flashlight-area" class="flashlight-area">
+          <canvas id="flashlight-canvas"></canvas>
+          <div id="lights-container" class="lights-container"></div>
+          <div class="flashlight-hint-touch">Toca o desliza sobre el mar 🔦</div>
         </div>
       </div>
+    </div>
 
-      <!-- Área de la Linterna -->
-      <div id="flashlight-area" class="flashlight-area">
-        <canvas id="flashlight-canvas"></canvas>
-        <div id="lights-container" class="lights-container">
-          <!-- Las luces interactivas se generan dinámicamente -->
-        </div>
-        <div class="flashlight-hint-touch">Toca o desliza en la pantalla para alumbrar 🔦</div>
+    <!-- Modal emergente al tocar un destello en Minijuego 1 -->
+    <div id="light-modal" class="custom-modal hidden">
+      <div class="modal-content glass-card glow-border">
+        <div class="modal-sparkle">🌊 ✦</div>
+        <h3 id="modal-light-title" class="modal-title">Brisa Marina</h3>
+        <p id="modal-light-phrase" class="modal-phrase">«Frase»</p>
+        <button id="close-light-modal" class="btn-ocean-sm">Continuar explorando</button>
       </div>
+    </div>
 
-      <!-- Modal de Pensamiento Revelado -->
-      <div id="light-modal" class="custom-modal hidden">
-        <div class="modal-content glass-card glow-border">
-          <div class="modal-sparkle">✦</div>
-          <h3 id="modal-light-title" class="modal-title">Destello de Luz</h3>
-          <p id="modal-light-phrase" class="modal-phrase">«Frase»</p>
-          <button id="close-light-modal" class="btn-celestial-sm">Continuar explorando</button>
-        </div>
-      </div>
-
-      <!-- Tarjeta de Recompensa de Estación 1 -->
-      <div id="station1-reward" class="reward-card glass-card hidden">
+    <!-- ========================================== -->
+    <!-- ESCENA 1B: RECOMPENSA ESTACIÓN 1           -->
+    <!-- ========================================== -->
+    <div id="scene-m1-reward" class="stage-scene">
+      <div class="glass-card compact-card">
         <div class="reward-icon-burst">✦</div>
         <h3 class="reward-title">¡Primer Fragmento Recuperado!</h3>
-        <p class="reward-subtitle">Fragmento I: Luz de la Mirada</p>
+        <p class="reward-subtitle">Fragmento I: La Brisa y la Chispa</p>
         <div class="poem-box">
-          <p class="poem-line">En la noche más callada y fría,</p>
-          <p class="poem-line">bastó un destello de tu mirada</p>
-          <p class="poem-line">para entender que la luz no viene del sol,</p>
-          <p class="poem-line">sino de quien te hace sonreír con el alma.</p>
+          <p class="poem-line">Entre el murmullo tranquilo de las olas</p>
+          <p class="poem-line">y el cielo abierto sobre la marea,</p>
+          <p class="poem-line">bastó conocerte, Martha,</p>
+          <p class="poem-line">para saber que tu luz no se compara con ninguna.</p>
         </div>
-        <button id="next-to-phase2" class="btn-celestial">Avanzar a la Estación II →</button>
+        <button id="btn-to-m2" class="btn-ocean">Avanzar a la Estación II →</button>
       </div>
-    </section>
+    </div>
 
     <!-- ========================================== -->
-    <!-- FASE 2: MINIJUEGO 2 - CUESTIONARIO         -->
+    <!-- ESCENA 2A: MINIJUEGO 2 - TRIVIA            -->
     <!-- ========================================== -->
-    <section id="phase-minigame2" class="phase-section">
-      <div class="minigame-header">
-        <span class="station-tag">Estación II</span>
-        <h2 class="station-title">Cuestionario de Cómplices</h2>
-        <p class="station-instruction">Solo quien guarda estos momentos en el corazón conoce las respuestas:</p>
-        <div class="trivia-progress">
-          <div class="progress-bar-fill" id="trivia-progress-bar"></div>
-        </div>
-      </div>
-
-      <!-- Tarjeta de Trivia -->
-      <div class="trivia-card-container">
-        <div id="trivia-card" class="glass-card trivia-card">
-          <div class="question-number" id="question-step">Pregunta 1 de 3</div>
-          <h3 class="question-text" id="question-text">¿Cuál es nuestro superpoder secreto?</h3>
-
-          <div class="options-container" id="options-container">
-            <!-- Opciones generadas dinámicamente -->
+    <div id="scene-m2-play" class="stage-scene">
+      <div class="glass-card compact-card">
+        <div class="scene-header">
+          <span class="station-tag">Estación II</span>
+          <h2 class="scene-title">Cuestionario de la Costa</h2>
+          <div class="trivia-progress">
+            <div class="progress-bar-fill" id="trivia-progress-bar"></div>
           </div>
-
-          <!-- Mensaje de error/intento tierno -->
-          <div id="trivia-feedback" class="trivia-feedback hidden"></div>
         </div>
 
-        <!-- Polaroid revelada tras responder correctamente -->
-        <div id="polaroid-reveal" class="polaroid-wrapper hidden">
-          <div class="polaroid-card">
-            <div class="polaroid-img-frame">
-              <img id="polaroid-img" src="" alt="Recuerdo especial" loading="lazy">
-            </div>
-            <div class="polaroid-caption" id="polaroid-caption">Nuestra complicidad es única.</div>
-          </div>
-          <button id="next-question-btn" class="btn-celestial-sm mt-3">Siguiente Pregunta →</button>
-        </div>
+        <div class="question-number" id="question-step">Pregunta 1 de 3</div>
+        <h3 class="question-text" id="question-text">¿Cuál es nuestro superpoder secreto?</h3>
+
+        <div class="options-container" id="options-container"></div>
+        <div id="trivia-feedback" class="trivia-feedback hidden"></div>
       </div>
+    </div>
 
-      <!-- Tarjeta de Recompensa de Estación 2 -->
-      <div id="station2-reward" class="reward-card glass-card hidden">
+    <!-- ========================================== -->
+    <!-- ESCENA 2B: POLAROID TRAS RESPUESTA         -->
+    <!-- ========================================== -->
+    <div id="scene-m2-polaroid" class="stage-scene">
+      <div class="glass-card polaroid-scene-card">
+        <div class="polaroid-card">
+          <div class="polaroid-img-frame">
+            <img id="polaroid-img" src="" alt="Recuerdo en la playa" loading="lazy">
+          </div>
+          <div class="polaroid-caption" id="polaroid-caption">Nuestras charlas frente al mar.</div>
+        </div>
+        <button id="btn-next-question" class="btn-ocean-sm mt-3">Siguiente Pregunta →</button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ESCENA 2C: RECOMPENSA ESTACIÓN 2           -->
+    <!-- ========================================== -->
+    <div id="scene-m2-reward" class="stage-scene">
+      <div class="glass-card compact-card">
         <div class="reward-icon-burst">✧</div>
         <h3 class="reward-title">¡Segundo Fragmento Recuperado!</h3>
-        <p class="reward-subtitle">Fragmento II: Eco de Nuestras Risas</p>
+        <p class="reward-subtitle">Fragmento II: Nuestras Risas</p>
         <div class="poem-box">
-          <p class="poem-line">Entre anécdotas, bromas tontas y miradas cómplices,</p>
-          <p class="poem-line">construimos un lenguaje que solo dos personas entienden.</p>
-          <p class="poem-line">Y en cada risa compartida,</p>
-          <p class="poem-line">el tiempo parece detenerse a nuestro favor.</p>
+          <p class="poem-line">Dicen que el mar guarda los secretos más bellos,</p>
+          <p class="poem-line">pero nuestra complicidad no la esconde nadie:</p>
+          <p class="poem-line">está en cada risa, en cada mirada,</p>
+          <p class="poem-line">y en esta química que siempre estuvo ahí.</p>
         </div>
-        <button id="next-to-phase3" class="btn-celestial">Avanzar a la Estación III →</button>
+        <button id="btn-to-m3" class="btn-ocean">Avanzar a la Estación III →</button>
       </div>
-    </section>
+    </div>
 
     <!-- ========================================== -->
-    <!-- FASE 3: MINIJUEGO 3 - LA CONSTELACIÓN      -->
+    <!-- ESCENA 3A: MINIJUEGO 3 - CONSTELACIÓN      -->
     <!-- ========================================== -->
-    <section id="phase-minigame3" class="phase-section">
-      <div class="minigame-header">
-        <span class="station-tag">Estación III</span>
-        <h2 class="station-title">Hilos del Destino</h2>
-        <p class="station-instruction">
-          Toca las estrellas numeradas en orden (del 1 al 7) para trazar la constelación oculta.
-        </p>
-        <div class="constellation-counter">
-          Siguiente estrella: <span id="next-star-num" class="highlight-star">1</span>
+    <div id="scene-m3-play" class="stage-scene">
+      <div class="glass-card game-card">
+        <div class="scene-header">
+          <span class="station-tag">Estación III</span>
+          <h2 class="scene-title">Hilos sobre el Océano</h2>
+          <p class="scene-instruction">
+            Toca las estrellas del 1 al 7 para trazar la constelación sobre el horizonte marino.
+          </p>
+          <div class="constellation-counter">
+            Siguiente estrella: <span id="next-star-num" class="highlight-star">1</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Tablero Interactivo de la Constelación -->
-      <div class="constellation-board-wrap">
-        <div id="constellation-board" class="constellation-board">
-          <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 400 400">
-            <!-- Líneas trazadas dinámicamente -->
-            <defs>
-              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="glow" />
-                <feComposite in="SourceGraphic" in2="glow" operator="over" />
-              </filter>
-            </defs>
-            <g id="svg-lines"></g>
-          </svg>
-          <div id="stars-nodes" class="stars-nodes">
-            <!-- Nodos de estrellas 1 a 7 generados dinámicamente -->
+        <div class="constellation-board-wrap">
+          <div id="constellation-board" class="constellation-board">
+            <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 400 400">
+              <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="glow" />
+                  <feComposite in="SourceGraphic" in2="glow" operator="over" />
+                </filter>
+              </defs>
+              <g id="svg-lines"></g>
+            </svg>
+            <div id="stars-nodes" class="stars-nodes"></div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Tarjeta de Recompensa de Estación 3 -->
-      <div id="station3-reward" class="reward-card glass-card hidden">
+    <!-- ========================================== -->
+    <!-- ESCENA 3B: RECOMPENSA ESTACIÓN 3           -->
+    <!-- ========================================== -->
+    <div id="scene-m3-reward" class="stage-scene">
+      <div class="glass-card compact-card">
         <div class="reward-icon-burst">⋆</div>
         <h3 class="reward-title">¡Constelación Completa!</h3>
-        <p class="reward-subtitle">Fragmentos III y IV Recuperados: Hilos del Destino & Latido Central</p>
+        <p class="reward-subtitle">Fragmentos III y IV: El Destino y la Química</p>
         <div class="poem-box">
-          <p class="poem-line">Dicen que la luz de las estrellas tarda milenios en llegar a la Tierra.</p>
-          <p class="poem-line">Quizás todas ellas brillaron en silencio a través del tiempo,</p>
-          <p class="poem-line">esperando el segundo exacto</p>
-          <p class="poem-line">en el que nuestros caminos se cruzaran.</p>
+          <p class="poem-line">Hay personas que son como el mar:</p>
+          <p class="poem-line">profundas, libres y llenas de magia.</p>
+          <p class="poem-line">Tú eres todo eso y mucho más, Martha.</p>
+          <p class="poem-line">Ahora todos los fragmentos están reunidos...</p>
         </div>
-        <button id="next-to-phase4" class="btn-celestial btn-pulse">¡Unir los 4 Fragmentos! ✦</button>
+        <button id="btn-to-climax" class="btn-ocean btn-pulse">¡Unir los 4 Fragmentos! ✦</button>
       </div>
-    </section>
+    </div>
 
     <!-- ========================================== -->
-    <!-- FASE 4: EL CLÍMAX ESPECTACULAR             -->
+    <!-- ESCENA 4A: PEDESTAL DE FUSIÓN              -->
     <!-- ========================================== -->
-    <section id="phase-climax" class="phase-section">
-      <!-- Escenario de Unión de Fragmentos -->
-      <div id="fusion-stage" class="fusion-stage">
-        <div class="celestial-badge">✦ El Momento de la Verdad ✦</div>
-        <h2 class="climax-title">Ensamblando el Mensaje</h2>
-        <p class="climax-desc">
-          Los 4 fragmentos que reuniste están listos para unirse y revelar el secreto final.
+    <div id="scene-climax-pedestal" class="stage-scene">
+      <div class="glass-card compact-card">
+        <div class="ocean-badge">✦ El Momento de la Verdad ✦</div>
+        <h2 class="scene-title">Ensamblando el Mensaje</h2>
+        <p class="subtitle">
+          Los 4 fragmentos se atraen al compás de la marea para revelar el secreto final.
         </p>
 
-        <!-- Círculo Alquímico / Pedestal Cósmico -->
         <div class="fusion-pedestal" id="fusion-pedestal">
           <div class="fusion-ring ring-outer"></div>
           <div class="fusion-ring ring-mid"></div>
           <div class="fusion-core" id="fusion-core">
-            <span class="core-icon">✦</span>
+            <span class="core-icon">🌊</span>
           </div>
 
-          <!-- Los 4 orbes que viajan -->
           <div class="floating-orb orb-1" id="orb-1">✦</div>
           <div class="floating-orb orb-2" id="orb-2">✧</div>
           <div class="floating-orb orb-3" id="orb-3">⋆</div>
           <div class="floating-orb orb-4" id="orb-4">❤</div>
         </div>
 
-        <button id="fuse-btn" class="btn-celestial btn-pulse btn-lg">
-          ✦ Ensamblar los Fragmentos ✦
+        <button id="btn-fuse" class="btn-ocean btn-pulse">
+          ✦ Unir los 4 Fragmentos ✦
         </button>
       </div>
+    </div>
 
-      <!-- La Gran Revelación: Carta y Galería -->
-      <div id="revelation-stage" class="revelation-stage hidden">
-        <div class="glass-card romantic-letter-card">
-          <div class="letter-seal">❤</div>
-          <div class="letter-header">
-            <span class="letter-salutation" id="letter-salutation">Para la persona más especial de mi vida,</span>
-          </div>
+    <!-- ========================================== -->
+    <!-- ESCENA 4B: LA CARTA ROMÁNTICA              -->
+    <!-- ========================================== -->
+    <div id="scene-climax-letter" class="stage-scene">
+      <div class="glass-card letter-card">
+        <div class="letter-seal">🌊 ❤</div>
+        <div class="letter-salutation" id="letter-salutation">Querida Martha,</div>
 
-          <!-- Texto de la carta con efecto máquina de escribir -->
+        <div class="letter-scroll-area">
           <div class="letter-body" id="letter-body"></div>
-
-          <button id="skip-typewriter-btn" class="skip-btn hidden">Leer todo de una vez</button>
-
-          <div class="letter-signature" id="letter-signature">
-            <span class="closing" id="letter-closing">Con todo mi amor,</span>
-            <span class="author-name" id="letter-author">Tu persona favorita</span>
-          </div>
         </div>
 
-        <!-- Galería de Recuerdos / Fotos -->
-        <div class="memories-section" id="memories-section">
-          <h3 class="memories-title">✦ Destellos de Nuestra Historia ✦</h3>
-          <div class="carousel-container">
-            <div class="carousel-track" id="carousel-track">
-              <!-- Fotos inyectadas dinámicamente -->
-            </div>
-            <div class="carousel-nav">
-              <button id="carousel-prev" class="carousel-arrow" aria-label="Foto anterior">‹</button>
-              <div class="carousel-dots" id="carousel-dots"></div>
-              <button id="carousel-next" class="carousel-arrow" aria-label="Siguiente foto">›</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- La Gran Pregunta Final -->
-        <div class="proposal-container glass-card glow-border" id="proposal-container">
-          <div class="proposal-stars">✨ ❤ ✨</div>
-          <h2 class="proposal-question" id="final-question">
-            ¿Quieres ser mi novia y seguir construyendo este universo juntos?
-          </h2>
-
-          <div class="proposal-actions">
-            <button id="btn-yes" class="btn-celestial btn-love btn-pulse">
-              <span id="btn-yes-text">¡Sí, por siempre! ❤️</span>
-            </button>
-            <button id="btn-no" class="btn-playful">
-              <span id="btn-no-text">Déjame pensarlo... 😜</span>
-            </button>
-          </div>
-
-          <div id="no-playful-msg" class="no-playful-msg hidden"></div>
+        <div class="letter-actions">
+          <button id="btn-skip-typewriter" class="btn-text-link">Saltar animación</button>
+          <button id="btn-to-gallery" class="btn-ocean-sm hidden">Ver nuestros recuerdos →</button>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- ========================================== -->
-    <!-- MODAL DE CELEBRACIÓN FINAL (¡Dijo que SÍ!) -->
+    <!-- ESCENA 4C: GALERÍA DE RECUERDOS (PLAYA)    -->
     <!-- ========================================== -->
-    <div id="celebration-modal" class="celebration-modal hidden">
-      <div class="glass-card celebration-card">
-        <div class="celebration-badge" id="celeb-badge">✦ Promesa Sellada entre las Estrellas ✦</div>
-        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ! 💖🎉</h2>
-        <div class="celebration-hearts">💕 🌟 💖 🌟 💕</div>
+    <div id="scene-climax-gallery" class="stage-scene">
+      <div class="glass-card gallery-card">
+        <div class="ocean-badge">✦ Destellos en la Arena ✦</div>
+        
+        <div class="carousel-container">
+          <div class="carousel-track" id="carousel-track"></div>
+          <div class="carousel-nav">
+            <button id="carousel-prev" class="carousel-arrow" aria-label="Foto anterior">‹</button>
+            <div class="carousel-dots" id="carousel-dots"></div>
+            <button id="carousel-next" class="carousel-arrow" aria-label="Siguiente foto">›</button>
+          </div>
+        </div>
+
+        <button id="btn-to-question" class="btn-ocean mt-3">
+          Una última pregunta para ti... ✨
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ESCENA 4D: LA GRAN PREGUNTA FINAL          -->
+    <!-- ========================================== -->
+    <div id="scene-climax-question" class="stage-scene">
+      <div class="glass-card compact-card glow-border">
+        <div class="proposal-stars">🌊 ✨ ❤ ✨ 🌊</div>
+        <h2 class="proposal-question" id="final-question">
+          Martha... ¿y si dejamos de fingir que solo es casualidad y vemos a dónde nos lleva esta química? ✨
+        </h2>
+
+        <div class="proposal-actions">
+          <button id="btn-yes" class="btn-ocean btn-love btn-pulse">
+            <span id="btn-yes-text">¡Me encanta la idea! Acepto ❤️</span>
+          </button>
+          <button id="btn-no" class="btn-playful">
+            <span id="btn-no-text">Solo si me invitas un coco en la playa... 😜</span>
+          </button>
+        </div>
+
+        <div id="no-playful-msg" class="no-playful-msg hidden"></div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ESCENA 4E: CELEBRACIÓN FINAL (¡Dijo que SÍ!)-->
+    <!-- ========================================== -->
+    <div id="scene-celebration" class="stage-scene">
+      <div class="glass-card compact-card glow-border">
+        <div class="ocean-badge" id="celeb-badge">✦ Promesa Sellada Frente al Mar ✦</div>
+        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ! 💖🌊</h2>
+        <div class="celebration-hearts">💕 🌟 💖 🌊 💕</div>
         <p class="celebration-text" id="celeb-message">
-          Este es solo el comienzo de nuestra historia. Prometo hacerte reír, cuidarte, apoyarte en cada sueño y quererte en cada versión de ti.
+          Martha, prometo sacarte sonrisas todos los días, llevarte a ver el mar, ser tu cómplice favorito y cuidar cada momento que construyamos juntos.
         </p>
 
         <div class="celebration-certificate">
@@ -336,15 +345,15 @@
           </div>
           <div class="cert-line">
             <span>Para:</span>
-            <strong id="celeb-partner"></strong>
+            <strong id="celeb-partner">Martha</strong>
           </div>
           <div class="cert-line">
             <span>De:</span>
-            <strong id="celeb-sender"></strong>
+            <strong id="celeb-sender">Tu cómplice</strong>
           </div>
         </div>
 
-        <button id="btn-download-capture" class="btn-celestial-sm">
+        <button id="btn-download-capture" class="btn-ocean-sm">
           📸 Guarda una captura de este momento
         </button>
       </div>
