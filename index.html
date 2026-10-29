@@ -17,6 +17,15 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
+  <!-- Fondos de Escenografía Realista (Las 4 Ilustraciones Mágicas de Gemini) -->
+  <div id="scenic-background" class="scenic-background" aria-hidden="true">
+    <div id="scenic-bg-1" class="scenic-layer scene-bg-1 active"></div>
+    <div id="scenic-bg-2" class="scenic-layer scene-bg-2"></div>
+    <div id="scenic-bg-3" class="scenic-layer scene-bg-3"></div>
+    <div id="scenic-bg-4" class="scenic-layer scene-bg-4"></div>
+    <div class="scenic-overlay"></div>
+  </div>
+
   <!-- Canvas de fondo: Andén 9 3/4, Sauce Boxeador, Gran Comedor con velas y Patronus -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
@@ -190,23 +199,30 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 2A: MINIJUEGO 2 - EL GRAN COMEDOR   -->
+    <!-- ESCENA 2A: MINIJUEGO 2 - EL GRAN COMEDOR (ESTILO GRIMOIRE HARRY POTTER) -->
     <!-- ========================================== -->
     <div id="scene-m2-play" class="stage-scene">
-      <div class="glass-card compact-card">
-        <div class="scene-header">
-          <span class="station-tag">Estación II</span>
-          <h2 class="scene-title">El Gran Comedor de Hogwarts</h2>
-          <div class="trivia-progress">
-            <div class="progress-bar-fill" id="trivia-progress-bar"></div>
-          </div>
+      <div class="parchment-grimoire-card">
+        <!-- Bookmark lateral pergamino con sello -->
+        <div class="grimoire-bookmark">
+          <span class="bookmark-station">Estación II</span>
+          <span class="bookmark-title">Gran Comedor</span>
+          <div class="bookmark-score">Aciertos: <span id="trivia-score">0</span> / 3</div>
         </div>
 
-        <div class="question-number" id="question-step">Pregunta 1 de 3</div>
-        <h3 class="question-text" id="question-text">¿Qué tan presente estás en mis pensamientos?</h3>
+        <!-- Encabezado ornamental con filigrana dorada -->
+        <div class="grimoire-header">
+          <div class="grimoire-flourish">❧ ✧ ✧ ✧ ☙</div>
+          <h2 class="grimoire-step-title" id="question-step">Pregunta 1 de 3</h2>
+          <div class="grimoire-flourish-bottom">✦ ─── ⚡ ─── ✦</div>
+        </div>
 
-        <div class="options-container" id="options-container"></div>
-        <div id="trivia-feedback" class="trivia-feedback hidden"></div>
+        <h3 class="grimoire-question-text" id="question-text">¿Qué tan presente estás en mis pensamientos?</h3>
+
+        <!-- Opciones estilo tarjetas ilustradas grabadas de Harry Potter -->
+        <div class="grimoire-options-grid" id="options-container"></div>
+        
+        <div id="trivia-feedback" class="grimoire-feedback hidden"></div>
       </div>
     </div>
 

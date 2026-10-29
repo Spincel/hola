@@ -117,16 +117,22 @@ export const config = {
         question: "¿Qué tan presente estás en mis pensamientos todos los días de mi vida?",
         options: [
           {
+            title: "Expreso de Hogwarts",
+            icon: "🚂",
             text: "En cada segundo, desde que abro los ojos hasta que me duermo; eres mi pensamiento favorito a todas horas ❤️",
             correct: true,
             feedback: "¡Totalmente mi amor! No hay un solo momento en el que no estés viva en mi mente y en mi corazón ✨",
           },
           {
+            title: "Tetera Mágica",
+            icon: "🫖",
             text: "Solo cuando me acuerdo de encender la tetera mágica",
             correct: false,
             feedback: "¡Jajaja por favor! Si vivo pensando en ti 24/7 🤭",
           },
           {
+            title: "Lechuza Mensajera",
+            icon: "🦉",
             text: "Únicamente cuando veo una lechuza volar por la ventana",
             correct: false,
             feedback: "¡Para nada! Estás en mis pensamientos en cada respiro 🥰",
@@ -139,16 +145,22 @@ export const config = {
         question: "Si tuvieras que definir qué significas tú para mí en este universo...",
         options: [
           {
+            title: "Expecto Patronum",
+            icon: "⚡",
             text: "Eres el amor de mi vida, mi mayor orgullo, mi refugio y definitivamente lo mejor que me ha pasado en la existencia ✨",
             correct: true,
             feedback: "¡Exactamente mi reina! Haberte encontrado y ser tu esposo es el mayor regalo de mi vida entera 😍",
           },
           {
+            title: "Clases de Pociones",
+            icon: "🧪",
             text: "Una compañera de clases de Pociones Avanzadas",
             correct: false,
             feedback: "¡Oye, somos esposos y cómplices para toda la eternidad! 😂🪄",
           },
           {
+            title: "Pergaminos Viejos",
+            icon: "📜",
             text: "Alguien que me ayuda a ordenar pergaminos viejos",
             correct: false,
             feedback: "¡Nooo! Eres la dueña absoluta de mi alma y mi felicidad ❤️",
@@ -161,16 +173,22 @@ export const config = {
         question: "Hablemos de nuestro futuro juntos... ¿cuál es ese plan soñado que construiremos paso a paso?",
         options: [
           {
+            title: "Cabaña en el Bosque",
+            icon: "🌲",
             text: "Escaparnos a una cabaña mágica en el bosque, con chimenea de piedra, lluvia afuera, buen vino y toda la vida para amarnos 💍🌲",
             correct: true,
             feedback: "¡Sí, mi cielo hermoso! Un plan perfecto que haremos realidad juntos para detener el tiempo a solas ✨",
           },
           {
+            title: "Bosque Prohibido",
+            icon: "🕷️",
             text: "Dormir en carpas en medio del Bosque Prohibido pasando frío",
             correct: false,
             feedback: "¡Jajaja con las acromántulas no! Queremos una cabaña cálida y hermosa con chimenea 🔥🤭",
           },
           {
+            title: "Armario de la Escalera",
+            icon: "🚪",
             text: "Mudarnos al armario debajo de la escalera",
             correct: false,
             feedback: "¡Jamás! Tú mereces un castillo entero y la cabaña más acogedora del bosque 🏰❤️",

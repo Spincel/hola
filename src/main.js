@@ -42,17 +42,30 @@ class ConstellationApp {
   }
 
   init() {
-    // 1. Iniciar cielo estrellado
+    // 1. Iniciar cielo estrellado y partículas
     const canvas = document.getElementById("stars-canvas");
     if (canvas) {
       this.starfield = new Starfield(canvas);
     }
 
-    // 2. Personalizar textos desde config
+    // 2. Establecer fondo escénico inicial (Módulo 1: Andén 9 3/4)
+    this.setScenicBackground(1);
+
+    // 3. Personalizar textos desde config
     this.applyConfig();
 
-    // 3. Vincular eventos de navegación y botones
+    // 4. Vincular eventos de navegación y botones
     this.bindEvents();
+  }
+
+  // Transición fluida de escenografía cinematográfica (Módulos 1 a 4)
+  setScenicBackground(index) {
+    for (let i = 1; i <= 4; i++) {
+      const el = document.getElementById(`scenic-bg-${i}`);
+      if (el) {
+        el.classList.toggle("active", i === index);
+      }
+    }
   }
 
   applyConfig() {
@@ -134,27 +147,31 @@ class ConstellationApp {
     // 0B. Comenzar la expedición en el bosque
     document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
+      this.setScenicBackground(1);
       if (this.starfield) this.starfield.setTheme("whompingWillow");
       this.showStage("scene-m1-play");
       this.initMinigame1();
     });
 
-    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía al Gran Comedor de Hogwarts)
+    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía al Bosque del Patronus)
     document.getElementById("btn-to-m2").addEventListener("click", () => {
+      this.setScenicBackground(2);
       if (this.starfield) this.starfield.setTheme("greatHall");
       this.showStage("scene-m2-play");
       this.initMinigame2();
     });
 
-    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a la Cabaña con Patronus)
+    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía al Giratiempo Dorado)
     document.getElementById("btn-to-m3").addEventListener("click", () => {
+      this.setScenicBackground(3);
       if (this.starfield) this.starfield.setTheme("patronusCabin");
       this.showStage("scene-m3-play");
       this.initMinigame3();
     });
 
-    // 4. Avanzar de Recompensa 3 al Clímax (Pedestal del Giratiempo)
+    // 4. Avanzar de Recompensa 3 al Clímax (La Cabaña Mágica con chimenea y lluvia)
     document.getElementById("btn-to-climax").addEventListener("click", () => {
+      this.setScenicBackground(4);
       if (this.starfield) this.starfield.setTheme("patronusCabin");
       this.showStage("scene-climax-pedestal");
       this.initClimaxPedestal();
@@ -162,12 +179,14 @@ class ConstellationApp {
 
     // 5. De la Carta a la Galería de Recuerdos
     document.getElementById("btn-to-gallery").addEventListener("click", () => {
+      this.setScenicBackground(4);
       this.showStage("scene-climax-gallery");
       this.initCarousel();
     });
 
     // 6. De la Galería a la Gran Pregunta
     document.getElementById("btn-to-question").addEventListener("click", () => {
+      this.setScenicBackground(4);
       this.showStage("scene-climax-question");
       this.initPlayfulNoButton();
     });
@@ -326,11 +345,12 @@ class ConstellationApp {
     const qData = config.minigame2.questions[this.currentTriviaIndex];
     const total = config.minigame2.questions.length;
 
-    const progressPercent = ((this.currentTriviaIndex + 1) / total) * 100;
-    document.getElementById("trivia-progress-bar").style.width = `${progressPercent}%`;
-
     document.getElementById("question-step").textContent = `Pregunta ${this.currentTriviaIndex + 1} de ${total}`;
     document.getElementById("question-text").textContent = qData.question;
+    const scoreEl = document.getElementById("trivia-score");
+    if (scoreEl) {
+      scoreEl.textContent = this.currentTriviaIndex;
+    }
 
     const feedbackEl = document.getElementById("trivia-feedback");
     feedbackEl.classList.add("hidden");
@@ -339,27 +359,44 @@ class ConstellationApp {
     optionsContainer.innerHTML = "";
 
     qData.options.forEach((opt) => {
-      const btn = document.createElement("button");
-      btn.className = "trivia-option";
-      btn.innerHTML = `<span class="opt-bullet">🪄</span> <span>${opt.text}</span>`;
+      const card = document.createElement("button");
+      card.className = "grimoire-option-card";
+      card.innerHTML = `
+        <div class="option-card-border">
+          <div class="option-illustration-box">
+            <span class="corner-flourish tl">✦</span>
+            <span class="corner-flourish tr">⚡</span>
+            <div class="option-etching">
+              <span class="option-icon">${opt.icon || "🪄"}</span>
+            </div>
+            <div class="option-title-banner">${opt.title || "Opción"}</div>
+            <span class="corner-flourish bl">✦</span>
+            <span class="corner-flourish br">☽</span>
+          </div>
+          <p class="option-desc">${opt.text}</p>
+        </div>
+      `;
 
-      btn.addEventListener("click", () => {
+      card.addEventListener("click", () => {
         if (opt.correct) {
           sound.playChime(3);
           document.getElementById("polaroid-img").src = qData.photo;
           document.getElementById("polaroid-caption").textContent = qData.photoCaption;
+          if (scoreEl) {
+            scoreEl.textContent = this.currentTriviaIndex + 1;
+          }
           this.showStage("scene-m2-polaroid");
         } else {
           sound.playWrongSound();
-          btn.classList.add("shake");
-          setTimeout(() => btn.classList.remove("shake"), 600);
+          card.classList.add("shake");
+          setTimeout(() => card.classList.remove("shake"), 600);
 
           feedbackEl.textContent = opt.feedback || config.minigame2.retryPrompt;
           feedbackEl.classList.remove("hidden");
         }
       });
 
-      optionsContainer.appendChild(btn);
+      optionsContainer.appendChild(card);
     });
   }
 

@@ -448,10 +448,7 @@ export class Starfield {
     this.time += 0.02;
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    this.drawBackground();
-    this.drawHogwartsSilhouette();
-    this.drawWhompingWillow();
-    this.drawPatronusGlow();
+    // Los efectos interactivos de partículas flotan por encima del fondo fotográfico escénico
     this.drawCandles();
     this.drawSteam();
     this.drawRain();
