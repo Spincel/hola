@@ -1,29 +1,30 @@
 /**
  * ====================================================================
- * ARCHIVO DE CONFIGURACIÓN PERSONALIZABLE
+ * CONFIGURACIÓN PERSONALIZADA PARA MARTHA ✦
  * ====================================================================
- * Aquí puedes cambiar todos los textos, nombres, preguntas, fotos,
- * poemas y música para que sea 100% tu historia.
+ * Una sorpresa interactiva, tierna y divertida que celebra
+ * la complicidad y la química especial que siempre ha existido.
  */
 
 export const config = {
   // 1. Nombres
-  partnerName: "Mi Amor", // Nombre o apodo de ella (ej: "Sofía", "Princesa", etc.)
-  yourName: "Tu persona favorita", // Tu nombre o firma
+  partnerName: "Martha", // Nombre de ella
+  yourName: "Tu amigo cómplice", // Tu nombre o apodo cariñoso
 
   // 2. Música de fondo
-  // Si tienes una canción propia en MP3, guárdala en /public/musica.mp3 y pon: "/musica.mp3"
-  // Si dejas null, la web usará el sintetizador celestial suave generado automáticamente en vivo.
-  audioUrl: null, // Cambia a "/musica.mp3" si subes tu archivo a la carpeta public/
-  synthAmbientEnabled: true, // Si es true y audioUrl es null, suena un ambiente cósmico relajante
+  // El sintetizador celestial ambiental está activo y crea una melodía relajante
+  // estilo caja de música y lofi en tiempo real sin necesidad de descargar archivos.
+  // Si en el futuro tienes un MP3 propio, puedes colocarlo en /public/cancion.mp3
+  audioUrl: null,
+  synthAmbientEnabled: true,
 
   // 3. Fase 0: Introducción
   intro: {
-    badge: "✦ Una Expedición de Recuerdos ✦",
+    badge: "✦ Una Sorpresa Entre las Estrellas ✦",
     title: "El Mensaje Fragmentado",
     subtitle:
-      "Hay un mensaje muy especial que se fragmentó en el camino hacia ti. Para revelarlo, debes recorrer este sendero y reunir los 4 fragmentos ocultos...",
-    startButtonText: "Comenzar el viaje ✨",
+      "Martha, hay un mensaje que se fragmentó en el camino hacia ti. Para descubrir de qué se trata, debes recorrer este sendero y reunir 4 fragmentos estelares...",
+    startButtonText: "Comenzar la aventura ✨",
     headphonesNotice: "Ponte audífonos para una mejor experiencia 🎧",
   },
 
@@ -31,31 +32,31 @@ export const config = {
   fragments: [
     {
       id: 1,
-      name: "Luz de la Mirada",
+      name: "La Chispa",
       icon: "✦",
       color: "#f5d061",
-      shortDesc: "Lo que iluminas sin darte cuenta",
+      shortDesc: "Esa mirada y esa energía única tuya",
     },
     {
       id: 2,
-      name: "Eco de Nuestras Risas",
+      name: "Nuestras Risas",
       icon: "✧",
       color: "#ff8fa3",
-      shortDesc: "Nuestras anécdotas y complicidad",
+      shortDesc: "Las anécdotas donde el tiempo vuela",
     },
     {
       id: 3,
       name: "Hilos del Destino",
       icon: "⋆",
       color: "#a78bfa",
-      shortDesc: "Las constelaciones que nos unieron",
+      shortDesc: "Las coincidencias que nos unieron",
     },
     {
       id: 4,
-      name: "Latido Central",
+      name: "La Química",
       icon: "❤",
       color: "#f43f5e",
-      shortDesc: "El corazón de este viaje",
+      shortDesc: "Eso que no se puede explicar con palabras",
     },
   ],
 
@@ -64,40 +65,40 @@ export const config = {
     stationNumber: "Estación I",
     title: "Encuentra las Luces Ocultas",
     instructions:
-      "La noche es profunda. Mueve la linterna (con tu dedo o ratón) y descubre los 4 destellos escondidos en la oscuridad.",
+      "La noche guarda secretos. Mueve la linterna (con tu dedo en el teléfono o con el ratón) y descubre los 4 destellos escondidos en la oscuridad.",
     foundCountLabel: "Luces encontradas:",
     lights: [
       {
         id: "light-1",
-        label: "Destello de Calidez",
+        label: "Destello de Autenticidad",
         phrase:
-          "«Tu sonrisa tiene la costumbre de arreglar mis peores días sin pedir permiso.»",
+          "«Tu risa espontánea, Martha: es de esas que contagian a cualquiera y alegran el día sin esfuerzo.»",
       },
       {
         id: "light-2",
-        label: "Destello de Alegría",
+        label: "Destello de Complicidad",
         phrase:
-          "«Esa chispa tan tuya de emocionarte por las pequeñas cosas del mundo.»",
+          "«Esa mirada en la que no necesitamos decir una sola palabra para saber de qué nos estamos riendo.»",
       },
       {
         id: "light-3",
-        label: "Destello de Paz",
+        label: "Destello de Calma",
         phrase:
-          "«La tranquilidad que siento cada vez que me miras y el tiempo se detiene.»",
+          "«La facilidad con la que contigo todo fluye tan natural, sin poses ni complicaciones.»",
       },
       {
         id: "light-4",
-        label: "Destello de Magia",
+        label: "Destello de Química",
         phrase:
-          "«Tu risa, que sin duda es mi melodía favorita en todo el universo.»",
+          "«Esa vibra inexplicable que se siente cada vez que estamos cerca... algo que no pasa con nadie más.»",
       },
     ],
-    rewardPoemTitle: "✦ Primer Fragmento Recuperado ✦",
+    rewardPoemTitle: "✦ Primer Fragmento Recuperado: La Chispa ✦",
     rewardPoem: [
-      "En la noche más callada y fría,",
-      "bastó un destello de tu mirada",
-      "para entender que la luz no viene del sol,",
-      "sino de quien te hace sonreír con el alma.",
+      "Entre todas las personas y lugares del mundo,",
+      "hay miradas que tienen una gravedad especial.",
+      "Contigo no hicieron falta pretextos, Martha:",
+      "bastó conocerte para saber que eres diferente a todas.",
     ],
     nextButtonText: "Avanzar a la Estación II →",
   },
@@ -107,86 +108,82 @@ export const config = {
     stationNumber: "Estación II",
     title: "El Cuestionario de Cómplices",
     instructions:
-      "Solo quien guarda estos momentos en el corazón conoce las verdaderas respuestas. Responde 3 preguntas:",
+      "Solo alguien con buena memoria y buen corazón puede responder estas 3 preguntas sobre nosotros:",
     questions: [
       {
-        question: "¿Cuál es nuestro superpoder secreto cuando estamos juntos?",
+        question: "¿Cuál es nuestro mayor superpoder cuando nos ponemos a platicar?",
         options: [
           {
-            text: "Reírnos hasta que nos duela la panza por cualquier tontería",
+            text: "Hacer que las horas parezcan minutos entre risas y temas infinitos",
             correct: true,
-            feedback: "¡Exacto! Nuestras risas rompen cualquier ley de la física.",
+            feedback: "¡Totalmente! Cuando estamos hablando, el reloj pierde el control.",
           },
           {
-            text: "Ser personas extremadamente serias y aburridas",
+            text: "Fingir que somos personas extremadamente serias y formales",
             correct: false,
-            feedback: "¡Oye no! Si somos los más cómplices y divertidos del mundo 🤭",
+            feedback: "¡Jajaja por favor! Si contigo la seriedad dura 3 segundos 🤭",
           },
           {
-            text: "Dormir 16 horas seguidas sin pestañear",
+            text: "Hablar del clima con cara de aburrimiento",
             correct: false,
-            feedback: "Tentador... pero no es nuestro mayor superpoder 🥰",
+            feedback: "Jamás en la vida. Inténtalo con sinceridad, Martha...",
           },
         ],
-        // Foto que se revela al acertar (puedes poner /photos/foto1.jpg o dejar enlace)
-        photo:
-          "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
-        photoCaption: "Nuestra complicidad es única en el mundo.",
+        photo: "/photos/recuerdo1.png",
+        photoCaption: "Nuestras charlas donde el mundo entero se pausa.",
       },
       {
-        question: "¿Qué fue lo primero que pensé cuando te conocí mejor?",
+        question: "Seamos 100% sinceros... ¿qué es lo más evidente cuando estamos juntos?",
         options: [
           {
-            text: "«Tiene una luz tan bonita que dan ganas de quedarse cerca para siempre»",
+            text: "Esa química y esa vibra única que se nota a kilómetros, por más que digamos 'solo somos amigos' 😉",
             correct: true,
-            feedback: "¡Tal cual! Y cada día que pasa me lo confirmas más.",
+            feedback: "¡Exacto! Hay cosas tan obvias que hasta el universo las nota ✨",
           },
           {
-            text: "«Seguro es un agente secreto de la NASA»",
+            text: "Que los dos tenemos sueño todo el día",
             correct: false,
-            feedback: "Demasiado hermosa para ser verdad, pero no de la NASA 😂",
+            feedback: "Bueno... tal vez a veces, ¡pero esa no es la respuesta correcta! 😂",
           },
           {
-            text: "«Parece que come limones enteros en el desayuno»",
+            text: "Que somos dos científicos de la NASA",
             correct: false,
-            feedback: "¡Jajaja jamás! Aunque tus caras raras son adorables.",
+            feedback: "Científicos no, pero de que hay química... la hay 🔬❤️",
           },
         ],
-        photo:
-          "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
-        photoCaption: "Desde el primer instante supe que eras irrepetible.",
+        photo: "/photos/recuerdo2.png",
+        photoCaption: "Esa chispa que no se puede fingir ni esconder.",
       },
       {
-        question: "Si tuviéramos un día entero solo para nosotros, ¿cuál sería el mejor plan?",
+        question: "Si tuviéramos una tarde libre sin pendientes, ¿cuál sería el plan ideal?",
         options: [
           {
-            text: "Caminar sin prisa, comer rico y hablar de la vida hasta la noche",
+            text: "Caminar sin prisa, comer algo rico y reírnos de cualquier tontería",
             correct: true,
-            feedback: "El mejor destino del mundo siempre será a tu lado ❤️",
+            feedback: "El plan perfecto siempre es compartir un buen momento contigo.",
           },
           {
-            text: "Hacer una fila de banco durante 9 horas",
+            text: "Ir a renovar la credencial de elector y hacer 5 horas de fila",
             correct: false,
-            feedback: "¡Qué pesadilla! Elige el plan con amor por favor 😅",
+            feedback: "¡Qué pesadilla! Elige algo más bonito por favor 😅",
           },
           {
-            text: "Ver un maratón de videos de cómo doblar calcetines",
+            text: "Contar cuántas hormigas cruzan la calle",
             correct: false,
-            feedback: "Mmm... ¡podemos armar un plan mil veces más divertido!",
+            feedback: "Mmm... ¡creo que se nos ocurre algo 100 veces mejor!",
           },
         ],
-        photo:
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop",
-        photoCaption: "Contigo cualquier lugar ordinario se vuelve mágico.",
+        photo: "/photos/recuerdo3.png",
+        photoCaption: "Cualquier instante ordinario a tu lado se vuelve un buen recuerdo.",
       },
     ],
-    retryPrompt: "¡Caaasi! Inténtalo con el corazón...",
-    rewardPoemTitle: "✦ Segundo Fragmento Recuperado ✦",
+    retryPrompt: "¡Caaasi! Piénsalo con la verdad, Martha...",
+    rewardPoemTitle: "✦ Segundo Fragmento Recuperado: Nuestras Risas ✦",
     rewardPoem: [
-      "Entre anécdotas, bromas tontas y miradas cómplices,",
-      "construimos un lenguaje que solo dos personas entienden.",
-      "Y en cada risa compartida,",
-      "el tiempo parece detenerse a nuestro favor.",
+      "Dicen que una buena amistad es un regalo,",
+      "pero cuando hay miradas que se entienden sin palabras",
+      "y una complicidad que llena cada silencio...",
+      "uno no puede evitar sonreír y agradecer encontrarte.",
     ],
     nextButtonText: "Avanzar a la Estación III →",
   },
@@ -194,17 +191,17 @@ export const config = {
   // 7. Minijuego 3: «Conectar la Constelación»
   minigame3: {
     stationNumber: "Estación III",
-    title: "Conectar la Constelación",
+    title: "Hilos del Destino",
     instructions:
-      "Toca o arrastra los puntos estelares en orden numérico (del 1 al 7) para trazar la figura que el cielo guardó para ti.",
+      "Toca las estrellas en orden del 1 al 7 para trazar la constelación que unió nuestros caminos...",
     starCount: 7,
-    constellationName: "«Constelación del Corazón Eterno»",
-    rewardPoemTitle: "✦ Tercer y Cuarto Fragmento Recuperados ✦",
+    constellationName: "«La Constelación de la Química»",
+    rewardPoemTitle: "✦ Fragmentos III y IV Recuperados: El Destino y la Química ✦",
     rewardPoem: [
-      "Dicen que la luz de las estrellas tarda milenios en llegar a la Tierra.",
-      "Quizás todas ellas brillaron en silencio a través del tiempo,",
-      "esperando el segundo exacto",
-      "en el que nuestros caminos se cruzaran.",
+      "Hay conexiones que no se planean ni se fuerzan;",
+      "simplemente suceden, como dos estrellas",
+      "que orbitan el mismo cielo y hacen todo más brillante.",
+      "Ahora todos los fragmentos están en tus manos...",
     ],
     nextButtonText: "¡Reunir todos los fragmentos! ✨",
   },
@@ -212,53 +209,55 @@ export const config = {
   // 8. Fase 4: El Clímax Espectacular (La Gran Revelación)
   climax: {
     stationNumber: "El Clímax",
-    title: "El Origen Revelado",
-    fuseButtonText: "✦ Unir los 4 Fragmentos ✦",
-    assemblingMessage: "Los 4 fragmentos se atraen en el centro del cosmos...",
-    revelationTitle: "Carta para Ti",
+    title: "La Revelación",
+    fuseButtonText: "✦ Ensamblar los 4 Fragmentos ✦",
+    assemblingMessage: "Los fragmentos se atraen en el centro del cosmos...",
+    revelationTitle: "Para Martha",
 
     // La carta emotiva principal
     letter: {
-      salutation: "Para la persona más especial de mi vida,",
+      salutation: "Querida Martha,",
       paragraphs: [
-        "Si llegaste hasta aquí, habrás notado que cada pequeño juego guardaba un pedacito de lo que significas para mí. No quería decírtelo con un simple mensaje de texto ni de golpe; las cosas verdaderamente valiosas merecen ser descubiertas con asombro, paso a paso, como se descubren las constelaciones en el cielo.",
-        "Desde que estás en mi vida, los días comunes tienen brillo propio, las conversaciones se vuelven infinitas y el futuro se siente como un lugar emocionante al cual caminar. Admiro tu bondad, tu inteligencia, tu hermosa forma de ser y la calidez con la que llenas todo a tu alrededor.",
-        "No creo en las casualidades. Creo firmemente que conocerte ha sido uno de los momentos más bonitos que me han sucedido, y hoy quiero dar un paso más a tu lado...",
+        "Si llegaste hasta aquí, habrás notado que cada pequeño juego guardaba un pedacito de lo que me encanta de ti. No quería decírtelo con un simple mensaje de texto ni de golpe; las cosas bonitas merecen una sorpresa a su altura.",
+        "Dicen que las mejores historias siempre empiezan de la forma más natural: con una amistad sincera, conversaciones que se extienden sin darse cuenta y risas que se quedan grabadas en la mente.",
+        "Pero la verdad es que, desde hace tiempo, hay algo muy claro: esa química tan nuestra, esa chispa que se enciende cada vez que coincidimos y esa complicidad que no tengo con nadie más. Me encanta tu risa, tu forma de ser y lo bonito que es compartir momentos contigo.",
+        "Siempre hemos dicho que 'solo somos amigos'... pero hoy quise prepararte esta constelación para hacerte una pregunta...",
       ],
-      closing: "Con todo mi amor y cariño,",
+      closing: "Con mucho cariño y toda la complicidad,",
     },
 
-    // Pequeño carrusel de fotos especiales
+    // Galería de Recuerdos / Ilustraciones
     memoriesGallery: [
       {
-        url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
-        caption: "Nuestras primeras anécdotas juntos",
+        url: "/photos/recuerdo1.png",
+        caption: "Nuestras mejores charlas bajo el cielo",
         tag: "Momentos Inolvidables",
       },
       {
-        url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800&auto=format&fit=crop",
-        caption: "Cualquier atardecer a tu lado se convierte en poesía",
-        tag: "Paz Contigo",
+        url: "/photos/recuerdo2.png",
+        caption: "Esa vibra y risas que solo tú y yo entendemos",
+        tag: "Nuestra Química",
       },
       {
-        url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
-        caption: "Por miles de risas, historias y abrazos más",
-        tag: "Infinitos Recuerdos",
+        url: "/photos/recuerdo3.png",
+        caption: "Por muchos más momentos compartidos",
+        tag: "Cómplices de Vida",
       },
     ],
 
-    // La gran pregunta final
-    finalQuestion: "¿Quieres ser mi novia y seguir construyendo este universo juntos?",
-    yesButtonText: "¡Sí, acepto con todo el corazón! ❤️",
-    noButtonText: "Déjame pensarlo... 😜",
+    // La gran pregunta final adaptada para dar el paso
+    finalQuestion: "Martha... ¿y si dejamos de fingir que solo es casualidad y vemos a dónde nos lleva esta química? ✨",
+    yesButtonText: "¡Me encanta la idea! Acepto ❤️",
+    noButtonText: "Solo si me invitas unos taquitos primero... 😜",
 
     // Respuestas juguetonas cuando pasa el cursor o toca el botón "No"
     noButtonResponses: [
-      "¿Segura segura? Mira que te consiento mucho 🙈",
-      "¡Ese botón tiene virus del desamor, no lo toques! 😜",
-      "¡El botón verde brilla mucho más bonito, mira hacia la izquierda! 👉",
-      "No se aceptan devoluciones en este corazón 🥰",
-      "¡Ups! Ese botón resbala... mejor presiona el que dice Sí ❤️",
+      "¡Trato hecho! Los taquitos y el postre van por mi cuenta 🌮🍦",
+      "Esa química no se puede negar, Martha... 🤭",
+      "¡No le des tantas vueltas, mira qué bonito brilla el botón verde! 👉",
+      "¿A poco no te encantó la constelación? 🥰",
+      "¡Piénsalo bien, mira que no cualquiera te programa un universo entero! ✨",
+      "¡Te atrapé! Mejor dale al botón de la izquierda ❤️",
     ],
 
     // Pantalla de celebración tras decir que SÍ
@@ -266,8 +265,8 @@ export const config = {
       badge: "✦ Promesa Sellada entre las Estrellas ✦",
       title: "¡Dijo que SÍ! 💖🎉",
       message:
-        "Este es solo el comienzo de nuestra historia. Prometo hacerte reír, cuidarte, apoyarte en cada sueño y quererte en cada versión de ti.",
-      signature: "Siempre tuyo,",
+        "Martha, prometo sacarte sonrisas todos los días, seguir siendo tu cómplice favorito y cuidar cada momento que construyamos juntos.",
+      signature: "Siempre para ti,",
     },
   },
 };

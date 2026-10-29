@@ -2,8 +2,9 @@
  * ====================================================================
  * SISTEMA DE AUDIO CELESTIAL (Web Audio API + Audio Player)
  * ====================================================================
- * Proporciona un sintetizador ambiental cósmico en tiempo real,
- * efectos de sonido de campanas/caja de música y soporte para MP3 externo.
+ * Proporciona un sintetizador ambiental cósmico en tiempo real
+ * con armonías envolventes, notas de caja de música estelar
+ * y efectos para cada interacción, además de soporte para MP3.
  */
 
 import { config } from "./config.js";
@@ -13,14 +14,15 @@ class CelestialAudioSystem {
     this.ctx = null;
     this.masterGain = null;
     this.ambientGain = null;
+    this.melodyGain = null;
     this.sfxGain = null;
     this.isMuted = false;
     this.isPlaying = false;
     this.externalAudio = null;
     this.ambientInterval = null;
-    this.activeOscillators = [];
+    this.melodyInterval = null;
 
-    // Frecuencias pentatónicas para caja de música estelar (C5, D5, E5, G5, A5, C6, D6, E6)
+    // Escala pentatónica estelar (C5, D5, E5, G5, A5, C6, D6, E6)
     this.scale = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66, 1318.51];
   }
 
@@ -32,22 +34,29 @@ class CelestialAudioSystem {
       this.ctx = new AudioCtx();
 
       this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+      this.masterGain.gain.setValueAtTime(0.75, this.ctx.currentTime);
       this.masterGain.connect(this.ctx.destination);
 
+      // Ganancia de pads atmosféricos de fondo
       this.ambientGain = this.ctx.createGain();
       this.ambientGain.gain.setValueAtTime(0.18, this.ctx.currentTime);
       this.ambientGain.connect(this.masterGain);
 
+      // Ganancia de melodía suave tipo caja de música
+      this.melodyGain = this.ctx.createGain();
+      this.melodyGain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+      this.melodyGain.connect(this.masterGain);
+
+      // Ganancia de efectos sonoros (campanas de interacción)
       this.sfxGain = this.ctx.createGain();
       this.sfxGain.gain.setValueAtTime(0.35, this.ctx.currentTime);
       this.sfxGain.connect(this.masterGain);
 
-      // Si hay archivo de audio personalizado en config
+      // Audio externo si el usuario coloca un archivo
       if (config.audioUrl) {
         this.externalAudio = new Audio(config.audioUrl);
         this.externalAudio.loop = true;
-        this.externalAudio.volume = 0.5;
+        this.externalAudio.volume = 0.55;
       }
     } catch (e) {
       console.warn("Web Audio API no soportado:", e);
@@ -75,12 +84,12 @@ class CelestialAudioSystem {
 
     // Si no hay audio externo o falló, arrancamos el sintetizador ambiental suave
     if (config.synthAmbientEnabled) {
-      this.startAmbientDrone();
+      this.startAmbientSoundtrack();
     }
   }
 
-  // Genera un fondo ambiental cósmico suave con pads relajantes
-  startAmbientDrone() {
+  // Genera un fondo ambiental cósmico suave con pads relajantes y notas de caja de música
+  startAmbientSoundtrack() {
     if (!this.ctx || this.ambientInterval) return;
 
     // Progresión de acordes etéreos (Fmaj7, Cmaj, Dm9, Am7)
@@ -100,7 +109,7 @@ class CelestialAudioSystem {
       chordIndex++;
 
       const now = this.ctx.currentTime;
-      const duration = 7.5; // Duración larga para que se fundan
+      const duration = 7.5;
 
       currentChord.forEach((freq, idx) => {
         const osc = this.ctx.createOscillator();
@@ -112,10 +121,9 @@ class CelestialAudioSystem {
 
         filter.type = "lowpass";
         filter.frequency.setValueAtTime(450, now);
-        filter.frequency.exponentialRampToValueAtTime(800, now + duration / 2);
+        filter.frequency.exponentialRampToValueAtTime(750, now + duration / 2);
         filter.frequency.exponentialRampToValueAtTime(450, now + duration);
 
-        // Envolvente suave: Fade in de 2s, sostenido, Fade out de 2.5s
         gain.gain.setValueAtTime(0.001, now);
         gain.gain.linearRampToValueAtTime(0.035, now + 2.0);
         gain.gain.setValueAtTime(0.035, now + duration - 2.5);
@@ -130,18 +138,61 @@ class CelestialAudioSystem {
       });
     };
 
+    // Melodía suave y delicada de caja de música que acompaña el fondo
+    const melodyNotes = [
+      [523.25, 659.25, 783.99], // C - E - G
+      [880.0, 783.99, 659.25],  // A - G - E
+      [587.33, 659.25, 880.0],  // D - E - A
+      [1046.5, 880.0, 783.99],  // C6 - A - G
+    ];
+
+    let melodyStep = 0;
+    const playMelodyMotif = () => {
+      if (!this.isPlaying || !this.ctx || this.isMuted) return;
+
+      const motif = melodyNotes[melodyStep % melodyNotes.length];
+      melodyStep++;
+
+      motif.forEach((freq, i) => {
+        setTimeout(() => {
+          if (!this.isPlaying || !this.ctx || this.isMuted) return;
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now);
+
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.linearRampToValueAtTime(0.06, now + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+
+          osc.connect(gain);
+          gain.connect(this.melodyGain);
+
+          osc.start(now);
+          osc.stop(now + 1.9);
+        }, i * 360);
+      });
+    };
+
     playChord();
     this.ambientInterval = setInterval(playChord, 6000);
+
+    // Tocar notas suaves cada 4.5 segundos
+    setTimeout(() => {
+      playMelodyMotif();
+      this.melodyInterval = setInterval(playMelodyMotif, 4500);
+    }, 2000);
   }
 
-  // Tono de campana de cristal / caja de música
+  // Tono de campana de cristal / caja de música interactiva
   playChime(noteIndex = 0) {
     if (!this.ctx || this.isMuted) return;
 
     const freq = this.scale[noteIndex % this.scale.length] || 523.25;
     const now = this.ctx.currentTime;
 
-    // Oscilador principal (onda sinusoidal pura)
     const osc1 = this.ctx.createOscillator();
     const osc2 = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
@@ -149,7 +200,6 @@ class CelestialAudioSystem {
     osc1.type = "sine";
     osc1.frequency.setValueAtTime(freq, now);
 
-    // Armónico suave para dar brillo de campana mágica
     osc2.type = "triangle";
     osc2.frequency.setValueAtTime(freq * 2.01, now);
 
@@ -171,7 +221,6 @@ class CelestialAudioSystem {
   playRewardChord() {
     if (!this.ctx || this.isMuted) return;
 
-    // Arpegio ascendente rápido
     const notes = [0, 2, 4, 5, 7];
     notes.forEach((noteIdx, i) => {
       setTimeout(() => {
@@ -208,7 +257,6 @@ class CelestialAudioSystem {
 
     const now = this.ctx.currentTime;
 
-    // 1. Barrido de resonancia
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     osc.type = "sine";
@@ -216,7 +264,7 @@ class CelestialAudioSystem {
     osc.frequency.exponentialRampToValueAtTime(880, now + 1.2);
 
     gain.gain.setValueAtTime(0.02, now);
-    gain.gain.linearRampToValueAtTime(0.2, now + 1.0);
+    gain.gain.linearRampToValueAtTime(0.22, now + 1.0);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
 
     osc.connect(gain);
@@ -224,7 +272,6 @@ class CelestialAudioSystem {
     osc.start(now);
     osc.stop(now + 2.6);
 
-    // 2. Cascada de notas estelares
     for (let i = 0; i < 8; i++) {
       setTimeout(() => {
         this.playChime(i);
@@ -244,12 +291,11 @@ class CelestialAudioSystem {
     });
   }
 
-  // Alternar silencio
   toggleMute() {
     this.isMuted = !this.isMuted;
 
     if (this.masterGain && this.ctx) {
-      const targetGain = this.isMuted ? 0 : 0.7;
+      const targetGain = this.isMuted ? 0 : 0.75;
       this.masterGain.gain.setValueAtTime(targetGain, this.ctx.currentTime);
     }
 
