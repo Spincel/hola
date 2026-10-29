@@ -101,6 +101,13 @@ class ConstellationApp {
   showStage(stageId) {
     const currentEl = document.getElementById(this.currentStageId);
     const nextEl = document.getElementById(stageId);
+    const hud = document.getElementById("fragments-hud");
+
+    // Ocultar HUD en la intro, en la carta final y fases del clímax para máximo lucimiento del pergamino
+    if (hud) {
+      const hideHudStages = ["scene-intro", "scene-climax-letter", "scene-climax-gallery", "scene-climax-question", "scene-celebration"];
+      hud.classList.toggle("hidden", hideHudStages.includes(stageId));
+    }
 
     if (currentEl) {
       currentEl.classList.remove("active");
@@ -288,10 +295,19 @@ class ConstellationApp {
       card.dataset.pairId = item.id;
 
       card.innerHTML = `
-        <div class="memory-card-back">⚡</div>
+        <div class="memory-card-back">
+          <span class="card-back-flourish tl">✦</span>
+          <span class="card-back-flourish br">✦</span>
+          <div class="card-back-crest">
+            <span class="crest-bolt">⚡</span>
+            <span class="crest-letter">H</span>
+          </div>
+        </div>
         <div class="memory-card-front">
-          <span class="card-icon">${item.icon}</span>
-          <span class="card-title">${item.name}</span>
+          <div class="card-front-inner">
+            <span class="card-icon">${item.icon}</span>
+            <span class="card-title">${item.name}</span>
+          </div>
         </div>
       `;
 
@@ -630,18 +646,19 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // CLÍMAX: FUSIÓN DE FRAGMENTOS (VÓRTICE GIRATORIO & CARTA)
+  // CLÍMAX: FUSIÓN DE FRAGMENTOS (EL GIRATIEMPO 3D & LA CARTA)
   // ==================================================================
   initClimaxPedestal() {
     const fuseBtn = document.getElementById("btn-fuse");
     fuseBtn.addEventListener("click", () => {
       fuseBtn.disabled = true;
-      fuseBtn.textContent = "✦ Girando y fusionando... ✦";
+      fuseBtn.textContent = "✦ Girando el Giratiempo a través del Tiempo... ⏳✨ ✦";
 
       const pedestal = document.getElementById("fusion-pedestal");
-      // 1. Activar vórtice de giro de fragmentos
+      // 1. Activar vórtice de giro 3D del Giratiempo
       pedestal.classList.add("vortex");
       sound.playChime(4);
+      sound.playWandSwoosh();
 
       // 2. Al completar el giro, estallido supernova y destello
       setTimeout(() => {
@@ -658,7 +675,7 @@ class ConstellationApp {
 
         pedestal.classList.add("fusing");
 
-        // 3. Revelar la carta tras el destello cegador
+        // 3. Revelar el pergamino real de Hogwarts tras el destello cegador
         setTimeout(() => {
           if (flashEl) {
             flashEl.classList.remove("active");
@@ -669,13 +686,13 @@ class ConstellationApp {
             particleCount: 180,
             spread: 100,
             origin: { y: 0.5 },
-            colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fbbf24", "#bae6fd"],
+            colors: ["#f59e0b", "#facc15", "#38bdf8", "#fef08a", "#ffffff"],
           });
 
           this.showStage("scene-climax-letter");
           this.startTypewriter();
         }, 1100);
-      }, 1600);
+      }, 2000);
     });
   }
 

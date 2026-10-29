@@ -34,10 +34,11 @@
     <span class="audio-icon">🌧️</span>
   </button>
 
-  <!-- Barra Superior: Inventario de Fragmentos Mágicos -->
+  <!-- Barra Superior: Relicario Mágico de Fragmentos de Hogwarts -->
   <header id="fragments-hud" class="fragments-hud hidden">
-    <div class="hud-container">
-      <div class="hud-title">Fragmentos del Andén & Hogwarts</div>
+    <div class="hud-container hogwarts-reliquary-plate">
+      <div class="hud-top-filigree">✦ ─── ⚡ ─── ✦</div>
+      <div class="hud-title">Relicario Mágico de Hogwarts</div>
       <div class="hud-slots">
         <div class="hud-slot" id="slot-1" data-index="1">
           <div class="slot-gem">🚂</div>
@@ -147,19 +148,19 @@
     <!-- ESCENA 1A: MINIJUEGO 1 - EL SAUCE BOXEADOR -->
     <!-- ========================================== -->
     <div id="scene-m1-play" class="stage-scene">
-      <div class="glass-card game-card">
+      <div class="glass-card game-card hogwarts-spell-card-slate">
         <div class="scene-header">
           <span class="station-tag">Estación I</span>
           <h2 class="scene-title">El Andén 9 ¾ & El Sauce Boxeador</h2>
           <p class="scene-instruction">
-            Encuentra los 3 pares que representan cómo estás en mi mente en todo momento y la magia de nuestro amor:
+            Descubre los 3 pares de cartas encantadas que revelan cómo habitas en mis pensamientos a cada instante:
           </p>
-          <div class="counter-badge">
-            Pares encontrados: <span id="pairs-count">0</span> / 3
+          <div class="counter-badge hogwarts-badge">
+            Pares revelados: <span id="pairs-count">0</span> / 3
           </div>
         </div>
 
-        <!-- Cuadrícula 3x2 de cartas -->
+        <!-- Cuadrícula 3x2 de cartas mágicas de Hogwarts -->
         <div class="memory-grid" id="memory-grid">
           <!-- Generadas dinámicamente -->
         </div>
@@ -168,13 +169,18 @@
       </div>
     </div>
 
-    <!-- Modal emergente al encontrar un par de memoria -->
+    <!-- Modal emergente al encontrar un par de memoria: Pergamino Real de Hogwarts -->
     <div id="pair-modal" class="custom-modal hidden">
-      <div class="modal-content glass-card glow-border">
+      <div class="modal-content hogwarts-parchment-modal">
+        <div class="modal-seal-crest">
+          <div class="wax-seal-mini">
+            <span class="seal-icon">⚡</span>
+          </div>
+        </div>
         <div class="modal-sparkle" id="pair-modal-icon">🚂 ✦</div>
         <h3 id="pair-modal-title" class="modal-title">Plataforma 9 ¾ & Nuestro Destino</h3>
         <p id="pair-modal-phrase" class="modal-phrase">«Frase»</p>
-        <button id="close-pair-modal" class="btn-ocean-sm">Continuar el viaje en el tren</button>
+        <button id="close-pair-modal" class="btn-hogwarts-gold">Continuar el viaje en el Expreso 🚂✨</button>
       </div>
     </div>
 
@@ -184,7 +190,7 @@
     <div id="scene-m1-reward" class="stage-scene">
       <div class="glass-card compact-card">
         <div class="reward-preview-thumb">
-          <img src="/photos/modulo1.png" alt="Módulo I: Andén 9 ¾ y Expreso de Hogwarts">
+          <img src="/photos/pareja_anden.jpg" alt="Módulo I: Juntos en el Andén 9 ¾">
         </div>
         <div class="reward-icon-burst">🚂</div>
         <h3 class="reward-title">¡Primer Fragmento Recuperado!</h3>
@@ -195,7 +201,7 @@
           <p class="poem-line">Pienso en ti en cada instante de mi día,</p>
           <p class="poem-line">porque eres el principio, el presente y mi futuro.</p>
         </div>
-        <button id="btn-to-m2" class="btn-ocean">Viajar al Castillo de Hogwarts (Estación II) →</button>
+        <button id="btn-to-m2" class="btn-hogwarts-gold btn-pulse">Viajar al Castillo de Hogwarts (Estación II) →</button>
       </div>
     </div>
 
@@ -238,7 +244,7 @@
           </div>
           <div class="polaroid-caption" id="polaroid-caption">Juntos en el Andén 9 ¾.</div>
         </div>
-        <button id="btn-next-question" class="btn-ocean-sm mt-3">Siguiente Pregunta →</button>
+        <button id="btn-next-question" class="btn-hogwarts-gold mt-3">Siguiente Pregunta →</button>
       </div>
     </div>
 
@@ -248,7 +254,7 @@
     <div id="scene-m2-reward" class="stage-scene">
       <div class="glass-card compact-card">
         <div class="reward-preview-thumb">
-          <img src="/photos/modulo2.png" alt="Módulo II: Expecto Patronum en el Bosque">
+          <img src="/photos/pareja_patronus.jpg" alt="Módulo II: Juntos con el Patronus en el Bosque">
         </div>
         <div class="reward-icon-burst">🏰</div>
         <h3 class="reward-title">¡Segundo Fragmento Recuperado!</h3>
@@ -259,7 +265,7 @@
           <p class="poem-line">existe una magia tan inmensa y verdadera</p>
           <p class="poem-line">como la suerte que tengo de tenerte en mi vida.</p>
         </div>
-        <button id="btn-to-m3" class="btn-ocean">Conjurar el Encantamiento Lumos (Estación III) →</button>
+        <button id="btn-to-m3" class="btn-hogwarts-gold btn-pulse">Conjurar el Encantamiento Patronus (Estación III) →</button>
       </div>
     </div>
 
@@ -356,57 +362,132 @@
           <p class="poem-line">La mujer que habita en mis pensamientos cada instante de mi día.</p>
           <p class="poem-line">Ahora los 4 fragmentos giran en el tiempo para sellar una promesa eterna...</p>
         </div>
-        <button id="btn-to-climax" class="btn-ocean btn-pulse">¡Unir los 4 Fragmentos con Magia! ✨</button>
+        <button id="btn-to-climax" class="btn-hogwarts-gold btn-pulse">Activar el Giratiempo Mágico ⏳✨</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4A: PEDESTAL DEL GIRATIEMPO         -->
+    <!-- ESCENA 4A: PEDESTAL DEL GIRATIEMPO REAL 3D -->
     <!-- ========================================== -->
     <div id="scene-climax-pedestal" class="stage-scene">
-      <div class="glass-card compact-card">
-        <div class="ocean-badge">✦ El Giratiempo & El Fuego ✦</div>
-        <h2 class="scene-title">Ensamblando la Magia</h2>
+      <div class="glass-card compact-card time-turner-card">
+        <div class="ocean-badge hogwarts-gold-badge">✦ El Giratiempo de los Recuerdos ✦</div>
+        <h2 class="scene-title">El Giratiempo & La Fusión</h2>
         <p class="subtitle">
-          Los 4 fragmentos giran a través del tiempo hacia el calor del fuego para revelar el secreto final.
+          Los 4 fragmentos giran a través del tiempo hacia el centro del reloj para revelar la promesa final.
         </p>
 
-        <div class="fusion-pedestal" id="fusion-pedestal">
-          <div class="fusion-ring ring-outer"></div>
-          <div class="fusion-ring ring-mid"></div>
-          <div class="fusion-core" id="fusion-core">
-            <span class="core-icon">⚡</span>
-          </div>
+        <!-- El Auténtico Giratiempo 3D con Anillos de Oro y Reloj de Arena -->
+        <div class="time-turner-container" id="fusion-pedestal">
+          <div class="time-turner-3d" id="time-turner-3d">
+            <!-- Anillo Exterior con Runas y Estrellas grabadas -->
+            <div class="tt-ring ring-outer">
+              <span class="tt-rune r1">✦</span>
+              <span class="tt-rune r2">TEMPORA</span>
+              <span class="tt-rune r3">⚡</span>
+              <span class="tt-rune r4">LABUNTUR</span>
+              <span class="tt-rune r5">✧</span>
+              <span class="tt-rune r6">AMOR</span>
+              <span class="tt-rune r7">MANET</span>
+              <span class="tt-rune r8">✦</span>
+            </div>
 
-          <div class="floating-orb orb-1" id="orb-1">🚂</div>
-          <div class="floating-orb orb-2" id="orb-2">🏰</div>
-          <div class="floating-orb orb-3" id="orb-3">🌲</div>
-          <div class="floating-orb orb-4" id="orb-4">⚡</div>
+            <!-- Anillo Intermedio (Giro en eje X) -->
+            <div class="tt-ring ring-mid">
+              <span class="tt-star s1">★</span>
+              <span class="tt-star s2">★</span>
+              <span class="tt-star s3">★</span>
+              <span class="tt-star s4">★</span>
+            </div>
+
+            <!-- Anillo Interior (Giro en eje Y) con Reloj de Arena -->
+            <div class="tt-ring ring-inner">
+              <div class="time-hourglass">
+                <div class="hourglass-glass top-bulb">
+                  <div class="sand-gold top-sand"></div>
+                </div>
+                <div class="hourglass-neck">
+                  <div class="sand-stream"></div>
+                </div>
+                <div class="hourglass-glass bottom-bulb">
+                  <div class="sand-gold bottom-sand"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Los 4 Fragmentos Mágicos en órbita sobre los ejes del Giratiempo -->
+            <div class="floating-orb orb-1" id="orb-1" title="Andén 9 ¾">
+              <span class="orb-gem">🚂</span>
+              <span class="orb-label">Andén</span>
+            </div>
+            <div class="floating-orb orb-2" id="orb-2" title="Castillo de Hogwarts">
+              <span class="orb-gem">🏰</span>
+              <span class="orb-label">Castillo</span>
+            </div>
+            <div class="floating-orb orb-3" id="orb-3" title="El Sauce Boxeador">
+              <span class="orb-gem">🌲</span>
+              <span class="orb-label">Sauce</span>
+            </div>
+            <div class="floating-orb orb-4" id="orb-4" title="Always">
+              <span class="orb-gem">⚡</span>
+              <span class="orb-label">Always</span>
+            </div>
+
+            <!-- Núcleo de fusión resplandeciente -->
+            <div class="fusion-core" id="fusion-core">
+              <span class="core-icon">⏳</span>
+            </div>
+          </div>
         </div>
 
-        <button id="btn-fuse" class="btn-ocean btn-pulse">
-          ✦ Unir los 4 Fragmentos con Magia ✦
+        <button id="btn-fuse" class="btn-hogwarts-gold btn-pulse">
+          ✦ Girar el Giratiempo & Fusionar la Magia ⏳✨ ✦
         </button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4B: LA CARTA MÁGICA                 -->
+    <!-- ESCENA 4B: LA CARTA EN PERGAMINO DE HOGWARTS -->
     <!-- (AQUÍ SE REVELA EL MENSAJE PARA XÓCHITL)   -->
     <!-- ========================================== -->
     <div id="scene-climax-letter" class="stage-scene">
-      <div class="glass-card letter-card">
-        <div class="letter-seal">⚡ 🚂 🏰</div>
-        <div class="letter-salutation" id="letter-salutation">Para mi amada esposa, Xóchitl Sinay Barba Cuevas:</div>
+      <div class="hogwarts-royal-scroll-card">
+        <!-- Remates de madera dorada del pergamino real -->
+        <div class="scroll-roller scroll-roller-top"></div>
 
-        <div class="letter-scroll-area">
-          <div class="letter-body" id="letter-body"></div>
+        <div class="scroll-parchment-inner">
+          <div class="scroll-crest-header">
+            <div class="scroll-wax-seal">
+              <span class="seal-bolt">⚡</span>
+              <span class="seal-h">H</span>
+            </div>
+            <div class="scroll-title-ornament">❧ ─── ✦ ─── ☙</div>
+            <div class="scroll-station-tag">Decreto Oficial de Amor ✦ Hogwarts</div>
+          </div>
+
+          <div class="letter-salutation" id="letter-salutation">Para mi amada esposa, Xóchitl Sinay Barba Cuevas:</div>
+
+          <div class="letter-scroll-area">
+            <div class="letter-body" id="letter-body"></div>
+          </div>
+
+          <div class="scroll-signature-box">
+            <div class="signature-line">
+              <span class="sig-title">Por siempre tuyo, con toda mi alma — Always:</span>
+              <span class="sig-name">Tu esposo que piensa en ti a cada segundo</span>
+            </div>
+            <div class="sig-seal-badge">
+              <span class="sig-crest">⚜️</span>
+            </div>
+          </div>
+
+          <div class="letter-actions">
+            <button id="btn-skip-typewriter" class="btn-text-link">Saltar animación ⚡</button>
+            <button id="btn-to-gallery" class="btn-hogwarts-gold hidden">Nuestros Recuerdos Mágicos →</button>
+          </div>
         </div>
 
-        <div class="letter-actions">
-          <button id="btn-skip-typewriter" class="btn-text-link">Saltar animación</button>
-          <button id="btn-to-gallery" class="btn-ocean-sm hidden">Ver nuestros recuerdos mágicos →</button>
-        </div>
+        <div class="scroll-roller scroll-roller-bottom"></div>
       </div>
     </div>
 
@@ -426,7 +507,7 @@
           </div>
         </div>
 
-        <button id="btn-to-question" class="btn-ocean mt-3">
+        <button id="btn-to-question" class="btn-hogwarts-gold mt-3">
           Una última pregunta para ti, mi amor... ✨
         </button>
       </div>
@@ -436,14 +517,14 @@
     <!-- ESCENA 4D: LA GRAN PROPUESTA DE FUTURO     -->
     <!-- ========================================== -->
     <div id="scene-climax-question" class="stage-scene">
-      <div class="glass-card compact-card glow-border">
+      <div class="glass-card compact-card hogwarts-spell-card-slate">
         <div class="proposal-stars">🚂 🏰 🌲 🌧️ 🍷 ⚡</div>
         <h2 class="proposal-question" id="final-question">
           Xóchitl Sinay... ¿aceptas que hagamos realidad este hermoso plan a futuro para escaparnos juntos a una cabaña mágica en el bosque, con chimenea, lluvia, buen vino y todo mi amor dedicado solo a ti? 🚂🏰🌲🌧️🍷🪄
         </h2>
 
         <div class="proposal-buttons-container">
-          <button id="btn-yes" class="btn-ocean btn-love btn-pulse">
+          <button id="btn-yes" class="btn-hogwarts-gold btn-love btn-pulse">
             <span id="btn-yes-text">¡Sí, mi amor! Prometido para nuestro futuro — Always ❤️⚡</span>
           </button>
           <div class="playful-btn-slot">
@@ -463,11 +544,11 @@
     <!-- ESCENA 4E: CELEBRACIÓN DE LA PROMESA       -->
     <!-- ========================================== -->
     <div id="scene-celebration" class="stage-scene">
-      <div class="glass-card compact-card glow-border">
+      <div class="glass-card compact-card hogwarts-spell-card-slate">
         <div class="celebration-preview-thumb">
-          <img src="/photos/modulo4.png" alt="Módulo IV: Nuestra Cabaña Mágica en el Bosque">
+          <img src="/photos/pareja_cabana.jpg" alt="Módulo IV: Nuestra Cabaña Mágica en el Bosque">
         </div>
-        <div class="ocean-badge" id="celeb-badge">✦ Promesa Sellada en el Andén 9 ¾ ✦</div>
+        <div class="ocean-badge hogwarts-gold-badge" id="celeb-badge">✦ Promesa Sellada en el Andén 9 ¾ ✦</div>
         <h2 class="celebration-title" id="celeb-title">¡Promesa Aceptada por mi Amada Esposa! 💖🚂🏰🪄</h2>
         <div class="celebration-hearts">💕 🚂 🏰 ⚡ 🍷 💕</div>
         <p class="celebration-text" id="celeb-message">
@@ -489,7 +570,7 @@
           </div>
         </div>
 
-        <button id="btn-download-capture" class="btn-ocean-sm">
+        <button id="btn-download-capture" class="btn-hogwarts-gold">
           📸 Guarda una captura de este momento
         </button>
       </div>
