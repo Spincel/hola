@@ -1,31 +1,33 @@
 /**
  * ====================================================================
- * CONFIGURACIÓN PERSONALIZADA: EL MAR, EL VINO Y LA ATRACCIÓN ✦
+ * CONFIGURACIÓN PERSONALIZADA: PARA MI AMADA ESPOSA
+ * XÓCHITL SINAY BARBA CUEVAS ✦ ENTRE EL MAR, EL VINO Y NUESTRO AMOR
  * ====================================================================
- * El nombre de ella NO se menciona al inicio. Se mantiene el misterio
- * hasta el clímax final, donde se revela la carta para Martha.
+ * El misterio se mantiene en las primeras fases y se revela con todo
+ * su esplendor en el clímax con la carta y la propuesta romántica.
  */
 
 export const config = {
-  // 1. Nombres (El nombre se revela únicamente en la carta final y clímax)
-  partnerName: "Martha",
-  yourName: "Tu amigo cómplice",
+  // 1. Nombres y Destinataria
+  partnerName: "Xóchitl Sinay Barba Cuevas",
+  partnerShortName: "Xóchitl Sinay",
+  yourName: "Tu esposo que te ama con toda su alma",
 
   // 2. Música y Sonido
   audioUrl: null,
   synthAmbientEnabled: true,
 
-  // 3. Fase 0: Introducción con Botella Misteriosa (Sin nombre explícito para máxima intriga)
+  // 3. Fase 0: Introducción con Botella Misteriosa en la orilla
   intro: {
-    badge: "✦ Un Misterio en la Orilla ✦",
-    bottleTag: "Para alguien que me quita el aliento 💌",
+    badge: "✦ Un Mensaje de Amor en la Orilla ✦",
+    bottleTag: "Para la mujer de mi vida, mi hermosa esposa 💌",
     bottleTeaser:
-      "Las olas del mar trajeron una botella misteriosa hasta la orilla con un mensaje guardado en secreto...",
+      "Las olas del mar trajeron una botella misteriosa con un mensaje guardado en secreto solo para ti...",
     openBottleText: "Descorchar y abrir el secreto 🐚✨",
-    unfoldedTitle: "¡Hola! Sé que la curiosidad te ganaría... 😉",
+    unfoldedTitle: "¡Hola mi amor! Sé que la curiosidad te ganaría... 😉",
     unfoldedSubtitle:
-      "Me dijeron que te gusta el mar, el buen vino y los misterios... Este mensaje se fragmentó en 4 piezas a lo largo de la costa. Si logras reunirlos, descubrirás exactamente quién eres para mí y lo que he guardado en silencio...",
-    startButtonText: "Comenzar la expedición marina ✨",
+      "Quería prepararte algo diferente, especial y que rompiera la rutina. Este mensaje de amor se fragmentó en 4 recuerdos a lo largo de la costa. Si logras reunirlos, descubrirás la propuesta que guardo en el corazón para nosotros dos...",
+    startButtonText: "Comenzar nuestro viaje juntos ✨",
     headphonesNotice: "Ponte audífonos para escuchar las olas y la melodía 🎧",
   },
 
@@ -33,154 +35,154 @@ export const config = {
   fragments: [
     {
       id: 1,
-      name: "La Atracción & La Brisa",
+      name: "Nuestra Pasión & El Mar",
       icon: "🍷",
       color: "#f43f5e",
-      shortDesc: "Esa copa de vino y esa vibra magnética",
+      shortDesc: "Ese vino compartido y nuestra complicidad intacta",
     },
     {
       id: 2,
-      name: "Nuestras Risas",
+      name: "Nuestra Historia & Risas",
       icon: "✧",
       color: "#ff8fa3",
-      shortDesc: "Donde las horas vuelan sin darnos cuenta",
+      shortDesc: "Cada momento a tu lado que atesoro en el alma",
     },
     {
       id: 3,
       name: "Hilos sobre el Mar",
       icon: "⋆",
       color: "#38bdf8",
-      shortDesc: "Las constelaciones sobre el océano",
+      shortDesc: "El destino que unió nuestras vidas",
     },
     {
       id: 4,
-      name: "La Química",
+      name: "Amor Eterno",
       icon: "❤",
       color: "#f5d061",
-      shortDesc: "Profunda e innegable como la marea",
+      shortDesc: "Infinito y profundo como el océano",
     },
   ],
 
-  // 5. Minijuego 1: «Memoria del Mar & Vino» (Juego de pares de 6 cartas)
+  // 5. Minijuego 1: «Memoria del Mar & Nuestro Vino» (Juego de pares de 6 cartas)
   minigame1: {
     stationNumber: "Estación I",
-    title: "Memoria del Mar & Vino",
+    title: "Memoria del Mar & Nuestro Vino",
     instructions:
-      "Encuentra los 3 pares ocultos entre las copas de vino tinto, la marea y el arte que nos conecta...",
+      "Encuentra los 3 pares que representan el amor, la complicidad y lo mucho que me encantas:",
     pairs: [
       {
         id: "vino",
         icon: "🍷",
         name: "Copa de Vino Tinto",
         phrase:
-          "«Me fascina esa copa de vino compartida contigo, donde una plática casual se vuelve la más envolvente del mundo.»",
+          "«Cada copa de vino contigo me confirma que haberte elegido como mi esposa es y será siempre la mejor decisión de mi vida.»",
       },
       {
         id: "olas",
         icon: "🌊",
-        name: "Marea & Libertad",
+        name: "Marea & Tu Mente Libre",
         phrase:
-          "«Tu mente libre, tu manera decidida de pensar y esa autenticidad tan tuya me atrapan más de lo que imaginas.»",
+          "«Admiro a la mujer extraordinaria que eres: tu inteligencia, tu determinación, tu fuerza y esa autenticidad que me enamora a diario.»",
       },
       {
         id: "tinta",
         icon: "🖋️",
-        name: "Arte en la Piel",
+        name: "Arte, Belleza y Pasión",
         phrase:
-          "«Tu porte, tu sonrisa, cada tatuaje en tu piel... me atraes completa y de una forma que ya no puedo fingir que no noto.»",
+          "«Me encantas completa, Xóchitl: tu mirada, tu sonrisa, tu cuerpo y el arte en tu piel... sigo tan loco por ti como el primer día.»",
       },
     ],
-    rewardPoemTitle: "✦ Primer Fragmento: La Atracción y la Brisa ✦",
+    rewardPoemTitle: "✦ Primer Fragmento: Nuestra Pasión & El Mar ✦",
     rewardPoem: [
-      "Entre el murmullo de las olas y el aroma a buen vino,",
-      "hay personas que simplemente te desarman al mirarlas.",
-      "Tu mente, tu estilo y esa belleza tan tuya",
-      "hacen imposible mirar hacia otro lado.",
+      "Entre el vaivén del mar y una copa de buen vino,",
+      "le doy gracias a la vida por tenerte como mi esposa.",
+      "Tu mente brillante, tu risa y tu belleza infinita",
+      "hacen que mi mundo entero sea perfecto a tu lado.",
     ],
     nextButtonText: "Avanzar a la Estación II →",
   },
 
-  // 6. Minijuego 2: «El Cuestionario de Cómplices»
+  // 6. Minijuego 2: «El Cuestionario de Nuestra Historia»
   minigame2: {
     stationNumber: "Estación II",
-    title: "Cuestionario de la Costa",
+    title: "Cuestionario de Nuestra Historia",
     instructions:
-      "Solo quien guarda estos momentos en el corazón conoce las respuestas con total sinceridad:",
+      "Preguntas de complicidad que solo nosotros dos conocemos en el corazón:",
     questions: [
       {
-        question: "¿Qué pasa cuando nos sentamos a tomar una copa de vino o café frente al mar?",
+        question: "¿Qué pasa cada vez que nos escapamos juntos a tomar una copa de vino frente al mar?",
         options: [
           {
-            text: "Las horas vuelan, las risas fluyen y esa atracción entre nosotros se vuelve imposible de disimular",
+            text: "El tiempo se detiene, nos volvemos a enamorar y recordamos lo increíble que es compartir la vida juntos ❤️",
             correct: true,
-            feedback: "¡Totalmente! Cuando estamos hablando, el reloj pierde el control y la química se siente en el aire.",
+            feedback: "¡Exactamente mi amor! Cuando estamos los dos a solas, el mundo exterior desaparece por completo ✨",
           },
           {
-            text: "Fingir que somos dos personas extremadamente aburridas",
+            text: "Nos ponemos a discutir sobre cómo se fabrican las latas de refresco",
             correct: false,
-            feedback: "¡Jajaja por favor! Si contigo la seriedad dura 3 segundos 🤭",
+            feedback: "¡Jajaja para nada! Con nosotros siempre hay magia y risas 🤭",
           },
           {
-            text: "Ponernos a discutir sobre el precio internacional del carbón",
+            text: "Fingir que somos dos personas extrañas y solemnes",
             correct: false,
-            feedback: "Jamás en la vida. Elige con el corazón...",
+            feedback: "¡Jamás! Nuestra química y complicidad son únicas 🥰",
           },
         ],
         photo: "/photos/playa_vino1.png",
-        photoCaption: "Nuestra química innegable entre copas de vino y risas.",
+        photoCaption: "Nuestras risas y esa complicidad que jamás cambia.",
       },
       {
-        question: "¿Qué es lo primero que llama la atención de ti cuando entras a cualquier lugar?",
+        question: "¿Qué es lo que más me atrae y me vuelve loco de ti, mi hermosa esposa?",
         options: [
           {
-            text: "Esa combinación letal: tu seguridad, tu inteligencia, tu belleza y esos tatuajes que te dan un estilo único",
+            text: "Absolutamente todo: tu inteligencia, tu carácter, tu cuerpo, tu sonrisa y el arte en tu piel que te hace única ✨",
             correct: true,
-            feedback: "¡Tal cual! Tienes una presencia y un porte que no se olvidan jamás.",
+            feedback: "¡Tal cual! Me fascinas entera, por dentro y por fuera, cada día más 😍",
           },
           {
-            text: "Que pareces un muñeco de cera de museo",
+            text: "Que puedes memorizar el directorio telefónico en 2 minutos",
             correct: false,
-            feedback: "¡Oye no! Si eres pura energía y carisma 😂",
+            feedback: "Eres brillante, ¡pero la respuesta va directo a lo que me enamora de ti! 😂",
           },
           {
-            text: "Que seguro caminas con un manual de instrucciones en la mano",
+            text: "Que caminas como si fueras un robot de hojalata",
             correct: false,
-            feedback: "¡Para nada! Tu espontaneidad es de las cosas que más me gustan.",
+            feedback: "¡Oye no! Si tienes una presencia y una belleza deslumbrante ❤️",
           },
         ],
         photo: "/photos/playa_vino2.png",
-        photoCaption: "Esa presencia, tu sonrisa y el arte en tu piel que te hacen única.",
+        photoCaption: "La reina de mi vida y de mi corazón bajo la luna.",
       },
       {
-        question: "Seamos 100% sinceros... ¿por qué siempre ha habido tanta química entre nosotros?",
+        question: "Con la mano en el corazón... ¿qué es lo que siento por ti después de todo nuestro camino juntos?",
         options: [
           {
-            text: "Porque me atraes completa: tu manera de pensar, tu risa, tu cuerpo y esa vibra que no tiene nadie más 😉",
+            text: "Que eres el gran amor de mi vida y te volvería a elegir como mi esposa en esta y en mil vidas más 💍❤️",
             correct: true,
-            feedback: "¡Exacto! Hay cosas tan evidentes que sería una tontería seguir negándolas ✨",
+            feedback: "¡Sí, mi vida entera! Eres mi hogar, mi paz y mi mayor tesoro ✨",
           },
           {
-            text: "Porque nos confunden con actores de comedia",
+            text: "Que somos buenos compañeros de fila en el banco",
             correct: false,
-            feedback: "Comediantes tal vez, ¡pero esa no es la verdadera respuesta! 😂",
+            feedback: "¡Jajaja no! Eres todo mi universo entero 🤭",
           },
           {
-            text: "Porque nos aburrimos de ver series",
+            text: "Que nos acostumbramos a la rutina",
             correct: false,
-            feedback: "Mmm... ¡sabes bien que es algo mucho más fuerte que eso!",
+            feedback: "¡Para nada! Lo que siento por ti sigue ardiendo con la misma pasión que al principio 🔥",
           },
         ],
         photo: "/photos/playa_vino3.png",
-        photoCaption: "Esa chispa que siempre ha estado encendida entre los dos.",
+        photoCaption: "Caminando juntos siempre, tomados de la mano.",
       },
     ],
-    retryPrompt: "¡Caaasi! Respóndelo con la verdad...",
-    rewardPoemTitle: "✦ Segundo Fragmento: Nuestras Risas ✦",
+    retryPrompt: "¡Caaasi mi amor! Respóndelo con el corazón...",
+    rewardPoemTitle: "✦ Segundo Fragmento: Nuestra Historia & Risas ✦",
     rewardPoem: [
-      "Dicen que el mar guarda los secretos más bellos,",
-      "pero nuestra complicidad no la esconde nadie:",
-      "está en cada risa compartida, en cada mirada,",
-      "y en esta química que siempre estuvo ahí.",
+      "Dicen que el amor verdadero madura como el mejor vino,",
+      "y nuestra historia es la prueba más hermosa de ello:",
+      "más cómplices, más apasionados y más unidos",
+      "con cada día que construimos juntos.",
     ],
     nextButtonText: "Avanzar a la Estación III →",
   },
@@ -192,75 +194,73 @@ export const config = {
     instructions:
       "Toca las estrellas del 1 al 7 para trazar el corazón estelar sobre las olas del mar...",
     starCount: 7,
-    constellationName: "«Constelación del Corazón Marino»",
-    rewardPoemTitle: "✦ Fragmentos III y IV: El Destino y la Química ✦",
+    constellationName: "«Constelación del Amor Eterno»",
+    rewardPoemTitle: "✦ Fragmentos III y IV: Hilos del Destino y Amor Eterno ✦",
     rewardPoem: [
-      "Hay mujeres que son como el mar:",
-      "profundas, libres, magnéticas y llenas de arte.",
-      "Tú eres todo eso y mucho más.",
-      "Ahora los 4 fragmentos están listos para unirse...",
+      "Eres el faro de mi vida, mi calma y mi mayor aventura.",
+      "La mujer con la que sueño, construyo y celebro cada día.",
+      "Ahora los 4 fragmentos se funden en una sola promesa de amor...",
     ],
     nextButtonText: "¡Reunir todos los fragmentos! ✨",
   },
 
-  // 8. Fase 4: El Clímax Espectacular (Aquí se revela el nombre de Martha por primera vez)
+  // 8. Fase 4: El Clímax Espectacular (La Carta a Xóchitl Sinay)
   climax: {
     stationNumber: "El Clímax",
     title: "La Revelación",
     fuseButtonText: "✦ Unir los 4 Fragmentos ✦",
     assemblingMessage: "Los fragmentos giran en espiral hacia el centro cósmico...",
-    revelationTitle: "Para Martha",
+    revelationTitle: "Para Xóchitl Sinay Barba Cuevas",
 
     letter: {
-      salutation: "Querida Martha,",
+      salutation: "Para mi amada esposa, Xóchitl Sinay Barba Cuevas:",
       paragraphs: [
-        "Si llegaste hasta aquí, habrás notado que cada pequeño juego guardaba una verdad que ya no tenía sentido seguir callando. No quería decírtelo con un mensaje común; una mujer tan especial como tú merecía una sorpresa diferente.",
-        "Dicen que el mar y el buen vino son para quienes saben disfrutar lo auténtico. Y para mí, no hay nadie más auténtica que tú. Me encanta tu mente, tu forma libre y decidida de pensar, y no voy a mentirte: me fascinas completa, de pies a cabeza. Tu mirada, tu sonrisa, tu porte y el arte de cada tatuaje en tu piel te hacen una mujer única, de esas que marcan para siempre.",
-        "Siempre hemos bromeado con que 'solo somos amigos'... pero hay miradas, silencios y una atracción tan viva que sería una tontería ignorarla.",
-        "Por eso hoy quise traerte hasta esta orilla de estrellas, para hacerte una pregunta con todo mi corazón...",
+        "Mi amor, quise construir este rincón frente al mar para hacer una pausa en el tiempo y recordarte algo que a veces la prisa de los días oculta, pero que mi corazón siente en cada respiro: sigo profundamente enamorado de ti, como el primer día o incluso más.",
+        "Admiro enormemente a la mujer extraordinaria que eres: tu inteligencia, tu determinación, tu forma de pensar y la fuerza con la que iluminas nuestro hogar. Pero también quiero que nunca olvides lo mucho que me fascinas como mujer: tu sonrisa que desarma cualquier mal día, tu cuerpo, el arte de los tatuajes en tu piel, tu porte y esa belleza tan tuya que me sigue quitando el aliento.",
+        "Ser tu esposo es el mayor honor y la bendición más grande de mi vida. Hemos reído, caminado juntos, vencido retos y construido un amor real, fuerte y leal. Y cada día que despierto a tu lado confirmo que no hay otro lugar en todo el universo donde prefiera estar que a tu lado.",
+        "Por eso hoy quiero invitarte a detener el reloj, a disfrutar de una copa de vino frente a las olas y a recordarnos por qué nos elegimos para siempre...",
       ],
-      closing: "Con mucho cariño y toda mi complicidad,",
+      closing: "Con todo mi amor, mi respeto y mi devoción eterna,",
     },
 
     memoriesGallery: [
       {
         url: "/photos/playa_vino1.png",
-        caption: "Nuestras mejores charlas con una copa de vino",
-        tag: "Química & Vino",
+        caption: "Nuestras pláticas interminables con una copa de vino",
+        tag: "Cómplices de Vida",
       },
       {
         url: "/photos/playa_vino2.png",
-        caption: "La magia de tu risa y tu porte bajo la luna",
-        tag: "Noches frente al mar",
+        caption: "Tu belleza y tu luz que iluminan mis noches",
+        tag: "Bajo la Luna",
       },
       {
         url: "/photos/playa_vino3.png",
-        caption: "Por muchos atardeceres más a tu lado",
-        tag: "Inolvidables",
+        caption: "Caminando juntos toda la vida, paso a paso",
+        tag: "Amor Eterno",
       },
     ],
 
-    finalQuestion: "Martha... ¿y si dejamos de fingir que solo somos amigos y vemos a dónde nos lleva todo esto este fin de semana? ✨",
-    yesButtonText: "¡Me encanta la idea! Acepto ❤️",
-    noButtonText: "Solo si hay vino tinto y el mar enfrente... 🍷🌊",
+    finalQuestion: "Xóchitl Sinay... ¿aceptas escaparte conmigo este fin de semana a una cita romántica frente al mar, con buen vino y todo mi amor dedicado solo a ti? 🍷🌊💍",
+    yesButtonText: "¡Sí, mi amor! Me encantaría ❤️",
+    noButtonText: "Solo si hay vino tinto, mar y muchos besos... 🍷🌴",
 
     noButtonResponses: [
-      "¡El vino tinto y la mejor vista van por mi cuenta! 🍷🌴",
-      "Esa química ya no se puede ocultar, Martha... 🤭",
-      "¡Piénsalo bien, mira que no cualquiera te programa un mar entero! ✨",
-      "¡El botón de arriba brilla mucho más bonito! 👆❤️",
-      "¿A poco no te encantó tu sorpresa? 🥰",
-      "¡Trato hecho! El vino y la playa nos esperan 🏖️❤️",
+      "¡Habrá todo el vino, los mejores atardeceres y todos los besos del mundo, mi reina! 🍷❤️",
+      "¡Te amo con toda mi alma, Xóchitl Sinay! 💖",
+      "¡No puedes decirle que no a tu esposo enamorado! 😉🌊",
+      "¡El botón de arriba brilla tanto como tu hermosa sonrisa! 👆✨",
+      "¡Trato hecho! Una escapada inolvidable solo para nosotros dos 🏖️💍❤️",
     ],
 
     celebration: {
-      badge: "✦ Promesa Sellada Frente al Mar ✦",
-      title: "¡Dijo que SÍ! 💖🍷",
+      badge: "✦ Promesa Sellada de Esposos Frente al Mar ✦",
+      title: "¡Dijo que SÍ mi amada esposa! 💖💍🍷",
       message:
-        "Martha, prometo sacarte sonrisas todos los días, disfrutar de un buen vino contigo frente al mar, ser tu cómplice favorito y no dejar de recordarte lo increíble que eres.",
-      dateLabel: "Cita oficial:",
+        "Xóchitl Sinay, prometo amarte cada día con más fuerza, cuidarte, hacerte sonreír, consentirte frente al mar y recordarte siempre lo afortunado que soy de ser tu esposo.",
+      dateLabel: "Nuestra escapada romántica:",
       dateValue: "Este fin de semana frente al mar 🌊🌴",
-      signature: "Siempre para ti,",
+      signature: "Siempre tuyo,",
     },
   },
 };

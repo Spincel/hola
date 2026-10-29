@@ -1,6 +1,6 @@
 /**
  * ====================================================================
- * CONTROLADOR PRINCIPAL: MARTHA ✦ ENTRE EL MAR Y LAS ESTRELLAS
+ * CONTROLADOR PRINCIPAL: XÓCHITL SINAY ✦ ENTRE EL MAR Y LAS ESTRELLAS
  * ====================================================================
  */
 
