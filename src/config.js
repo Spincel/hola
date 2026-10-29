@@ -260,6 +260,8 @@ export const config = {
       title: "¡Dijo que SÍ! 💖🌊",
       message:
         "Martha, prometo sacarte sonrisas todos los días, llevarte a ver el mar, ser tu cómplice favorito y cuidar cada momento que construyamos juntos.",
+      dateLabel: "Cita oficial:",
+      dateValue: "Este fin de semana frente al mar 🌊🌴",
       signature: "Siempre para ti,",
     },
   },

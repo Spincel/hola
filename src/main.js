@@ -81,11 +81,11 @@ class ConstellationApp {
     document.getElementById("celeb-message").textContent = config.climax.celebration.message;
     document.getElementById("celeb-partner").textContent = config.partnerName;
     document.getElementById("celeb-sender").textContent = config.yourName;
-
-    // Fecha actual formateada
-    const now = new Date();
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    document.getElementById("celeb-date").textContent = now.toLocaleDateString("es-ES", options);
+    document.getElementById("celeb-date").textContent = config.climax.celebration.dateValue || "Este fin de semana frente al mar 🌊🌴";
+    const dateLabelEl = document.getElementById("celeb-date-label");
+    if (dateLabelEl) {
+      dateLabelEl.textContent = config.climax.celebration.dateLabel || "Cita oficial:";
+    }
   }
 
   // Transición fluida entre escenas en la misma ventana fija
@@ -136,24 +136,28 @@ class ConstellationApp {
     // 0B. Comenzar la expedición marina tras descorchar
     document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
+      if (this.starfield) this.starfield.setTheme("twilight");
       this.showStage("scene-m1-play");
       this.initMinigame1();
     });
 
-    // 2. Avanzar de Recompensa 1 a Minijuego 2
+    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía a Atardecer en la playa)
     document.getElementById("btn-to-m2").addEventListener("click", () => {
+      if (this.starfield) this.starfield.setTheme("sunset");
       this.showStage("scene-m2-play");
       this.initMinigame2();
     });
 
-    // 3. Avanzar de Recompensa 2 a Minijuego 3
+    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a Océano Boreal con Luna y Olas de Aurora)
     document.getElementById("btn-to-m3").addEventListener("click", () => {
+      if (this.starfield) this.starfield.setTheme("aurora");
       this.showStage("scene-m3-play");
       this.initMinigame3();
     });
 
     // 4. Avanzar de Recompensa 3 al Clímax (Pedestal)
     document.getElementById("btn-to-climax").addEventListener("click", () => {
+      if (this.starfield) this.starfield.setTheme("aurora");
       this.showStage("scene-climax-pedestal");
       this.initClimaxPedestal();
     });
@@ -513,21 +517,37 @@ class ConstellationApp {
       fuseBtn.textContent = "✦ Fusión en proceso... ✦";
 
       sound.playClimaxBurst();
+      if (this.starfield) {
+        this.starfield.triggerFlash();
+      }
+
+      // Destello intenso a pantalla completa
+      const flashEl = document.getElementById("supernova-flash");
+      if (flashEl) {
+        flashEl.classList.remove("hidden");
+        requestAnimationFrame(() => flashEl.classList.add("active"));
+      }
 
       const pedestal = document.getElementById("fusion-pedestal");
       pedestal.classList.add("fusing");
 
       setTimeout(() => {
+        if (flashEl) {
+          flashEl.classList.remove("active");
+          setTimeout(() => flashEl.classList.add("hidden"), 800);
+        }
+
         confetti({
-          particleCount: 160,
+          particleCount: 180,
           spread: 100,
           origin: { y: 0.5 },
           colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#fb7185", "#ffffff"],
         });
 
+        // Mostrar la carta romántica con el efecto máquina de escribir
         this.showStage("scene-climax-letter");
         this.startTypewriter();
-      }, 1600);
+      }, 1400);
     });
   }
 
@@ -552,6 +572,7 @@ class ConstellationApp {
 
     skipBtn.onclick = finishTypewriter;
 
+    // Se escribe poco a poco palabra por palabra
     this.typewriterInterval = setInterval(() => {
       if (charIndex < fullText.length) {
         charIndex += 2;
@@ -559,7 +580,7 @@ class ConstellationApp {
       } else {
         finishTypewriter();
       }
-    }, 25);
+    }, 32);
   }
 
   initCarousel() {
@@ -629,9 +650,9 @@ class ConstellationApp {
       msgEl.textContent = randomMsg;
       msgEl.classList.remove("hidden");
 
-      const maxOffset = 50;
-      const x = (Math.random() - 0.5) * maxOffset * 2;
-      const y = (Math.random() - 0.5) * maxOffset;
+      // Desplazamiento limpio y acotado para no desfasar la tarjeta
+      const x = (Math.random() - 0.5) * 36;
+      const y = (Math.random() - 0.5) * 12;
 
       btnNo.style.transform = `translate(${x}px, ${y}px)`;
     };

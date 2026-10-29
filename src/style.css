@@ -1247,7 +1247,7 @@ html, body {
 }
 
 /* ====================================================================
-   FASE 4D: LA GRAN PREGUNTA
+   FASE 4D: LA GRAN PREGUNTA (BOTONES LIMPIOS Y MENSAJE SIN SOLAPAR)
    ==================================================================== */
 .proposal-stars {
   font-size: 1.35rem;
@@ -1262,14 +1262,13 @@ html, body {
   line-height: 1.35;
 }
 
-.proposal-actions {
+.proposal-buttons-container {
   display: flex;
-  gap: 12px;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
   position: relative;
-  min-height: 64px;
 }
 
 .btn-love {
@@ -1277,6 +1276,17 @@ html, body {
   color: #fff;
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
   font-size: 0.94rem;
+  width: 100%;
+  max-width: 290px;
+}
+
+.playful-btn-slot {
+  position: relative;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .btn-playful {
@@ -1288,16 +1298,31 @@ html, body {
   font-weight: 600;
   border-radius: 30px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
+  max-width: 290px;
+}
+
+.playful-msg-wrapper {
+  min-height: 44px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
 }
 
 .no-playful-msg {
-  margin-top: 12px;
-  font-size: 0.84rem;
-  color: var(--coral-rose);
-  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--gold-light);
+  background: rgba(245, 208, 97, 0.12);
+  border: 1px solid rgba(245, 208, 97, 0.35);
+  padding: 6px 14px;
+  border-radius: 14px;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
   animation: fade-in-up 0.3s ease;
+  max-width: 95%;
+  line-height: 1.35;
 }
 
 /* ====================================================================
@@ -1349,6 +1374,24 @@ html, body {
 /* ====================================================================
    UTILIDADES Y ANIMACIONES
    ==================================================================== */
+/* Destello intenso cuando se unen los 4 fragmentos */
+.supernova-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #ffffff 20%, #fffdf0 50%, rgba(254, 240, 138, 0.95) 80%, rgba(56, 189, 248, 0.85) 100%);
+  z-index: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.supernova-flash.active {
+  opacity: 1;
+}
+
 .hidden {
   display: none !important;
 }

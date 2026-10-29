@@ -50,6 +50,9 @@
     </div>
   </header>
 
+  <!-- Flash intenso supernova cuando se unen todos los fragmentos -->
+  <div id="supernova-flash" class="supernova-flash hidden"></div>
+
   <!-- Contenedor Único Fijo en Pantalla (Sin Scroll) -->
   <main id="app-viewport" class="app-viewport">
 
@@ -389,16 +392,20 @@
           Martha... ¿y si dejamos de fingir que solo es casualidad y vemos a dónde nos lleva esta química? ✨
         </h2>
 
-        <div class="proposal-actions">
+        <div class="proposal-buttons-container">
           <button id="btn-yes" class="btn-ocean btn-love btn-pulse">
             <span id="btn-yes-text">¡Me encanta la idea! Acepto ❤️</span>
           </button>
-          <button id="btn-no" class="btn-playful">
-            <span id="btn-no-text">Solo si me invitas un coco en la playa... 😜</span>
-          </button>
+          <div class="playful-btn-slot">
+            <button id="btn-no" class="btn-playful">
+              <span id="btn-no-text">Solo si me invitas un coco en la playa... 😜</span>
+            </button>
+          </div>
         </div>
 
-        <div id="no-playful-msg" class="no-playful-msg hidden"></div>
+        <div class="playful-msg-wrapper">
+          <div id="no-playful-msg" class="no-playful-msg hidden"></div>
+        </div>
       </div>
     </div>
 
@@ -416,8 +423,8 @@
 
         <div class="celebration-certificate">
           <div class="cert-line">
-            <span>Fecha oficial de nuestro universo:</span>
-            <strong id="celeb-date"></strong>
+            <span id="celeb-date-label">Cita oficial:</span>
+            <strong id="celeb-date">Este fin de semana frente al mar 🌊🌴</strong>
           </div>
           <div class="cert-line">
             <span>Para:</span>
