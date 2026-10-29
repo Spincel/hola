@@ -132,8 +132,8 @@ export const config = {
             feedback: "¡Para nada! Estás en mis pensamientos en cada respiro 🥰",
           },
         ],
-        photo: "/photos/anden_9_tres_cuartos_pareja.png",
-        photoCaption: "Juntos en el Andén 9 ¾, listos para cualquier viaje de la vida.",
+        photo: "/photos/modulo1.png",
+        photoCaption: "En el Andén 9 ¾ con el Expreso de Hogwarts, el comienzo de nuestra travesía.",
       },
       {
         question: "Si tuvieras que definir qué significas tú para mí en este universo...",
@@ -154,8 +154,8 @@ export const config = {
             feedback: "¡Nooo! Eres la dueña absoluta de mi alma y mi felicidad ❤️",
           },
         ],
-        photo: "/photos/castillo_hogwarts_bosque_sauce.png",
-        photoCaption: "Caminando juntos bajo la lluvia mágica frente al castillo.",
+        photo: "/photos/modulo2.png",
+        photoCaption: "Expecto Patronum: Eres mi luz eterna, mi paz y mi pensamiento más feliz.",
       },
       {
         question: "Hablemos de nuestro futuro juntos... ¿cuál es ese plan soñado que construiremos paso a paso?",
@@ -176,8 +176,8 @@ export const config = {
             feedback: "¡Jamás! Tú mereces un castillo entero y la cabaña más acogedora del bosque 🏰❤️",
           },
         ],
-        photo: "/photos/cabana_magica_chimenea_patronus.png",
-        photoCaption: "Nuestra cabaña soñada con chimenea, vino y la luz del Patronus.",
+        photo: "/photos/modulo4.png",
+        photoCaption: "Nuestra cabaña mágica soñada con chimenea, lluvia suave y faroles.",
       },
     ],
     retryPrompt: "¡Caaasi mi amor! Elige la verdad de nuestro corazón...",
@@ -229,19 +229,24 @@ export const config = {
 
     memoriesGallery: [
       {
-        url: "/photos/anden_9_tres_cuartos_pareja.png",
-        caption: "En el Andén 9 ¾ listos para recorrer la vida juntos",
-        tag: "Plataforma 9 ¾",
+        url: "/photos/modulo1.png",
+        caption: "En el Andén 9 ¾ listos para recorrer la vida juntos en el Expreso de Hogwarts",
+        tag: "Módulo I: Plataforma 9 ¾",
       },
       {
-        url: "/photos/castillo_hogwarts_bosque_sauce.png",
-        caption: "Bajo la lluvia mágica con el castillo y el bosque de fondo",
-        tag: "Hogwarts & Sauce",
+        url: "/photos/modulo2.png",
+        caption: "Eres mi Patronus: la luz que disuelve cualquier tormenta y me llena de paz — Always",
+        tag: "Módulo II: Expecto Patronum",
       },
       {
-        url: "/photos/cabana_magica_chimenea_patronus.png",
-        caption: "Nuestra futura cabaña con chimenea y la luz del Patronus",
-        tag: "Nuestro Futuro",
+        url: "/photos/modulo3.png",
+        caption: "Ni con un giratiempo cambiaría un solo segundo de los que he vivido a tu lado",
+        tag: "Módulo III: El Giratiempo",
+      },
+      {
+        url: "/photos/modulo4.png",
+        caption: "Nuestra soñada cabaña mágica en el bosque, con chimenea, lluvia y toda la vida para amarnos",
+        tag: "Módulo IV: Plan a Futuro",
       },
     ],
 
