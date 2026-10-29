@@ -109,10 +109,10 @@ class ConstellationApp {
     audioBtn.addEventListener("click", () => {
       const isMuted = sound.toggleMute();
       audioBtn.classList.toggle("muted", isMuted);
-      audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🎵";
+      audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🌧️";
     });
 
-    // 0A. Abrir la botella misteriosa
+    // 0A. Abrir el cofre del bosque
     const openBottle = () => {
       sound.start();
       sound.playChime(4);
@@ -121,7 +121,7 @@ class ConstellationApp {
         particleCount: 40,
         spread: 60,
         origin: { y: 0.5 },
-        colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#ffffff"],
+        colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fef08a", "#bae6fd"],
       });
 
       document.getElementById("intro-bottle-box").classList.add("hidden");
@@ -131,31 +131,31 @@ class ConstellationApp {
     document.getElementById("btn-open-bottle").addEventListener("click", openBottle);
     document.getElementById("bottle-interactive").addEventListener("click", openBottle);
 
-    // 0B. Comenzar la expedición marina tras descorchar
+    // 0B. Comenzar la expedición en el bosque
     document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
-      if (this.starfield) this.starfield.setTheme("twilight");
+      if (this.starfield) this.starfield.setTheme("misty");
       this.showStage("scene-m1-play");
       this.initMinigame1();
     });
 
-    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía a Atardecer en la playa)
+    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía a Cabaña con lluvia)
     document.getElementById("btn-to-m2").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("sunset");
+      if (this.starfield) this.starfield.setTheme("rainy");
       this.showStage("scene-m2-play");
       this.initMinigame2();
     });
 
-    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a Océano Boreal con Luna y Olas de Aurora)
+    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a Luciérnagas y chimenea cálida)
     document.getElementById("btn-to-m3").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("aurora");
+      if (this.starfield) this.starfield.setTheme("cozy");
       this.showStage("scene-m3-play");
       this.initMinigame3();
     });
 
-    // 4. Avanzar de Recompensa 3 al Clímax (Pedestal)
+    // 4. Avanzar de Recompensa 3 al Clímax (Pedestal de chimenea)
     document.getElementById("btn-to-climax").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("aurora");
+      if (this.starfield) this.starfield.setTheme("cozy");
       this.showStage("scene-climax-pedestal");
       this.initClimaxPedestal();
     });
@@ -198,13 +198,13 @@ class ConstellationApp {
       particleCount: 50,
       spread: 60,
       origin: { y: 0.12 },
-      colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#ffffff", "#fb7185"],
+      colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fef08a", "#bae6fd"],
       ticks: 180,
     });
   }
 
   // ==================================================================
-  // ESTACIÓN 1: MINIJUEGO DE MEMORIA (MAR & VINO - 3 PARES / 6 CARTAS)
+  // ESTACIÓN 1: MINIJUEGO DE MEMORIA (BOSQUE & CABAÑA - 3 PARES)
   // ==================================================================
   initMinigame1() {
     const grid = document.getElementById("memory-grid");
@@ -221,7 +221,7 @@ class ConstellationApp {
     countEl.textContent = "0";
     grid.innerHTML = "";
 
-    // 3 pares temáticos de mar, vino y atracción
+    // 3 pares temáticos de bosque, cabaña y pasión
     const pairs = config.minigame1.pairs;
     const cardsData = [];
     pairs.forEach((pair) => {
@@ -238,7 +238,7 @@ class ConstellationApp {
       card.dataset.pairId = item.id;
 
       card.innerHTML = `
-        <div class="memory-card-back">🌊</div>
+        <div class="memory-card-back">🌲</div>
         <div class="memory-card-front">
           <span class="card-icon">${item.icon}</span>
           <span class="card-title">${item.name}</span>
@@ -341,7 +341,7 @@ class ConstellationApp {
     qData.options.forEach((opt) => {
       const btn = document.createElement("button");
       btn.className = "trivia-option";
-      btn.innerHTML = `<span class="opt-bullet">🌊</span> <span>${opt.text}</span>`;
+      btn.innerHTML = `<span class="opt-bullet">🌲</span> <span>${opt.text}</span>`;
 
       btn.addEventListener("click", () => {
         if (opt.correct) {
@@ -487,7 +487,7 @@ class ConstellationApp {
             particleCount: 180,
             spread: 100,
             origin: { y: 0.5 },
-            colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#fb7185", "#ffffff"],
+            colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fbbf24", "#bae6fd"],
           });
 
           this.showStage("scene-climax-letter");
@@ -630,14 +630,14 @@ class ConstellationApp {
         angle: 60,
         spread: 55,
         origin: { x: 0 },
-        colors: ["#38bdf8", "#2dd4bf", "#fb7185", "#f5d061"],
+        colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fbbf24"],
       });
       confetti({
         particleCount: 5,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
-        colors: ["#38bdf8", "#2dd4bf", "#fb7185", "#f5d061"],
+        colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fbbf24"],
       });
 
       if (Date.now() < animationEnd) {
