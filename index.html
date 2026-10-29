@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Una Sorpresa Entre el Bosque y la Lluvia ✦ Xóchitl Sinay</title>
+  <title>El Viaje Mágico de Nuestro Amor ✦ Xóchitl Sinay</title>
   
-  <meta property="og:title" content="Un refugio entre el bosque, la lluvia y la cabaña ✦">
-  <meta property="og:description" content="Una expedición interactiva en una cabaña en el bosque para Xóchitl Sinay.">
+  <meta property="og:title" content="El Viaje Mágico de Nuestro Amor ✦ Andén 9 ¾ y Hogwarts">
+  <meta property="og:description" content="Una travesía inolvidable a través de la magia y un plan a futuro para Xóchitl Sinay.">
   <meta property="og:type" content="website">
 
   <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
@@ -17,33 +17,33 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-  <!-- Canvas de fondo: Bosque de pinos, lluvia continua y luciérnagas -->
+  <!-- Canvas de fondo: Andén 9 3/4, Sauce Boxeador, Gran Comedor con velas y Patronus -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
-  <!-- Botón de Audio Flotante (Lluvia en el bosque + chimenea y música) -->
-  <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de sonido" title="Lluvia y chimenea en el bosque">
+  <!-- Botón de Audio Flotante (Lluvia en Hogwarts + chimenea y música mágica) -->
+  <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de sonido" title="Lluvia mágica y melodía de Hogwarts">
     <span class="audio-icon">🌧️</span>
   </button>
 
-  <!-- Barra Superior: Inventario de Fragmentos del Bosque -->
+  <!-- Barra Superior: Inventario de Fragmentos Mágicos -->
   <header id="fragments-hud" class="fragments-hud hidden">
     <div class="hud-container">
-      <div class="hud-title">Fragmentos del Bosque</div>
+      <div class="hud-title">Fragmentos del Andén & Hogwarts</div>
       <div class="hud-slots">
         <div class="hud-slot" id="slot-1" data-index="1">
-          <div class="slot-gem">🌲</div>
-          <span class="slot-label">Pinos</span>
+          <div class="slot-gem">🚂</div>
+          <span class="slot-label">Andén 9¾</span>
         </div>
         <div class="hud-slot" id="slot-2" data-index="2">
-          <div class="slot-gem">🍷</div>
-          <span class="slot-label">Vino</span>
+          <div class="slot-gem">🏰</div>
+          <span class="slot-label">Castillo</span>
         </div>
         <div class="hud-slot" id="slot-3" data-index="3">
-          <div class="slot-gem">⚡</div>
-          <span class="slot-label">Patronus</span>
+          <div class="slot-gem">🌲</div>
+          <span class="slot-label">Sauce</span>
         </div>
         <div class="hud-slot" id="slot-4" data-index="4">
-          <div class="slot-gem">❤</div>
+          <div class="slot-gem">⚡</div>
           <span class="slot-label">Always</span>
         </div>
       </div>
@@ -57,46 +57,46 @@
   <main id="app-viewport" class="app-viewport">
 
     <!-- ========================================== -->
-    <!-- ESCENA 0: INTRODUCCIÓN - EL COFRE DEL BOSQUE-->
-    <!-- (Misterio y calidez entre los pinos)       -->
+    <!-- ESCENA 0: INTRODUCCIÓN - EL BILLETE DEL ANDÉN 9 ¾ -->
     <!-- ========================================== -->
     <div id="scene-intro" class="stage-scene active">
       
-      <!-- Estado A: El Farol y Cofre de Roble -->
+      <!-- Estado A: El Billete Dorado del Expreso de Hogwarts -->
       <div id="intro-bottle-box" class="glass-card compact-card intro-bottle-card">
-        <div class="ocean-badge" id="intro-badge">✦ Un Refugio Entre los Pinos y la Lluvia ✦</div>
+        <div class="ocean-badge" id="intro-badge">✦ Expreso de Hogwarts ✦ Andén 9 ¾ ✦</div>
         
         <div class="floating-bottle-wrap" id="bottle-interactive">
           <div class="bottle-glow"></div>
-          <!-- Farol cálido y cofre de madera en el bosque -->
-          <svg class="bottle-svg" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Billete Dorado de Hogwarts Express -->
+          <svg class="bottle-svg" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#854d0e" />
-                <stop offset="50%" stop-color="#5a310c" />
-                <stop offset="100%" stop-color="#3d2008" />
+              <linearGradient id="ticketGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fef08a" />
+                <stop offset="35%" stop-color="#eab308" />
+                <stop offset="70%" stop-color="#ca8a04" />
+                <stop offset="100%" stop-color="#854d0e" />
               </linearGradient>
-              <radialGradient id="lanternGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#fef08a" stop-opacity="1" />
-                <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.8" />
-                <stop offset="100%" stop-color="#b45309" stop-opacity="0.1" />
+              <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fef08a" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#eab308" stop-opacity="0.4" />
+                <stop offset="100%" stop-color="#78350f" stop-opacity="0" />
               </radialGradient>
             </defs>
-            <!-- Tejadito del farol rústico -->
-            <polygon points="60,18 25,48 95,48" fill="#292524" stroke="#78350f" stroke-width="2" />
-            <rect x="52" y="8" width="16" height="12" rx="3" fill="#78350f" stroke="#a16207" stroke-width="1.5" />
-            <!-- Vidrio con fuego interior -->
-            <rect x="30" y="48" width="60" height="76" rx="4" fill="url(#lanternGlow)" stroke="#78350f" stroke-width="2" />
-            <circle cx="60" cy="86" r="16" fill="#fef08a" opacity="0.9" class="sparkle-dot-1" />
-            <text x="60" y="91" font-size="12" text-anchor="middle" fill="#78350f">🔥</text>
-            <!-- Base de madera de roble con herrajes -->
-            <rect x="22" y="124" width="76" height="42" rx="6" fill="url(#woodGrad)" stroke="#a16207" stroke-width="2" />
-            <rect x="38" y="138" width="44" height="14" rx="3" fill="#292524" stroke="#d97706" stroke-width="1" />
-            <circle cx="60" cy="145" r="4" fill="#fbbf24" />
-            <!-- Gotitas de lluvia y chispas doradas -->
-            <circle cx="28" cy="70" r="2.5" fill="#bae6fd" class="sparkle-dot-2" />
-            <circle cx="92" cy="100" r="2" fill="#fef08a" class="sparkle-dot-3" />
-            <circle cx="45" cy="158" r="1.8" fill="#f59e0b" />
+            <!-- Billete de Hogwarts dorado con corte ornamental -->
+            <rect x="15" y="24" width="110" height="132" rx="10" fill="url(#ticketGold)" stroke="#fef08a" stroke-width="2" />
+            <rect x="22" y="31" width="96" height="118" rx="6" fill="#1c1917" stroke="#ca8a04" stroke-width="1.5" />
+            <!-- Sello de Hogwarts 9 3/4 -->
+            <circle cx="70" cy="74" r="28" fill="url(#portalGlow)" />
+            <circle cx="70" cy="74" r="24" fill="#7f1d1d" stroke="#eab308" stroke-width="2" />
+            <text x="70" y="81" font-family="'Playfair Display', serif" font-size="16" text-anchor="middle" fill="#fef08a" font-weight="bold">9 ¾</text>
+            <!-- Texto Hogwarts Express -->
+            <text x="70" y="112" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" text-anchor="middle" fill="#fef08a" letter-spacing="2" font-weight="700">HOGWARTS</text>
+            <text x="70" y="124" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" text-anchor="middle" fill="#fde047" letter-spacing="1">PLATAFORMA 9 ¾</text>
+            <text x="70" y="138" font-family="'Caveat', cursive" font-size="11" text-anchor="middle" fill="#ffffff">London to Hogwarts</text>
+            <!-- Chispas mágicas -->
+            <circle cx="28" cy="42" r="2" fill="#fef08a" class="sparkle-dot-1" />
+            <circle cx="112" cy="45" r="2.5" fill="#fef08a" class="sparkle-dot-2" />
+            <circle cx="110" cy="142" r="2" fill="#fef08a" class="sparkle-dot-3" />
           </svg>
           <div class="wave-ripples">
             <span></span>
@@ -104,46 +104,45 @@
           </div>
         </div>
 
-        <div class="bottle-tag" id="bottle-tag">Para la dueña de mi corazón, mi amada esposa 💌🌲</div>
+        <div class="bottle-tag" id="bottle-tag">Para la mujer de mi vida, mi único y gran amor 💌🚂⚡</div>
         <p class="bottle-teaser" id="bottle-teaser">
-          La lluvia suave y el murmullo del bosque trajeron un cofre de madera resguardado bajo los pinos con un mensaje para ti...
+          Entre el vapor del Expreso de Hogwarts y el muro del Andén 9 ¾, hay un billete dorado y un mensaje secreto reservado solo para ti...
         </p>
 
         <div class="headphones-hint">
           <span class="hint-icon">🎧</span>
-          <span>Ponte audífonos para escuchar la lluvia y el bosque 🌧️</span>
+          <span>Ponte audífonos para escuchar la lluvia y la magia 🌧️🪄</span>
         </div>
 
         <button id="btn-open-bottle" class="btn-ocean btn-pulse">
-          <span id="open-bottle-text">Abrir el cofre del bosque 🌲✨</span>
+          <span id="open-bottle-text">Cruzar al Andén 9 ¾ y abrir el mensaje 🚂✨</span>
         </button>
       </div>
 
-      <!-- Estado B: El Mensaje Desplegado -->
+      <!-- Estado B: El Mensaje Desplegado tras abordar -->
       <div id="intro-unfolded-box" class="glass-card compact-card hidden">
-        <div class="ocean-badge">✦ El Secreto de la Cabaña ✦</div>
-        <h1 class="main-title" id="unfolded-title">¡Hola mi amor! Sé que la curiosidad te ganaría... 😉</h1>
+        <div class="ocean-badge">✦ El Secreto de Nuestro Destino ✦</div>
+        <h1 class="main-title" id="unfolded-title">¡Hola mi amor! Bienvenida a nuestro viaje mágico... 😉⚡</h1>
         <p class="subtitle" id="unfolded-subtitle">
-          Quería prepararte algo diferente, especial y que rompiera la rutina: una expedición a nuestro propio refugio en el bosque. Este mensaje se fragmentó en 4 recuerdos entre los pinos, la lluvia y la chimenea. Si logras reunirlos, descubrirás la propuesta que guardo en el corazón para nosotros dos...
+          Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento del día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Reúne cada fragmento para descubrir el gran plan a futuro que tengo reservado para los dos...
         </p>
         <button id="btn-start" class="btn-ocean btn-pulse">
-          <span id="start-btn-text">Adentrarnos juntos en el bosque ✨</span>
+          <span id="start-btn-text">Subir al tren de nuestro amor ✨</span>
         </button>
       </div>
 
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 1A: MINIJUEGO 1 - MEMORIA DEL BOSQUE-->
-    <!-- (3 pares de cartas 3x2: Pinos, Vino, Arte) -->
+    <!-- ESCENA 1A: MINIJUEGO 1 - EL SAUCE BOXEADOR -->
     <!-- ========================================== -->
     <div id="scene-m1-play" class="stage-scene">
       <div class="glass-card game-card">
         <div class="scene-header">
           <span class="station-tag">Estación I</span>
-          <h2 class="scene-title">Memoria del Bosque & la Cabaña</h2>
+          <h2 class="scene-title">El Andén 9 ¾ & El Sauce Boxeador</h2>
           <p class="scene-instruction">
-            Encuentra los 3 pares que representan nuestro refugio de amor, la lluvia y lo mucho que me fascinas:
+            Encuentra los 3 pares que representan cómo estás en mi mente en todo momento y la magia de nuestro amor:
           </p>
           <div class="counter-badge">
             Pares encontrados: <span id="pairs-count">0</span> / 3
@@ -162,10 +161,10 @@
     <!-- Modal emergente al encontrar un par de memoria -->
     <div id="pair-modal" class="custom-modal hidden">
       <div class="modal-content glass-card glow-border">
-        <div class="modal-sparkle" id="pair-modal-icon">🌲 ✦</div>
-        <h3 id="pair-modal-title" class="modal-title">Pinos & Lluvia Suave</h3>
+        <div class="modal-sparkle" id="pair-modal-icon">🚂 ✦</div>
+        <h3 id="pair-modal-title" class="modal-title">Plataforma 9 ¾ & Nuestro Destino</h3>
         <p id="pair-modal-phrase" class="modal-phrase">«Frase»</p>
-        <button id="close-pair-modal" class="btn-ocean-sm">Continuar explorando el bosque</button>
+        <button id="close-pair-modal" class="btn-ocean-sm">Continuar el viaje en el tren</button>
       </div>
     </div>
 
@@ -174,34 +173,34 @@
     <!-- ========================================== -->
     <div id="scene-m1-reward" class="stage-scene">
       <div class="glass-card compact-card">
-        <div class="reward-icon-burst">🌲</div>
+        <div class="reward-icon-burst">🚂</div>
         <h3 class="reward-title">¡Primer Fragmento Recuperado!</h3>
-        <p class="reward-subtitle">Fragmento I: Pinos & Lluvia</p>
+        <p class="reward-subtitle">Fragmento I: Andén 9 ¾ & Destino</p>
         <div class="poem-box">
-          <p class="poem-line">Entre el murmullo de la lluvia y el aroma a pino,</p>
-          <p class="poem-line">el calor de tu cuerpo es mi único y verdadero refugio.</p>
-          <p class="poem-line">Tu mente brillante, tu risa y tu belleza infinita</p>
-          <p class="poem-line">hacen de cualquier rincón del mundo nuestro hogar.</p>
+          <p class="poem-line">No existe tren, reloj ni distancia en este mundo</p>
+          <p class="poem-line">que pueda apartar tu recuerdo de mi mente.</p>
+          <p class="poem-line">Pienso en ti en cada instante de mi día,</p>
+          <p class="poem-line">porque eres el principio, el presente y mi futuro.</p>
         </div>
-        <button id="btn-to-m2" class="btn-ocean">Avanzar a la Cabaña (Estación II) →</button>
+        <button id="btn-to-m2" class="btn-ocean">Viajar al Castillo de Hogwarts (Estación II) →</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 2A: MINIJUEGO 2 - TRIVIA CABAÑA     -->
+    <!-- ESCENA 2A: MINIJUEGO 2 - EL GRAN COMEDOR   -->
     <!-- ========================================== -->
     <div id="scene-m2-play" class="stage-scene">
       <div class="glass-card compact-card">
         <div class="scene-header">
           <span class="station-tag">Estación II</span>
-          <h2 class="scene-title">Cuestionario de Nuestra Cabaña</h2>
+          <h2 class="scene-title">El Gran Comedor de Hogwarts</h2>
           <div class="trivia-progress">
             <div class="progress-bar-fill" id="trivia-progress-bar"></div>
           </div>
         </div>
 
         <div class="question-number" id="question-step">Pregunta 1 de 3</div>
-        <h3 class="question-text" id="question-text">¿Qué es lo mejor de una cabaña con lluvia?</h3>
+        <h3 class="question-text" id="question-text">¿Qué tan presente estás en mis pensamientos?</h3>
 
         <div class="options-container" id="options-container"></div>
         <div id="trivia-feedback" class="trivia-feedback hidden"></div>
@@ -215,9 +214,9 @@
       <div class="glass-card polaroid-scene-card">
         <div class="polaroid-card">
           <div class="polaroid-img-frame">
-            <img id="polaroid-img" src="" alt="Recuerdo en la cabaña con vino y chimenea" loading="lazy">
+            <img id="polaroid-img" src="" alt="Recuerdo mágico en Hogwarts" loading="lazy">
           </div>
-          <div class="polaroid-caption" id="polaroid-caption">Nuestra complicidad frente a la chimenea.</div>
+          <div class="polaroid-caption" id="polaroid-caption">Juntos en el Andén 9 ¾.</div>
         </div>
         <button id="btn-next-question" class="btn-ocean-sm mt-3">Siguiente Pregunta →</button>
       </div>
@@ -228,29 +227,29 @@
     <!-- ========================================== -->
     <div id="scene-m2-reward" class="stage-scene">
       <div class="glass-card compact-card">
-        <div class="reward-icon-burst">🍷</div>
+        <div class="reward-icon-burst">🏰</div>
         <h3 class="reward-title">¡Segundo Fragmento Recuperado!</h3>
-        <p class="reward-subtitle">Fragmento II: Vino & Chimenea</p>
+        <p class="reward-subtitle">Fragmento II: El Castillo & Mis Pensamientos</p>
         <div class="poem-box">
-          <p class="poem-line">El fuego de la chimenea templa el frío del bosque,</p>
-          <p class="poem-line">pero es tu abrazo el que enciende mi alma entera.</p>
-          <p class="poem-line">Cada risa, cada mirada y cada momento a tu lado</p>
-          <p class="poem-line">hacen que amar sea lo más hermoso que me ha pasado.</p>
+          <p class="poem-line">Ni en las mil salas del castillo más grande,</p>
+          <p class="poem-line">ni en las páginas de los libros más sabios,</p>
+          <p class="poem-line">existe una magia tan inmensa y verdadera</p>
+          <p class="poem-line">como la suerte que tengo de tenerte en mi vida.</p>
         </div>
-        <button id="btn-to-m3" class="btn-ocean">Avanzar a las Luciérnagas (Estación III) →</button>
+        <button id="btn-to-m3" class="btn-ocean">Conjurar el Encantamiento Lumos (Estación III) →</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 3A: MINIJUEGO 3 - LUCIÉRNAGAS       -->
+    <!-- ESCENA 3A: MINIJUEGO 3 - ENCANTAMIENTO LUMOS-->
     <!-- ========================================== -->
     <div id="scene-m3-play" class="stage-scene">
       <div class="glass-card game-card">
         <div class="scene-header">
           <span class="station-tag">Estación III</span>
-          <h2 class="scene-title">Luciérnagas en el Bosque</h2>
+          <h2 class="scene-title">Encantamiento Lumos & El Patronus</h2>
           <p class="scene-instruction">
-            Toca las luces doradas del 1 al 7 para trazar el corazón resplandeciente entre los pinos y la niebla.
+            Toca las luces mágicas del 1 al 7 para encender con tu varita el corazón resplandeciente entre los pinos y la niebla:
           </p>
           <div class="constellation-counter">
             Siguiente luz: <span id="next-star-num" class="highlight-star">1</span>
@@ -279,55 +278,55 @@
     <!-- ========================================== -->
     <div id="scene-m3-reward" class="stage-scene">
       <div class="glass-card compact-card">
-        <div class="reward-icon-burst">⋆</div>
-        <h3 class="reward-title">¡Corazón del Bosque Completo!</h3>
-        <p class="reward-subtitle">Fragmentos III y IV: Luciérnagas y Amor Eterno</p>
+        <div class="reward-icon-burst">⚡</div>
+        <h3 class="reward-title">¡Corazón del Patronus Completo!</h3>
+        <p class="reward-subtitle">Fragmentos III y IV: La Fuerza del Sauce y Always</p>
         <div class="poem-box">
-          <p class="poem-line">Eres mi refugio en la tormenta, mi calma y mi mayor aventura.</p>
-          <p class="poem-line">La mujer con la que sueño, construyo y celebro cada día.</p>
-          <p class="poem-line">Ahora los 4 fragmentos se funden en el calor de una sola promesa...</p>
+          <p class="poem-line">Eres mi Patronus en la tormenta, mi calma y mi mayor alegría.</p>
+          <p class="poem-line">La mujer que habita en mis pensamientos cada instante de mi día.</p>
+          <p class="poem-line">Ahora los 4 fragmentos giran en el tiempo para sellar una promesa eterna...</p>
         </div>
-        <button id="btn-to-climax" class="btn-ocean btn-pulse">¡Unir los 4 Fragmentos del Bosque! ✦</button>
+        <button id="btn-to-climax" class="btn-ocean btn-pulse">¡Unir los 4 Fragmentos con Magia! ✨</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4A: PEDESTAL DE FUSIÓN (CON VÓRTICE)-->
+    <!-- ESCENA 4A: PEDESTAL DEL GIRATIEMPO         -->
     <!-- ========================================== -->
     <div id="scene-climax-pedestal" class="stage-scene">
       <div class="glass-card compact-card">
-        <div class="ocean-badge">✦ El Fuego de la Chimenea ✦</div>
-        <h2 class="scene-title">Ensamblando el Mensaje</h2>
+        <div class="ocean-badge">✦ El Giratiempo & El Fuego ✦</div>
+        <h2 class="scene-title">Ensamblando la Magia</h2>
         <p class="subtitle">
-          Las 4 piezas del bosque giran en espiral hacia el calor de la chimenea para revelar el secreto final.
+          Los 4 fragmentos giran a través del tiempo hacia el calor del fuego para revelar el secreto final.
         </p>
 
         <div class="fusion-pedestal" id="fusion-pedestal">
           <div class="fusion-ring ring-outer"></div>
           <div class="fusion-ring ring-mid"></div>
           <div class="fusion-core" id="fusion-core">
-            <span class="core-icon">🔥</span>
+            <span class="core-icon">⚡</span>
           </div>
 
-          <div class="floating-orb orb-1" id="orb-1">🌲</div>
-          <div class="floating-orb orb-2" id="orb-2">🍷</div>
-          <div class="floating-orb orb-3" id="orb-3">⚡</div>
-          <div class="floating-orb orb-4" id="orb-4">❤</div>
+          <div class="floating-orb orb-1" id="orb-1">🚂</div>
+          <div class="floating-orb orb-2" id="orb-2">🏰</div>
+          <div class="floating-orb orb-3" id="orb-3">🌲</div>
+          <div class="floating-orb orb-4" id="orb-4">⚡</div>
         </div>
 
         <button id="btn-fuse" class="btn-ocean btn-pulse">
-          ✦ Unir los 4 Fragmentos Mágicos ✦
+          ✦ Unir los 4 Fragmentos con Magia ✦
         </button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4B: LA CARTA ROMÁNTICA EN LA CABAÑA -->
-    <!-- (AQUÍ SE REVELA EL NOMBRE DE XÓCHITL SINAY)-->
+    <!-- ESCENA 4B: LA CARTA MÁGICA                 -->
+    <!-- (AQUÍ SE REVELA EL MENSAJE PARA XÓCHITL)   -->
     <!-- ========================================== -->
     <div id="scene-climax-letter" class="stage-scene">
       <div class="glass-card letter-card">
-        <div class="letter-seal">🌲 ⚡ 🍷</div>
+        <div class="letter-seal">⚡ 🚂 🏰</div>
         <div class="letter-salutation" id="letter-salutation">Para mi amada esposa, Xóchitl Sinay Barba Cuevas:</div>
 
         <div class="letter-scroll-area">
@@ -336,17 +335,17 @@
 
         <div class="letter-actions">
           <button id="btn-skip-typewriter" class="btn-text-link">Saltar animación</button>
-          <button id="btn-to-gallery" class="btn-ocean-sm hidden">Ver nuestra cabaña soñada →</button>
+          <button id="btn-to-gallery" class="btn-ocean-sm hidden">Ver nuestros recuerdos mágicos →</button>
         </div>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4C: GALERÍA DE LA CABAÑA Y BOSQUE   -->
+    <!-- ESCENA 4C: GALERÍA DE RECUERDOS MÁGICOS    -->
     <!-- ========================================== -->
     <div id="scene-climax-gallery" class="stage-scene">
       <div class="glass-card gallery-card">
-        <div class="ocean-badge">✦ Nuestra Cabaña en el Bosque ✦</div>
+        <div class="ocean-badge">✦ Nuestro Viaje Mágico ✦</div>
         
         <div class="carousel-container">
           <div class="carousel-track" id="carousel-track"></div>
@@ -364,22 +363,22 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4D: LA GRAN PREGUNTA FINAL          -->
+    <!-- ESCENA 4D: LA GRAN PROPUESTA DE FUTURO     -->
     <!-- ========================================== -->
     <div id="scene-climax-question" class="stage-scene">
       <div class="glass-card compact-card glow-border">
-        <div class="proposal-stars">🌲 🍷 🔥 🌧️ 🪄 ⚡</div>
+        <div class="proposal-stars">🚂 🏰 🌲 🌧️ 🍷 ⚡</div>
         <h2 class="proposal-question" id="final-question">
-          Xóchitl Sinay... ¿aceptas escaparte conmigo este fin de semana a una cabaña mágica en el bosque, con chimenea, lluvia, buen vino y todo mi amor dedicado solo a ti? 🌲🏡🌧️🍷🪄
+          Xóchitl Sinay... ¿aceptas que hagamos realidad este hermoso plan a futuro para escaparnos juntos a una cabaña mágica en el bosque, con chimenea, lluvia, buen vino y todo mi amor dedicado solo a ti? 🚂🏰🌲🌧️🍷🪄
         </h2>
 
         <div class="proposal-buttons-container">
           <button id="btn-yes" class="btn-ocean btn-love btn-pulse">
-            <span id="btn-yes-text">¡Sí, mi amor! Always ❤️⚡</span>
+            <span id="btn-yes-text">¡Sí, mi amor! Prometido para nuestro futuro — Always ❤️⚡</span>
           </button>
           <div class="playful-btn-slot">
             <button id="btn-no" class="btn-playful">
-              <span id="btn-no-text">Solo si hay chimenea, vino tinto y cerveza de mantequilla... 🍺🔥</span>
+              <span id="btn-no-text">Solo si viajamos en el Expreso de Hogwarts... 🚂✨</span>
             </button>
           </div>
         </div>
@@ -391,21 +390,21 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4E: CELEBRACIÓN FINAL (¡Dijo que SÍ!)-->
+    <!-- ESCENA 4E: CELEBRACIÓN DE LA PROMESA       -->
     <!-- ========================================== -->
     <div id="scene-celebration" class="stage-scene">
       <div class="glass-card compact-card glow-border">
-        <div class="ocean-badge" id="celeb-badge">✦ Promesa Sellada en la Cabaña del Bosque ✦</div>
-        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ mi amada esposa! 💖🌲🏡🪄</h2>
-        <div class="celebration-hearts">💕 🌲 ⚡ 🏡 🍷 💕</div>
+        <div class="ocean-badge" id="celeb-badge">✦ Promesa Sellada en el Andén 9 ¾ ✦</div>
+        <h2 class="celebration-title" id="celeb-title">¡Promesa Aceptada por mi Amada Esposa! 💖🚂🏰🪄</h2>
+        <div class="celebration-hearts">💕 🚂 🏰 ⚡ 🍷 💕</div>
         <p class="celebration-text" id="celeb-message">
-          Xóchitl Sinay, prometo amarte cada día con más fuerza, cuidarte, hacerte sonreír, cobijarte mientras llueve afuera y recordarte siempre lo inmensamente afortunado que soy de ser tu esposo.
+          Xóchitl Sinay, prometo amarte cada día con más fuerza, pensar en ti en cada paso, cuidarte, hacerte sonreír y hacer realidad muy pronto nuestro plan soñado en la cabaña en el bosque. Eres lo mejor de toda mi vida.
         </p>
 
         <div class="celebration-certificate">
           <div class="cert-line">
-            <span id="celeb-date-label">Nuestra escapada romántica:</span>
-            <strong id="celeb-date">Este fin de semana en una cabaña mágica en el bosque 🌲🏡🌧️🍷🪄</strong>
+            <span id="celeb-date-label">Nuestro plan prometido a futuro:</span>
+            <strong id="celeb-date">Nuestra escapada mágica a una cabaña en el bosque 🌲🏡🌧️🍷🪄</strong>
           </div>
           <div class="cert-line">
             <span>Para:</span>
@@ -413,7 +412,7 @@
           </div>
           <div class="cert-line">
             <span>De:</span>
-            <strong id="celeb-sender">Tu esposo que te ama con toda su alma</strong>
+            <strong id="celeb-sender">Tu esposo que piensa en ti en cada segundo y te ama con toda su alma</strong>
           </div>
         </div>
 

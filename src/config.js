@@ -1,266 +1,269 @@
 /**
  * ====================================================================
  * CONFIGURACIÓN PERSONALIZADA: PARA MI AMADA ESPOSA
- * XÓCHITL SINAY BARBA CUEVAS ✦ CABAÑA, BOSQUE, LLUVIA, VINO & MAGIA
+ * XÓCHITL SINAY BARBA CUEVAS ✦ EL VIAJE MÁGICO DE NUESTRO AMOR
  * ====================================================================
- * Una experiencia inmersiva inspirada en lo que ella más ama:
- * cabañas acogedoras, el aroma a bosque de pinos, la lluvia suave,
- * el fuego de la chimenea, el buen vino tinto y la magia de Harry Potter.
+ * Una expedición mágica a través del Andén 9 ¾, el Sauce Boxeador,
+ * el Castillo de Hogwarts y nuestra cabaña soñada con lluvia y chimenea.
+ * 
+ * Propósito: Recordarle que pienso en ella en cada segundo, que la amo
+ * con toda mi alma, que es lo mejor que me ha pasado en la vida, y sellar
+ * una hermosa promesa / plan a futuro para escaparnos juntos.
  */
 
 export const config = {
   // 1. Nombres y Destinataria
   partnerName: "Xóchitl Sinay Barba Cuevas",
   partnerShortName: "Xóchitl Sinay",
-  yourName: "Tu esposo que te ama con toda su alma",
+  yourName: "Tu esposo que piensa en ti en cada segundo y te ama con toda su alma",
 
-  // 2. Sonido y Ambiente (Lluvia suave en el bosque y música acústica)
+  // 2. Sonido y Ambiente (Lluvia mágica, chimenea y melodía encantada)
   audioUrl: null,
   synthAmbientEnabled: true,
 
-  // 3. Fase 0: Introducción con el Farol del Bosque / Cofre Mágico
+  // 3. Fase 0: La Plataforma 9 ¾ (King's Cross & Billete Dorado de Hogwarts)
   intro: {
-    badge: "✦ Un Refugio Mágico Entre los Pinos y la Lluvia ✦",
-    bottleTag: "Para la dueña de mi corazón, mi amada esposa 💌🌲⚡",
+    badge: "✦ Expreso de Hogwarts ✦ Andén 9 ¾ ✦",
+    bottleTag: "Para la mujer de mi vida, mi único y gran amor 💌🚂⚡",
     bottleTeaser:
-      "La lluvia suave y el murmullo del bosque trajeron un cofre encantado resguardado bajo los pinos con un mensaje para ti...",
-    openBottleText: "Abrir el cofre con Alohomora 🪄✨",
-    unfoldedTitle: "¡Hola mi amor! Sé que la curiosidad te ganaría... 😉",
+      "Entre el vapor del Expreso de Hogwarts y el muro del Andén 9 ¾, hay un billete dorado y un mensaje secreto reservado solo para ti...",
+    openBottleText: "Cruzar al Andén 9 ¾ y abrir el mensaje 🚂✨",
+    unfoldedTitle: "¡Hola mi amor! Bienvenida a nuestro viaje mágico... 😉⚡",
     unfoldedSubtitle:
-      "Quería prepararte algo diferente, especial y que rompiera la rutina: una expedición a nuestro propio refugio mágico en el bosque. Este mensaje se fragmentó en 4 recuerdos entre los pinos, la lluvia y la chimenea. Si logras reunirlos, descubrirás la propuesta que guardo en el corazón para nosotros dos...",
-    startButtonText: "Adentrarnos juntos en el bosque ✨",
-    headphonesNotice: "Ponte audífonos para escuchar la lluvia y el bosque 🎧🌧️",
+      "Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento del día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Reúne cada fragmento para descubrir el gran plan a futuro que tengo reservado para los dos...",
+    startButtonText: "Subir al tren de nuestro amor ✨",
+    headphonesNotice: "Ponte audífonos para escuchar la lluvia y la magia 🎧🌧️🪄",
   },
 
-  // 4. Los 4 Fragmentos que irá desbloqueando en el bosque
+  // 4. Los 4 Fragmentos que irá desbloqueando en los lugares mágicos
   fragments: [
     {
       id: 1,
-      name: "Pinos & Lluvia",
-      icon: "🌲",
-      color: "#22c55e",
-      shortDesc: "El aroma a tierra mojada y nuestro abrazo",
+      name: "Andén 9 ¾ & Destino",
+      icon: "🚂",
+      color: "#eab308",
+      shortDesc: "El destino que unió nuestras vidas para siempre",
     },
     {
       id: 2,
-      name: "Vino & Chimenea",
-      icon: "🍷",
-      color: "#f43f5e",
-      shortDesc: "Frente al fuego donde el tiempo se detiene",
+      name: "El Castillo & Mis Pensamientos",
+      icon: "🏰",
+      color: "#38bdf8",
+      shortDesc: "Pienso en ti en cada segundo de mis días",
     },
     {
       id: 3,
-      name: "Nuestro Patronus",
-      icon: "⚡",
-      color: "#f5d061",
-      shortDesc: "Tu luz que ilumina cualquier oscuridad",
+      name: "El Sauce & Nuestra Fuerza",
+      icon: "🌲",
+      color: "#22c55e",
+      shortDesc: "Raíces inquebrantables y lluvia serena",
     },
     {
       id: 4,
-      name: "Amor Eterno (Always)",
-      icon: "❤",
-      color: "#fb7185",
-      shortDesc: "Profundo, leal e indestructible",
+      name: "Nuestro Patronus (Always)",
+      icon: "⚡",
+      color: "#f43f5e",
+      shortDesc: "Lo mejor de mi vida entera — Always",
     },
   ],
 
-  // 5. Minijuego 1: «Memoria del Bosque & la Magia» (3 pares de cartas 3x2)
+  // 5. Minijuego 1: «Memoria Mágica: El Andén 9 ¾ y el Sauce Boxeador» (3 pares de cartas 3x2)
   minigame1: {
     stationNumber: "Estación I",
-    title: "Memoria del Bosque & la Magia",
+    title: "El Andén 9 ¾ & El Sauce Boxeador",
     instructions:
-      "Encuentra los 3 pares que representan nuestro refugio de amor, la lluvia y nuestra complicidad mágica:",
+      "Encuentra los 3 pares que representan cómo estás en mi mente en todo momento y la magia de nuestro amor:",
     pairs: [
       {
-        id: "bosque",
-        icon: "🌲",
-        name: "Pinos & Lluvia Suave",
+        id: "anden",
+        icon: "🚂",
+        name: "Plataforma 9 ¾ & Nuestro Destino",
         phrase:
-          "«El sonido de las gotas de lluvia sobre el tejado de madera y tú entre mis brazos... no existe un lugar de más paz en todo el universo.»",
+          "«Subirme al tren de la vida contigo fue la mejor decisión que he tomado; pienso en ti en cada estación, en cada hora y en cada suspiro.»",
       },
       {
-        id: "vino",
-        icon: "🍷",
-        name: "Vino Frente a la Chimenea",
+        id: "castillo",
+        icon: "🏰",
+        name: "El Castillo & Nuestra Cabaña",
         phrase:
-          "«Una copa de buen vino tinto compartida contigo junto al fuego crepitante me confirma que haberte elegido como mi esposa es lo mejor de mi vida.»",
+          "«Admiro a la mujer extraordinaria que eres: tu mente brillante, tu sonrisa deslumbrante y ese corazón noble que es mi único hogar.»",
       },
       {
         id: "patronus",
         icon: "⚡",
-        name: "Nuestro Patronus & Magia",
+        name: "El Patronus & La Promesa Always",
         phrase:
-          "«Eres mi Patronus en cada día difícil: tu luz, tu inteligencia y tu sonrisa ahuyentan cualquier oscuridad. Y si me preguntan cuánto tiempo te amaré... —Always.»",
+          "«Eres mi pensamiento más feliz, la luz que ahuyenta cualquier tormenta. Eres lo mejor de toda mi existencia. —¿After all this time? —Always.»",
       },
     ],
-    rewardPoemTitle: "✦ Primer Fragmento: Pinos & Lluvia ✦",
+    rewardPoemTitle: "✦ Primer Fragmento: Andén 9 ¾ & Destino ✦",
     rewardPoem: [
-      "Entre el murmullo de la lluvia y el aroma a pino,",
-      "el calor de tu cuerpo es mi único y verdadero refugio.",
-      "Tu mente brillante, tu risa y tu belleza infinita",
-      "hacen de cualquier rincón del mundo nuestro hogar.",
+      "No existe tren, reloj ni distancia en este mundo",
+      "que pueda apartar tu recuerdo de mi mente.",
+      "Pienso en ti en cada instante de mi día,",
+      "porque eres el principio, el presente y mi futuro.",
     ],
-    nextButtonText: "Avanzar a la Cabaña (Estación II) →",
+    nextButtonText: "Viajar al Castillo de Hogwarts (Estación II) →",
   },
 
-  // 6. Minijuego 2: «Cuestionario de Nuestra Cabaña Mágica»
+  // 6. Minijuego 2: «Cuestionario del Gran Comedor & El Castillo de Hogwarts»
   minigame2: {
     stationNumber: "Estación II",
-    title: "Cuestionario de Nuestra Cabaña",
+    title: "El Gran Comedor de Hogwarts",
     instructions:
-      "Momentos de complicidad que solo nosotros dos conocemos en el corazón:",
+      "Bajo las velas flotantes y el techo encantado, responde con la sinceridad más pura de nuestro amor:",
     questions: [
       {
-        question: "¿Qué es lo mejor de escaparnos juntos a una cabaña en medio del bosque mientras llueve afuera?",
+        question: "¿Qué tan presente estás en mis pensamientos todos los días de mi vida?",
         options: [
           {
-            text: "El sonido de las gotas en la ventana, el calor de la chimenea, una copa de vino y nosotros dos abrazados sin prisa ❤️",
+            text: "En cada segundo, desde que abro los ojos hasta que me duermo; eres mi pensamiento favorito a todas horas ❤️",
             correct: true,
-            feedback: "¡Exactamente mi amor! Ver llover afuera mientras estamos abrigados junto al fuego es la gloria entera ✨",
+            feedback: "¡Totalmente mi amor! No hay un solo momento en el que no estés viva en mi mente y en mi corazón ✨",
           },
           {
-            text: "Ponernos a contar cuántas agujas tiene cada pino del bosque",
+            text: "Solo cuando me acuerdo de encender la tetera mágica",
             correct: false,
-            feedback: "¡Jajaja terminaríamos en el año 2090! Elige con el corazón... 🤭",
+            feedback: "¡Jajaja por favor! Si vivo pensando en ti 24/7 🤭",
           },
           {
-            text: "Fingir que nos da frío y no querer abrazarnos",
+            text: "Únicamente cuando veo una lechuza volar por la ventana",
             correct: false,
-            feedback: "¡Imposible! Si el mejor pretexto del frío es estar pegaditos 🥰",
+            feedback: "¡Para nada! Estás en mis pensamientos en cada respiro 🥰",
           },
         ],
-        photo: "/photos/cabana_chimenea_vino.png",
-        photoCaption: "Nuestras mejores charlas con vino frente al fuego de la chimenea.",
+        photo: "/photos/anden_9_tres_cuartos_pareja.png",
+        photoCaption: "Juntos en el Andén 9 ¾, listos para cualquier viaje de la vida.",
       },
       {
-        question: "¿Qué es lo que más me fascina y me vuelve loco de ti, mi hermosa esposa?",
+        question: "Si tuvieras que definir qué significas tú para mí en este universo...",
         options: [
           {
-            text: "Absolutamente todo: tu inteligencia brillante, tu sonrisa que ilumina cualquier lugar, tu porte, tu cuerpo y esa magia tan tuya ✨",
+            text: "Eres el amor de mi vida, mi mayor orgullo, mi refugio y definitivamente lo mejor que me ha pasado en la existencia ✨",
             correct: true,
-            feedback: "¡Tal cual! Me fascinas entera, por dentro y por fuera, cada día más 😍",
+            feedback: "¡Exactamente mi reina! Haberte encontrado y ser tu esposo es el mayor regalo de mi vida entera 😍",
           },
           {
-            text: "Que sabes de memoria la receta exacta de la Poción Multijugos",
+            text: "Una compañera de clases de Pociones Avanzadas",
             correct: false,
-            feedback: "Sé que eres una bruja brillante, ¡pero la respuesta va directo a lo que me enamora de ti! 😂🪄",
+            feedback: "¡Oye, somos esposos y cómplices para toda la eternidad! 😂🪄",
           },
           {
-            text: "Que caminas como si fueras un fantasma de las mazmorras",
+            text: "Alguien que me ayuda a ordenar pergaminos viejos",
             correct: false,
-            feedback: "¡Para nada! Tienes una belleza, una calidez y una presencia deslumbrante ❤️",
+            feedback: "¡Nooo! Eres la dueña absoluta de mi alma y mi felicidad ❤️",
           },
         ],
-        photo: "/photos/bosque_lluvia_pareja.png",
-        photoCaption: "Caminando juntos bajo la lluvia fresca entre los árboles.",
+        photo: "/photos/castillo_hogwarts_bosque_sauce.png",
+        photoCaption: "Caminando juntos bajo la lluvia mágica frente al castillo.",
       },
       {
-        question: "Si tuviéramos que describir lo que siento por ti con una palabra mágica...",
+        question: "Hablemos de nuestro futuro juntos... ¿cuál es ese plan soñado que construiremos paso a paso?",
         options: [
           {
-            text: "«Always»... porque eres el gran amor de mi vida y te volvería a elegir como mi esposa en esta y en mil vidas más 💍🪄",
+            text: "Escaparnos a una cabaña mágica en el bosque, con chimenea de piedra, lluvia afuera, buen vino y toda la vida para amarnos 💍🌲",
             correct: true,
-            feedback: "¡Sí, mi vida entera! —After all this time? —Always. Eres mi hogar y mi mayor tesoro ✨",
+            feedback: "¡Sí, mi cielo hermoso! Un plan perfecto que haremos realidad juntos para detener el tiempo a solas ✨",
           },
           {
-            text: "Expelliarmus",
+            text: "Dormir en carpas en medio del Bosque Prohibido pasando frío",
             correct: false,
-            feedback: "¡Desarmado me tienes tú a mí, pero esa no es la palabra! 🤭🪄",
+            feedback: "¡Jajaja con las acromántulas no! Queremos una cabaña cálida y hermosa con chimenea 🔥🤭",
           },
           {
-            text: "Alohomora",
+            text: "Mudarnos al armario debajo de la escalera",
             correct: false,
-            feedback: "Ya abriste mi corazón hace mucho tiempo, ¡pero la respuesta es mucho más profunda! ❤️",
+            feedback: "¡Jamás! Tú mereces un castillo entero y la cabaña más acogedora del bosque 🏰❤️",
           },
         ],
-        photo: "/photos/cabana_atardecer_bosque.png",
-        photoCaption: "Nuestro refugio soñado entre los pinos al atardecer.",
+        photo: "/photos/cabana_magica_chimenea_patronus.png",
+        photoCaption: "Nuestra cabaña soñada con chimenea, vino y la luz del Patronus.",
       },
     ],
-    retryPrompt: "¡Caaasi mi amor! Respóndelo con el corazón...",
-    rewardPoemTitle: "✦ Segundo Fragmento: Vino & Chimenea ✦",
+    retryPrompt: "¡Caaasi mi amor! Elige la verdad de nuestro corazón...",
+    rewardPoemTitle: "✦ Segundo Fragmento: El Castillo & Mis Pensamientos ✦",
     rewardPoem: [
-      "El fuego de la chimenea templa el frío del bosque,",
-      "pero es tu abrazo el que enciende mi alma entera.",
-      "Cada risa, cada mirada y cada momento a tu lado",
-      "hacen que amar sea lo más hermoso que me ha pasado.",
+      "Ni en las mil salas del castillo más grande,",
+      "ni en las páginas de los libros más sabios,",
+      "existe una magia tan inmensa y verdadera",
+      "como la suerte que tengo de tenerte en mi vida.",
     ],
-    nextButtonText: "Avanzar a las Luciérnagas (Estación III) →",
+    nextButtonText: "Conjurar el Encantamiento Lumos (Estación III) →",
   },
 
-  // 7. Minijuego 3: «Constelación Lumos»
+  // 7. Minijuego 3: «Encantamiento Lumos & La Constelación del Patronus»
   minigame3: {
     stationNumber: "Estación III",
-    title: "Luciérnagas & Encantamiento Lumos",
+    title: "Encantamiento Lumos & El Patronus",
     instructions:
-      "Toca las luces doradas del 1 al 7 para encender el corazón resplandeciente entre los pinos y la niebla...",
+      "Toca las luces mágicas del 1 al 7 para encender con tu varita el corazón resplandeciente entre los pinos y la niebla...",
     starCount: 7,
-    constellationName: "«Constelación del Corazón Mágico»",
-    rewardPoemTitle: "✦ Fragmentos III y IV: Patronus y Amor Eterno ✦",
+    constellationName: "«Constelación del Patronus Eterno»",
+    rewardPoemTitle: "✦ Fragmentos III y IV: La Fuerza del Sauce y Always ✦",
     rewardPoem: [
-      "Eres mi refugio en la tormenta, mi calma y mi mayor aventura.",
-      "La mujer con la que sueño, construyo y celebro cada día.",
-      "Ahora los 4 fragmentos se funden en el calor de una sola promesa...",
+      "Eres mi Patronus en la tormenta, mi calma y mi mayor alegría.",
+      "La mujer que habita en mis pensamientos cada instante de mi día.",
+      "Ahora los 4 fragmentos giran en el tiempo para sellar una promesa eterna...",
     ],
-    nextButtonText: "¡Reunir todos los fragmentos! ✨",
+    nextButtonText: "¡Unir los 4 Fragmentos Mágicos! ✨",
   },
 
-  // 8. Fase 4: El Clímax Espectacular (La Carta a Xóchitl Sinay en la Cabaña)
+  // 8. Fase 4: El Clímax Espectacular (La Carta Mágica a Xóchitl Sinay)
   climax: {
     stationNumber: "El Clímax",
     title: "La Revelación",
-    fuseButtonText: "✦ Unir los 4 Fragmentos Mágicos ✦",
-    assemblingMessage: "Las luciérnagas y los fragmentos giran en espiral hacia el fuego...",
+    fuseButtonText: "✦ Unir los 4 Fragmentos con Magia ✦",
+    assemblingMessage: "El giratiempo gira y las luces se funden en el corazón del fuego...",
     revelationTitle: "Para Xóchitl Sinay Barba Cuevas",
 
     letter: {
       salutation: "Para mi amada esposa, Xóchitl Sinay Barba Cuevas:",
       paragraphs: [
-        "Mi amor, quise construir este rincón entre el aroma a pinos, la lluvia y la madera para hacer una pausa en el tiempo y recordarte algo que a veces la rutina diaria oculta, pero que mi corazón siente en cada respiro: sigo profundamente enamorado de ti, como el primer día o incluso más.",
-        "Admiro con todo mi ser a la mujer extraordinaria que eres: tu inteligencia brillante, tu determinación, tu forma de pensar y la fuerza con la que iluminas nuestro hogar. Pero también quiero que nunca olvides lo mucho que me fascinas como mujer: tu sonrisa que desarma cualquier tormenta, tu mirada hermosa, tu cuerpo, tu porte elegante y esa magia natural tan tuya que me sigue quitando el aliento.",
-        "Ser tu esposo es el mayor honor y la bendición más grande de mi vida. Eres mi refugio y mi Patronus: esa luz invencible que ahuyenta cualquier día difícil. Hemos caminado juntos, vencido retos y construido un amor real, cálido y leal. Y si alguien me preguntara hasta cuándo te voy a amar, mi respuesta siempre será la misma: Always.",
-        "Por eso hoy quiero invitarte a detener el reloj, a escapar juntos al bosque, a escuchar la lluvia caer mientras disfrutamos de una copa de vino frente al fuego de una chimenea y recordar por qué nos elegimos para siempre...",
+        "Mi amor, quise construir este rincón mágico para hacer una pausa en el tiempo y decirte algo que mi corazón siente con una fuerza inmensa en cada latido: te amo con toda mi alma, y no hay un solo día ni un solo instante en que no piense en ti.",
+        "Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.",
+        "Eres mi refugio y mi Patronus: esa luz invencible que disuelve cualquier nube gris. Hemos caminado juntos, soñado juntos y superado cualquier tormenta. Y hoy no quiero hablarte de la prisa del día a día, sino de nuestro futuro... de un plan hermoso que vamos a construir juntos con toda la ilusión.",
+        "Sueño con el día en que nos escapemos a esa cabaña mágica en el bosque que tanto nos emociona, para escuchar la lluvia caer contra los cristales, acurrucarnos junto a la chimenea crepitante, disfrutar de una copa de vino y mirarnos a los ojos sabiendo que todo lo que necesitamos en este mundo es estar juntos...",
       ],
-      closing: "Con todo mi amor, mi respeto y mi devoción eterna,",
+      closing: "Por siempre tuyo, con todo mi amor y devoción — Always,",
     },
 
     memoriesGallery: [
       {
-        url: "/photos/cabana_chimenea_vino.png",
-        caption: "Nuestras pláticas interminables con vino frente al fuego",
-        tag: "Nuestra Cabaña",
+        url: "/photos/anden_9_tres_cuartos_pareja.png",
+        caption: "En el Andén 9 ¾ listos para recorrer la vida juntos",
+        tag: "Plataforma 9 ¾",
       },
       {
-        url: "/photos/bosque_lluvia_pareja.png",
-        caption: "Caminando juntos bajo la lluvia entre los pinos",
-        tag: "Lluvia & Amor",
+        url: "/photos/castillo_hogwarts_bosque_sauce.png",
+        caption: "Bajo la lluvia mágica con el castillo y el bosque de fondo",
+        tag: "Hogwarts & Sauce",
       },
       {
-        url: "/photos/cabana_atardecer_bosque.png",
-        caption: "Nuestro rincón soñado en medio de la naturaleza",
-        tag: "Refugio Eterno",
+        url: "/photos/cabana_magica_chimenea_patronus.png",
+        caption: "Nuestra futura cabaña con chimenea y la luz del Patronus",
+        tag: "Nuestro Futuro",
       },
     ],
 
-    finalQuestion: "Xóchitl Sinay... ¿aceptas escaparte conmigo este fin de semana a una cabaña mágica en el bosque, con chimenea, lluvia, buen vino y todo mi amor dedicado solo a ti? 🌲🏡🌧️🍷🪄",
-    yesButtonText: "¡Sí, mi amor! Always ❤️⚡",
-    noButtonText: "Solo si hay chimenea, vino tinto y cerveza de mantequilla... 🍺🔥",
+    finalQuestion: "Xóchitl Sinay... ¿aceptas que hagamos realidad este hermoso plan a futuro para escaparnos juntos a una cabaña mágica en el bosque, con chimenea, lluvia, buen vino y todo mi amor dedicado solo a ti? 🚂🏰🌲🌧️🍷🪄",
+    yesButtonText: "¡Sí, mi amor! Prometido para nuestro futuro — Always ❤️⚡",
+    noButtonText: "Solo si viajamos en el Expreso de Hogwarts... 🚂✨",
 
     noButtonResponses: [
-      "¡Habrá chimenea encendida, el mejor vino y toda la magia del mundo, mi reina! 🍷🔥❤️",
-      "¡Te amo con toda mi alma, Xóchitl Sinay! —Always 💖🪄",
-      "¡No puedes decirle que no a tu esposo enamorado! 😉🌧️",
-      "¡El botón de arriba brilla como la luz de un Patronus! 👆✨",
-      "¡Trato hecho! Una escapada inolvidable a nuestra cabaña en el bosque 🌲🏡🌧️💍❤️",
+      "¡El Expreso de Hogwarts saldrá puntual solo para los dos, mi reina! 🚂✨❤️",
+      "¡Pienso en ti en cada segundo del día, Xóchitl Sinay! —Always 💖🪄",
+      "¡Eres lo mejor que me ha pasado en toda la vida, jamás lo olvides! 🥰🏰",
+      "¡El botón de arriba resplandece como un Patronus plateado! 👆✨",
+      "¡Trato hecho! Ese plan a futuro en nuestra cabaña mágica será inolvidable 🌲🏡🌧️💍❤️",
     ],
 
     celebration: {
-      badge: "✦ Promesa Sellada en la Cabaña del Bosque ✦",
-      title: "¡Dijo que SÍ mi amada esposa! 💖🌲🏡🪄",
+      badge: "✦ Promesa Sellada en el Andén 9 ¾ ✦",
+      title: "¡Promesa Aceptada por mi Amada Esposa! 💖🚂🏰🪄",
       message:
-        "Xóchitl Sinay, prometo amarte cada día con más fuerza, cuidarte, hacerte sonreír, cobijarte mientras llueve afuera y recordarte siempre lo inmensamente afortunado que soy de ser tu esposo.",
-      dateLabel: "Nuestra escapada romántica:",
-      dateValue: "Este fin de semana en una cabaña mágica en el bosque 🌲🏡🌧️🍷🪄",
+        "Xóchitl Sinay, prometo amarte cada día con más fuerza, pensar en ti en cada paso, cuidarte, hacerte sonreír y hacer realidad muy pronto nuestro plan soñado en la cabaña en el bosque. Eres lo mejor de toda mi vida.",
+      dateLabel: "Nuestro plan prometido a futuro:",
+      dateValue: "Nuestra escapada mágica a una cabaña en el bosque 🌲🏡🌧️🍷🪄",
       signature: "Always tuyo,",
     },
   },

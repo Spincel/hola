@@ -134,28 +134,28 @@ class ConstellationApp {
     // 0B. Comenzar la expedición en el bosque
     document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
-      if (this.starfield) this.starfield.setTheme("misty");
+      if (this.starfield) this.starfield.setTheme("whompingWillow");
       this.showStage("scene-m1-play");
       this.initMinigame1();
     });
 
-    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía a Cabaña con lluvia)
+    // 2. Avanzar de Recompensa 1 a Minijuego 2 (Cambio de escenografía al Gran Comedor de Hogwarts)
     document.getElementById("btn-to-m2").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("rainy");
+      if (this.starfield) this.starfield.setTheme("greatHall");
       this.showStage("scene-m2-play");
       this.initMinigame2();
     });
 
-    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a Luciérnagas y chimenea cálida)
+    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía a la Cabaña con Patronus)
     document.getElementById("btn-to-m3").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("cozy");
+      if (this.starfield) this.starfield.setTheme("patronusCabin");
       this.showStage("scene-m3-play");
       this.initMinigame3();
     });
 
-    // 4. Avanzar de Recompensa 3 al Clímax (Pedestal de chimenea)
+    // 4. Avanzar de Recompensa 3 al Clímax (Pedestal del Giratiempo)
     document.getElementById("btn-to-climax").addEventListener("click", () => {
-      if (this.starfield) this.starfield.setTheme("cozy");
+      if (this.starfield) this.starfield.setTheme("patronusCabin");
       this.showStage("scene-climax-pedestal");
       this.initClimaxPedestal();
     });
@@ -238,7 +238,7 @@ class ConstellationApp {
       card.dataset.pairId = item.id;
 
       card.innerHTML = `
-        <div class="memory-card-back">🌲</div>
+        <div class="memory-card-back">⚡</div>
         <div class="memory-card-front">
           <span class="card-icon">${item.icon}</span>
           <span class="card-title">${item.name}</span>
@@ -341,7 +341,7 @@ class ConstellationApp {
     qData.options.forEach((opt) => {
       const btn = document.createElement("button");
       btn.className = "trivia-option";
-      btn.innerHTML = `<span class="opt-bullet">🌲</span> <span>${opt.text}</span>`;
+      btn.innerHTML = `<span class="opt-bullet">🪄</span> <span>${opt.text}</span>`;
 
       btn.addEventListener("click", () => {
         if (opt.correct) {
