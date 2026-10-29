@@ -48,9 +48,9 @@ class ForestAudioSystem {
       this.melodyGain.gain.setValueAtTime(0.13, this.ctx.currentTime);
       this.melodyGain.connect(this.masterGain);
 
-      // 3. Ganancia de lluvia continua en el bosque
+      // 3. Ganancia de lluvia continua en el bosque (muy bajita y tenue de fondo)
       this.rainGain = this.ctx.createGain();
-      this.rainGain.gain.setValueAtTime(0.16, this.ctx.currentTime);
+      this.rainGain.gain.setValueAtTime(0.035, this.ctx.currentTime);
       this.rainGain.connect(this.masterGain);
 
       // 4. Ganancia de efectos sonoros (campanillas de madera e interacción)
@@ -107,21 +107,21 @@ class ForestAudioSystem {
       const white = Math.random() * 2 - 1;
       output[i] = (lastOut + 0.04 * white) / 1.04;
       lastOut = output[i];
-      output[i] *= 2.8;
+      output[i] *= 0.75;
     }
 
     const rainSource = this.ctx.createBufferSource();
     rainSource.buffer = noiseBuffer;
     rainSource.loop = true;
 
-    // Filtro pasa-altos y pasa-bajos combinados para imitar lluvia en tejado
+    // Filtro pasa-bajos cálido para que sea una lluvia lejana muy suave y sin siseos molestos
     const lowpass = this.ctx.createBiquadFilter();
     lowpass.type = "lowpass";
-    lowpass.frequency.setValueAtTime(1400, this.ctx.currentTime);
+    lowpass.frequency.setValueAtTime(500, this.ctx.currentTime);
 
     const highpass = this.ctx.createBiquadFilter();
     highpass.type = "highpass";
-    highpass.frequency.setValueAtTime(350, this.ctx.currentTime);
+    highpass.frequency.setValueAtTime(120, this.ctx.currentTime);
 
     rainSource.connect(highpass);
     highpass.connect(lowpass);

@@ -65,18 +65,19 @@ export class Starfield {
     this.flashOpacity = 1.0;
   }
 
-  // 1. Gotas de lluvia
+  // 1. Gotas de lluvia sutiles y tenues
   createRaindrops() {
-    const count = Math.min(Math.floor(this.width / 9), 100);
+    // Muy pocas gotas para mantener la vista limpia, relajante y nada enfadosa (máximo 22)
+    const count = Math.min(Math.floor(this.width / 40), 22);
     this.raindrops = [];
     for (let i = 0; i < count; i++) {
       this.raindrops.push({
-        x: Math.random() * (this.width + 100) - 50,
+        x: Math.random() * (this.width + 60) - 30,
         y: Math.random() * this.height,
-        length: Math.random() * 20 + 12,
-        speed: Math.random() * 8 + 10,
-        opacity: Math.random() * 0.35 + 0.15,
-        thickness: Math.random() * 0.8 + 0.6,
+        length: Math.random() * 8 + 5,
+        speed: Math.random() * 2 + 2,
+        opacity: Math.random() * 0.06 + 0.025,
+        thickness: 0.5,
       });
     }
   }
@@ -369,12 +370,12 @@ export class Starfield {
     this.ctx.restore();
   }
 
-  // Lluvia suave que cae en todas las escenas exteriores
+  // Lluvia muy tenue, delicada y relajante (sin interferir en el Gran Comedor interior)
   drawRain() {
-    if (this.reducedMotion) return;
+    if (this.reducedMotion || this.currentTheme === "greatHall") return;
 
     this.ctx.save();
-    const wind = 0.12;
+    const wind = 0.08;
 
     this.raindrops.forEach((drop) => {
       this.ctx.strokeStyle = `rgba(186, 230, 253, ${drop.opacity})`;
@@ -391,7 +392,7 @@ export class Starfield {
 
       if (drop.y > this.height) {
         drop.y = -drop.length;
-        drop.x = Math.random() * (this.width + 100) - 50;
+        drop.x = Math.random() * (this.width + 60) - 30;
       }
     });
 
