@@ -6,7 +6,7 @@
   <title>Martha ✦ Entre el Mar y las Estrellas</title>
   
   <meta property="og:title" content="Martha: Un mensaje entre el mar y las estrellas ✦">
-  <meta property="og:description" content="Una expedición interactiva de recuerdos y complicidad.">
+  <meta property="og:description" content="Una sorpresa interactiva de recuerdos y complicidad.">
   <meta property="og:type" content="website">
 
   <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
@@ -20,7 +20,7 @@
   <!-- Canvas de fondo: Cielo estrellado y resplandor de marea -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
-  <!-- Botón de Audio Flotante (Mute/Unmute) -->
+  <!-- Botón de Audio Flotante (Música + Olas del mar) -->
   <button id="audio-toggle-btn" class="audio-btn" aria-label="Control de sonido" title="Música y olas del mar">
     <span class="audio-icon">🎵</span>
   </button>
@@ -54,25 +54,75 @@
   <main id="app-viewport" class="app-viewport">
 
     <!-- ========================================== -->
-    <!-- ESCENA 0: INTRODUCCIÓN                     -->
+    <!-- ESCENA 0: INTRODUCCIÓN - LA BOTELLA DEL MAR-->
     <!-- ========================================== -->
     <div id="scene-intro" class="stage-scene active">
-      <div class="glass-card compact-card">
-        <div class="ocean-badge" id="intro-badge">✦ Entre el Mar y las Estrellas ✦</div>
-        <h1 class="main-title" id="intro-title">El Mensaje de la Marea</h1>
-        <p class="subtitle" id="intro-subtitle">
-          Martha, hay un mensaje que llegó flotando desde el horizonte. Para descubrir el secreto que guarda, debes recorrer la costa y reunir 4 fragmentos estelares...
+      
+      <!-- Estado A: La Botella Misteriosa Flotando -->
+      <div id="intro-bottle-box" class="glass-card compact-card intro-bottle-card">
+        <div class="ocean-badge" id="intro-badge">✦ Un Misterio en la Orilla ✦</div>
+        
+        <!-- Botella interactiva con pergamino y polvo mágico -->
+        <div class="floating-bottle-wrap" id="bottle-interactive">
+          <div class="bottle-glow"></div>
+          <svg class="bottle-svg" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cuello y tapón de corcho -->
+            <rect x="50" y="8" width="20" height="14" rx="3" fill="#c28e5c" stroke="#8d5b32" stroke-width="1.5" />
+            <path d="M46 22 L74 22 L70 38 L50 38 Z" fill="#8d5b32" opacity="0.6" />
+            <!-- Cuerpo de la botella de cristal -->
+            <path d="M48 38 C32 46, 20 62, 20 86 L20 148 C20 162, 34 172, 60 172 C86 172, 100 162, 100 148 L100 86 C100 62, 88 46, 72 38 Z" 
+                  fill="url(#glassGrad)" stroke="rgba(56, 189, 248, 0.7)" stroke-width="2.2" />
+            <!-- Brillo de cristal -->
+            <path d="M28 86 L28 144 C28 152, 34 158, 44 162" stroke="rgba(255, 255, 255, 0.55)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+            <!-- Pergamino enrollado dentro con sello de corazón -->
+            <rect x="42" y="70" width="36" height="74" rx="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" transform="rotate(-6 60 107)" />
+            <circle cx="60" cy="107" r="7" fill="#f43f5e" />
+            <text x="60" y="110" font-size="7" text-anchor="middle" fill="#fff" font-weight="bold">❤</text>
+            <!-- Destellos mágicos interiores -->
+            <circle cx="38" cy="95" r="2" fill="#fff" class="sparkle-dot-1" />
+            <circle cx="82" cy="120" r="2.5" fill="#fef08a" class="sparkle-dot-2" />
+            <circle cx="50" cy="145" r="1.8" fill="#38bdf8" class="sparkle-dot-3" />
+            <defs>
+              <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.25)" />
+                <stop offset="60%" stop-color="rgba(8, 24, 48, 0.45)" />
+                <stop offset="100%" stop-color="rgba(45, 212, 191, 0.3)" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="wave-ripples">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="bottle-tag" id="bottle-tag">Para: Martha 💌</div>
+        <p class="bottle-teaser" id="bottle-teaser">
+          Las olas del mar trajeron una botella misteriosa con tu nombre hasta la orilla...
         </p>
 
-        <div class="headphones-hint" id="intro-headphones">
+        <div class="headphones-hint">
           <span class="hint-icon">🎧</span>
           <span>Ponte audífonos para escuchar las olas y la melodía</span>
         </div>
 
-        <button id="btn-start" class="btn-ocean btn-pulse">
-          <span id="intro-start-btn-text">Comenzar el viaje ✨</span>
+        <button id="btn-open-bottle" class="btn-ocean btn-pulse">
+          <span id="open-bottle-text">Descorchar y abrir el secreto 🐚✨</span>
         </button>
       </div>
+
+      <!-- Estado B: El Mensaje Desplegado tras abrir la botella -->
+      <div id="intro-unfolded-box" class="glass-card compact-card hidden">
+        <div class="ocean-badge">✦ El Secreto de la Marea ✦</div>
+        <h1 class="main-title" id="unfolded-title">¡Hola, Martha! 😉</h1>
+        <p class="subtitle" id="unfolded-subtitle">
+          Sabía que la curiosidad te ganaría... El mar trajo un mensaje muy especial para ti, pero se fragmentó en 4 piezas a lo largo de la costa. ¿Aceptas el reto de reunir cada fragmento y descubrir qué guarda?
+        </p>
+        <button id="btn-start" class="btn-ocean btn-pulse">
+          <span id="start-btn-text">Comenzar la expedición marina ✨</span>
+        </button>
+      </div>
+
     </div>
 
     <!-- ========================================== -->
@@ -84,18 +134,43 @@
           <span class="station-tag">Estación I</span>
           <h2 class="scene-title">Destellos en la Marea</h2>
           <p class="scene-instruction">
-            El mar brilla con bioluminiscencia. Mueve tu dedo o ratón y toca los 4 destellos en las olas.
+            El mar brilla con bioluminiscencia. Mueve la linterna y toca los 4 destellos en las olas.
           </p>
-          <div class="counter-badge">
-            Destellos descubiertos: <span id="lights-count">0</span> / 4
-          </div>
         </div>
 
+        <!-- Área de la linterna interactiva -->
         <div id="flashlight-area" class="flashlight-area">
           <canvas id="flashlight-canvas"></canvas>
           <div id="lights-container" class="lights-container"></div>
           <div class="flashlight-hint-touch">Toca o desliza sobre el mar 🔦</div>
         </div>
+
+        <!-- Tracker claro de destellos encontrados -->
+        <div class="lights-tracker" id="lights-tracker">
+          <div class="tracker-slot" id="track-slot-0" title="Destello 1">
+            <span class="track-icon">🐚</span>
+            <span class="track-label">Brisa</span>
+            <span class="track-status" id="track-st-0">⏳</span>
+          </div>
+          <div class="tracker-slot" id="track-slot-1" title="Destello 2">
+            <span class="track-icon">🌊</span>
+            <span class="track-label">Olas</span>
+            <span class="track-status" id="track-st-1">⏳</span>
+          </div>
+          <div class="tracker-slot" id="track-slot-2" title="Destello 3">
+            <span class="track-icon">🌅</span>
+            <span class="track-label">Calma</span>
+            <span class="track-status" id="track-st-2">⏳</span>
+          </div>
+          <div class="tracker-slot" id="track-slot-3" title="Destello 4">
+            <span class="track-icon">✨</span>
+            <span class="track-label">Química</span>
+            <span class="track-status" id="track-st-3">⏳</span>
+          </div>
+        </div>
+
+        <!-- Mensaje Toast si toca uno que ya encontró -->
+        <div id="light-already-toast" class="light-toast hidden"></div>
       </div>
     </div>
 
@@ -190,19 +265,20 @@
           <span class="station-tag">Estación III</span>
           <h2 class="scene-title">Hilos sobre el Océano</h2>
           <p class="scene-instruction">
-            Toca las estrellas del 1 al 7 para trazar la constelación sobre el horizonte marino.
+            Toca las estrellas del 1 al 7 para trazar el corazón estelar sobre las olas.
           </p>
           <div class="constellation-counter">
             Siguiente estrella: <span id="next-star-num" class="highlight-star">1</span>
           </div>
         </div>
 
+        <!-- Tablero de constelación con viewBox porcentual (0 a 100) sin cortes -->
         <div class="constellation-board-wrap">
           <div id="constellation-board" class="constellation-board">
-            <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 400 400">
+            <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 100 100">
               <defs>
                 <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="glow" />
+                  <feGaussianBlur stdDeviation="1.5" result="glow" />
                   <feComposite in="SourceGraphic" in2="glow" operator="over" />
                 </filter>
               </defs>
@@ -240,7 +316,7 @@
         <div class="ocean-badge">✦ El Momento de la Verdad ✦</div>
         <h2 class="scene-title">Ensamblando el Mensaje</h2>
         <p class="subtitle">
-          Los 4 fragmentos se atraen al compás de la marea para revelar el secreto final.
+          Los 4 fragmentos se unen al compás de la marea para revelar el secreto final.
         </p>
 
         <div class="fusion-pedestal" id="fusion-pedestal">

@@ -6,7 +6,7 @@
 :root {
   --bg-deep: #020914;
   --bg-ocean: #05162d;
-  --bg-card: rgba(8, 24, 48, 0.78);
+  --bg-card: rgba(8, 24, 48, 0.82);
   --bg-card-border: rgba(56, 189, 248, 0.35);
   
   --ocean-cyan: #38bdf8;
@@ -15,7 +15,7 @@
   
   --gold: #f5d061;
   --gold-light: #fff2ad;
-  --gold-glow: rgba(245, 208, 97, 0.5);
+  --gold-glow: rgba(245, 208, 97, 0.55);
   
   --coral-rose: #fb7185;
   --coral-dark: #f43f5e;
@@ -123,7 +123,7 @@ html, body {
 }
 
 .hud-container {
-  background: rgba(5, 19, 41, 0.82);
+  background: rgba(5, 19, 41, 0.85);
   border: 1px solid var(--ocean-cyan);
   border-radius: 40px;
   padding: 5px 14px;
@@ -207,7 +207,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 68px 14px 16px;
+  padding: 66px 14px 16px;
   overflow: hidden;
 }
 
@@ -222,7 +222,7 @@ html, body {
   transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
   width: 92%;
   max-width: 480px;
-  max-height: calc(100dvh - 84px);
+  max-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -237,19 +237,19 @@ html, body {
 }
 
 /* ====================================================================
-   TARJETAS DE CRISTAL COMPACTAS
+   TARJETAS DE CRISTAL
    ==================================================================== */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--bg-card-border);
   border-radius: 22px;
-  padding: 24px 20px;
+  padding: 22px 18px;
   backdrop-filter: blur(16px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(56, 189, 248, 0.1);
   width: 100%;
   text-align: center;
   position: relative;
-  max-height: calc(100dvh - 90px);
+  max-height: calc(100dvh - 84px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -261,7 +261,7 @@ html, body {
 }
 
 .game-card {
-  padding: 18px 16px;
+  padding: 16px 14px;
 }
 
 .ocean-badge {
@@ -271,27 +271,27 @@ html, body {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid var(--ocean-cyan);
   color: var(--ocean-cyan);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   letter-spacing: 1.5px;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 1.95rem;
+  font-size: 1.85rem;
   font-weight: 700;
   line-height: 1.25;
   color: #fff;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
 }
 
 .subtitle {
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   line-height: 1.55;
 }
 
@@ -300,13 +300,116 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--ocean-cyan);
   background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.25);
   padding: 6px 14px;
   border-radius: 20px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
+}
+
+/* ====================================================================
+   BOTELLA DEL MAR FLOTANTE INTERACTIVA (INTRO)
+   ==================================================================== */
+.intro-bottle-card {
+  padding: 22px 18px 20px;
+}
+
+.floating-bottle-wrap {
+  position: relative;
+  width: 110px;
+  height: 160px;
+  margin: 6px auto 10px;
+  cursor: pointer;
+  animation: bobbing 3.8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes bobbing {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.bottle-glow {
+  position: absolute;
+  width: 90px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
+  filter: blur(12px);
+  z-index: 0;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 0.9; transform: scale(1.15); }
+}
+
+.bottle-svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+}
+
+.sparkle-dot-1 { animation: twinkle 1.8s infinite ease-in-out; }
+.sparkle-dot-2 { animation: twinkle 2.3s infinite ease-in-out 0.4s; }
+.sparkle-dot-3 { animation: twinkle 2s infinite ease-in-out 0.8s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.wave-ripples {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.wave-ripples span {
+  position: absolute;
+  bottom: 4px;
+  width: 80px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  animation: ripple 3s infinite linear;
+}
+
+.wave-ripples span:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.bottle-tag {
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.bottle-teaser {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.45;
+  max-width: 380px;
 }
 
 /* ====================================================================
@@ -316,8 +419,8 @@ html, body {
   background: linear-gradient(135deg, var(--ocean-cyan), #0284c7);
   color: #fff;
   border: none;
-  padding: 13px 26px;
-  font-size: 0.98rem;
+  padding: 12px 24px;
+  font-size: 0.96rem;
   font-weight: 700;
   font-family: var(--font-sans);
   border-radius: 30px;
@@ -339,8 +442,8 @@ html, body {
   background: rgba(56, 189, 248, 0.15);
   border: 1px solid var(--ocean-cyan);
   color: #fff;
-  padding: 10px 20px;
-  font-size: 0.88rem;
+  padding: 9px 18px;
+  font-size: 0.86rem;
   font-weight: 600;
   border-radius: 24px;
   cursor: pointer;
@@ -366,7 +469,7 @@ html, body {
   background: transparent;
   border: none;
   color: var(--text-dim);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -380,13 +483,13 @@ html, body {
    ==================================================================== */
 .scene-header {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .station-tag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -396,46 +499,36 @@ html, body {
 
 .scene-title {
   font-family: var(--font-serif);
-  font-size: 1.55rem;
+  font-size: 1.48rem;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .scene-instruction {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: var(--text-muted);
-  max-width: 400px;
-  margin: 0 auto 6px;
-  line-height: 1.4;
-}
-
-.counter-badge {
-  display: inline-block;
-  background: rgba(5, 19, 41, 0.8);
-  border: 1px solid var(--ocean-cyan);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.78rem;
-  color: var(--ocean-cyan);
-  font-weight: 600;
+  max-width: 380px;
+  margin: 0 auto 4px;
+  line-height: 1.35;
 }
 
 /* ====================================================================
-   FASE 1: LINTERNA EN LA MAREA
+   ESTACIÓN 1: LINTERNA Y TRACKER CLARO DE DESTELLOS
    ==================================================================== */
 .flashlight-area {
   position: relative;
   width: 100%;
-  max-width: 420px;
-  height: 280px;
-  max-height: 38vh;
-  border-radius: 18px;
+  max-width: 390px;
+  height: 230px;
+  max-height: 32vh;
+  border-radius: 16px;
   border: 1px solid var(--ocean-cyan);
   overflow: hidden;
   background: radial-gradient(circle at center, #071f3a, #020914);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   cursor: crosshair;
   touch-action: none;
+  margin-bottom: 8px;
 }
 
 #flashlight-canvas {
@@ -477,12 +570,25 @@ html, body {
   border-radius: 50%;
   box-shadow: 0 0 20px 6px var(--ocean-cyan);
   animation: pulse-sea-light 1.8s infinite ease-in-out;
+  transition: all 0.3s ease;
 }
 
-.hidden-light.revealed {
-  opacity: 0.35;
-  filter: grayscale(0.6);
-  cursor: default;
+/* Destello ya encontrado: se vuelve una conchita/perla dorada fija con checkmark */
+.hidden-light.revealed .light-spark {
+  background: var(--gold);
+  box-shadow: 0 0 16px var(--gold);
+  border: 1px solid #fff;
+  animation: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden-light.revealed .light-spark::after {
+  content: '✓';
+  font-size: 10px;
+  font-weight: bold;
+  color: #020914;
 }
 
 @keyframes pulse-sea-light {
@@ -492,19 +598,72 @@ html, body {
 
 .flashlight-hint-touch {
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   color: var(--text-dim);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   padding: 3px 10px;
   border-radius: 10px;
   pointer-events: none;
   z-index: 5;
 }
 
-/* Modales y Recompensas */
+/* Tracker de destellos encontrados */
+.lights-tracker {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.tracker-slot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(2, 9, 20, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  transition: var(--transition-smooth);
+}
+
+.tracker-slot.found {
+  border-color: var(--gold);
+  background: rgba(245, 208, 97, 0.15);
+  color: var(--gold-light);
+  transform: scale(1.05);
+}
+
+.tracker-slot.found .track-status {
+  color: #4ade80;
+}
+
+/* Toast flotante cuando le pica a una ya encontrada */
+.light-toast {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(8, 24, 48, 0.95);
+  border: 1px solid var(--ocean-cyan);
+  color: #fff;
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  z-index: 20;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  animation: fade-in-up 0.3s ease;
+  pointer-events: none;
+  width: max-content;
+  max-width: 90%;
+}
+
+/* Modal de pensamiento */
 .custom-modal {
   position: fixed;
   top: 0;
@@ -521,34 +680,34 @@ html, body {
 }
 
 .modal-content {
-  max-width: 420px;
+  max-width: 400px;
 }
 
 .modal-sparkle {
-  font-size: 1.8rem;
-  margin-bottom: 6px;
+  font-size: 1.6rem;
+  margin-bottom: 4px;
 }
 
 .modal-title {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--ocean-cyan);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .modal-phrase {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-style: italic;
   color: var(--text-main);
-  margin-bottom: 18px;
-  line-height: 1.6;
+  margin-bottom: 16px;
+  line-height: 1.55;
 }
 
 .reward-icon-burst {
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   color: var(--ocean-cyan);
   filter: drop-shadow(0 0 16px var(--ocean-glow));
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   animation: spin-slow 15s linear infinite;
 }
 
@@ -559,46 +718,46 @@ html, body {
 
 .reward-title {
   font-family: var(--font-serif);
-  font-size: 1.45rem;
+  font-size: 1.38rem;
   color: #fff;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .reward-subtitle {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--ocean-cyan);
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .poem-box {
   background: rgba(2, 9, 20, 0.45);
   border-left: 2px solid var(--ocean-cyan);
   border-radius: 8px;
-  padding: 14px 18px;
-  margin-bottom: 20px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
   text-align: left;
   width: 100%;
 }
 
 .poem-line {
   font-family: var(--font-serif);
-  font-size: 0.96rem;
+  font-size: 0.92rem;
   font-style: italic;
   color: #f1f5f9;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 /* ====================================================================
-   FASE 2: TRIVIA Y POLAROID
+   ESTACIÓN 2: TRIVIA Y POLAROID
    ==================================================================== */
 .trivia-progress {
   width: 100%;
-  max-width: 240px;
+  max-width: 220px;
   height: 5px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  margin: 6px auto 0;
+  margin: 5px auto 0;
   overflow: hidden;
 }
 
@@ -611,42 +770,42 @@ html, body {
 }
 
 .question-number {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--coral-rose);
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .question-text {
   font-family: var(--font-serif);
-  font-size: 1.22rem;
+  font-size: 1.18rem;
   color: #fff;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   line-height: 1.35;
 }
 
 .options-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 
 .trivia-option {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 14px;
-  padding: 12px 16px;
-  font-size: 0.92rem;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 0.88rem;
   color: var(--text-main);
   cursor: pointer;
   text-align: left;
   transition: var(--transition-smooth);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .trivia-option:hover {
@@ -667,38 +826,38 @@ html, body {
 }
 
 .trivia-feedback {
-  margin-top: 12px;
-  font-size: 0.85rem;
+  margin-top: 10px;
+  font-size: 0.82rem;
   color: var(--coral-rose);
   background: rgba(251, 113, 133, 0.12);
   border: 1px solid rgba(251, 113, 133, 0.25);
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: 10px;
 }
 
 /* Polaroid centrada */
 .polaroid-scene-card {
-  max-width: 360px;
+  max-width: 340px;
 }
 
 .polaroid-card {
   background: #fdfdfd;
   color: #1e293b;
-  padding: 12px 12px 18px;
+  padding: 10px 10px 16px;
   border-radius: 6px;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6), 0 0 16px rgba(56, 189, 248, 0.2);
-  max-width: 290px;
+  max-width: 270px;
   margin: 0 auto;
   transform: rotate(-2deg);
 }
 
 .polaroid-img-frame {
   width: 100%;
-  height: 190px;
+  height: 180px;
   background: #111;
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .polaroid-img-frame img {
@@ -709,21 +868,21 @@ html, body {
 
 .polaroid-caption {
   font-family: var(--font-hand);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   color: #334155;
   line-height: 1.2;
   text-align: center;
 }
 
 .mt-3 {
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 /* ====================================================================
-   FASE 3: CONSTELACIÓN SOBRE EL MAR
+   ESTACIÓN 3: TABLERO DE LA CONSTELACIÓN (TODOS LOS NÚMEROS 100% VISIBLES)
    ==================================================================== */
 .constellation-counter {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
 }
 
@@ -735,15 +894,16 @@ html, body {
 
 .constellation-board-wrap {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 290px;
+  height: 290px;
   max-width: 44vh;
   max-height: 44vh;
-  margin: 8px auto;
-  border-radius: 24px;
-  background: radial-gradient(circle at center, rgba(10, 37, 64, 0.7), rgba(2, 9, 20, 0.95));
+  margin: 6px auto;
+  border-radius: 20px;
+  background: radial-gradient(circle at center, rgba(10, 37, 64, 0.75), rgba(2, 9, 20, 0.95));
   border: 1px solid var(--ocean-cyan);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(56, 189, 248, 0.12);
+  /* Permite que los bordes de los nodos se vean sin recorte */
   overflow: hidden;
 }
 
@@ -787,27 +947,28 @@ html, body {
 
 .star-node {
   position: absolute;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: rgba(8, 24, 48, 0.88);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(8, 24, 48, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--text-dim);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transition: var(--transition-smooth);
+  user-select: none;
 }
 
 .star-node.target {
   border-color: var(--gold);
   color: #fff;
-  background: rgba(245, 208, 97, 0.2);
-  box-shadow: 0 0 18px var(--gold);
+  background: rgba(245, 208, 97, 0.25);
+  box-shadow: 0 0 20px var(--gold);
   animation: pulse-node 1.5s infinite ease-in-out;
 }
 
@@ -828,9 +989,9 @@ html, body {
    ==================================================================== */
 .fusion-pedestal {
   position: relative;
-  width: 210px;
-  height: 210px;
-  margin: 10px auto 24px;
+  width: 190px;
+  height: 190px;
+  margin: 8px auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -856,8 +1017,8 @@ html, body {
 }
 
 .fusion-core {
-  width: 68px;
-  height: 68px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--ocean-cyan), #0284c7);
   display: flex;
@@ -869,13 +1030,13 @@ html, body {
 }
 
 .core-icon {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 }
 
 .floating-orb {
   position: absolute;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: rgba(8, 24, 48, 0.9);
   border: 1.5px solid var(--ocean-cyan);
@@ -883,7 +1044,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
+  font-size: 1rem;
   box-shadow: 0 0 14px var(--ocean-glow);
   transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 4;
@@ -910,40 +1071,39 @@ html, body {
 }
 
 /* ====================================================================
-   FASE 4B: LA CARTA ROMÁNTICA (CON ÁREA SCROLLABLE INTERNA SI ES NECESARIO)
+   FASE 4B: CARTA ROMÁNTICA
    ==================================================================== */
 .letter-card {
   max-width: 480px;
   text-align: left;
   border-color: var(--ocean-cyan);
-  padding: 24px 20px;
+  padding: 22px 18px;
 }
 
 .letter-seal {
   position: absolute;
-  top: 18px;
-  right: 20px;
-  font-size: 1.35rem;
+  top: 16px;
+  right: 18px;
+  font-size: 1.3rem;
   color: var(--coral-rose);
   filter: drop-shadow(0 0 6px var(--coral-glow));
 }
 
 .letter-salutation {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   color: var(--gold-light);
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .letter-scroll-area {
   max-height: 48vh;
   overflow-y: auto;
   padding-right: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
-/* Scrollbar sutil dentro de la carta */
 .letter-scroll-area::-webkit-scrollbar {
   width: 4px;
 }
@@ -954,14 +1114,14 @@ html, body {
 
 .letter-body {
   font-family: var(--font-serif);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   color: #f1f5f9;
   line-height: 1.75;
   white-space: pre-wrap;
 }
 
 .letter-body p {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .letter-actions {
@@ -975,13 +1135,13 @@ html, body {
    FASE 4C: CARRUSEL DE RECUERDOS (PLAYA)
    ==================================================================== */
 .gallery-card {
-  max-width: 440px;
+  max-width: 430px;
 }
 
 .carousel-container {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 370px;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 16px;
@@ -1000,16 +1160,16 @@ html, body {
   min-width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 10px;
 }
 
 .slide-image-box {
   width: 100%;
-  height: 200px;
-  max-height: 26vh;
+  height: 190px;
+  max-height: 25vh;
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .slide-image-box img {
@@ -1026,7 +1186,7 @@ html, body {
 }
 
 .slide-tag {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--ocean-cyan);
@@ -1043,17 +1203,17 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px 12px;
+  padding: 6px 12px 10px;
 }
 
 .carousel-arrow {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1096,9 +1256,9 @@ html, body {
 
 .proposal-question {
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   color: #fff;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   line-height: 1.35;
 }
 
@@ -1116,15 +1276,15 @@ html, body {
   background: linear-gradient(135deg, var(--coral-dark), #e11d48);
   color: #fff;
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
-  font-size: 0.96rem;
+  font-size: 0.94rem;
 }
 
 .btn-playful {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text-muted);
-  padding: 12px 20px;
-  font-size: 0.88rem;
+  padding: 11px 18px;
+  font-size: 0.86rem;
   font-weight: 600;
   border-radius: 30px;
   cursor: pointer;
@@ -1133,8 +1293,8 @@ html, body {
 }
 
 .no-playful-msg {
-  margin-top: 14px;
-  font-size: 0.86rem;
+  margin-top: 12px;
+  font-size: 0.84rem;
   color: var(--coral-rose);
   font-weight: 600;
   animation: fade-in-up 0.3s ease;
@@ -1145,29 +1305,29 @@ html, body {
    ==================================================================== */
 .celebration-title {
   font-family: var(--font-serif);
-  font-size: 1.85rem;
+  font-size: 1.8rem;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .celebration-hearts {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
 }
 
 .celebration-text {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--text-main);
   line-height: 1.55;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .celebration-certificate {
   background: rgba(2, 9, 20, 0.5);
   border: 1px dashed var(--ocean-cyan);
   border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 18px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -1178,7 +1338,7 @@ html, body {
 .cert-line {
   display: flex;
   justify-content: space-between;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
@@ -1187,7 +1347,7 @@ html, body {
 }
 
 /* ====================================================================
-   UTILIDADES
+   UTILIDADES Y ANIMACIONES
    ==================================================================== */
 .hidden {
   display: none !important;
@@ -1199,29 +1359,28 @@ html, body {
 }
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ajustes adicionales para pantallas muy pequeñas */
 @media (max-height: 640px) {
   .app-viewport {
-    padding-top: 56px;
+    padding-top: 54px;
   }
   .main-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   .scene-title {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   }
   .flashlight-area {
-    height: 230px;
+    height: 190px;
   }
   .constellation-board-wrap {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
   }
   .polaroid-img-frame {
-    height: 150px;
+    height: 140px;
   }
 }

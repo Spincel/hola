@@ -13,13 +13,16 @@ export const config = {
   audioUrl: null,
   synthAmbientEnabled: true,
 
-  // 3. Fase 0: Introducción
+  // 3. Fase 0: Introducción con Botella Misteriosa
   intro: {
-    badge: "✦ Entre el Mar y las Estrellas ✦",
-    title: "El Mensaje de la Marea",
-    subtitle:
-      "Martha, hay un mensaje que llegó flotando desde el horizonte. Para descubrir el secreto que guarda, debes recorrer la costa y reunir 4 fragmentos estelares...",
-    startButtonText: "Comenzar el viaje ✨",
+    badge: "✦ Un Misterio en la Orilla ✦",
+    bottleTag: "Para: Martha 💌",
+    bottleTeaser: "Las olas del mar trajeron una botella misteriosa con tu nombre hasta la arena...",
+    openBottleText: "Descorchar y abrir el secreto 🐚✨",
+    unfoldedTitle: "¡Hola, Martha! 😉",
+    unfoldedSubtitle:
+      "Sabía que la curiosidad te ganaría... El mar trajo un mensaje muy especial para ti, pero se fragmentó en 4 piezas a lo largo de la costa. ¿Aceptas el reto de reunir cada fragmento y descubrir qué guarda?",
+    startButtonText: "Comenzar la expedición marina ✨",
     headphonesNotice: "Ponte audífonos para escuchar las olas y la melodía 🎧",
   },
 
@@ -62,6 +65,7 @@ export const config = {
     instructions:
       "El mar nocturno brilla con bioluminiscencia. Mueve la linterna sobre las olas y descubre los 4 destellos escondidos en la orilla.",
     foundCountLabel: "Luces encontradas:",
+    alreadyFoundNotice: "¡Ya descubriste este destello! 🐚 Busca los que faltan en la oscuridad 🌊",
     lights: [
       {
         id: "light-1",

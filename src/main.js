@@ -1,7 +1,6 @@
 /**
  * ====================================================================
  * CONTROLADOR PRINCIPAL: MARTHA ✦ ENTRE EL MAR Y LAS ESTRELLAS
- * Experiencia centrada en ventana única, sin scroll, con transiciones suaves.
  * ====================================================================
  */
 
@@ -18,22 +17,24 @@ class ConstellationApp {
 
     // Minijuego 1: Destellos en la marea
     this.revealedLightsCount = 0;
+    this.foundLightIndices = new Set();
     this.flashlightPos = { x: 0, y: 0 };
     this.isPointerInsideFlashlight = false;
+    this.toastTimeout = null;
 
     // Minijuego 2: Trivia costera
     this.currentTriviaIndex = 0;
 
-    // Minijuego 3: Constelación marina (7 nodos formando un corazón sobre el mar)
+    // Minijuego 3: Constelación marina (7 estrellas en corazón, coordenadas porcentuales 100x100 sin recortes)
     this.currentConstellationStep = 1;
     this.constellationNodes = [
-      { id: 1, x: 150, y: 80, label: "1" },
-      { id: 2, x: 75, y: 150, label: "2" },
-      { id: 3, x: 115, y: 245, label: "3" },
-      { id: 4, x: 200, y: 325, label: "4" },
-      { id: 5, x: 285, y: 245, label: "5" },
-      { id: 6, x: 325, y: 150, label: "6" },
-      { id: 7, x: 250, y: 80, label: "7" },
+      { id: 1, x: 32, y: 22, label: "1" },
+      { id: 2, x: 18, y: 44, label: "2" },
+      { id: 3, x: 28, y: 68, label: "3" },
+      { id: 4, x: 50, y: 84, label: "4" },
+      { id: 5, x: 72, y: 68, label: "5" },
+      { id: 6, x: 82, y: 44, label: "6" },
+      { id: 7, x: 68, y: 22, label: "7" },
     ];
 
     // Carrusel de recuerdos
@@ -57,13 +58,14 @@ class ConstellationApp {
   }
 
   applyConfig() {
-    // Portada
+    // Portada y Botella
     document.getElementById("intro-badge").textContent = config.intro.badge;
-    document.getElementById("intro-title").textContent = config.intro.title;
-    document.getElementById("intro-subtitle").textContent = config.intro.subtitle;
-    document.getElementById("intro-start-btn-text").textContent = config.intro.startButtonText;
-    document.getElementById("intro-headphones").querySelector("span:last-child").textContent =
-      config.intro.headphonesNotice;
+    document.getElementById("bottle-tag").textContent = config.intro.bottleTag;
+    document.getElementById("bottle-teaser").textContent = config.intro.bottleTeaser;
+    document.getElementById("open-bottle-text").textContent = config.intro.openBottleText;
+    document.getElementById("unfolded-title").textContent = config.intro.unfoldedTitle;
+    document.getElementById("unfolded-subtitle").textContent = config.intro.unfoldedSubtitle;
+    document.getElementById("start-btn-text").textContent = config.intro.startButtonText;
 
     // Carta y firma
     document.getElementById("letter-salutation").textContent = config.climax.letter.salutation;
@@ -86,7 +88,7 @@ class ConstellationApp {
     document.getElementById("celeb-date").textContent = now.toLocaleDateString("es-ES", options);
   }
 
-  // Transición fluida entre escenas dentro de la misma ventana
+  // Transición fluida entre escenas en la misma ventana fija
   showStage(stageId) {
     const currentEl = document.getElementById(this.currentStageId);
     const nextEl = document.getElementById(stageId);
@@ -112,9 +114,27 @@ class ConstellationApp {
       audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🎵";
     });
 
-    // 1. Comenzar el viaje (Intro -> Minijuego 1)
-    document.getElementById("btn-start").addEventListener("click", () => {
+    // 0A. Abrir la botella misteriosa
+    const openBottle = () => {
       sound.start();
+      sound.playChime(4);
+
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.5 },
+        colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#ffffff"],
+      });
+
+      document.getElementById("intro-bottle-box").classList.add("hidden");
+      document.getElementById("intro-unfolded-box").classList.remove("hidden");
+    };
+
+    document.getElementById("btn-open-bottle").addEventListener("click", openBottle);
+    document.getElementById("bottle-interactive").addEventListener("click", openBottle);
+
+    // 0B. Comenzar la expedición marina tras descorchar
+    document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
       this.showStage("scene-m1-play");
       this.initMinigame1();
@@ -201,11 +221,12 @@ class ConstellationApp {
 
     window.addEventListener("resize", resizeCanvas);
 
+    // 4 posiciones de destellos en la marea
     const positions = [
-      { top: "25%", left: "22%" },
-      { top: "30%", left: "76%" },
-      { top: "72%", left: "32%" },
-      { top: "68%", left: "78%" },
+      { top: "28%", left: "24%" },
+      { top: "32%", left: "75%" },
+      { top: "72%", left: "34%" },
+      { top: "68%", left: "74%" },
     ];
 
     container.innerHTML = "";
@@ -291,12 +312,37 @@ class ConstellationApp {
     ctx.restore();
   }
 
-  revealLight(index, lightData, element) {
-    if (element.classList.contains("revealed")) return;
+  showLightToast(message) {
+    const toast = document.getElementById("light-already-toast");
+    toast.textContent = message;
+    toast.classList.remove("hidden");
 
+    if (this.toastTimeout) clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => {
+      toast.classList.add("hidden");
+    }, 2400);
+  }
+
+  revealLight(index, lightData, element) {
+    // Si ya lo encontró previamente, avisarle claramente sin confusión
+    if (this.foundLightIndices.has(index)) {
+      sound.playChime(2);
+      this.showLightToast(config.minigame1.alreadyFoundNotice);
+      return;
+    }
+
+    // Nuevo destello encontrado
+    this.foundLightIndices.add(index);
     element.classList.add("revealed");
     this.revealedLightsCount++;
-    document.getElementById("lights-count").textContent = this.revealedLightsCount;
+
+    // Actualizar el slot del tracker visual
+    const trackSlot = document.getElementById(`track-slot-${index}`);
+    const trackStatus = document.getElementById(`track-st-${index}`);
+    if (trackSlot && trackStatus) {
+      trackSlot.classList.add("found");
+      trackStatus.textContent = "✓";
+    }
 
     sound.playChime(this.revealedLightsCount);
 
@@ -309,7 +355,7 @@ class ConstellationApp {
         document.getElementById("light-modal").classList.add("hidden");
         this.collectFragment(1);
         this.showStage("scene-m1-reward");
-      }, 1100);
+      }, 1200);
     }
   }
 
@@ -356,7 +402,6 @@ class ConstellationApp {
       btn.addEventListener("click", () => {
         if (opt.correct) {
           sound.playChime(3);
-          // Cambiar en la misma ventana a la Polaroid
           document.getElementById("polaroid-img").src = qData.photo;
           document.getElementById("polaroid-caption").textContent = qData.photoCaption;
           this.showStage("scene-m2-polaroid");
@@ -375,7 +420,7 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // ESTACIÓN 3: CONSTELACIÓN SOBRE EL MAR
+  // ESTACIÓN 3: CONSTELACIÓN SOBRE EL MAR (COORDENADAS PORCENTUALES)
   // ==================================================================
   initMinigame3() {
     this.currentConstellationStep = 1;
@@ -391,8 +436,9 @@ class ConstellationApp {
       el.className = "star-node";
       el.id = `star-node-${node.id}`;
       el.textContent = node.label;
-      el.style.left = `${node.x}px`;
-      el.style.top = `${node.y}px`;
+      // Posición porcentual exacta
+      el.style.left = `${node.x}%`;
+      el.style.top = `${node.y}%`;
 
       if (node.id === 1) {
         el.classList.add("target");
@@ -411,6 +457,7 @@ class ConstellationApp {
 
       sound.playChime(this.currentConstellationStep);
 
+      // Si no es la primera, trazar línea con la anterior
       if (this.currentConstellationStep > 1) {
         const prevNode = this.constellationNodes.find((n) => n.id === this.currentConstellationStep - 1);
         if (prevNode) {
@@ -427,7 +474,7 @@ class ConstellationApp {
           nextNodeEl.classList.add("target");
         }
       } else {
-        // Cerrar el corazón uniendo la 7 con la 1
+        // Cerrar el corazón uniendo la 7 con la 1 en la cima
         const lastNode = this.constellationNodes[this.constellationNodes.length - 1];
         const firstNode = this.constellationNodes[0];
         this.drawConstellationLine(lastNode, firstNode);
@@ -448,6 +495,7 @@ class ConstellationApp {
   drawConstellationLine(fromNode, toNode) {
     const svgLines = document.getElementById("svg-lines");
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    // Coordenadas coincidentes con el viewBox="0 0 100 100"
     line.setAttribute("x1", fromNode.x);
     line.setAttribute("y1", fromNode.y);
     line.setAttribute("x2", toNode.x);
@@ -477,7 +525,6 @@ class ConstellationApp {
           colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#fb7185", "#ffffff"],
         });
 
-        // Cambiar en la misma ventana a la Carta Romántica
         this.showStage("scene-climax-letter");
         this.startTypewriter();
       }, 1600);
