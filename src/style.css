@@ -513,134 +513,103 @@ html, body {
 }
 
 /* ====================================================================
-   ESTACIÓN 1: LINTERNA Y TRACKER CLARO DE DESTELLOS
+   ESTACIÓN 1: MINIJUEGO DE MEMORIA (MAR & VINO - 3 PARES / 6 CARTAS)
    ==================================================================== */
-.flashlight-area {
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  margin: 8px auto 10px;
+  perspective: 1000px;
+}
+
+.memory-card {
   position: relative;
-  width: 100%;
-  max-width: 390px;
-  height: 230px;
-  max-height: 32vh;
-  border-radius: 16px;
-  border: 1px solid var(--ocean-cyan);
-  overflow: hidden;
-  background: radial-gradient(circle at center, #071f3a, #020914);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  cursor: crosshair;
-  touch-action: none;
-  margin-bottom: 8px;
-}
-
-#flashlight-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.lights-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.hidden-light {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  aspect-ratio: 1 / 1.18;
   cursor: pointer;
-  z-index: 3;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hidden-light .light-spark {
-  width: 16px;
-  height: 16px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 20px 6px var(--ocean-cyan);
-  animation: pulse-sea-light 1.8s infinite ease-in-out;
-  transition: all 0.3s ease;
+.memory-card.flipped,
+.memory-card.matched {
+  transform: rotateY(180deg);
 }
 
-/* Destello ya encontrado: se vuelve una conchita/perla dorada fija con checkmark */
-.hidden-light.revealed .light-spark {
-  background: var(--gold);
-  box-shadow: 0 0 16px var(--gold);
-  border: 1px solid #fff;
-  animation: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hidden-light.revealed .light-spark::after {
-  content: '✓';
-  font-size: 10px;
-  font-weight: bold;
-  color: #020914;
-}
-
-@keyframes pulse-sea-light {
-  0%, 100% { transform: scale(0.85); box-shadow: 0 0 14px 4px var(--ocean-cyan); }
-  50% { transform: scale(1.2); box-shadow: 0 0 24px 8px var(--ocean-teal); }
-}
-
-.flashlight-hint-touch {
+.memory-card-front,
+.memory-card-back {
   position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.65);
-  color: var(--text-dim);
-  font-size: 0.7rem;
-  padding: 3px 10px;
-  border-radius: 10px;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Tracker de destellos encontrados */
-.lights-tracker {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-top: 4px;
-}
-
-.tracker-slot {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(2, 9, 20, 0.6);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  height: 100%;
   border-radius: 14px;
-  padding: 4px 10px;
-  font-size: 0.74rem;
-  color: var(--text-dim);
-  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.tracker-slot.found {
-  border-color: var(--gold);
-  background: rgba(245, 208, 97, 0.15);
-  color: var(--gold-light);
-  transform: scale(1.05);
+.memory-card-back {
+  background: radial-gradient(circle at center, #0e3057, #06162d);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  color: var(--ocean-cyan);
+  font-size: 1.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tracker-slot.found .track-status {
-  color: #4ade80;
+.memory-card:hover .memory-card-back {
+  border-color: var(--ocean-cyan);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+}
+
+.memory-card-front {
+  background: radial-gradient(circle at center, rgba(14, 48, 87, 0.95), rgba(5, 22, 45, 0.95));
+  border: 1.5px solid var(--gold);
+  transform: rotateY(180deg);
+  padding: 8px 4px;
+  gap: 4px;
+}
+
+.memory-card.matched .memory-card-front {
+  border-color: #4ade80;
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.45);
+  animation: match-pulse 0.7s ease;
+}
+
+@keyframes match-pulse {
+  0% { transform: rotateY(180deg) scale(1); }
+  50% { transform: rotateY(180deg) scale(1.08); }
+  100% { transform: rotateY(180deg) scale(1); }
+}
+
+.card-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.card-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.15;
+}
+
+.counter-badge {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  color: var(--ocean-cyan);
+  margin-top: 2px;
 }
 
 /* Toast flotante cuando le pica a una ya encontrada */
@@ -1068,6 +1037,89 @@ html, body {
 .fusion-pedestal.fusing .fusion-core {
   transform: scale(1.6);
   box-shadow: 0 0 80px #fff, 0 0 120px var(--ocean-cyan);
+}
+
+/* Efecto Vórtice Giratorio de Fusión solicitado */
+.fusion-pedestal.vortex .ring-outer {
+  animation: spin-vortex 0.7s linear infinite !important;
+  border-color: var(--gold);
+}
+
+.fusion-pedestal.vortex .ring-mid {
+  animation: spin-vortex-reverse 0.5s linear infinite !important;
+  border-color: #fff;
+}
+
+@keyframes spin-vortex {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-vortex-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.fusion-pedestal.vortex .floating-orb {
+  animation-duration: 2.2s;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+
+.fusion-pedestal.vortex .orb-1 {
+  animation-name: spiral-orb-1;
+}
+.fusion-pedestal.vortex .orb-2 {
+  animation-name: spiral-orb-2;
+}
+.fusion-pedestal.vortex .orb-3 {
+  animation-name: spiral-orb-3;
+}
+.fusion-pedestal.vortex .orb-4 {
+  animation-name: spiral-orb-4;
+}
+
+@keyframes spiral-orb-1 {
+  0% { top: 0; left: 50%; transform: translateX(-50%) rotate(0deg) scale(1); }
+  35% { top: 50%; left: 90%; transform: translate(-50%, -50%) rotate(140deg) scale(1.15); }
+  70% { top: 90%; left: 50%; transform: translate(-50%, -50%) rotate(380deg) scale(0.85); }
+  90% { top: 50%; left: 30%; transform: translate(-50%, -50%) rotate(600deg) scale(0.5); }
+  100% { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(720deg) scale(0.05); opacity: 0; }
+}
+
+@keyframes spiral-orb-2 {
+  0% { top: 50%; right: 0; transform: translateY(-50%) rotate(0deg) scale(1); }
+  35% { top: 90%; right: 50%; transform: translate(50%, -50%) rotate(140deg) scale(1.15); }
+  70% { top: 50%; right: 90%; transform: translate(50%, -50%) rotate(380deg) scale(0.85); }
+  90% { top: 15%; right: 50%; transform: translate(50%, -50%) rotate(600deg) scale(0.5); }
+  100% { top: 50%; right: 50%; transform: translate(50%, -50%) rotate(720deg) scale(0.05); opacity: 0; }
+}
+
+@keyframes spiral-orb-3 {
+  0% { bottom: 0; left: 50%; transform: translateX(-50%) rotate(0deg) scale(1); }
+  35% { bottom: 50%; left: 10%; transform: translate(-50%, 50%) rotate(140deg) scale(1.15); }
+  70% { bottom: 90%; left: 50%; transform: translate(-50%, 50%) rotate(380deg) scale(0.85); }
+  90% { bottom: 50%; left: 75%; transform: translate(-50%, 50%) rotate(600deg) scale(0.5); }
+  100% { bottom: 50%; left: 50%; transform: translate(-50%, 50%) rotate(720deg) scale(0.05); opacity: 0; }
+}
+
+@keyframes spiral-orb-4 {
+  0% { top: 50%; left: 0; transform: translateY(-50%) rotate(0deg) scale(1); }
+  35% { top: 10%; left: 50%; transform: translate(-50%, -50%) rotate(140deg) scale(1.15); }
+  70% { top: 50%; left: 90%; transform: translate(-50%, -50%) rotate(380deg) scale(0.85); }
+  90% { top: 85%; left: 50%; transform: translate(-50%, -50%) rotate(600deg) scale(0.5); }
+  100% { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(720deg) scale(0.05); opacity: 0; }
+}
+
+.fusion-pedestal.vortex .fusion-core {
+  animation: core-swell 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes core-swell {
+  0% { transform: scale(1); box-shadow: 0 0 25px var(--ocean-cyan); }
+  50% { transform: scale(1.3) rotate(180deg); box-shadow: 0 0 50px #fff, 0 0 80px var(--gold); }
+  80% { transform: scale(1.7) rotate(360deg); box-shadow: 0 0 90px #fff, 0 0 130px var(--coral-glow); }
+  100% { transform: scale(2.2) rotate(720deg); box-shadow: 0 0 160px #fff, 0 0 220px #fff; }
 }
 
 /* ====================================================================

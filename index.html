@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Martha ✦ Entre el Mar y las Estrellas</title>
+  <title>Una Sorpresa Entre el Mar y las Estrellas ✦</title>
   
-  <meta property="og:title" content="Martha: Un mensaje entre el mar y las estrellas ✦">
-  <meta property="og:description" content="Una sorpresa interactiva de recuerdos y complicidad.">
+  <meta property="og:title" content="Un mensaje entre el mar y las estrellas ✦">
+  <meta property="og:description" content="Una expedición interactiva de recuerdos y complicidad.">
   <meta property="og:type" content="website">
 
   <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-  <!-- Canvas de fondo: Cielo estrellado y resplandor de marea -->
+  <!-- Canvas de fondo: Cielo estrellado, luna y ondas de aurora boreal -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
   <!-- Botón de Audio Flotante (Música + Olas del mar) -->
@@ -31,8 +31,8 @@
       <div class="hud-title">Fragmentos de la Marea</div>
       <div class="hud-slots">
         <div class="hud-slot" id="slot-1" data-index="1">
-          <div class="slot-gem">✦</div>
-          <span class="slot-label">Brisa</span>
+          <div class="slot-gem">🍷</div>
+          <span class="slot-label">Vino</span>
         </div>
         <div class="hud-slot" id="slot-2" data-index="2">
           <div class="slot-gem">✧</div>
@@ -50,7 +50,7 @@
     </div>
   </header>
 
-  <!-- Flash intenso supernova cuando se unen todos los fragmentos -->
+  <!-- Flash intenso supernova cuando se fusionan todos los fragmentos -->
   <div id="supernova-flash" class="supernova-flash hidden"></div>
 
   <!-- Contenedor Único Fijo en Pantalla (Sin Scroll) -->
@@ -58,6 +58,7 @@
 
     <!-- ========================================== -->
     <!-- ESCENA 0: INTRODUCCIÓN - LA BOTELLA DEL MAR-->
+    <!-- (Sin nombre de ella para mantener el misterio)-->
     <!-- ========================================== -->
     <div id="scene-intro" class="stage-scene active">
       
@@ -65,23 +66,17 @@
       <div id="intro-bottle-box" class="glass-card compact-card intro-bottle-card">
         <div class="ocean-badge" id="intro-badge">✦ Un Misterio en la Orilla ✦</div>
         
-        <!-- Botella interactiva con pergamino y polvo mágico -->
         <div class="floating-bottle-wrap" id="bottle-interactive">
           <div class="bottle-glow"></div>
           <svg class="bottle-svg" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cuello y tapón de corcho -->
             <rect x="50" y="8" width="20" height="14" rx="3" fill="#c28e5c" stroke="#8d5b32" stroke-width="1.5" />
             <path d="M46 22 L74 22 L70 38 L50 38 Z" fill="#8d5b32" opacity="0.6" />
-            <!-- Cuerpo de la botella de cristal -->
             <path d="M48 38 C32 46, 20 62, 20 86 L20 148 C20 162, 34 172, 60 172 C86 172, 100 162, 100 148 L100 86 C100 62, 88 46, 72 38 Z" 
                   fill="url(#glassGrad)" stroke="rgba(56, 189, 248, 0.7)" stroke-width="2.2" />
-            <!-- Brillo de cristal -->
             <path d="M28 86 L28 144 C28 152, 34 158, 44 162" stroke="rgba(255, 255, 255, 0.55)" stroke-width="2.5" stroke-linecap="round" fill="none" />
-            <!-- Pergamino enrollado dentro con sello de corazón -->
             <rect x="42" y="70" width="36" height="74" rx="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" transform="rotate(-6 60 107)" />
             <circle cx="60" cy="107" r="7" fill="#f43f5e" />
             <text x="60" y="110" font-size="7" text-anchor="middle" fill="#fff" font-weight="bold">❤</text>
-            <!-- Destellos mágicos interiores -->
             <circle cx="38" cy="95" r="2" fill="#fff" class="sparkle-dot-1" />
             <circle cx="82" cy="120" r="2.5" fill="#fef08a" class="sparkle-dot-2" />
             <circle cx="50" cy="145" r="1.8" fill="#38bdf8" class="sparkle-dot-3" />
@@ -99,9 +94,9 @@
           </div>
         </div>
 
-        <div class="bottle-tag" id="bottle-tag">Para: Martha 💌</div>
+        <div class="bottle-tag" id="bottle-tag">Para alguien que me quita el aliento 💌</div>
         <p class="bottle-teaser" id="bottle-teaser">
-          Las olas del mar trajeron una botella misteriosa con tu nombre hasta la orilla...
+          Las olas del mar trajeron una botella misteriosa hasta la orilla con un mensaje guardado en secreto...
         </p>
 
         <div class="headphones-hint">
@@ -117,9 +112,9 @@
       <!-- Estado B: El Mensaje Desplegado tras abrir la botella -->
       <div id="intro-unfolded-box" class="glass-card compact-card hidden">
         <div class="ocean-badge">✦ El Secreto de la Marea ✦</div>
-        <h1 class="main-title" id="unfolded-title">¡Hola, Martha! 😉</h1>
+        <h1 class="main-title" id="unfolded-title">¡Hola! Sé que la curiosidad te ganaría... 😉</h1>
         <p class="subtitle" id="unfolded-subtitle">
-          Sabía que la curiosidad te ganaría... El mar trajo un mensaje muy especial para ti, pero se fragmentó en 4 piezas a lo largo de la costa. ¿Aceptas el reto de reunir cada fragmento y descubrir qué guarda?
+          Me dijeron que te gusta el mar, el buen vino y los misterios... Este mensaje se fragmentó en 4 piezas a lo largo de la costa. Si logras reunirlos, descubrirás exactamente quién eres para mí y lo que he guardado en silencio...
         </p>
         <button id="btn-start" class="btn-ocean btn-pulse">
           <span id="start-btn-text">Comenzar la expedición marina ✨</span>
@@ -129,61 +124,38 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 1A: MINIJUEGO 1 - JUGAR LINTERNA    -->
+    <!-- ESCENA 1A: MINIJUEGO 1 - MEMORIA MAR & VINO-->
+    <!-- (3 pares interactivos de cartas 3x2)       -->
     <!-- ========================================== -->
     <div id="scene-m1-play" class="stage-scene">
       <div class="glass-card game-card">
         <div class="scene-header">
           <span class="station-tag">Estación I</span>
-          <h2 class="scene-title">Destellos en la Marea</h2>
+          <h2 class="scene-title">Memoria del Mar & Vino</h2>
           <p class="scene-instruction">
-            El mar brilla con bioluminiscencia. Mueve la linterna y toca los 4 destellos en las olas.
+            Encuentra los 3 pares ocultos entre las copas de vino tinto, las olas y el arte que nos conecta...
           </p>
-        </div>
-
-        <!-- Área de la linterna interactiva -->
-        <div id="flashlight-area" class="flashlight-area">
-          <canvas id="flashlight-canvas"></canvas>
-          <div id="lights-container" class="lights-container"></div>
-          <div class="flashlight-hint-touch">Toca o desliza sobre el mar 🔦</div>
-        </div>
-
-        <!-- Tracker claro de destellos encontrados -->
-        <div class="lights-tracker" id="lights-tracker">
-          <div class="tracker-slot" id="track-slot-0" title="Destello 1">
-            <span class="track-icon">🐚</span>
-            <span class="track-label">Brisa</span>
-            <span class="track-status" id="track-st-0">⏳</span>
-          </div>
-          <div class="tracker-slot" id="track-slot-1" title="Destello 2">
-            <span class="track-icon">🌊</span>
-            <span class="track-label">Olas</span>
-            <span class="track-status" id="track-st-1">⏳</span>
-          </div>
-          <div class="tracker-slot" id="track-slot-2" title="Destello 3">
-            <span class="track-icon">🌅</span>
-            <span class="track-label">Calma</span>
-            <span class="track-status" id="track-st-2">⏳</span>
-          </div>
-          <div class="tracker-slot" id="track-slot-3" title="Destello 4">
-            <span class="track-icon">✨</span>
-            <span class="track-label">Química</span>
-            <span class="track-status" id="track-st-3">⏳</span>
+          <div class="counter-badge">
+            Pares encontrados: <span id="pairs-count">0</span> / 3
           </div>
         </div>
 
-        <!-- Mensaje Toast si toca uno que ya encontró -->
-        <div id="light-already-toast" class="light-toast hidden"></div>
+        <!-- Cuadrícula 3x2 de cartas -->
+        <div class="memory-grid" id="memory-grid">
+          <!-- Generadas dinámicamente -->
+        </div>
+
+        <div id="memory-toast" class="light-toast hidden"></div>
       </div>
     </div>
 
-    <!-- Modal emergente al tocar un destello en Minijuego 1 -->
-    <div id="light-modal" class="custom-modal hidden">
+    <!-- Modal emergente al encontrar un par de memoria -->
+    <div id="pair-modal" class="custom-modal hidden">
       <div class="modal-content glass-card glow-border">
-        <div class="modal-sparkle">🌊 ✦</div>
-        <h3 id="modal-light-title" class="modal-title">Brisa Marina</h3>
-        <p id="modal-light-phrase" class="modal-phrase">«Frase»</p>
-        <button id="close-light-modal" class="btn-ocean-sm">Continuar explorando</button>
+        <div class="modal-sparkle" id="pair-modal-icon">🍷 ✦</div>
+        <h3 id="pair-modal-title" class="modal-title">Copa de Vino Tinto</h3>
+        <p id="pair-modal-phrase" class="modal-phrase">«Frase»</p>
+        <button id="close-pair-modal" class="btn-ocean-sm">Continuar explorando</button>
       </div>
     </div>
 
@@ -192,14 +164,14 @@
     <!-- ========================================== -->
     <div id="scene-m1-reward" class="stage-scene">
       <div class="glass-card compact-card">
-        <div class="reward-icon-burst">✦</div>
+        <div class="reward-icon-burst">🍷</div>
         <h3 class="reward-title">¡Primer Fragmento Recuperado!</h3>
-        <p class="reward-subtitle">Fragmento I: La Brisa y la Chispa</p>
+        <p class="reward-subtitle">Fragmento I: La Atracción y la Brisa</p>
         <div class="poem-box">
-          <p class="poem-line">Entre el murmullo tranquilo de las olas</p>
-          <p class="poem-line">y el cielo abierto sobre la marea,</p>
-          <p class="poem-line">bastó conocerte, Martha,</p>
-          <p class="poem-line">para saber que tu luz no se compara con ninguna.</p>
+          <p class="poem-line">Entre el murmullo de las olas y el aroma a buen vino,</p>
+          <p class="poem-line">hay personas que simplemente te desarman al mirarlas.</p>
+          <p class="poem-line">Tu mente, tu estilo y esa belleza tan tuya</p>
+          <p class="poem-line">hacen imposible mirar hacia otro lado.</p>
         </div>
         <button id="btn-to-m2" class="btn-ocean">Avanzar a la Estación II →</button>
       </div>
@@ -219,7 +191,7 @@
         </div>
 
         <div class="question-number" id="question-step">Pregunta 1 de 3</div>
-        <h3 class="question-text" id="question-text">¿Cuál es nuestro superpoder secreto?</h3>
+        <h3 class="question-text" id="question-text">¿Qué pasa cuando tomamos vino frente al mar?</h3>
 
         <div class="options-container" id="options-container"></div>
         <div id="trivia-feedback" class="trivia-feedback hidden"></div>
@@ -233,9 +205,9 @@
       <div class="glass-card polaroid-scene-card">
         <div class="polaroid-card">
           <div class="polaroid-img-frame">
-            <img id="polaroid-img" src="" alt="Recuerdo en la playa" loading="lazy">
+            <img id="polaroid-img" src="" alt="Recuerdo en la playa con vino" loading="lazy">
           </div>
-          <div class="polaroid-caption" id="polaroid-caption">Nuestras charlas frente al mar.</div>
+          <div class="polaroid-caption" id="polaroid-caption">Nuestra química frente al mar.</div>
         </div>
         <button id="btn-next-question" class="btn-ocean-sm mt-3">Siguiente Pregunta →</button>
       </div>
@@ -252,7 +224,7 @@
         <div class="poem-box">
           <p class="poem-line">Dicen que el mar guarda los secretos más bellos,</p>
           <p class="poem-line">pero nuestra complicidad no la esconde nadie:</p>
-          <p class="poem-line">está en cada risa, en cada mirada,</p>
+          <p class="poem-line">está en cada risa compartida, en cada mirada,</p>
           <p class="poem-line">y en esta química que siempre estuvo ahí.</p>
         </div>
         <button id="btn-to-m3" class="btn-ocean">Avanzar a la Estación III →</button>
@@ -268,14 +240,13 @@
           <span class="station-tag">Estación III</span>
           <h2 class="scene-title">Hilos sobre el Océano</h2>
           <p class="scene-instruction">
-            Toca las estrellas del 1 al 7 para trazar el corazón estelar sobre las olas.
+            Toca las estrellas del 1 al 7 para trazar el corazón estelar sobre las olas del mar.
           </p>
           <div class="constellation-counter">
             Siguiente estrella: <span id="next-star-num" class="highlight-star">1</span>
           </div>
         </div>
 
-        <!-- Tablero de constelación con viewBox porcentual (0 a 100) sin cortes -->
         <div class="constellation-board-wrap">
           <div id="constellation-board" class="constellation-board">
             <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 100 100">
@@ -302,24 +273,24 @@
         <h3 class="reward-title">¡Constelación Completa!</h3>
         <p class="reward-subtitle">Fragmentos III y IV: El Destino y la Química</p>
         <div class="poem-box">
-          <p class="poem-line">Hay personas que son como el mar:</p>
-          <p class="poem-line">profundas, libres y llenas de magia.</p>
-          <p class="poem-line">Tú eres todo eso y mucho más, Martha.</p>
-          <p class="poem-line">Ahora todos los fragmentos están reunidos...</p>
+          <p class="poem-line">Hay mujeres que son como el mar:</p>
+          <p class="poem-line">profundas, libres, magnéticas y llenas de arte.</p>
+          <p class="poem-line">Tú eres todo eso y mucho más.</p>
+          <p class="poem-line">Ahora los 4 fragmentos están listos para unirse...</p>
         </div>
         <button id="btn-to-climax" class="btn-ocean btn-pulse">¡Unir los 4 Fragmentos! ✦</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4A: PEDESTAL DE FUSIÓN              -->
+    <!-- ESCENA 4A: PEDESTAL DE FUSIÓN (CON VÓRTICE)-->
     <!-- ========================================== -->
     <div id="scene-climax-pedestal" class="stage-scene">
       <div class="glass-card compact-card">
         <div class="ocean-badge">✦ El Momento de la Verdad ✦</div>
         <h2 class="scene-title">Ensamblando el Mensaje</h2>
         <p class="subtitle">
-          Los 4 fragmentos se unen al compás de la marea para revelar el secreto final.
+          Los 4 fragmentos giran en espiral hacia el centro para revelar el secreto final.
         </p>
 
         <div class="fusion-pedestal" id="fusion-pedestal">
@@ -329,7 +300,7 @@
             <span class="core-icon">🌊</span>
           </div>
 
-          <div class="floating-orb orb-1" id="orb-1">✦</div>
+          <div class="floating-orb orb-1" id="orb-1">🍷</div>
           <div class="floating-orb orb-2" id="orb-2">✧</div>
           <div class="floating-orb orb-3" id="orb-3">⋆</div>
           <div class="floating-orb orb-4" id="orb-4">❤</div>
@@ -343,11 +314,12 @@
 
     <!-- ========================================== -->
     <!-- ESCENA 4B: LA CARTA ROMÁNTICA              -->
+    <!-- (AQUÍ SE REVELA EL NOMBRE DE MARTHA)       -->
     <!-- ========================================== -->
     <div id="scene-climax-letter" class="stage-scene">
       <div class="glass-card letter-card">
-        <div class="letter-seal">🌊 ❤</div>
-        <div class="letter-salutation" id="letter-salutation">Querida Martha,</div>
+        <div class="letter-seal">🍷 ❤</div>
+        <div class="letter-salutation" id="letter-salutation">Para Martha,</div>
 
         <div class="letter-scroll-area">
           <div class="letter-body" id="letter-body"></div>
@@ -365,7 +337,7 @@
     <!-- ========================================== -->
     <div id="scene-climax-gallery" class="stage-scene">
       <div class="glass-card gallery-card">
-        <div class="ocean-badge">✦ Destellos en la Arena ✦</div>
+        <div class="ocean-badge">✦ Entre el Mar y el Vino ✦</div>
         
         <div class="carousel-container">
           <div class="carousel-track" id="carousel-track"></div>
@@ -387,9 +359,9 @@
     <!-- ========================================== -->
     <div id="scene-climax-question" class="stage-scene">
       <div class="glass-card compact-card glow-border">
-        <div class="proposal-stars">🌊 ✨ ❤ ✨ 🌊</div>
+        <div class="proposal-stars">🌊 🍷 ❤ ✨ 🌊</div>
         <h2 class="proposal-question" id="final-question">
-          Martha... ¿y si dejamos de fingir que solo es casualidad y vemos a dónde nos lleva esta química? ✨
+          Martha... ¿y si dejamos de fingir que solo somos amigos y vemos a dónde nos lleva todo esto este fin de semana? ✨
         </h2>
 
         <div class="proposal-buttons-container">
@@ -398,7 +370,7 @@
           </button>
           <div class="playful-btn-slot">
             <button id="btn-no" class="btn-playful">
-              <span id="btn-no-text">Solo si me invitas un coco en la playa... 😜</span>
+              <span id="btn-no-text">Solo si hay vino tinto y el mar enfrente... 🍷🌊</span>
             </button>
           </div>
         </div>
@@ -415,10 +387,10 @@
     <div id="scene-celebration" class="stage-scene">
       <div class="glass-card compact-card glow-border">
         <div class="ocean-badge" id="celeb-badge">✦ Promesa Sellada Frente al Mar ✦</div>
-        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ! 💖🌊</h2>
+        <h2 class="celebration-title" id="celeb-title">¡Dijo que SÍ! 💖🍷</h2>
         <div class="celebration-hearts">💕 🌟 💖 🌊 💕</div>
         <p class="celebration-text" id="celeb-message">
-          Martha, prometo sacarte sonrisas todos los días, llevarte a ver el mar, ser tu cómplice favorito y cuidar cada momento que construyamos juntos.
+          Martha, prometo sacarte sonrisas todos los días, disfrutar de un buen vino contigo frente al mar, ser tu cómplice favorito y no dejar de recordarte lo increíble que eres.
         </p>
 
         <div class="celebration-certificate">
@@ -432,7 +404,7 @@
           </div>
           <div class="cert-line">
             <span>De:</span>
-            <strong id="celeb-sender">Tu cómplice</strong>
+            <strong id="celeb-sender">Tu amigo cómplice</strong>
           </div>
         </div>
 

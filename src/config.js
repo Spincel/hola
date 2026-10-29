@@ -1,11 +1,13 @@
 /**
  * ====================================================================
- * CONFIGURACIÓN PERSONALIZADA: MARTHA, EL MAR Y LAS ESTRELLAS ✦
+ * CONFIGURACIÓN PERSONALIZADA: EL MAR, EL VINO Y LA ATRACCIÓN ✦
  * ====================================================================
+ * El nombre de ella NO se menciona al inicio. Se mantiene el misterio
+ * hasta el clímax final, donde se revela la carta para Martha.
  */
 
 export const config = {
-  // 1. Nombres
+  // 1. Nombres (El nombre se revela únicamente en la carta final y clímax)
   partnerName: "Martha",
   yourName: "Tu amigo cómplice",
 
@@ -13,15 +15,16 @@ export const config = {
   audioUrl: null,
   synthAmbientEnabled: true,
 
-  // 3. Fase 0: Introducción con Botella Misteriosa
+  // 3. Fase 0: Introducción con Botella Misteriosa (Sin nombre explícito para máxima intriga)
   intro: {
     badge: "✦ Un Misterio en la Orilla ✦",
-    bottleTag: "Para: Martha 💌",
-    bottleTeaser: "Las olas del mar trajeron una botella misteriosa con tu nombre hasta la arena...",
+    bottleTag: "Para alguien que me quita el aliento 💌",
+    bottleTeaser:
+      "Las olas del mar trajeron una botella misteriosa hasta la orilla con un mensaje guardado en secreto...",
     openBottleText: "Descorchar y abrir el secreto 🐚✨",
-    unfoldedTitle: "¡Hola, Martha! 😉",
+    unfoldedTitle: "¡Hola! Sé que la curiosidad te ganaría... 😉",
     unfoldedSubtitle:
-      "Sabía que la curiosidad te ganaría... El mar trajo un mensaje muy especial para ti, pero se fragmentó en 4 piezas a lo largo de la costa. ¿Aceptas el reto de reunir cada fragmento y descubrir qué guarda?",
+      "Me dijeron que te gusta el mar, el buen vino y los misterios... Este mensaje se fragmentó en 4 piezas a lo largo de la costa. Si logras reunirlos, descubrirás exactamente quién eres para mí y lo que he guardado en silencio...",
     startButtonText: "Comenzar la expedición marina ✨",
     headphonesNotice: "Ponte audífonos para escuchar las olas y la melodía 🎧",
   },
@@ -30,74 +33,69 @@ export const config = {
   fragments: [
     {
       id: 1,
-      name: "La Brisa & La Chispa",
-      icon: "✦",
-      color: "#38bdf8",
-      shortDesc: "La energía fresca y única que transmites",
+      name: "La Atracción & La Brisa",
+      icon: "🍷",
+      color: "#f43f5e",
+      shortDesc: "Esa copa de vino y esa vibra magnética",
     },
     {
       id: 2,
       name: "Nuestras Risas",
       icon: "✧",
       color: "#ff8fa3",
-      shortDesc: "Donde el tiempo se pasa volando",
+      shortDesc: "Donde las horas vuelan sin darnos cuenta",
     },
     {
       id: 3,
       name: "Hilos sobre el Mar",
       icon: "⋆",
-      color: "#a78bfa",
+      color: "#38bdf8",
       shortDesc: "Las constelaciones sobre el océano",
     },
     {
       id: 4,
       name: "La Química",
       icon: "❤",
-      color: "#f43f5e",
+      color: "#f5d061",
       shortDesc: "Profunda e innegable como la marea",
     },
   ],
 
-  // 5. Minijuego 1: «Encuentra las Luces»
+  // 5. Minijuego 1: «Memoria del Mar & Vino» (Juego de pares de 6 cartas)
   minigame1: {
     stationNumber: "Estación I",
-    title: "Destellos en la Marea",
+    title: "Memoria del Mar & Vino",
     instructions:
-      "El mar nocturno brilla con bioluminiscencia. Mueve la linterna sobre las olas y descubre los 4 destellos escondidos en la orilla.",
-    foundCountLabel: "Luces encontradas:",
-    alreadyFoundNotice: "¡Ya descubriste este destello! 🐚 Busca los que faltan en la oscuridad 🌊",
-    lights: [
+      "Encuentra los 3 pares ocultos entre las copas de vino tinto, la marea y el arte que nos conecta...",
+    pairs: [
       {
-        id: "light-1",
-        label: "Brisa Marina",
+        id: "vino",
+        icon: "🍷",
+        name: "Copa de Vino Tinto",
         phrase:
-          "«Tu risa, Martha: es como la brisa del mar, fresca, libre y capaz de arreglar cualquier día nublado.»",
+          "«Me fascina esa copa de vino compartida contigo, donde una plática casual se vuelve la más envolvente del mundo.»",
       },
       {
-        id: "light-2",
-        label: "Complicidad de Olas",
+        id: "olas",
+        icon: "🌊",
+        name: "Marea & Libertad",
         phrase:
-          "«Esa mirada con la que nos entendemos al instante sin decir una sola palabra, al ritmo del mar.»",
+          "«Tu mente libre, tu manera decidida de pensar y esa autenticidad tan tuya me atrapan más de lo que imaginas.»",
       },
       {
-        id: "light-3",
-        label: "Calma Infinita",
+        id: "tinta",
+        icon: "🖋️",
+        name: "Arte en la Piel",
         phrase:
-          "«La paz tan bonita que da estar cerca de ti, como sentarse en la arena a ver caer el atardecer.»",
-      },
-      {
-        id: "light-4",
-        label: "Química Profunda",
-        phrase:
-          "«Esa chispa inexplicable que se siente cada vez que coincidimos... profunda y viva como el océano.»",
+          "«Tu porte, tu sonrisa, cada tatuaje en tu piel... me atraes completa y de una forma que ya no puedo fingir que no noto.»",
       },
     ],
-    rewardPoemTitle: "✦ Primer Fragmento: La Brisa y la Chispa ✦",
+    rewardPoemTitle: "✦ Primer Fragmento: La Atracción y la Brisa ✦",
     rewardPoem: [
-      "Entre el murmullo tranquilo de las olas",
-      "y el cielo abierto sobre la marea,",
-      "bastó conocerte, Martha,",
-      "para saber que tu luz no se compara con ninguna.",
+      "Entre el murmullo de las olas y el aroma a buen vino,",
+      "hay personas que simplemente te desarman al mirarlas.",
+      "Tu mente, tu estilo y esa belleza tan tuya",
+      "hacen imposible mirar hacia otro lado.",
     ],
     nextButtonText: "Avanzar a la Estación II →",
   },
@@ -107,81 +105,81 @@ export const config = {
     stationNumber: "Estación II",
     title: "Cuestionario de la Costa",
     instructions:
-      "Solo quien guarda estos momentos en el corazón conoce las respuestas con sinceridad:",
+      "Solo quien guarda estos momentos en el corazón conoce las respuestas con total sinceridad:",
     questions: [
       {
-        question: "¿Cuál es nuestro superpoder secreto cuando nos ponemos a platicar?",
+        question: "¿Qué pasa cuando nos sentamos a tomar una copa de vino o café frente al mar?",
         options: [
           {
-            text: "Hacer que las horas parezcan segundos, como ver la tarde caer en el mar",
+            text: "Las horas vuelan, las risas fluyen y esa atracción entre nosotros se vuelve imposible de disimular",
             correct: true,
-            feedback: "¡Totalmente! Cuando estamos hablando, el reloj pierde el control.",
+            feedback: "¡Totalmente! Cuando estamos hablando, el reloj pierde el control y la química se siente en el aire.",
           },
           {
-            text: "Fingir que somos personas extremadamente serias y aburridas",
+            text: "Fingir que somos dos personas extremadamente aburridas",
             correct: false,
             feedback: "¡Jajaja por favor! Si contigo la seriedad dura 3 segundos 🤭",
           },
           {
-            text: "Hablar del clima con cara de aburrimiento",
+            text: "Ponernos a discutir sobre el precio internacional del carbón",
             correct: false,
-            feedback: "Jamás en la vida. Inténtalo con sinceridad, Martha...",
+            feedback: "Jamás en la vida. Elige con el corazón...",
           },
         ],
-        photo: "/photos/playa1.png",
-        photoCaption: "Nuestras mejores charlas bajo el cielo frente al mar.",
+        photo: "/photos/playa_vino1.png",
+        photoCaption: "Nuestra química innegable entre copas de vino y risas.",
       },
       {
-        question: "Si tuviéramos una tarde libre frente a la playa, ¿cuál sería el plan ideal?",
+        question: "¿Qué es lo primero que llama la atención de ti cuando entras a cualquier lugar?",
         options: [
           {
-            text: "Caminar descalzos por la orilla, reírnos de tonterías y ver las olas caer",
+            text: "Esa combinación letal: tu seguridad, tu inteligencia, tu belleza y esos tatuajes que te dan un estilo único",
             correct: true,
-            feedback: "El plan perfecto siempre es compartir la brisa y el atardecer contigo.",
+            feedback: "¡Tal cual! Tienes una presencia y un porte que no se olvidan jamás.",
           },
           {
-            text: "Hacer una fila de banco durante 8 horas en el calor",
+            text: "Que pareces un muñeco de cera de museo",
             correct: false,
-            feedback: "¡Qué pesadilla! Elige el plan con amor por favor 😅",
+            feedback: "¡Oye no! Si eres pura energía y carisma 😂",
           },
           {
-            text: "Aprender a doblar toallas en forma de cisne",
+            text: "Que seguro caminas con un manual de instrucciones en la mano",
             correct: false,
-            feedback: "Mmm... ¡creo que podemos pasarla mil veces mejor frente al mar!",
+            feedback: "¡Para nada! Tu espontaneidad es de las cosas que más me gustan.",
           },
         ],
-        photo: "/photos/playa2.png",
-        photoCaption: "Cualquier atardecer frente al mar contigo se vuelve mágico.",
+        photo: "/photos/playa_vino2.png",
+        photoCaption: "Esa presencia, tu sonrisa y el arte en tu piel que te hacen única.",
       },
       {
-        question: "Seamos 100% sinceros... ¿qué es lo más evidente cuando estamos juntos?",
+        question: "Seamos 100% sinceros... ¿por qué siempre ha habido tanta química entre nosotros?",
         options: [
           {
-            text: "Esa química que se nota a kilómetros, por más que digamos 'solo somos amigos' 😉",
+            text: "Porque me atraes completa: tu manera de pensar, tu risa, tu cuerpo y esa vibra que no tiene nadie más 😉",
             correct: true,
-            feedback: "¡Exacto! Hay cosas tan evidentes que hasta el mar entero las nota ✨",
+            feedback: "¡Exacto! Hay cosas tan evidentes que sería una tontería seguir negándolas ✨",
           },
           {
-            text: "Que los dos tenemos sueño todo el día",
+            text: "Porque nos confunden con actores de comedia",
             correct: false,
-            feedback: "Bueno... tal vez a veces, ¡pero esa no es la respuesta correcta! 😂",
+            feedback: "Comediantes tal vez, ¡pero esa no es la verdadera respuesta! 😂",
           },
           {
-            text: "Que deberíamos dedicarnos a la pesca submarina",
+            text: "Porque nos aburrimos de ver series",
             correct: false,
-            feedback: "Pescadores no... pero de que hay química... la hay ❤️",
+            feedback: "Mmm... ¡sabes bien que es algo mucho más fuerte que eso!",
           },
         ],
-        photo: "/photos/playa3.png",
-        photoCaption: "Esa chispa que nunca se apaga entre nosotros.",
+        photo: "/photos/playa_vino3.png",
+        photoCaption: "Esa chispa que siempre ha estado encendida entre los dos.",
       },
     ],
-    retryPrompt: "¡Caaasi! Piénsalo con la verdad, Martha...",
+    retryPrompt: "¡Caaasi! Respóndelo con la verdad...",
     rewardPoemTitle: "✦ Segundo Fragmento: Nuestras Risas ✦",
     rewardPoem: [
       "Dicen que el mar guarda los secretos más bellos,",
       "pero nuestra complicidad no la esconde nadie:",
-      "está en cada risa, en cada mirada,",
+      "está en cada risa compartida, en cada mirada,",
       "y en esta química que siempre estuvo ahí.",
     ],
     nextButtonText: "Avanzar a la Estación III →",
@@ -192,33 +190,33 @@ export const config = {
     stationNumber: "Estación III",
     title: "Hilos sobre el Océano",
     instructions:
-      "Toca las estrellas del 1 al 7 para trazar la constelación sobre el horizonte marino...",
+      "Toca las estrellas del 1 al 7 para trazar el corazón estelar sobre las olas del mar...",
     starCount: 7,
     constellationName: "«Constelación del Corazón Marino»",
     rewardPoemTitle: "✦ Fragmentos III y IV: El Destino y la Química ✦",
     rewardPoem: [
-      "Hay personas que son como el mar:",
-      "profundas, libres y llenas de magia.",
-      "Tú eres todo eso y mucho más, Martha.",
-      "Ahora todos los fragmentos están reunidos...",
+      "Hay mujeres que son como el mar:",
+      "profundas, libres, magnéticas y llenas de arte.",
+      "Tú eres todo eso y mucho más.",
+      "Ahora los 4 fragmentos están listos para unirse...",
     ],
     nextButtonText: "¡Reunir todos los fragmentos! ✨",
   },
 
-  // 8. Fase 4: El Clímax Espectacular (La Revelación)
+  // 8. Fase 4: El Clímax Espectacular (Aquí se revela el nombre de Martha por primera vez)
   climax: {
     stationNumber: "El Clímax",
     title: "La Revelación",
     fuseButtonText: "✦ Unir los 4 Fragmentos ✦",
-    assemblingMessage: "Los fragmentos se unen al compás de la marea...",
+    assemblingMessage: "Los fragmentos giran en espiral hacia el centro cósmico...",
     revelationTitle: "Para Martha",
 
     letter: {
       salutation: "Querida Martha,",
       paragraphs: [
-        "Si llegaste hasta aquí, habrás notado que cada pequeño juego guardaba un pedacito de lo que me encanta de ti. No quería decírtelo con un mensaje común; una persona tan especial como tú merecía una sorpresa diferente.",
-        "Dicen que el mar tiene la magia de dar paz y libertad a quien sabe apreciarlo. Para mí, compartir momentos contigo se siente exactamente así: las horas pasan volando, las risas fluyen sin esfuerzo y cualquier día común se vuelve inolvidable.",
-        "Siempre hemos dicho que 'solo somos amigos'... pero la verdad es que esa química que tenemos, esa complicidad tan nuestra y esa forma en que nos entendemos, es algo que no tengo con nadie más en este mundo.",
+        "Si llegaste hasta aquí, habrás notado que cada pequeño juego guardaba una verdad que ya no tenía sentido seguir callando. No quería decírtelo con un mensaje común; una mujer tan especial como tú merecía una sorpresa diferente.",
+        "Dicen que el mar y el buen vino son para quienes saben disfrutar lo auténtico. Y para mí, no hay nadie más auténtica que tú. Me encanta tu mente, tu forma libre y decidida de pensar, y no voy a mentirte: me fascinas completa, de pies a cabeza. Tu mirada, tu sonrisa, tu porte y el arte de cada tatuaje en tu piel te hacen una mujer única, de esas que marcan para siempre.",
+        "Siempre hemos bromeado con que 'solo somos amigos'... pero hay miradas, silencios y una atracción tan viva que sería una tontería ignorarla.",
         "Por eso hoy quise traerte hasta esta orilla de estrellas, para hacerte una pregunta con todo mi corazón...",
       ],
       closing: "Con mucho cariño y toda mi complicidad,",
@@ -226,40 +224,40 @@ export const config = {
 
     memoriesGallery: [
       {
-        url: "/photos/playa1.png",
-        caption: "Nuestras mejores charlas bajo la noche marina",
-        tag: "Bioluminiscencia",
+        url: "/photos/playa_vino1.png",
+        caption: "Nuestras mejores charlas con una copa de vino",
+        tag: "Química & Vino",
       },
       {
-        url: "/photos/playa2.png",
-        caption: "Caminar por la orilla y reírnos de todo",
-        tag: "Atardeceres Únicos",
+        url: "/photos/playa_vino2.png",
+        caption: "La magia de tu risa y tu porte bajo la luna",
+        tag: "Noches frente al mar",
       },
       {
-        url: "/photos/playa3.png",
-        caption: "Esa fogata de risas y complicidad que nunca se apaga",
-        tag: "Nuestra Química",
+        url: "/photos/playa_vino3.png",
+        caption: "Por muchos atardeceres más a tu lado",
+        tag: "Inolvidables",
       },
     ],
 
-    finalQuestion: "Martha... ¿y si dejamos de fingir que solo es casualidad y vemos a dónde nos lleva esta química? ✨",
+    finalQuestion: "Martha... ¿y si dejamos de fingir que solo somos amigos y vemos a dónde nos lleva todo esto este fin de semana? ✨",
     yesButtonText: "¡Me encanta la idea! Acepto ❤️",
-    noButtonText: "Solo si me invitas un coco en la playa... 😜",
+    noButtonText: "Solo si hay vino tinto y el mar enfrente... 🍷🌊",
 
     noButtonResponses: [
-      "¡Trato hecho! El coco y los taquitos en la playa van por mi cuenta 🥥🌮",
-      "Esa química es más grande que el océano entero, Martha... 🤭",
-      "¡No lo pienses tanto, mira qué bonito brilla el botón verde! 👉",
-      "¿A poco no te encantó tu sorpresa en la playa? 🥰",
-      "¡Piénsalo bien, mira que no cualquiera te programa un mar de estrellas! ✨",
-      "¡Te atrapé! Mejor dale al botón de la izquierda ❤️",
+      "¡El vino tinto y la mejor vista van por mi cuenta! 🍷🌴",
+      "Esa química ya no se puede ocultar, Martha... 🤭",
+      "¡Piénsalo bien, mira que no cualquiera te programa un mar entero! ✨",
+      "¡El botón de arriba brilla mucho más bonito! 👆❤️",
+      "¿A poco no te encantó tu sorpresa? 🥰",
+      "¡Trato hecho! El vino y la playa nos esperan 🏖️❤️",
     ],
 
     celebration: {
       badge: "✦ Promesa Sellada Frente al Mar ✦",
-      title: "¡Dijo que SÍ! 💖🌊",
+      title: "¡Dijo que SÍ! 💖🍷",
       message:
-        "Martha, prometo sacarte sonrisas todos los días, llevarte a ver el mar, ser tu cómplice favorito y cuidar cada momento que construyamos juntos.",
+        "Martha, prometo sacarte sonrisas todos los días, disfrutar de un buen vino contigo frente al mar, ser tu cómplice favorito y no dejar de recordarte lo increíble que eres.",
       dateLabel: "Cita oficial:",
       dateValue: "Este fin de semana frente al mar 🌊🌴",
       signature: "Siempre para ti,",

@@ -15,12 +15,10 @@ class ConstellationApp {
     this.currentStageId = "scene-intro";
     this.collectedFragments = new Set();
 
-    // Minijuego 1: Destellos en la marea
-    this.revealedLightsCount = 0;
-    this.foundLightIndices = new Set();
-    this.flashlightPos = { x: 0, y: 0 };
-    this.isPointerInsideFlashlight = false;
-    this.toastTimeout = null;
+    // Minijuego 1: Memoria del Mar & Vino (3 pares / 6 cartas)
+    this.flippedCards = [];
+    this.matchedPairsCount = 0;
+    this.isCheckingMemory = false;
 
     // Minijuego 2: Trivia costera
     this.currentTriviaIndex = 0;
@@ -28,13 +26,13 @@ class ConstellationApp {
     // Minijuego 3: Constelación marina (7 estrellas en corazón, coordenadas porcentuales 100x100 sin recortes)
     this.currentConstellationStep = 1;
     this.constellationNodes = [
-      { id: 1, x: 32, y: 22, label: "1" },
-      { id: 2, x: 18, y: 44, label: "2" },
-      { id: 3, x: 28, y: 68, label: "3" },
-      { id: 4, x: 50, y: 84, label: "4" },
-      { id: 5, x: 72, y: 68, label: "5" },
-      { id: 6, x: 82, y: 44, label: "6" },
-      { id: 7, x: 68, y: 22, label: "7" },
+      { id: 1, x: 34, y: 24, label: "1" },
+      { id: 2, x: 20, y: 44, label: "2" },
+      { id: 3, x: 30, y: 66, label: "3" },
+      { id: 4, x: 50, y: 80, label: "4" },
+      { id: 5, x: 70, y: 66, label: "5" },
+      { id: 6, x: 80, y: 44, label: "6" },
+      { id: 7, x: 66, y: 24, label: "7" },
     ];
 
     // Carrusel de recuerdos
@@ -206,161 +204,103 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // ESTACIÓN 1: LINTERNA EN LA MAREA
+  // ESTACIÓN 1: MINIJUEGO DE MEMORIA (MAR & VINO - 3 PARES / 6 CARTAS)
   // ==================================================================
   initMinigame1() {
-    const area = document.getElementById("flashlight-area");
-    const canvas = document.getElementById("flashlight-canvas");
-    const container = document.getElementById("lights-container");
-    const ctx = canvas.getContext("2d");
+    const grid = document.getElementById("memory-grid");
+    const countEl = document.getElementById("pairs-count");
+    const modal = document.getElementById("pair-modal");
+    const modalTitle = document.getElementById("pair-modal-title");
+    const modalIcon = document.getElementById("pair-modal-icon");
+    const modalPhrase = document.getElementById("pair-modal-phrase");
+    const closeModalBtn = document.getElementById("close-pair-modal");
 
-    const resizeCanvas = () => {
-      const rect = area.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      this.drawFlashlight(ctx, rect.width, rect.height);
-    };
+    this.flippedCards = [];
+    this.matchedPairsCount = 0;
+    this.isCheckingMemory = false;
+    countEl.textContent = "0";
+    grid.innerHTML = "";
 
-    window.addEventListener("resize", resizeCanvas);
+    // 3 pares temáticos de mar, vino y atracción
+    const pairs = config.minigame1.pairs;
+    const cardsData = [];
+    pairs.forEach((pair) => {
+      cardsData.push({ ...pair, uniqueId: `${pair.id}-a` });
+      cardsData.push({ ...pair, uniqueId: `${pair.id}-b` });
+    });
 
-    // 4 posiciones de destellos en la marea
-    const positions = [
-      { top: "28%", left: "24%" },
-      { top: "32%", left: "75%" },
-      { top: "72%", left: "34%" },
-      { top: "68%", left: "74%" },
-    ];
+    // Barajar aleatoriamente
+    cardsData.sort(() => Math.random() - 0.5);
 
-    container.innerHTML = "";
-    config.minigame1.lights.forEach((light, i) => {
-      const pos = positions[i] || { top: "50%", left: "50%" };
-      const el = document.createElement("div");
-      el.className = "hidden-light";
-      el.id = `light-btn-${i}`;
-      el.style.top = pos.top;
-      el.style.left = pos.left;
-      el.innerHTML = `<div class="light-spark"></div>`;
+    cardsData.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "memory-card";
+      card.dataset.pairId = item.id;
 
-      el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        this.revealLight(i, light, el);
+      card.innerHTML = `
+        <div class="memory-card-back">🌊</div>
+        <div class="memory-card-front">
+          <span class="card-icon">${item.icon}</span>
+          <span class="card-title">${item.name}</span>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        if (this.isCheckingMemory) return;
+        if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+        sound.playChime(this.flippedCards.length + 1);
+        card.classList.add("flipped");
+        this.flippedCards.push({ card, item });
+
+        if (this.flippedCards.length === 2) {
+          this.isCheckingMemory = true;
+          const [first, second] = this.flippedCards;
+
+          if (first.item.id === second.item.id) {
+            // ¡PAR ENCONTRADO!
+            setTimeout(() => {
+              first.card.classList.add("matched");
+              second.card.classList.add("matched");
+              this.matchedPairsCount++;
+              countEl.textContent = this.matchedPairsCount;
+
+              sound.playRewardChord();
+
+              // Mostrar modal con la frase emotiva de este par
+              modalIcon.textContent = `${first.item.icon} ✨`;
+              modalTitle.textContent = first.item.name;
+              modalPhrase.textContent = first.item.phrase;
+              modal.classList.remove("hidden");
+
+              this.flippedCards = [];
+              this.isCheckingMemory = false;
+            }, 450);
+          } else {
+            // No coinciden
+            setTimeout(() => {
+              sound.playWrongSound();
+              first.card.classList.remove("flipped");
+              second.card.classList.remove("flipped");
+              this.flippedCards = [];
+              this.isCheckingMemory = false;
+            }, 900);
+          }
+        }
       });
 
-      container.appendChild(el);
+      grid.appendChild(card);
     });
 
-    const updateCoords = (clientX, clientY) => {
-      const rect = area.getBoundingClientRect();
-      this.flashlightPos.x = clientX - rect.left;
-      this.flashlightPos.y = clientY - rect.top;
-      this.isPointerInsideFlashlight = true;
-      this.drawFlashlight(ctx, rect.width, rect.height);
+    closeModalBtn.onclick = () => {
+      modal.classList.add("hidden");
+      if (this.matchedPairsCount >= 3) {
+        setTimeout(() => {
+          this.collectFragment(1);
+          this.showStage("scene-m1-reward");
+        }, 300);
+      }
     };
-
-    area.addEventListener("mousemove", (e) => updateCoords(e.clientX, e.clientY));
-    area.addEventListener("touchmove", (e) => {
-      if (e.touches.length > 0) {
-        updateCoords(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    });
-    area.addEventListener("touchstart", (e) => {
-      if (e.touches.length > 0) {
-        updateCoords(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    });
-
-    setTimeout(() => {
-      const rect = area.getBoundingClientRect();
-      this.flashlightPos = { x: rect.width / 2, y: rect.height / 2 };
-      this.isPointerInsideFlashlight = true;
-      resizeCanvas();
-    }, 120);
-
-    // Cerrar modal de pensamiento
-    document.getElementById("close-light-modal").addEventListener("click", () => {
-      document.getElementById("light-modal").classList.add("hidden");
-    });
-  }
-
-  drawFlashlight(ctx, w, h) {
-    ctx.clearRect(0, 0, w, h);
-
-    // Oscuridad marina sobre las olas
-    ctx.fillStyle = "rgba(2, 9, 20, 0.94)";
-    ctx.fillRect(0, 0, w, h);
-
-    if (!this.isPointerInsideFlashlight) return;
-
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-out";
-
-    const radius = Math.min(w, h) * 0.35;
-    const grad = ctx.createRadialGradient(
-      this.flashlightPos.x,
-      this.flashlightPos.y,
-      radius * 0.15,
-      this.flashlightPos.x,
-      this.flashlightPos.y,
-      radius
-    );
-    grad.addColorStop(0, "rgba(0, 0, 0, 1)");
-    grad.addColorStop(0.7, "rgba(0, 0, 0, 0.75)");
-    grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(this.flashlightPos.x, this.flashlightPos.y, radius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  showLightToast(message) {
-    const toast = document.getElementById("light-already-toast");
-    toast.textContent = message;
-    toast.classList.remove("hidden");
-
-    if (this.toastTimeout) clearTimeout(this.toastTimeout);
-    this.toastTimeout = setTimeout(() => {
-      toast.classList.add("hidden");
-    }, 2400);
-  }
-
-  revealLight(index, lightData, element) {
-    // Si ya lo encontró previamente, avisarle claramente sin confusión
-    if (this.foundLightIndices.has(index)) {
-      sound.playChime(2);
-      this.showLightToast(config.minigame1.alreadyFoundNotice);
-      return;
-    }
-
-    // Nuevo destello encontrado
-    this.foundLightIndices.add(index);
-    element.classList.add("revealed");
-    this.revealedLightsCount++;
-
-    // Actualizar el slot del tracker visual
-    const trackSlot = document.getElementById(`track-slot-${index}`);
-    const trackStatus = document.getElementById(`track-st-${index}`);
-    if (trackSlot && trackStatus) {
-      trackSlot.classList.add("found");
-      trackStatus.textContent = "✓";
-    }
-
-    sound.playChime(this.revealedLightsCount);
-
-    document.getElementById("modal-light-title").textContent = lightData.label;
-    document.getElementById("modal-light-phrase").textContent = lightData.phrase;
-    document.getElementById("light-modal").classList.remove("hidden");
-
-    if (this.revealedLightsCount >= config.minigame1.lights.length) {
-      setTimeout(() => {
-        document.getElementById("light-modal").classList.add("hidden");
-        this.collectFragment(1);
-        this.showStage("scene-m1-reward");
-      }, 1200);
-    }
   }
 
   // ==================================================================
@@ -508,46 +448,52 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // CLÍMAX: FUSIÓN DE FRAGMENTOS & CARTA
+  // CLÍMAX: FUSIÓN DE FRAGMENTOS (VÓRTICE GIRATORIO & CARTA)
   // ==================================================================
   initClimaxPedestal() {
     const fuseBtn = document.getElementById("btn-fuse");
     fuseBtn.addEventListener("click", () => {
       fuseBtn.disabled = true;
-      fuseBtn.textContent = "✦ Fusión en proceso... ✦";
-
-      sound.playClimaxBurst();
-      if (this.starfield) {
-        this.starfield.triggerFlash();
-      }
-
-      // Destello intenso a pantalla completa
-      const flashEl = document.getElementById("supernova-flash");
-      if (flashEl) {
-        flashEl.classList.remove("hidden");
-        requestAnimationFrame(() => flashEl.classList.add("active"));
-      }
+      fuseBtn.textContent = "✦ Girando y fusionando... ✦";
 
       const pedestal = document.getElementById("fusion-pedestal");
-      pedestal.classList.add("fusing");
+      // 1. Activar vórtice de giro de fragmentos
+      pedestal.classList.add("vortex");
+      sound.playChime(4);
 
+      // 2. Al completar el giro, estallido supernova y destello
       setTimeout(() => {
-        if (flashEl) {
-          flashEl.classList.remove("active");
-          setTimeout(() => flashEl.classList.add("hidden"), 800);
+        sound.playClimaxBurst();
+        if (this.starfield) {
+          this.starfield.triggerFlash();
         }
 
-        confetti({
-          particleCount: 180,
-          spread: 100,
-          origin: { y: 0.5 },
-          colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#fb7185", "#ffffff"],
-        });
+        const flashEl = document.getElementById("supernova-flash");
+        if (flashEl) {
+          flashEl.classList.remove("hidden");
+          requestAnimationFrame(() => flashEl.classList.add("active"));
+        }
 
-        // Mostrar la carta romántica con el efecto máquina de escribir
-        this.showStage("scene-climax-letter");
-        this.startTypewriter();
-      }, 1400);
+        pedestal.classList.add("fusing");
+
+        // 3. Revelar la carta tras el destello cegador
+        setTimeout(() => {
+          if (flashEl) {
+            flashEl.classList.remove("active");
+            setTimeout(() => flashEl.classList.add("hidden"), 800);
+          }
+
+          confetti({
+            particleCount: 180,
+            spread: 100,
+            origin: { y: 0.5 },
+            colors: ["#38bdf8", "#2dd4bf", "#f5d061", "#fb7185", "#ffffff"],
+          });
+
+          this.showStage("scene-climax-letter");
+          this.startTypewriter();
+        }, 1100);
+      }, 1600);
     });
   }
 
@@ -568,6 +514,8 @@ class ConstellationApp {
       container.innerHTML = fullHtml;
       skipBtn.classList.add("hidden");
       toGalleryBtn.classList.remove("hidden");
+      const scrollParent = container.parentElement;
+      if (scrollParent) scrollParent.scrollTop = scrollParent.scrollHeight;
     };
 
     skipBtn.onclick = finishTypewriter;
@@ -577,10 +525,12 @@ class ConstellationApp {
       if (charIndex < fullText.length) {
         charIndex += 2;
         container.innerText = fullText.slice(0, charIndex);
+        const scrollParent = container.parentElement;
+        if (scrollParent) scrollParent.scrollTop = scrollParent.scrollHeight;
       } else {
         finishTypewriter();
       }
-    }, 32);
+    }, 28);
   }
 
   initCarousel() {
@@ -650,9 +600,9 @@ class ConstellationApp {
       msgEl.textContent = randomMsg;
       msgEl.classList.remove("hidden");
 
-      // Desplazamiento limpio y acotado para no desfasar la tarjeta
-      const x = (Math.random() - 0.5) * 36;
-      const y = (Math.random() - 0.5) * 12;
+      // Desplazamiento limpio y acotado para no desfasar la tarjeta ni solapar el texto
+      const x = (Math.random() - 0.5) * 24;
+      const y = (Math.random() - 0.5) * 6;
 
       btnNo.style.transform = `translate(${x}px, ${y}px)`;
     };
