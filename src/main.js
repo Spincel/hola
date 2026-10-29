@@ -69,34 +69,32 @@ class ConstellationApp {
   }
 
   applyConfig() {
-    // Portada y Botella
-    document.getElementById("intro-badge").textContent = config.intro.badge;
-    document.getElementById("bottle-tag").textContent = config.intro.bottleTag;
-    document.getElementById("bottle-teaser").textContent = config.intro.bottleTeaser;
-    document.getElementById("open-bottle-text").textContent = config.intro.openBottleText;
-    document.getElementById("unfolded-title").textContent = config.intro.unfoldedTitle;
-    document.getElementById("unfolded-subtitle").textContent = config.intro.unfoldedSubtitle;
-    document.getElementById("start-btn-text").textContent = config.intro.startButtonText;
+    // Portada y Sobre Mágico de Hogwarts
+    const setTxt = (id, val) => {
+      const el = document.getElementById(id);
+      if (el && val !== undefined) el.textContent = val;
+    };
+
+    setTxt("unfolded-title", config.intro.unfoldedTitle);
+    setTxt("unfolded-subtitle", config.intro.unfoldedSubtitle);
+    setTxt("start-btn-text", config.intro.startButtonText);
 
     // Carta y firma
-    document.getElementById("letter-salutation").textContent = config.climax.letter.salutation;
+    setTxt("letter-salutation", config.climax.letter.salutation);
 
     // Pregunta final
-    document.getElementById("final-question").textContent = config.climax.finalQuestion;
-    document.getElementById("btn-yes-text").textContent = config.climax.yesButtonText;
-    document.getElementById("btn-no-text").textContent = config.climax.noButtonText;
+    setTxt("final-question", config.climax.finalQuestion);
+    setTxt("btn-yes-text", config.climax.yesButtonText);
+    setTxt("btn-no-text", config.climax.noButtonText);
 
     // Celebración
-    document.getElementById("celeb-badge").textContent = config.climax.celebration.badge;
-    document.getElementById("celeb-title").textContent = config.climax.celebration.title;
-    document.getElementById("celeb-message").textContent = config.climax.celebration.message;
-    document.getElementById("celeb-partner").textContent = config.partnerName;
-    document.getElementById("celeb-sender").textContent = config.yourName;
-    document.getElementById("celeb-date").textContent = config.climax.celebration.dateValue || "Este fin de semana frente al mar 🌊🌴";
-    const dateLabelEl = document.getElementById("celeb-date-label");
-    if (dateLabelEl) {
-      dateLabelEl.textContent = config.climax.celebration.dateLabel || "Cita oficial:";
-    }
+    setTxt("celeb-badge", config.climax.celebration.badge);
+    setTxt("celeb-title", config.climax.celebration.title);
+    setTxt("celeb-message", config.climax.celebration.message);
+    setTxt("celeb-partner", config.partnerName);
+    setTxt("celeb-sender", config.yourName);
+    setTxt("celeb-date", config.climax.celebration.dateValue || "Plan a futuro: Nuestra cabaña mágica en el bosque 🌲☕💍");
+    setTxt("celeb-date-label", config.climax.celebration.dateLabel || "Promesa sellada:");
   }
 
   // Transición fluida entre escenas en la misma ventana fija
@@ -125,26 +123,59 @@ class ConstellationApp {
       audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🌧️";
     });
 
-    // 0A. Abrir el cofre del bosque
-    const openBottle = () => {
-      sound.start();
-      sound.playChime(4);
+    // 0A. Abrir el Sobre Mágico de Hogwarts
+    let envelopeOpened = false;
+    const openEnvelope = () => {
+      if (envelopeOpened) return;
+      envelopeOpened = true;
 
+      sound.start();
+      sound.playEnvelopeOpen();
+
+      const seal = document.getElementById("btn-open-bottle");
+      const flap = document.getElementById("envelope-flap");
+      const flash = document.getElementById("supernova-flash");
+
+      if (seal) seal.classList.add("breaking");
+
+      // Flash breve cálido mágico
+      if (flash) {
+        flash.classList.remove("hidden");
+        flash.classList.add("active");
+        setTimeout(() => {
+          flash.classList.remove("active");
+          setTimeout(() => flash.classList.add("hidden"), 500);
+        }, 320);
+      }
+
+      // Solapa se abre en 3D
+      setTimeout(() => {
+        if (flap) flap.classList.add("open");
+      }, 200);
+
+      // Chispas mágicas de bienvenida
       confetti({
-        particleCount: 40,
-        spread: 60,
+        particleCount: 55,
+        spread: 80,
         origin: { y: 0.5 },
-        colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fef08a", "#bae6fd"],
+        colors: ["#f59e0b", "#facc15", "#38bdf8", "#fef08a", "#ffffff"],
       });
 
-      document.getElementById("intro-bottle-box").classList.add("hidden");
-      document.getElementById("intro-unfolded-box").classList.remove("hidden");
+      // El pergamino con la carta se revela
+      setTimeout(() => {
+        const bottleBox = document.getElementById("intro-bottle-box");
+        const unfoldedBox = document.getElementById("intro-unfolded-box");
+        if (bottleBox) bottleBox.classList.add("hidden");
+        if (unfoldedBox) unfoldedBox.classList.remove("hidden");
+      }, 720);
     };
 
-    document.getElementById("btn-open-bottle").addEventListener("click", openBottle);
-    document.getElementById("bottle-interactive").addEventListener("click", openBottle);
+    const sealBtn = document.getElementById("btn-open-bottle");
+    if (sealBtn) sealBtn.addEventListener("click", openEnvelope);
+    const bottleInteractive = document.getElementById("bottle-interactive");
+    if (bottleInteractive) bottleInteractive.addEventListener("click", openEnvelope);
 
-    // 0B. Comenzar la expedición en el bosque
+    // 0B. Comenzar la expedición en el Expreso de Hogwarts
     document.getElementById("btn-start").addEventListener("click", () => {
       document.getElementById("fragments-hud").classList.remove("hidden");
       this.setScenicBackground(1);
@@ -401,87 +432,201 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // ESTACIÓN 3: CONSTELACIÓN SOBRE EL MAR (COORDENADAS PORCENTUALES)
+  // ESTACIÓN 3: ENCANTAMIENTO EXPECTO PATRONUM CON VARITA MÁGICA
   // ==================================================================
   initMinigame3() {
-    this.currentConstellationStep = 1;
-    const nodesContainer = document.getElementById("stars-nodes");
-    const svgLines = document.getElementById("svg-lines");
-    nodesContainer.innerHTML = "";
-    svgLines.innerHTML = "";
+    const guidePath = document.getElementById("spell-guide-path");
+    const completedPath = document.getElementById("spell-completed-path");
+    const runesContainer = document.getElementById("spell-runes");
+    const wandActor = document.getElementById("wand-actor");
+    const powerValEl = document.getElementById("wand-power-val");
+    const burstEl = document.getElementById("spell-incantation-burst");
+    const wrap = document.getElementById("spell-canvas-wrap");
 
-    document.getElementById("next-star-num").textContent = "1";
+    if (!guidePath || !completedPath || !runesContainer || !wandActor) return;
 
-    this.constellationNodes.forEach((node) => {
-      const el = document.createElement("div");
-      el.className = "star-node";
-      el.id = `star-node-${node.id}`;
-      el.textContent = node.label;
-      // Posición porcentual exacta
-      el.style.left = `${node.x}%`;
-      el.style.top = `${node.y}%`;
+    if (burstEl) burstEl.classList.add("hidden");
 
-      if (node.id === 1) {
-        el.classList.add("target");
-      }
+    const totalLength = guidePath.getTotalLength();
+    completedPath.style.strokeDasharray = `${totalLength}`;
+    completedPath.style.strokeDashoffset = `${totalLength}`;
 
-      el.addEventListener("click", () => this.handleStarClick(node));
-      nodesContainer.appendChild(el);
+    let currentProgress = 0; // 0 a 1
+    let isCompleted = false;
+
+    const runesData = [
+      { id: 1, ratio: 0.0, icon: "✦", label: "Inicio" },
+      { id: 2, ratio: 0.28, icon: "⚡", label: "Giro" },
+      { id: 3, ratio: 0.55, icon: "✧", label: "Bucle" },
+      { id: 4, ratio: 0.78, icon: "☽", label: "Floreo" },
+      { id: 5, ratio: 1.0, icon: "🦌", label: "Patronus" },
+    ];
+
+    runesContainer.innerHTML = "";
+    const runeElements = [];
+
+    runesData.forEach((rune, idx) => {
+      const pt = guidePath.getPointAtLength(rune.ratio * totalLength);
+      const el = document.createElement("button");
+      el.className = "spell-rune-node";
+      if (idx === 0) el.classList.add("completed");
+      if (idx === 1) el.classList.add("active");
+      el.style.left = `${(pt.x / 500) * 100}%`;
+      el.style.top = `${(pt.y / 280) * 100}%`;
+      el.innerHTML = `<span>${rune.icon}</span>`;
+      el.title = `${rune.label} (${Math.round(rune.ratio * 100)}%)`;
+
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (isCompleted) return;
+        animateWandTo(rune.ratio);
+      });
+
+      runesContainer.appendChild(el);
+      runeElements.push({ el, ...rune });
     });
-  }
 
-  handleStarClick(node) {
-    if (node.id === this.currentConstellationStep) {
-      const currentNodeEl = document.getElementById(`star-node-${node.id}`);
-      currentNodeEl.classList.remove("target");
-      currentNodeEl.classList.add("connected");
+    const updateWandPosition = (ratio) => {
+      currentProgress = Math.max(0, Math.min(1, ratio));
+      const currentLen = currentProgress * totalLength;
+      completedPath.style.strokeDashoffset = `${totalLength - currentLen}`;
 
-      sound.playChime(this.currentConstellationStep);
+      const pt = guidePath.getPointAtLength(currentLen);
+      wandActor.style.left = `${(pt.x / 500) * 100}%`;
+      wandActor.style.top = `${(pt.y / 280) * 100}%`;
 
-      // Si no es la primera, trazar línea con la anterior
-      if (this.currentConstellationStep > 1) {
-        const prevNode = this.constellationNodes.find((n) => n.id === this.currentConstellationStep - 1);
-        if (prevNode) {
-          this.drawConstellationLine(prevNode, node);
-        }
+      if (powerValEl) {
+        powerValEl.textContent = `${Math.round(currentProgress * 100)}%`;
       }
 
-      this.currentConstellationStep++;
-
-      if (this.currentConstellationStep <= this.constellationNodes.length) {
-        document.getElementById("next-star-num").textContent = this.currentConstellationStep;
-        const nextNodeEl = document.getElementById(`star-node-${this.currentConstellationStep}`);
-        if (nextNodeEl) {
-          nextNodeEl.classList.add("target");
+      // Actualizar estado visual de las runas en el camino
+      runeElements.forEach((r, idx) => {
+        if (currentProgress >= r.ratio - 0.02) {
+          r.el.classList.add("completed");
+          r.el.classList.remove("active");
+        } else {
+          r.el.classList.remove("completed");
+          const prevCompleted = idx === 0 || currentProgress >= runeElements[idx - 1].ratio - 0.02;
+          if (prevCompleted && currentProgress < r.ratio) {
+            r.el.classList.add("active");
+          } else {
+            r.el.classList.remove("active");
+          }
         }
-      } else {
-        // Cerrar el corazón uniendo la 7 con la 1 en la cima
-        const lastNode = this.constellationNodes[this.constellationNodes.length - 1];
-        const firstNode = this.constellationNodes[0];
-        this.drawConstellationLine(lastNode, firstNode);
+      });
 
-        document.getElementById("next-star-num").textContent = "✓ ¡Completa!";
+      // Al alcanzar el 98% o más, se completa el hechizo con éxito
+      if (currentProgress >= 0.98 && !isCompleted) {
+        triggerSpellComplete();
+      }
+    };
 
+    const triggerSpellComplete = () => {
+      isCompleted = true;
+      updateWandPosition(1.0);
+      sound.playSpellSuccess();
+
+      if (burstEl) {
+        burstEl.classList.remove("hidden");
+      }
+
+      confetti({
+        particleCount: 75,
+        spread: 90,
+        origin: { y: 0.5 },
+        colors: ["#38bdf8", "#facc15", "#fef08a", "#ffffff", "#bae6fd"],
+      });
+
+      setTimeout(() => {
+        this.collectFragment(3);
         setTimeout(() => {
-          this.collectFragment(3);
-          setTimeout(() => {
-            this.collectFragment(4);
-            this.showStage("scene-m3-reward");
-          }, 450);
-        }, 600);
-      }
-    }
-  }
+          this.collectFragment(4);
+          this.showStage("scene-m3-reward");
+        }, 550);
+      }, 1900);
+    };
 
-  drawConstellationLine(fromNode, toNode) {
-    const svgLines = document.getElementById("svg-lines");
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    // Coordenadas coincidentes con el viewBox="0 0 100 100"
-    line.setAttribute("x1", fromNode.x);
-    line.setAttribute("y1", fromNode.y);
-    line.setAttribute("x2", toNode.x);
-    line.setAttribute("y2", toNode.y);
-    svgLines.appendChild(line);
+    let animationFrameId = null;
+    const animateWandTo = (targetRatio) => {
+      if (isCompleted) return;
+      sound.playWandSwoosh();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+      const startRatio = currentProgress;
+      const diff = targetRatio - startRatio;
+      const duration = Math.max(300, Math.abs(diff) * 1000);
+      const startTime = performance.now();
+
+      const step = (now) => {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        // Easing suave cuadrático
+        const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        const newRatio = startRatio + diff * ease;
+        updateWandPosition(newRatio);
+
+        if (t < 1) {
+          animationFrameId = requestAnimationFrame(step);
+        } else {
+          animationFrameId = null;
+        }
+      };
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    // Colocar varita en posición inicial
+    updateWandPosition(0);
+
+    // Muestreo para arrastrar o tocar a lo largo de la curva
+    let isDragging = false;
+
+    const getRatioFromPoint = (clientX, clientY) => {
+      const rect = wrap.getBoundingClientRect();
+      const clickX = ((clientX - rect.left) / rect.width) * 500;
+      const clickY = ((clientY - rect.top) / rect.height) * 280;
+
+      let closestLen = 0;
+      let minDistanceSq = Infinity;
+      const samples = 70;
+      for (let i = 0; i <= samples; i++) {
+        const testLen = (i / samples) * totalLength;
+        const pt = guidePath.getPointAtLength(testLen);
+        const dx = pt.x - clickX;
+        const dy = pt.y - clickY;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < minDistanceSq) {
+          minDistanceSq = distSq;
+          closestLen = testLen;
+        }
+      }
+      return closestLen / totalLength;
+    };
+
+    const onPointerDown = (e) => {
+      if (isCompleted) return;
+      isDragging = true;
+      const ratio = getRatioFromPoint(e.clientX, e.clientY);
+      if (ratio > currentProgress) {
+        animateWandTo(ratio);
+      }
+    };
+
+    const onPointerMove = (e) => {
+      if (!isDragging || isCompleted) return;
+      const ratio = getRatioFromPoint(e.clientX, e.clientY);
+      if (ratio > currentProgress && ratio <= currentProgress + 0.35) {
+        updateWandPosition(ratio);
+        sound.playWandSwoosh();
+      }
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+    };
+
+    wrap.onpointerdown = onPointerDown;
+    wrap.onpointermove = onPointerMove;
+    window.onpointerup = onPointerUp;
   }
 
   // ==================================================================

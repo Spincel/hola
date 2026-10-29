@@ -21,17 +21,17 @@ export const config = {
   audioUrl: null,
   synthAmbientEnabled: true,
 
-  // 3. Fase 0: La Plataforma 9 ¾ (King's Cross & Billete Dorado de Hogwarts)
+  // 3. Fase 0: El Sobre Mágico de Hogwarts (Bienvenida oficial)
   intro: {
-    badge: "✦ Expreso de Hogwarts ✦ Andén 9 ¾ ✦",
-    bottleTag: "Para la mujer de mi vida, mi único y gran amor 💌🚂⚡",
-    bottleTeaser:
-      "Entre el vapor del Expreso de Hogwarts y el muro del Andén 9 ¾, hay un billete dorado y un mensaje secreto reservado solo para ti...",
-    openBottleText: "Cruzar al Andén 9 ¾ y abrir el mensaje 🚂✨",
-    unfoldedTitle: "¡Hola mi amor! Bienvenida a nuestro viaje mágico... 😉⚡",
+    envelopeBadge: "✦ CARTA OFICIAL DE HOGWARTS ✦",
+    envelopeTo: "Sra. Xóchitl Sinay Barba Cuevas",
+    envelopeDesc: "La dueña absoluta del corazón y de la vida de su esposo",
+    envelopeDest: "Destino: Andén 9 ¾ ✦ Expreso de Hogwarts",
+    envelopeTapHint: "Toca el sello de cera de Hogwarts para romper el encantamiento y abrir ⚡🪄",
+    unfoldedTitle: "¡Bienvenida a Nuestro Viaje Mágico, Mi Amor! ⚡🚂",
     unfoldedSubtitle:
-      "Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento del día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Reúne cada fragmento para descubrir el gran plan a futuro que tengo reservado para los dos...",
-    startButtonText: "Subir al tren de nuestro amor ✨",
+      "Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento de mi día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Sigue cada estación para descubrir el gran plan a futuro que tengo reservado para los dos...",
+    startButtonText: "Subir al Expreso de Hogwarts 🚂✨",
     headphonesNotice: "Ponte audífonos para escuchar la lluvia y la magia 🎧🌧️🪄",
   },
 
@@ -209,14 +209,13 @@ export const config = {
     nextButtonText: "Conjurar el Encantamiento Lumos (Estación III) →",
   },
 
-  // 7. Minijuego 3: «Encantamiento Lumos & La Constelación del Patronus»
+  // 7. Minijuego 3: «El Encantamiento: Expecto Patronum con Varita Mágica»
   minigame3: {
     stationNumber: "Estación III",
-    title: "Encantamiento Lumos & El Patronus",
+    title: "El Encantamiento: Expecto Patronum",
     instructions:
-      "Toca las luces mágicas del 1 al 7 para encender con tu varita el corazón resplandeciente entre los pinos y la niebla...",
-    starCount: 7,
-    constellationName: "«Constelación del Patronus Eterno»",
+      "Desliza tu varita mágica siguiendo el trazo sagrado del encantamiento para conjurar la luz plateada que protege nuestro amor:",
+    spellName: "«Expecto Patronum — Always»",
     rewardPoemTitle: "✦ Fragmentos III y IV: La Fuerza del Sauce y Always ✦",
     rewardPoem: [
       "Eres mi Patronus en la tormenta, mi calma y mi mayor alegría.",

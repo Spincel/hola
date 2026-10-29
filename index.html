@@ -66,77 +66,78 @@
   <main id="app-viewport" class="app-viewport">
 
     <!-- ========================================== -->
-    <!-- ESCENA 0: INTRODUCCIÓN - EL BILLETE DEL ANDÉN 9 ¾ -->
+    <!-- ESCENA 0: EL SOBRE MÁGICO DE HOGWARTS      -->
     <!-- ========================================== -->
     <div id="scene-intro" class="stage-scene active">
       
-      <!-- Estado A: El Billete Dorado del Expreso de Hogwarts -->
-      <div id="intro-bottle-box" class="glass-card compact-card intro-bottle-card">
-        <div class="ocean-badge" id="intro-badge">✦ Expreso de Hogwarts ✦ Andén 9 ¾ ✦</div>
-        
-        <div class="floating-bottle-wrap" id="bottle-interactive">
-          <div class="bottle-glow"></div>
-          <!-- Billete Dorado de Hogwarts Express -->
-          <svg class="bottle-svg" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="ticketGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#fef08a" />
-                <stop offset="35%" stop-color="#eab308" />
-                <stop offset="70%" stop-color="#ca8a04" />
-                <stop offset="100%" stop-color="#854d0e" />
-              </linearGradient>
-              <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#fef08a" stop-opacity="0.9" />
-                <stop offset="60%" stop-color="#eab308" stop-opacity="0.4" />
-                <stop offset="100%" stop-color="#78350f" stop-opacity="0" />
-              </radialGradient>
-            </defs>
-            <!-- Billete de Hogwarts dorado con corte ornamental -->
-            <rect x="15" y="24" width="110" height="132" rx="10" fill="url(#ticketGold)" stroke="#fef08a" stroke-width="2" />
-            <rect x="22" y="31" width="96" height="118" rx="6" fill="#1c1917" stroke="#ca8a04" stroke-width="1.5" />
-            <!-- Sello de Hogwarts 9 3/4 -->
-            <circle cx="70" cy="74" r="28" fill="url(#portalGlow)" />
-            <circle cx="70" cy="74" r="24" fill="#7f1d1d" stroke="#eab308" stroke-width="2" />
-            <text x="70" y="81" font-family="'Playfair Display', serif" font-size="16" text-anchor="middle" fill="#fef08a" font-weight="bold">9 ¾</text>
-            <!-- Texto Hogwarts Express -->
-            <text x="70" y="112" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" text-anchor="middle" fill="#fef08a" letter-spacing="2" font-weight="700">HOGWARTS</text>
-            <text x="70" y="124" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" text-anchor="middle" fill="#fde047" letter-spacing="1">PLATAFORMA 9 ¾</text>
-            <text x="70" y="138" font-family="'Caveat', cursive" font-size="11" text-anchor="middle" fill="#ffffff">London to Hogwarts</text>
-            <!-- Chispas mágicas -->
-            <circle cx="28" cy="42" r="2" fill="#fef08a" class="sparkle-dot-1" />
-            <circle cx="112" cy="45" r="2.5" fill="#fef08a" class="sparkle-dot-2" />
-            <circle cx="110" cy="142" r="2" fill="#fef08a" class="sparkle-dot-3" />
-          </svg>
-          <div class="wave-ripples">
-            <span></span>
-            <span></span>
+      <!-- Estado A: Solo el sobre sellado de bienvenida de Hogwarts -->
+      <div id="intro-bottle-box" class="hogwarts-envelope-card">
+        <div class="envelope-floating-wrapper" id="bottle-interactive">
+          <div class="envelope-glow-aura"></div>
+          
+          <div class="hogwarts-envelope" id="hogwarts-envelope">
+            <!-- Solapa superior con sello de cera de Hogwarts -->
+            <div class="envelope-flap" id="envelope-flap">
+              <div class="wax-seal" id="btn-open-bottle" title="Toca el sello para abrir el encantamiento">
+                <div class="seal-inner">
+                  <span class="seal-crest">⚡</span>
+                  <span class="seal-sub">H</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Frente del sobre con la caligrafía oficial de Hogwarts -->
+            <div class="envelope-front">
+              <div class="envelope-post-mark">
+                <span class="post-icon">🦉</span>
+                <span class="post-label">OWL POST ✦ HOGWARTS</span>
+              </div>
+              <div class="envelope-address">
+                <p class="addr-name">Para la Sra. Xóchitl Sinay Barba Cuevas</p>
+                <p class="addr-room">La dueña absoluta del corazón de su esposo</p>
+                <p class="addr-place">El rincón más cálido y feliz de nuestra vida</p>
+                <p class="addr-route">Destino: Plataforma 9 ¾ ✦ Expreso de Hogwarts</p>
+              </div>
+            </div>
+
+            <!-- Chispas mágicas flotando alrededor -->
+            <div class="envelope-sparks">
+              <span class="espark s1">✧</span>
+              <span class="espark s2">✦</span>
+              <span class="espark s3">⚡</span>
+              <span class="espark s4">✧</span>
+            </div>
           </div>
         </div>
 
-        <div class="bottle-tag" id="bottle-tag">Para la mujer de mi vida, mi único y gran amor 💌🚂⚡</div>
-        <p class="bottle-teaser" id="bottle-teaser">
-          Entre el vapor del Expreso de Hogwarts y el muro del Andén 9 ¾, hay un billete dorado y un mensaje secreto reservado solo para ti...
-        </p>
-
-        <div class="headphones-hint">
-          <span class="hint-icon">🎧</span>
-          <span>Ponte audífonos para escuchar la lluvia y la magia 🌧️🪄</span>
+        <div class="envelope-hint">
+          <span class="hint-wand">🪄</span>
+          <span>Toca el sello de cera para romper el encantamiento y abrir</span>
         </div>
-
-        <button id="btn-open-bottle" class="btn-ocean btn-pulse">
-          <span id="open-bottle-text">Cruzar al Andén 9 ¾ y abrir el mensaje 🚂✨</span>
-        </button>
       </div>
 
-      <!-- Estado B: El Mensaje Desplegado tras abordar -->
-      <div id="intro-unfolded-box" class="glass-card compact-card hidden">
-        <div class="ocean-badge">✦ El Secreto de Nuestro Destino ✦</div>
-        <h1 class="main-title" id="unfolded-title">¡Hola mi amor! Bienvenida a nuestro viaje mágico... 😉⚡</h1>
-        <p class="subtitle" id="unfolded-subtitle">
-          Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento del día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Reúne cada fragmento para descubrir el gran plan a futuro que tengo reservado para los dos...
-        </p>
-        <button id="btn-start" class="btn-ocean btn-pulse">
-          <span id="start-btn-text">Subir al tren de nuestro amor ✨</span>
+      <!-- Estado B: El Pergamino desplegado con la carta que inicia el viaje -->
+      <div id="intro-unfolded-box" class="parchment-grimoire-card intro-parchment-card hidden">
+        <div class="grimoire-bookmark">
+          <span class="bookmark-station">Hogwarts</span>
+          <span class="bookmark-title">Andén 9 ¾</span>
+        </div>
+
+        <div class="grimoire-header">
+          <div class="grimoire-flourish">❧ ✧ ⚡ ✧ ☙</div>
+          <h1 class="grimoire-step-title" id="unfolded-title">¡Bienvenida a Nuestro Viaje Mágico, Mi Amor! ⚡🚂</h1>
+          <div class="grimoire-flourish-bottom">✦ ─── London to Hogwarts ─── ✦</div>
+        </div>
+
+        <div class="intro-parchment-body">
+          <p class="intro-lead-salutation">Para mi amada esposa, Xóchitl Sinay:</p>
+          <p id="unfolded-subtitle" class="intro-letter-p">
+            Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento de mi día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Sigue cada estación para descubrir el gran plan a futuro que tengo reservado para los dos...
+          </p>
+        </div>
+
+        <button id="btn-start" class="btn-hogwarts-gold btn-pulse">
+          <span id="start-btn-text">Subir al Expreso de Hogwarts 🚂✨</span>
         </button>
       </div>
 
@@ -263,33 +264,77 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 3A: MINIJUEGO 3 - ENCANTAMIENTO LUMOS-->
+    <!-- ESCENA 3A: MINIJUEGO 3 - TRAZO DE VARITA MÁGICA -->
     <!-- ========================================== -->
     <div id="scene-m3-play" class="stage-scene">
-      <div class="glass-card game-card">
+      <div class="glass-card wand-game-card">
         <div class="scene-header">
           <span class="station-tag">Estación III</span>
-          <h2 class="scene-title">Encantamiento Lumos & El Patronus</h2>
+          <h2 class="scene-title">Encantamiento: Expecto Patronum ⚡🪄</h2>
           <p class="scene-instruction">
-            Toca las luces mágicas del 1 al 7 para encender con tu varita el corazón resplandeciente entre los pinos y la niebla:
+            Mueve tu varita mágica siguiendo el trazo sagrado del encantamiento para invocar la luz plateada que protege nuestro amor:
           </p>
-          <div class="constellation-counter">
-            Siguiente luz: <span id="next-star-num" class="highlight-star">1</span>
+          <div class="wand-spell-badge">
+            <span class="spell-incantation">« Movimiento de Varita: Bucle y Floreo »</span>
+            <span class="spell-progress-text">Poder del Encantamiento: <b id="wand-power-val">0%</b></span>
           </div>
         </div>
 
-        <div class="constellation-board-wrap">
-          <div id="constellation-board" class="constellation-board">
-            <svg id="constellation-svg" class="constellation-svg" viewBox="0 0 100 100">
+        <div class="wand-spell-container" id="wand-spell-container">
+          <div class="spell-canvas-wrap" id="spell-canvas-wrap">
+            <svg id="spell-svg" class="spell-svg" viewBox="0 0 500 280">
               <defs>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="1.5" result="glow" />
-                  <feComposite in="SourceGraphic" in2="glow" operator="over" />
+                <filter id="spell-glow-filter" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
                 </filter>
+                <linearGradient id="spell-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="45%" stop-color="#facc15" />
+                  <stop offset="80%" stop-color="#fef08a" />
+                  <stop offset="100%" stop-color="#ffffff" />
+                </linearGradient>
               </defs>
-              <g id="svg-lines"></g>
+
+              <!-- Curva guía tenue punteada del encantamiento -->
+              <path id="spell-guide-path" class="spell-guide-path" 
+                    d="M 50,190 C 130,220 180,240 230,170 C 270,110 300,55 245,55 C 195,55 175,135 250,185 C 310,225 380,220 410,150 C 430,100 425,65 450,55" />
+
+              <!-- Trazo completado y brillante que ilumina el camino -->
+              <path id="spell-completed-path" class="spell-completed-path" 
+                    d="M 50,190 C 130,220 180,240 230,170 C 270,110 300,55 245,55 C 195,55 175,135 250,185 C 310,225 380,220 410,150 C 430,100 425,65 450,55" />
             </svg>
-            <div id="stars-nodes" class="stars-nodes"></div>
+
+            <!-- Runas interactivas en puntos clave del hechizo -->
+            <div id="spell-runes" class="spell-runes"></div>
+
+            <!-- La Varita Mágica que se desplaza -->
+            <div id="wand-actor" class="wand-actor">
+              <div class="wand-body">
+                <div class="wand-handle"></div>
+                <div class="wand-shaft"></div>
+                <div class="wand-tip">
+                  <div class="wand-spark-aura"></div>
+                  <span class="wand-tip-star">✧</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mensaje de éxito al completar el hechizo -->
+            <div id="spell-incantation-burst" class="spell-incantation-burst hidden">
+              <div class="patronus-stag-icon">🦌✨</div>
+              <span class="incantation-word">¡EXPECTO PATRONUM!</span>
+              <span class="incantation-sub">✦ La luz más pura y eterna de mi amor por ti ✦</span>
+            </div>
+          </div>
+
+          <div class="wand-hint">
+            <span class="wand-icon-pulse">🪄</span>
+            <span>Arrastra la varita o toca las runas luminosas para completar el trazo</span>
           </div>
         </div>
       </div>
