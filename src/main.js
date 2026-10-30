@@ -56,6 +56,79 @@ export const triggerMagicalSparkBurst = (centerX, centerY) => {
   }
 };
 
+// Chispas ligeras mágicas para clics en botones y tarjetas
+export const triggerLightMagicBurst = (centerX, centerY) => {
+  if (!centerX || !centerY) return;
+  const container = document.body;
+  const symbols = ["✧", "✦", "⚡", "★", "·"];
+  const colors = ["#facc15", "#fde047", "#ffffff", "#f59e0b", "#38bdf8"];
+  const count = 12;
+
+  for (let i = 0; i < count; i++) {
+    const spark = document.createElement("div");
+    spark.className = "magic-spark-particle-light";
+
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.45;
+    const distance = 25 + Math.random() * 45;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    const rot = (Math.random() - 0.5) * 360;
+    const size = 11 + Math.random() * 7;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+
+    spark.textContent = symbol;
+    spark.style.left = `${centerX}px`;
+    spark.style.top = `${centerY}px`;
+    spark.style.color = color;
+    spark.style.fontSize = `${size}px`;
+    spark.style.setProperty("--tx", `${tx}px`);
+    spark.style.setProperty("--ty", `${ty}px`);
+    spark.style.setProperty("--rot", `${rot}deg`);
+
+    container.appendChild(spark);
+    setTimeout(() => spark.remove(), 550);
+  }
+};
+
+// Transición mágica de escena: velo dorado y chispas ascendentes
+export const triggerSceneTransitionMagic = () => {
+  const container = document.body;
+  const veil = document.createElement("div");
+  veil.className = "scene-magic-veil";
+  container.appendChild(veil);
+  setTimeout(() => veil.remove(), 750);
+
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  const count = 16;
+  const symbols = ["✧", "✦", "★", "·"];
+  const colors = ["#facc15", "#fef08a", "#ffffff", "#38bdf8"];
+
+  for (let i = 0; i < count; i++) {
+    const spark = document.createElement("div");
+    spark.className = "magic-spark-particle-light";
+    const x = cx + (Math.random() - 0.5) * (window.innerWidth * 0.65);
+    const y = cy + (Math.random() - 0.5) * (window.innerHeight * 0.5);
+    const tx = (Math.random() - 0.5) * 80;
+    const ty = -35 - Math.random() * 55; // Ascienden como brasas doradas
+    const rot = (Math.random() - 0.5) * 180;
+    const size = 12 + Math.random() * 10;
+
+    spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    spark.style.left = `${x}px`;
+    spark.style.top = `${y}px`;
+    spark.style.color = colors[Math.floor(Math.random() * colors.length)];
+    spark.style.fontSize = `${size}px`;
+    spark.style.setProperty("--tx", `${tx}px`);
+    spark.style.setProperty("--ty", `${ty}px`);
+    spark.style.setProperty("--rot", `${rot}deg`);
+
+    container.appendChild(spark);
+    setTimeout(() => spark.remove(), 600);
+  }
+};
+
 class ConstellationApp {
   constructor() {
     window.app = this;
@@ -161,6 +234,10 @@ class ConstellationApp {
       currentEl.classList.remove("active");
     }
 
+    // Efecto mágico en cada cambio de escena
+    triggerSceneTransitionMagic();
+    sound.playWandSwoosh();
+
     if (nextEl) {
       this.currentStageId = stageId;
       setTimeout(() => {
@@ -170,6 +247,15 @@ class ConstellationApp {
   }
 
   bindEvents() {
+    // Escuchador global de magia en cada botón o elemento interactivo
+    document.addEventListener("pointerdown", (e) => {
+      const btn = e.target.closest("button, .relic-stone-btn, .game-card-btn, .choice-card, .btn-hogwarts-gold, .btn-primary, .wax-seal, .carousel-arrow, .carousel-dot, .sound-btn, .custom-choice");
+      if (btn) {
+        triggerLightMagicBurst(e.clientX, e.clientY);
+        sound.playMagicClick();
+      }
+    }, { passive: true });
+
     // Botón de audio flotante
     const audioBtn = document.getElementById("audio-toggle-btn");
     audioBtn.addEventListener("click", () => {
@@ -607,10 +693,41 @@ class ConstellationApp {
       this.triggerYesCelebration();
     });
 
-    // 9. Captura final
+    // 9. Desplegar el Mapa del Merodeador (Captura final con fotos y poema)
+    const marauderModal = document.getElementById("marauder-map-modal");
+    const closeMarauderBtn = document.getElementById("close-marauder-modal");
+    const saveMarauderPngBtn = document.getElementById("btn-save-marauder-image");
+    const printMarauderBtn = document.getElementById("btn-print-marauder");
+
     document.getElementById("btn-download-capture").addEventListener("click", () => {
-      window.print();
+      sound.playSpellSuccess();
+      triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
+      if (marauderModal) {
+        marauderModal.classList.remove("hidden");
+        const viewport = document.getElementById("marauder-scroll-viewport");
+        if (viewport) viewport.scrollTop = 0;
+      }
     });
+
+    if (closeMarauderBtn && marauderModal) {
+      closeMarauderBtn.addEventListener("click", () => {
+        sound.playWandSwoosh();
+        marauderModal.classList.add("hidden");
+      });
+    }
+
+    if (printMarauderBtn) {
+      printMarauderBtn.addEventListener("click", () => {
+        sound.playQuillScribe();
+        window.print();
+      });
+    }
+
+    if (saveMarauderPngBtn) {
+      saveMarauderPngBtn.addEventListener("click", () => {
+        this.generateMarauderParchmentPng();
+      });
+    }
   }
 
   collectFragment(id) {
@@ -1006,7 +1123,7 @@ class ConstellationApp {
   }
 
   // ==================================================================
-  // ESTACIÓN IV: EL ROMPECABEZAS SAGRADO: ALWAYS ⚡△⃒⃘
+  // ESTACIÓN IV: EL ROMPECABEZAS SAGRADO: ALWAYS ⚡△⃒⃘ (ARRASTRAR & ENSAMBLAR)
   // ==================================================================
   initMinigame4() {
     this.assembledRelics = new Set();
@@ -1014,77 +1131,244 @@ class ConstellationApp {
     const bannerEl = document.getElementById("hallows-always-banner");
     const msgEl = document.getElementById("relic-active-message");
     const msgText = document.getElementById("relic-message-text");
+    const altarEl = document.getElementById("hallows-altar-container");
+    const hintEl = document.getElementById("hallows-drag-hint");
+
+    let selectedRelicId = null;
 
     if (countEl) countEl.textContent = "0";
     if (bannerEl) bannerEl.classList.add("hidden");
     if (msgEl) msgEl.classList.add("hidden");
+    if (altarEl) {
+      altarEl.classList.remove("drop-hover");
+    }
+    if (hintEl) {
+      hintEl.innerHTML = "<span>✨ Toma y arrastra cada figura hacia su lugar en el altar ✨</span>";
+    }
 
     const relicKeys = ["triangle", "circle", "wand"];
 
-    // Reiniciar piezas y botones
-    relicKeys.forEach((relicId) => {
-      const piece = document.getElementById(`hallows-piece-${relicId}`);
-      if (piece) piece.classList.add("hidden");
-
-      const btn = document.getElementById(`btn-relic-${relicId}`);
-      if (btn) btn.classList.remove("placed");
-    });
-
     const relicsConfig = {
       triangle: {
+        name: "La Capa",
         phrase: "«Eres mi refugio seguro y el lugar donde mi alma siempre encuentra paz.»",
       },
       circle: {
+        name: "La Piedra",
         phrase: "«Pienso en ti en cada instante de mi día; vives en cada latido de mi corazón.»",
       },
       wand: {
+        name: "La Varita",
         phrase: "«Nuestro amor es la fuerza más pura e inquebrantable de este universo.»",
       },
     };
 
+    // Reiniciar piezas en el SVG y figuras en la bandeja
     relicKeys.forEach((relicId) => {
-      const btn = document.getElementById(`btn-relic-${relicId}`);
-      if (!btn) return;
+      const pieceSvg = document.getElementById(`hallows-piece-${relicId}`);
+      if (pieceSvg) pieceSvg.classList.add("hidden");
 
-      btn.onclick = () => {
-        if (this.assembledRelics.has(relicId)) return;
-        this.assembledRelics.add(relicId);
+      const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+      if (slotSvg) {
+        slotSvg.classList.remove("slot-hover", "target-hint-active");
+      }
 
-        sound.playWandSwoosh();
-        btn.classList.add("placed");
+      const pieceEl = document.getElementById(`piece-relic-${relicId}`);
+      if (pieceEl) {
+        pieceEl.classList.remove("placed", "is-dragging", "selected", "spring-back");
+        pieceEl.style.transform = "translate3d(0, 0, 0)";
+      }
+    });
 
-        const piece = document.getElementById(`hallows-piece-${relicId}`);
-        if (piece) piece.classList.remove("hidden");
+    const assembleRelic = (relicId, snapX, snapY) => {
+      if (this.assembledRelics.has(relicId)) return;
+      this.assembledRelics.add(relicId);
 
-        if (countEl) countEl.textContent = this.assembledRelics.size.toString();
+      const pieceEl = document.getElementById(`piece-relic-${relicId}`);
+      if (pieceEl) {
+        pieceEl.classList.remove("is-dragging", "selected", "spring-back");
+        pieceEl.classList.add("placed");
+        pieceEl.style.transform = "translate3d(0, 0, 0)";
+      }
 
-        if (msgEl && msgText && relicsConfig[relicId]) {
-          msgText.textContent = relicsConfig[relicId].phrase;
-          msgEl.classList.remove("hidden");
+      const pieceSvg = document.getElementById(`hallows-piece-${relicId}`);
+      if (pieceSvg) pieceSvg.classList.remove("hidden");
+
+      const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+      if (slotSvg) slotSvg.classList.remove("slot-hover", "target-hint-active");
+
+      sound.playWandSwoosh();
+      sound.playChime(this.assembledRelics.size);
+
+      // Estallido de chispas en el altar sagrado
+      const altarRect = altarEl ? altarEl.getBoundingClientRect() : null;
+      const burstX = snapX || (altarRect ? altarRect.left + altarRect.width / 2 : window.innerWidth / 2);
+      const burstY = snapY || (altarRect ? altarRect.top + altarRect.height / 2 : window.innerHeight / 2);
+      triggerMagicalSparkBurst(burstX, burstY);
+
+      if (countEl) countEl.textContent = this.assembledRelics.size.toString();
+
+      if (msgEl && msgText && relicsConfig[relicId]) {
+        msgText.textContent = relicsConfig[relicId].phrase;
+        msgEl.classList.remove("hidden");
+      }
+
+      if (hintEl) {
+        hintEl.innerHTML = `<span>✦ ¡${relicsConfig[relicId]?.name || "Reliquia"} ensamblada con éxito! ✦</span>`;
+      }
+
+      // Si se han colocado las 3 reliquias
+      if (this.assembledRelics.size === 3) {
+        sound.playSpellSuccess();
+
+        if (bannerEl) {
+          bannerEl.classList.remove("hidden");
         }
 
-        // Si se han colocado las 3 reliquias
-        if (this.assembledRelics.size === 3) {
-          sound.playSpellSuccess();
+        const svgEl = document.getElementById("hallows-svg");
+        if (svgEl) {
+          const rect = svgEl.getBoundingClientRect();
+          triggerMagicalSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
 
-          if (bannerEl) {
-            bannerEl.classList.remove("hidden");
-          }
-
-          const svgEl = document.getElementById("hallows-svg");
-          if (svgEl) {
-            const rect = svgEl.getBoundingClientRect();
-            triggerMagicalSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
-          }
-
+        setTimeout(() => {
+          this.collectFragment(4);
           setTimeout(() => {
-            this.collectFragment(4);
-            setTimeout(() => {
-              this.showStage("scene-m4-reward");
-            }, 800);
-          }, 2200);
+            this.showStage("scene-m4-reward");
+          }, 800);
+        }, 2400);
+      }
+    };
+
+    // Configurar arrastre táctil y de ratón en cada figura de la bandeja
+    relicKeys.forEach((relicId) => {
+      const pieceEl = document.getElementById(`piece-relic-${relicId}`);
+      if (!pieceEl) return;
+
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      const onPointerDown = (e) => {
+        if (this.assembledRelics.has(relicId)) return;
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = false;
+
+        try {
+          pieceEl.setPointerCapture(e.pointerId);
+        } catch (_) {}
+
+        // Limpiar selección previa
+        relicKeys.forEach((k) => {
+          const other = document.getElementById(`piece-relic-${k}`);
+          if (other) other.classList.remove("selected");
+          const slot = document.getElementById(`hallows-slot-${k}`);
+          if (slot) slot.classList.remove("target-hint-active");
+        });
+        selectedRelicId = null;
+      };
+
+      const onPointerMove = (e) => {
+        if (this.assembledRelics.has(relicId)) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist > 8) {
+          isDragging = true;
+          pieceEl.classList.remove("spring-back", "selected");
+          pieceEl.classList.add("is-dragging");
+
+          // Mover la figura física directamente con el dedo o cursor
+          pieceEl.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.12)`;
+
+          // Iluminar la silueta correspondiente en el altar
+          const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+          if (slotSvg) slotSvg.classList.add("target-hint-active");
+
+          if (hintEl) {
+            hintEl.innerHTML = `<span>✨ Suelta ${relicsConfig[relicId]?.name} sobre el altar sagrado ✨</span>`;
+          }
+
+          if (altarEl) {
+            const aRect = altarEl.getBoundingClientRect();
+            const isHover = (
+              e.clientX >= aRect.left - 30 &&
+              e.clientX <= aRect.right + 30 &&
+              e.clientY >= aRect.top - 30 &&
+              e.clientY <= aRect.bottom + 30
+            );
+            altarEl.classList.toggle("drop-hover", isHover);
+            if (slotSvg) slotSvg.classList.toggle("slot-hover", isHover);
+          }
         }
       };
+
+      const onPointerUp = (e) => {
+        if (this.assembledRelics.has(relicId)) return;
+
+        try {
+          pieceEl.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+
+        pieceEl.classList.remove("is-dragging");
+
+        if (altarEl) {
+          altarEl.classList.remove("drop-hover");
+        }
+
+        const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+        if (slotSvg) slotSvg.classList.remove("slot-hover", "target-hint-active");
+
+        const totalDist = Math.hypot(e.clientX - startX, e.clientY - startY);
+
+        if (isDragging && totalDist > 25) {
+          // El usuario arrastró físicamente la figura
+          if (altarEl) {
+            const aRect = altarEl.getBoundingClientRect();
+            const isInside = (
+              e.clientX >= aRect.left - 40 &&
+              e.clientX <= aRect.right + 40 &&
+              e.clientY >= aRect.top - 40 &&
+              e.clientY <= aRect.bottom + 40
+            );
+
+            if (isInside) {
+              // Encaje perfecto en el altar sagrado
+              assembleRelic(relicId, e.clientX, e.clientY);
+            } else {
+              // No llegó al altar -> regresa elásticamente a su posición
+              pieceEl.classList.add("spring-back");
+              pieceEl.style.transform = "translate3d(0, 0, 0)";
+              setTimeout(() => pieceEl.classList.remove("spring-back"), 400);
+              sound.playWandSwoosh();
+              if (hintEl) {
+                hintEl.innerHTML = "<span>✨ Arrastra la figura hasta el círculo del altar sagrado ✨</span>";
+              }
+            }
+          }
+        } else {
+          // Fue un simple clic o tap sin arrastrar -> NUNCA se acomoda solo
+          pieceEl.style.transform = "translate3d(0, 0, 0)";
+          pieceEl.classList.remove("shake-hint");
+          void pieceEl.offsetWidth; // Forzar reflujo para reiniciar animación
+          pieceEl.classList.add("shake-hint");
+          setTimeout(() => pieceEl.classList.remove("shake-hint"), 500);
+
+          sound.playMagicClick();
+          if (hintEl) {
+            hintEl.innerHTML = `<span>👆 ¡Debes arrastrar ${relicsConfig[relicId]?.name} con tu dedo o ratón hacia el altar! 👆</span>`;
+          }
+        }
+
+        isDragging = false;
+      };
+
+      pieceEl.onpointerdown = onPointerDown;
+      pieceEl.onpointermove = onPointerMove;
+      pieceEl.onpointerup = onPointerUp;
+      pieceEl.onpointercancel = onPointerUp;
     });
   }
 
@@ -1362,6 +1646,377 @@ class ConstellationApp {
     setTimeout(() => {
       this.showStage("scene-celebration");
     }, 500);
+  }
+
+  // ==================================================================
+  // GENERADOR HD DE PERGAMINO: EL MAPA DEL MERODEADOR (PNG)
+  // ==================================================================
+  async generateMarauderParchmentPng() {
+    const saveBtn = document.getElementById("btn-save-marauder-image");
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = "✨ Encantando pergamino en HD... ⏳";
+    }
+
+    try {
+      await document.fonts.ready;
+
+      // Cargar las 3 fotos de la pareja
+      const loadImage = (src) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(null);
+          img.src = src;
+        });
+
+      const [imgAnden, imgPatronus, imgCabana] = await Promise.all([
+        loadImage("/photos/pareja_anden.jpg"),
+        loadImage("/photos/pareja_patronus.jpg"),
+        loadImage("/photos/pareja_cabana.jpg"),
+      ]);
+
+      // Lienzo de ultra alta definición (1400 x 2380 px)
+      const canvas = document.createElement("canvas");
+      canvas.width = 1400;
+      canvas.height = 2380;
+      const ctx = canvas.getContext("2d");
+
+      // 1. Fondo de pergamino envejecido
+      const bgGrad = ctx.createRadialGradient(700, 1190, 80, 700, 1190, 1300);
+      bgGrad.addColorStop(0, "#fefaf0");
+      bgGrad.addColorStop(0.5, "#f6e8c7");
+      bgGrad.addColorStop(0.85, "#e9d1a3");
+      bgGrad.addColorStop(1, "#d6bc8b");
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Manchas sutiles de pátina vintage
+      ctx.fillStyle = "rgba(100, 45, 15, 0.04)";
+      ctx.beginPath();
+      ctx.arc(140, 180, 120, 0, Math.PI * 2);
+      ctx.arc(1260, 2200, 160, 0, Math.PI * 2);
+      ctx.arc(1250, 300, 100, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Doble borde del Mapa del Merodeador
+      ctx.strokeStyle = "#5a2512";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(34, 34, canvas.width - 68, canvas.height - 68);
+
+      ctx.strokeStyle = "rgba(90, 37, 18, 0.45)";
+      ctx.lineWidth = 1.8;
+      ctx.setLineDash([8, 6]);
+      ctx.strokeRect(46, 46, canvas.width - 92, canvas.height - 92);
+      ctx.setLineDash([]);
+
+      // Florituras en las 4 esquinas
+      const corners = [
+        [60, 60],
+        [canvas.width - 60, 60],
+        [60, canvas.height - 60],
+        [canvas.width - 60, canvas.height - 60],
+      ];
+      ctx.fillStyle = "#78350f";
+      ctx.font = "bold 20px 'Playfair Display', Georgia, serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      corners.forEach(([cx, cy]) => {
+        ctx.fillText("✦", cx, cy);
+      });
+
+      // 2. Encabezado del Mapa del Merodeador
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#63200f";
+      ctx.font = "italic 21px 'Playfair Display', Georgia, serif";
+      ctx.fillText("« Los Merodeadores de Nuestro Destino se enorgullecen en presentar »", 700, 105);
+
+      // Línea superior del título
+      ctx.strokeStyle = "rgba(90, 37, 18, 0.35)";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(180, 130);
+      ctx.lineTo(1220, 130);
+      ctx.stroke();
+
+      // Título Principal
+      ctx.fillStyle = "#431407";
+      ctx.font = "900 50px 'Playfair Display', Georgia, serif";
+      ctx.fillText("EL MAPA DEL MERODEADOR", 700, 180);
+
+      // Línea inferior del título
+      ctx.beginPath();
+      ctx.moveTo(180, 202);
+      ctx.lineTo(1220, 202);
+      ctx.stroke();
+
+      // Listón de subtítulo
+      ctx.fillStyle = "#781c1d";
+      ctx.beginPath();
+      ctx.roundRect(420, 222, 560, 36, 18);
+      ctx.fill();
+
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "bold 17px 'Playfair Display', Georgia, serif";
+      ctx.fillText("DEL AMOR ETERNO & LOS PLANES SOÑADOS", 700, 246);
+
+      // Dedicatoria a la esposa
+      ctx.fillStyle = "#451a03";
+      ctx.font = "italic 22px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Dedicado con toda el alma a la dueña absoluta de mi corazón:", 700, 298);
+
+      ctx.fillStyle = "#781c1d";
+      ctx.font = "900 36px 'Playfair Display', Georgia, serif";
+      ctx.fillText("XÓCHITL SINAY BARBA CUEVAS", 700, 342);
+
+      // Juramento solemne
+      ctx.fillStyle = "#92400e";
+      ctx.font = "italic bold 21px 'Playfair Display', Georgia, serif";
+      ctx.fillText("« Juro solemnemente que mis intenciones son amarte siempre... Always »", 700, 385);
+
+      ctx.fillStyle = "#b45309";
+      ctx.font = "bold 18px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✧ ─── ✦ ─── ⚡ ─── ✦ ─── ✧", 700, 416);
+
+      // 3. Pasillo del Mapa con Huellitas y Punto de Encuentro
+      ctx.fillStyle = "rgba(139, 69, 19, 0.08)";
+      ctx.fillRect(80, 436, 1240, 80);
+
+      ctx.strokeStyle = "rgba(90, 37, 18, 0.35)";
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath();
+      ctx.moveTo(80, 436);
+      ctx.lineTo(1320, 436);
+      ctx.moveTo(80, 516);
+      ctx.lineTo(1320, 516);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Huellas de Xóchitl
+      ctx.fillStyle = "#fcf4dd";
+      ctx.fillRect(100, 452, 160, 30);
+      ctx.strokeStyle = "#78350f";
+      ctx.strokeRect(100, 452, 160, 30);
+      ctx.fillStyle = "#451a03";
+      ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Xóchitl Sinay 🐾", 180, 473);
+
+      ctx.font = "20px system-ui, sans-serif";
+      ctx.fillText("🐾   🐾   🐾", 330, 480);
+
+      // Punto de encuentro: La Cabaña Soñada
+      ctx.fillStyle = "#fef3c7";
+      ctx.beginPath();
+      ctx.roundRect(470, 448, 460, 56, 10);
+      ctx.fill();
+      ctx.strokeStyle = "#b45309";
+      ctx.stroke();
+
+      ctx.fillStyle = "#78350f";
+      ctx.font = "bold 18px 'Playfair Display', Georgia, serif";
+      ctx.fillText("💕  Nuestra Cabaña en el Bosque 🌲🏡🌧️  💕", 700, 483);
+
+      // Huellas del Esposo
+      ctx.font = "20px system-ui, sans-serif";
+      ctx.fillText("🐾   🐾   🐾", 1070, 480);
+
+      ctx.fillStyle = "#fcf4dd";
+      ctx.fillRect(1140, 452, 160, 30);
+      ctx.strokeStyle = "#78350f";
+      ctx.strokeRect(1140, 452, 160, 30);
+      ctx.fillStyle = "#451a03";
+      ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Tu Esposo 🐾", 1220, 473);
+
+      // 4. Dibujar las 3 fotos en marcos polaroid vintage
+      const drawFramedPhoto = (img, x, y, w, h, pinSymbol, caption) => {
+        // Marco de papel polaroid
+        ctx.save();
+        ctx.shadowColor = "rgba(60, 30, 10, 0.25)";
+        ctx.shadowBlur = 14;
+        ctx.shadowOffsetY = 6;
+        ctx.fillStyle = "#fdfaf2";
+        ctx.beginPath();
+        ctx.roundRect(x - 10, y - 10, w + 20, h + 65, 8);
+        ctx.fill();
+        ctx.strokeStyle = "#c4a47c";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.restore();
+
+        // Foto recortada cover
+        if (img) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.roundRect(x, y, w, h, 4);
+          ctx.clip();
+
+          const imgRatio = img.width / img.height;
+          const targetRatio = w / h;
+          let sx = 0, sy = 0, sw = img.width, sh = img.height;
+          if (imgRatio > targetRatio) {
+            sh = img.height;
+            sw = img.height * targetRatio;
+            sx = (img.width - sw) / 2;
+          } else {
+            sw = img.width;
+            sh = img.width / targetRatio;
+            sy = (img.height - sh) / 2;
+          }
+          ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+          ctx.restore();
+        }
+
+        // Pin superior
+        ctx.font = "20px system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(pinSymbol, x + w / 2, y - 14);
+
+        // Subtítulo de la foto
+        ctx.fillStyle = "#451a03";
+        ctx.font = "italic 15px 'Playfair Display', Georgia, serif";
+        ctx.fillText(caption, x + w / 2, y + h + 34);
+      };
+
+      drawFramedPhoto(imgAnden, 80, 555, 380, 260, "⚡", "Andén 9 ¾ ✦ El Inicio de Nuestro Destino");
+      drawFramedPhoto(imgPatronus, 510, 545, 380, 270, "✨", "Expecto Patronum ✦ Always");
+      drawFramedPhoto(imgCabana, 940, 555, 380, 260, "🌲", "Nuestra Cabaña ✦ El Refugio Soñado");
+
+      // 5. Carta y Poema de Amor Completa
+      const letterBoxX = 80;
+      const letterBoxY = 895;
+      const letterBoxW = 1240;
+      const letterBoxH = 1170;
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.48)";
+      ctx.beginPath();
+      ctx.roundRect(letterBoxX, letterBoxY, letterBoxW, letterBoxH, 12);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(139, 69, 19, 0.35)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Saludo inicial
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#601c0b";
+      ctx.font = "bold 28px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Para mi amada esposa, Xóchitl Sinay Barba Cuevas:", letterBoxX + 40, letterBoxY + 54);
+
+      ctx.strokeStyle = "rgba(139, 69, 19, 0.25)";
+      ctx.beginPath();
+      ctx.moveTo(letterBoxX + 40, letterBoxY + 70);
+      ctx.lineTo(letterBoxX + letterBoxW - 40, letterBoxY + 70);
+      ctx.stroke();
+
+      // Envoltura de texto para los 4 párrafos
+      const paragraphs = config.climax.letter.paragraphs;
+      let textY = letterBoxY + 115;
+      ctx.fillStyle = "#2b1408";
+      ctx.font = "21px 'Playfair Display', Georgia, serif";
+      const maxLineWidth = letterBoxW - 80;
+      const lineHeight = 36;
+
+      const renderParagraph = (text) => {
+        const words = text.split(" ");
+        let line = "";
+        for (let i = 0; i < words.length; i++) {
+          const testLine = line + (line ? " " : "") + words[i];
+          const testWidth = ctx.measureText(testLine).width;
+          if (testWidth > maxLineWidth && i > 0) {
+            ctx.fillText(line, letterBoxX + 40, textY);
+            line = words[i];
+            textY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        ctx.fillText(line, letterBoxX + 40, textY);
+        textY += lineHeight + 22; // Espacio entre párrafos
+      };
+
+      paragraphs.forEach((p) => renderParagraph(p));
+
+      // Bloque de firma
+      textY = Math.max(textY, letterBoxY + letterBoxH - 140);
+      ctx.strokeStyle = "rgba(139, 69, 19, 0.35)";
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath();
+      ctx.moveTo(letterBoxX + 40, textY);
+      ctx.lineTo(letterBoxX + letterBoxW - 40, textY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#63200f";
+      ctx.font = "italic 22px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Por siempre tuyo, con todo mi amor y devoción — Always,", letterBoxX + letterBoxW - 40, textY + 40);
+
+      ctx.fillStyle = "#781c1d";
+      ctx.font = "bold 34px 'Caveat', cursive, Georgia, serif";
+      ctx.fillText("Tu esposo que piensa en ti en cada segundo y te ama con toda su alma", letterBoxX + letterBoxW - 40, textY + 85);
+
+      // 6. Pie de Página: Sello de Cera de Hogwarts & Mischief Managed
+      const sealY = 2175;
+      ctx.save();
+      ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+      ctx.shadowBlur = 16;
+      ctx.shadowOffsetY = 6;
+      const sealGrad = ctx.createRadialGradient(700, sealY, 10, 700, sealY, 44);
+      sealGrad.addColorStop(0, "#b91c1c");
+      sealGrad.addColorStop(0.65, "#7f1d1d");
+      sealGrad.addColorStop(1, "#450a0a");
+      ctx.fillStyle = sealGrad;
+      ctx.beginPath();
+      ctx.arc(700, sealY, 44, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#991b1b";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "bold 24px 'Playfair Display', Georgia, serif";
+      ctx.fillText("⚡△⃒⃘", 700, sealY + 8);
+
+      ctx.fillStyle = "#5a2512";
+      ctx.font = "900 20px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✦ TRAVESURA REALIZADA ✦ MISCHIEF MANAGED ✦ ALWAYS ✦", 700, 2275);
+
+      // 7. Descargar la imagen
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Mapa_del_Merodeador_Xochitl_Sinay.png";
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          a.remove();
+          URL.revokeObjectURL(url);
+        }, 1500);
+
+        sound.playRewardChord();
+        triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
+
+        if (saveBtn) {
+          saveBtn.textContent = "✓ ¡Pergamino Guardado con Éxito! 📜✨";
+          setTimeout(() => {
+            saveBtn.textContent = "📥 Descargar Pergamino (PNG HD)";
+            saveBtn.disabled = false;
+          }, 3500);
+        }
+      }, "image/png");
+    } catch (err) {
+      console.error("Error al generar el pergamino:", err);
+      if (saveBtn) {
+        saveBtn.textContent = "📥 Descargar Pergamino (PNG HD)";
+        saveBtn.disabled = false;
+      }
+    }
   }
 }
 

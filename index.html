@@ -462,15 +462,21 @@
           <span class="station-tag">Estación IV</span>
           <h2 class="scene-title">El Rompecabezas Sagrado: Always ⚡△⃒⃘</h2>
           <p class="scene-instruction">
-            Ensambla las 3 reliquias ancestrales que forjan el símbolo del amor eterno e inquebrantable:
+            Mueve y acomoda cada una de las 3 reliquias ancestrales sobre su silueta en el altar para forjar el símbolo del amor inquebrantable:
           </p>
           <div class="counter-badge hogwarts-badge">
             Reliquias ensambladas: <span id="hallows-relics-count">0</span> / 3
           </div>
+          <div class="hallows-drag-hint" id="hallows-drag-hint">
+            <span>✨ Toma y arrastra cada figura hacia su lugar en el altar ✨</span>
+          </div>
         </div>
 
-        <div class="hallows-altar-container">
-          <div class="hallows-runic-circle">
+        <div class="hallows-altar-container" id="hallows-altar-container">
+          <!-- Elemento flotante auxiliar para arrastre -->
+          <div id="hallows-drag-ghost" class="hallows-drag-ghost hidden"></div>
+
+          <div class="hallows-runic-circle" id="hallows-runic-circle">
             <div class="hallows-orbit-ring"></div>
 
             <svg id="hallows-svg" class="hallows-svg" viewBox="0 0 320 280">
@@ -514,31 +520,51 @@
             </div>
           </div>
 
-          <!-- Selector de las 3 reliquias -->
+          <!-- Bandeja de Reliquias Ancestrales (Figuras Arrastrables y Reubicables) -->
           <div class="hallows-relics-tray" id="hallows-relics-tray">
-            <button class="relic-stone-btn" id="btn-relic-triangle" data-relic="triangle">
-              <span class="relic-stone-icon">⏶</span>
-              <div class="relic-stone-info">
-                <span class="relic-stone-name">La Capa</span>
-                <span class="relic-stone-desc">Nuestro Refugio</span>
+            <div class="hallows-puzzle-piece" id="piece-relic-triangle" data-relic="triangle" role="button" tabindex="0" aria-label="La Capa de la Invisibilidad">
+              <div class="piece-shape-wrapper shape-triangle">
+                <svg viewBox="0 0 60 54" class="piece-mini-svg">
+                  <polygon points="30,4 6,48 54,48" class="piece-svg-polygon" />
+                  <polygon points="30,14 14,44 46,44" class="piece-svg-inner" />
+                </svg>
               </div>
-            </button>
+              <div class="piece-label-block">
+                <strong class="piece-name">La Capa</strong>
+                <span class="piece-desc">Nuestro Refugio</span>
+              </div>
+              <div class="piece-drag-badge">Arrastra ⚡</div>
+            </div>
 
-            <button class="relic-stone-btn" id="btn-relic-circle" data-relic="circle">
-              <span class="relic-stone-icon">◯</span>
-              <div class="relic-stone-info">
-                <span class="relic-stone-name">La Piedra</span>
-                <span class="relic-stone-desc">En mi Mente</span>
+            <div class="hallows-puzzle-piece" id="piece-relic-circle" data-relic="circle" role="button" tabindex="0" aria-label="La Piedra de la Resurrección">
+              <div class="piece-shape-wrapper shape-circle">
+                <svg viewBox="0 0 60 54" class="piece-mini-svg">
+                  <circle cx="30" cy="27" r="21" class="piece-svg-circle" />
+                  <circle cx="30" cy="27" r="13" class="piece-svg-inner" />
+                </svg>
               </div>
-            </button>
+              <div class="piece-label-block">
+                <strong class="piece-name">La Piedra</strong>
+                <span class="piece-desc">En mi Mente</span>
+              </div>
+              <div class="piece-drag-badge">Arrastra ⚡</div>
+            </div>
 
-            <button class="relic-stone-btn" id="btn-relic-wand" data-relic="wand">
-              <span class="relic-stone-icon">┃</span>
-              <div class="relic-stone-info">
-                <span class="relic-stone-name">La Varita</span>
-                <span class="relic-stone-desc">Fuerza Eterna</span>
+            <div class="hallows-puzzle-piece" id="piece-relic-wand" data-relic="wand" role="button" tabindex="0" aria-label="La Varita de Saúco">
+              <div class="piece-shape-wrapper shape-wand">
+                <svg viewBox="0 0 60 54" class="piece-mini-svg">
+                  <line x1="30" y1="4" x2="30" y2="50" class="piece-svg-wand" />
+                  <circle cx="30" cy="15" r="3.5" class="piece-svg-elder-node" />
+                  <circle cx="30" cy="27" r="3.5" class="piece-svg-elder-node" />
+                  <circle cx="30" cy="39" r="3.5" class="piece-svg-elder-node" />
+                </svg>
               </div>
-            </button>
+              <div class="piece-label-block">
+                <strong class="piece-name">La Varita</strong>
+                <span class="piece-desc">Fuerza Eterna</span>
+              </div>
+              <div class="piece-drag-badge">Arrastra ⚡</div>
+            </div>
           </div>
 
           <div class="relic-active-message hidden" id="relic-active-message">
@@ -787,9 +813,144 @@
           </div>
         </div>
 
-        <button id="btn-download-capture" class="btn-hogwarts-gold">
-          📸 Guarda una captura de este momento
+        <button id="btn-download-capture" class="btn-hogwarts-gold btn-pulse">
+          📜 Desplegar el Mapa del Merodeador & Guardar Pergamino ✨
         </button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL DEL MAPA DEL MERODEADOR (CAPTURA)    -->
+    <!-- ========================================== -->
+    <div id="marauder-map-modal" class="custom-modal hidden">
+      <div class="marauder-modal-dialog">
+        <!-- Barra superior de acciones -->
+        <div class="marauder-modal-toolbar">
+          <div class="marauder-toolbar-badge">
+            <span>✦ EL MAPA DEL MERODEADOR ✦ ALWAYS</span>
+          </div>
+          <div class="marauder-toolbar-actions">
+            <button id="btn-save-marauder-image" class="btn-hogwarts-gold-sm">
+              📥 Descargar Pergamino (PNG HD)
+            </button>
+            <button id="btn-print-marauder" class="btn-hogwarts-secondary-sm">
+              🖨️ Imprimir
+            </button>
+            <button id="close-marauder-modal" class="btn-close-modal" aria-label="Cerrar modal">
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Visor del Pergamino del Mapa del Merodeador -->
+        <div class="marauder-scroll-viewport" id="marauder-scroll-viewport">
+          <div class="marauder-parchment-sheet" id="marauder-parchment-sheet">
+            
+            <!-- Encabezado y títulos en tipografía clásica del Mapa -->
+            <div class="marauder-header">
+              <div class="marauder-banner-curved">
+                « Los Merodeadores de Nuestro Destino se enorgullecen en presentar »
+              </div>
+              <h1 class="marauder-main-title">EL MAPA DEL MERODEADOR</h1>
+              <div class="marauder-subtitle-ribbon">
+                DEL AMOR ETERNO & LOS PLANES SOÑADOS
+              </div>
+              <p class="marauder-dedication">
+                Dedicado con toda el alma a la dueña absoluta de mi corazón:
+                <strong class="marauder-recipient-name">XÓCHITL SINAY BARBA CUEVAS</strong>
+              </p>
+              <div class="marauder-solemn-oath">
+                « Juro solemnemente que mis intenciones son amarte siempre... Always »
+              </div>
+            </div>
+
+            <!-- Huellitas del Merodeador recorriendo los pasillos de Hogwarts -->
+            <div class="marauder-footsteps-corridor">
+              <div class="marauder-trail trail-left">
+                <span class="trail-name-tag">Xóchitl Sinay 🐾</span>
+                <div class="trail-steps">🐾 🐾 🐾 🐾</div>
+              </div>
+              <div class="marauder-meeting-hub">
+                <div class="meeting-crest">
+                  <span class="meeting-heart">💕</span>
+                  <span class="meeting-place">Nuestra Cabaña en el Bosque 🌲🏡🌧️</span>
+                </div>
+              </div>
+              <div class="marauder-trail trail-right">
+                <span class="trail-name-tag">Tu Esposo 🐾</span>
+                <div class="trail-steps">🐾 🐾 🐾 🐾</div>
+              </div>
+            </div>
+
+            <!-- Galería de Fotos de Nosotros Juntos estilo Pergamino -->
+            <div class="marauder-photos-grid">
+              <div class="marauder-photo-frame">
+                <div class="photo-pin">⚡</div>
+                <div class="photo-img-wrap">
+                  <img src="/photos/pareja_anden.jpg" alt="Xóchitl y su Esposo en el Andén 9 ¾">
+                </div>
+                <span class="photo-caption">Andén 9 ¾ ✦ El Inicio de Nuestro Destino</span>
+              </div>
+
+              <div class="marauder-photo-frame highlight-frame">
+                <div class="photo-pin">✨</div>
+                <div class="photo-img-wrap">
+                  <img src="/photos/pareja_patronus.jpg" alt="Xóchitl y su Esposo con el Ciervo Patronus">
+                </div>
+                <span class="photo-caption">Expecto Patronum ✦ Eres mi Pensamiento Más Feliz — Always</span>
+              </div>
+
+              <div class="marauder-photo-frame">
+                <div class="photo-pin">🌲</div>
+                <div class="photo-img-wrap">
+                  <img src="/photos/pareja_cabana.jpg" alt="Xóchitl y su Esposo en Nuestra Cabaña Mágica">
+                </div>
+                <span class="photo-caption">Nuestra Cabaña ✦ El Refugio Soñado</span>
+              </div>
+            </div>
+
+            <!-- Poema y Carta de Amor Completa en Caligrafía -->
+            <div class="marauder-letter-content">
+              <div class="marauder-salutation">
+                Para mi amada esposa, Xóchitl Sinay Barba Cuevas:
+              </div>
+
+              <p class="marauder-p">
+                Mi amor, quise construir este rincón mágico para hacer una pausa en el tiempo y decirte algo que mi corazón siente con una fuerza inmensa en cada latido: <strong>te amo con toda mi alma, y no hay un solo día ni un solo instante en que no piense en ti.</strong>
+              </p>
+
+              <p class="marauder-p">
+                Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Eres la dueña absoluta de mi corazón y de mi vida entera. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.
+              </p>
+
+              <p class="marauder-p">
+                Eres mi refugio y mi Patronus: esa luz invencible que disuelve cualquier nube gris. Hemos caminado juntos, soñado juntos y superado cualquier tormenta. Y hoy no quiero hablarte de la prisa del día a día, sino de nuestro futuro... de un plan hermoso que vamos a construir juntos con toda la ilusión.
+              </p>
+
+              <p class="marauder-p">
+                Sueño con el día en que nos escapemos a esa cabaña mágica en el bosque que tanto nos emociona, para escuchar la lluvia caer contra los cristales, acurrucarnos junto a la chimenea crepitante, disfrutar de una copa de vino y mirarnos a los ojos sabiendo que todo lo que necesitamos en este mundo es estar juntos...
+              </p>
+
+              <div class="marauder-signature-block">
+                <div class="marauder-closing">Por siempre tuyo, con todo mi amor y devoción — Always,</div>
+                <div class="marauder-author-sig">Tu esposo que piensa en ti en cada segundo y te ama con toda su alma</div>
+              </div>
+            </div>
+
+            <!-- Sello Oficial y Travesura Realizada -->
+            <div class="marauder-footer">
+              <div class="marauder-seal-badge">
+                <div class="wax-seal-large">
+                  <span class="seal-glyph">⚡△⃒⃘</span>
+                </div>
+              </div>
+              <div class="marauder-mischief-text">
+                ✦ TRAVESURA REALIZADA ✦ MISCHIEF MANAGED ✦ ALWAYS ✦
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 
