@@ -2350,7 +2350,10 @@ html, body {
    ESTACIÓN 4A: MINIJUEGO 4 - EL ROMPECABEZAS SAGRADO: ALWAYS ⚡△⃒⃘
    ==================================================================== */
 .hallows-puzzle-card {
-  max-width: 440px;
+  max-width: 420px;
+  padding: 14px 14px 12px;
+  max-height: calc(100dvh - 50px);
+  overflow: visible !important;
 }
 
 .hallows-altar-container {
@@ -2358,14 +2361,15 @@ html, body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 6px;
+  margin-top: 4px;
+  position: relative;
 }
 
 .hallows-runic-circle {
   position: relative;
-  width: 250px;
-  height: 220px;
-  margin: 0 auto 12px;
+  width: 190px;
+  height: 165px;
+  margin: 0 auto 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2373,10 +2377,10 @@ html, body {
 
 .hallows-orbit-ring {
   position: absolute;
-  inset: -6px;
+  inset: -4px;
   border-radius: 50%;
   border: 1px dashed rgba(212, 175, 55, 0.45);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15), inset 0 0 20px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.15), inset 0 0 16px rgba(245, 158, 11, 0.1);
   animation: hallows-spin-ring 35s linear infinite;
   pointer-events: none;
 }
@@ -2484,9 +2488,9 @@ html, body {
 }
 
 .hallows-drag-hint {
-  margin: 6px auto 2px;
+  margin: 4px auto 2px;
   display: inline-block;
-  padding: 4px 12px;
+  padding: 3px 10px;
   background: rgba(245, 158, 11, 0.14);
   border: 1px dashed rgba(245, 158, 11, 0.5);
   border-radius: 20px;
@@ -2542,18 +2546,18 @@ html, body {
 .hallows-relics-tray {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  max-width: 400px;
-  margin: 10px auto 4px;
+  max-width: 380px;
+  margin: 6px auto 0;
 }
 
 .hallows-puzzle-piece {
   position: relative;
   background: linear-gradient(145deg, rgba(38, 22, 12, 0.95) 0%, rgba(18, 9, 5, 0.98) 100%);
   border: 1.5px solid #d4af37;
-  border-radius: 14px;
-  padding: 10px 6px 8px;
+  border-radius: 12px;
+  padding: 8px 4px 6px;
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -2562,32 +2566,22 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(254, 240, 138, 0.25);
+  gap: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(254, 240, 138, 0.25);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-  will-change: transform;
 }
 
-.hallows-puzzle-piece:hover:not(.placed):not(.is-dragging) {
-  transform: translateY(-4px) scale(1.04);
+.hallows-puzzle-piece:hover:not(.placed):not(.in-tray-dragged) {
+  transform: translateY(-3px) scale(1.03);
   border-color: #fef08a;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7), 0 0 18px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(245, 158, 11, 0.5);
   background: linear-gradient(145deg, rgba(50, 30, 16, 0.96) 0%, rgba(28, 14, 8, 0.98) 100%);
 }
 
-.hallows-puzzle-piece.is-dragging {
-  cursor: grabbing !important;
-  z-index: 9999 !important;
-  opacity: 0.96;
-  border-color: #fde047 !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 35px rgba(250, 204, 21, 0.9), inset 0 0 15px rgba(254, 240, 138, 0.4) !important;
-  transition: none !important;
-  filter: drop-shadow(0 0 18px rgba(250, 204, 21, 0.8));
-}
-
-.hallows-puzzle-piece.spring-back {
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25) !important;
-  transform: translate3d(0, 0, 0) scale(1) !important;
+.hallows-puzzle-piece.in-tray-dragged {
+  opacity: 0.3 !important;
+  border-style: dashed !important;
+  transform: scale(0.95);
 }
 
 .hallows-puzzle-piece.shake-hint {
@@ -2604,34 +2598,43 @@ html, body {
   80% { transform: translate3d(4px, 0, 0) rotate(2deg); }
 }
 
-.hallows-puzzle-piece.selected {
-  border-color: #fde047;
-  box-shadow: 0 0 24px rgba(250, 204, 21, 0.85), inset 0 0 14px rgba(254, 240, 138, 0.35);
-  transform: translateY(-5px) scale(1.06);
-  animation: selected-piece-glow 1.4s infinite alternate ease-in-out;
-}
-
-@keyframes selected-piece-glow {
-  0% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.6); }
-  100% { box-shadow: 0 0 30px rgba(250, 204, 21, 0.95), 0 0 45px rgba(56, 189, 248, 0.5); }
-}
-
 .hallows-puzzle-piece.placed {
   border-color: rgba(34, 197, 94, 0.55);
   background: linear-gradient(145deg, rgba(18, 38, 22, 0.8) 0%, rgba(10, 24, 14, 0.85) 100%);
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: default;
   pointer-events: none;
   box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
 }
 
-.piece-shape-wrapper {
-  width: 58px;
-  height: 48px;
+/* Proxy de arrastre flotante en document.body (Totalmente inmune a overflow) */
+.hallows-drag-proxy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%) scale(1.18);
+  filter: drop-shadow(0 0 20px rgba(250, 204, 21, 0.95)) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.85));
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  will-change: left, top;
+}
+
+.hallows-drag-proxy.returning {
+  transition: left 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.25), top 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.25), transform 0.35s ease, opacity 0.35s ease !important;
+}
+
+.piece-shape-wrapper {
+  width: 48px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
 }
 
 .piece-mini-svg {
@@ -2683,24 +2686,24 @@ html, body {
 
 .piece-name {
   font-family: var(--font-serif);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #fef08a;
   letter-spacing: 0.3px;
 }
 
 .piece-desc {
-  font-size: 0.66rem;
+  font-size: 0.62rem;
   color: #cbd5e1;
   font-style: italic;
   margin-top: 1px;
 }
 
 .piece-drag-badge {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   color: #fde047;
-  margin-top: 3px;
-  padding: 1px 7px;
+  margin-top: 2px;
+  padding: 1px 6px;
   border-radius: 10px;
   background: rgba(245, 158, 11, 0.22);
   border: 1px solid rgba(245, 158, 11, 0.45);

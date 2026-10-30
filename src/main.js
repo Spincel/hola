@@ -1134,14 +1134,10 @@ class ConstellationApp {
     const altarEl = document.getElementById("hallows-altar-container");
     const hintEl = document.getElementById("hallows-drag-hint");
 
-    let selectedRelicId = null;
-
     if (countEl) countEl.textContent = "0";
     if (bannerEl) bannerEl.classList.add("hidden");
     if (msgEl) msgEl.classList.add("hidden");
-    if (altarEl) {
-      altarEl.classList.remove("drop-hover");
-    }
+    if (altarEl) altarEl.classList.remove("drop-hover");
     if (hintEl) {
       hintEl.innerHTML = "<span>✨ Toma y arrastra cada figura hacia su lugar en el altar ✨</span>";
     }
@@ -1152,14 +1148,17 @@ class ConstellationApp {
       triangle: {
         name: "La Capa",
         phrase: "«Eres mi refugio seguro y el lugar donde mi alma siempre encuentra paz.»",
+        svgHtml: `<svg viewBox="0 0 60 54" style="width:62px;height:56px;"><polygon points="30,4 6,48 54,48" style="fill:rgba(245,158,11,0.28);stroke:#facc15;stroke-width:3.5;stroke-linejoin:round;filter:drop-shadow(0 0 10px #facc15);" /><polygon points="30,14 14,44 46,44" style="fill:none;stroke:#fef08a;stroke-width:1.8;stroke-dasharray:4 3;" /></svg>`,
       },
       circle: {
         name: "La Piedra",
         phrase: "«Pienso en ti en cada instante de mi día; vives en cada latido de mi corazón.»",
+        svgHtml: `<svg viewBox="0 0 60 54" style="width:62px;height:56px;"><circle cx="30" cy="27" r="22" style="fill:rgba(56,189,248,0.28);stroke:#38bdf8;stroke-width:3.5;filter:drop-shadow(0 0 10px #38bdf8);" /><circle cx="30" cy="27" r="14" style="fill:none;stroke:#ffffff;stroke-width:1.8;stroke-dasharray:4 3;" /></svg>`,
       },
       wand: {
         name: "La Varita",
         phrase: "«Nuestro amor es la fuerza más pura e inquebrantable de este universo.»",
+        svgHtml: `<svg viewBox="0 0 60 54" style="width:62px;height:56px;"><line x1="30" y1="4" x2="30" y2="50" style="stroke:#ffffff;stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 12px #facc15);" /><circle cx="30" cy="15" r="3.5" style="fill:#fde047;stroke:#78350f;stroke-width:1.2;" /><circle cx="30" cy="27" r="3.5" style="fill:#fde047;stroke:#78350f;stroke-width:1.2;" /><circle cx="30" cy="39" r="3.5" style="fill:#fde047;stroke:#78350f;stroke-width:1.2;" /></svg>`,
       },
     };
 
@@ -1175,7 +1174,7 @@ class ConstellationApp {
 
       const pieceEl = document.getElementById(`piece-relic-${relicId}`);
       if (pieceEl) {
-        pieceEl.classList.remove("placed", "is-dragging", "selected", "spring-back");
+        pieceEl.classList.remove("placed", "in-tray-dragged", "shake-hint");
         pieceEl.style.transform = "translate3d(0, 0, 0)";
       }
     });
@@ -1186,7 +1185,7 @@ class ConstellationApp {
 
       const pieceEl = document.getElementById(`piece-relic-${relicId}`);
       if (pieceEl) {
-        pieceEl.classList.remove("is-dragging", "selected", "spring-back");
+        pieceEl.classList.remove("in-tray-dragged", "shake-hint");
         pieceEl.classList.add("placed");
         pieceEl.style.transform = "translate3d(0, 0, 0)";
       }
@@ -1214,7 +1213,7 @@ class ConstellationApp {
       }
 
       if (hintEl) {
-        hintEl.innerHTML = `<span>✦ ¡${relicsConfig[relicId]?.name || "Reliquia"} ensamblada con éxito! ✦</span>`;
+        hintEl.innerHTML = `<span>✦ ¡${relicsConfig[relicId]?.name || "Reliquia"} forjada con éxito! ✦</span>`;
       }
 
       // Si se han colocado las 3 reliquias
@@ -1240,7 +1239,7 @@ class ConstellationApp {
       }
     };
 
-    // Configurar arrastre táctil y de ratón en cada figura de la bandeja
+    // Configurar arrastre táctil y ratón con proxy global flotante
     relicKeys.forEach((relicId) => {
       const pieceEl = document.getElementById(`piece-relic-${relicId}`);
       if (!pieceEl) return;
@@ -1248,6 +1247,7 @@ class ConstellationApp {
       let isDragging = false;
       let startX = 0;
       let startY = 0;
+      let proxyEl = null;
 
       const onPointerDown = (e) => {
         if (this.assembledRelics.has(relicId)) return;
@@ -1255,120 +1255,117 @@ class ConstellationApp {
         startY = e.clientY;
         isDragging = false;
 
-        try {
-          pieceEl.setPointerCapture(e.pointerId);
-        } catch (_) {}
+        const onPointerMove = (moveEv) => {
+          const dx = moveEv.clientX - startX;
+          const dy = moveEv.clientY - startY;
+          const dist = Math.hypot(dx, dy);
 
-        // Limpiar selección previa
-        relicKeys.forEach((k) => {
-          const other = document.getElementById(`piece-relic-${k}`);
-          if (other) other.classList.remove("selected");
-          const slot = document.getElementById(`hallows-slot-${k}`);
-          if (slot) slot.classList.remove("target-hint-active");
-        });
-        selectedRelicId = null;
-      };
+          if (!isDragging && dist > 10) {
+            isDragging = true;
+            pieceEl.classList.add("in-tray-dragged");
 
-      const onPointerMove = (e) => {
-        if (this.assembledRelics.has(relicId)) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        const dist = Math.hypot(dx, dy);
+            // Crear elemento proxy flotante en el body
+            proxyEl = document.createElement("div");
+            proxyEl.className = "hallows-drag-proxy";
+            proxyEl.innerHTML = relicsConfig[relicId].svgHtml;
+            proxyEl.style.left = `${moveEv.clientX}px`;
+            proxyEl.style.top = `${moveEv.clientY}px`;
+            document.body.appendChild(proxyEl);
 
-        if (dist > 8) {
-          isDragging = true;
-          pieceEl.classList.remove("spring-back", "selected");
-          pieceEl.classList.add("is-dragging");
+            const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+            if (slotSvg) slotSvg.classList.add("target-hint-active");
 
-          // Mover la figura física directamente con el dedo o cursor
-          pieceEl.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.12)`;
+            if (hintEl) {
+              hintEl.innerHTML = `<span>✨ Suelta ${relicsConfig[relicId]?.name} sobre el altar sagrado ✨</span>`;
+            }
+          }
 
-          // Iluminar la silueta correspondiente en el altar
+          if (isDragging && proxyEl) {
+            proxyEl.style.left = `${moveEv.clientX}px`;
+            proxyEl.style.top = `${moveEv.clientY}px`;
+
+            if (altarEl) {
+              const aRect = altarEl.getBoundingClientRect();
+              const isOver = (
+                moveEv.clientX >= aRect.left - 25 &&
+                moveEv.clientX <= aRect.right + 25 &&
+                moveEv.clientY >= aRect.top - 25 &&
+                moveEv.clientY <= aRect.bottom + 25
+              );
+              altarEl.classList.toggle("drop-hover", isOver);
+              const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
+              if (slotSvg) slotSvg.classList.toggle("slot-hover", isOver);
+            }
+          }
+        };
+
+        const onPointerUp = (upEv) => {
+          window.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("pointerup", onPointerUp);
+          window.removeEventListener("pointercancel", onPointerUp);
+
+          if (altarEl) altarEl.classList.remove("drop-hover");
           const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
-          if (slotSvg) slotSvg.classList.add("target-hint-active");
+          if (slotSvg) slotSvg.classList.remove("slot-hover", "target-hint-active");
 
-          if (hintEl) {
-            hintEl.innerHTML = `<span>✨ Suelta ${relicsConfig[relicId]?.name} sobre el altar sagrado ✨</span>`;
-          }
-
-          if (altarEl) {
-            const aRect = altarEl.getBoundingClientRect();
-            const isHover = (
-              e.clientX >= aRect.left - 30 &&
-              e.clientX <= aRect.right + 30 &&
-              e.clientY >= aRect.top - 30 &&
-              e.clientY <= aRect.bottom + 30
-            );
-            altarEl.classList.toggle("drop-hover", isHover);
-            if (slotSvg) slotSvg.classList.toggle("slot-hover", isHover);
-          }
-        }
-      };
-
-      const onPointerUp = (e) => {
-        if (this.assembledRelics.has(relicId)) return;
-
-        try {
-          pieceEl.releasePointerCapture(e.pointerId);
-        } catch (_) {}
-
-        pieceEl.classList.remove("is-dragging");
-
-        if (altarEl) {
-          altarEl.classList.remove("drop-hover");
-        }
-
-        const slotSvg = document.getElementById(`hallows-slot-${relicId}`);
-        if (slotSvg) slotSvg.classList.remove("slot-hover", "target-hint-active");
-
-        const totalDist = Math.hypot(e.clientX - startX, e.clientY - startY);
-
-        if (isDragging && totalDist > 25) {
-          // El usuario arrastró físicamente la figura
-          if (altarEl) {
-            const aRect = altarEl.getBoundingClientRect();
-            const isInside = (
-              e.clientX >= aRect.left - 40 &&
-              e.clientX <= aRect.right + 40 &&
-              e.clientY >= aRect.top - 40 &&
-              e.clientY <= aRect.bottom + 40
+          if (isDragging && proxyEl) {
+            const aRect = altarEl ? altarEl.getBoundingClientRect() : null;
+            const isInside = aRect && (
+              upEv.clientX >= aRect.left - 35 &&
+              upEv.clientX <= aRect.right + 35 &&
+              upEv.clientY >= aRect.top - 35 &&
+              upEv.clientY <= aRect.bottom + 35
             );
 
             if (isInside) {
-              // Encaje perfecto en el altar sagrado
-              assembleRelic(relicId, e.clientX, e.clientY);
+              // Ensamblar la pieza con éxito
+              proxyEl.remove();
+              proxyEl = null;
+              assembleRelic(relicId, upEv.clientX, upEv.clientY);
             } else {
-              // No llegó al altar -> regresa elásticamente a su posición
-              pieceEl.classList.add("spring-back");
-              pieceEl.style.transform = "translate3d(0, 0, 0)";
-              setTimeout(() => pieceEl.classList.remove("spring-back"), 400);
+              // Retornar suavemente a la posición de la bandeja
+              const pRect = pieceEl.getBoundingClientRect();
+              proxyEl.classList.add("returning");
+              proxyEl.style.left = `${pRect.left + pRect.width / 2}px`;
+              proxyEl.style.top = `${pRect.top + pRect.height / 2}px`;
+              proxyEl.style.transform = "translate(-50%, -50%) scale(0.85)";
+              proxyEl.style.opacity = "0.3";
+
               sound.playWandSwoosh();
               if (hintEl) {
-                hintEl.innerHTML = "<span>✨ Arrastra la figura hasta el círculo del altar sagrado ✨</span>";
+                hintEl.innerHTML = "<span>✨ Arrastra la figura hacia el altar sagrado ✨</span>";
               }
+
+              setTimeout(() => {
+                if (proxyEl) {
+                  proxyEl.remove();
+                  proxyEl = null;
+                }
+                pieceEl.classList.remove("in-tray-dragged");
+              }, 350);
+            }
+          } else {
+            // Clic sin arrastrar -> Sacudir y guiar al usuario a arrastrar
+            pieceEl.classList.remove("shake-hint");
+            void pieceEl.offsetWidth;
+            pieceEl.classList.add("shake-hint");
+            setTimeout(() => pieceEl.classList.remove("shake-hint"), 500);
+
+            sound.playMagicClick();
+            if (hintEl) {
+              hintEl.innerHTML = `<span>👆 ¡Debes arrastrar ${relicsConfig[relicId]?.name} con tu dedo o ratón hacia el altar! 👆</span>`;
             }
           }
-        } else {
-          // Fue un simple clic o tap sin arrastrar -> NUNCA se acomoda solo
-          pieceEl.style.transform = "translate3d(0, 0, 0)";
-          pieceEl.classList.remove("shake-hint");
-          void pieceEl.offsetWidth; // Forzar reflujo para reiniciar animación
-          pieceEl.classList.add("shake-hint");
-          setTimeout(() => pieceEl.classList.remove("shake-hint"), 500);
 
-          sound.playMagicClick();
-          if (hintEl) {
-            hintEl.innerHTML = `<span>👆 ¡Debes arrastrar ${relicsConfig[relicId]?.name} con tu dedo o ratón hacia el altar! 👆</span>`;
-          }
-        }
+          isDragging = false;
+        };
 
-        isDragging = false;
+        window.addEventListener("pointermove", onPointerMove);
+        window.addEventListener("pointerup", onPointerUp);
+        window.addEventListener("pointercancel", onPointerUp);
       };
 
       pieceEl.onpointerdown = onPointerDown;
-      pieceEl.onpointermove = onPointerMove;
-      pieceEl.onpointerup = onPointerUp;
-      pieceEl.onpointercancel = onPointerUp;
     });
   }
 
