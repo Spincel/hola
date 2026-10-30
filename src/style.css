@@ -3541,35 +3541,62 @@ html, body {
   border-radius: 6px;
 }
 
-/* Encabezado */
-.marauder-header {
+/* ==========================================================================
+   PORTADA Y FACHADA ARQUITECTÓNICA DEL MAPA DEL MERODEADOR (ESTILO MINALIMA)
+   ========================================================================== */
+.marauder-cover-facade {
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
   position: relative;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(90, 37, 18, 0.25);
+}
+
+.cover-gothic-arch {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto 6px;
+}
+
+.arch-svg-decor {
+  width: 100%;
+  height: 48px;
+  display: block;
 }
 
 .marauder-banner-curved {
   font-family: var(--font-serif);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-style: italic;
   font-weight: 600;
   color: #63200f;
   letter-spacing: 1px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.marauder-authors-tag {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #781c1d;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .marauder-main-title {
   font-family: var(--font-serif);
-  font-size: 2.15rem;
-  font-weight: 800;
+  font-size: 2.25rem;
+  font-weight: 900;
   letter-spacing: 4px;
   color: #431407;
   text-transform: uppercase;
-  margin: 4px 0 6px;
+  margin: 6px 0 8px;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-  border-top: 1.5px solid rgba(90, 37, 18, 0.35);
-  border-bottom: 1.5px solid rgba(90, 37, 18, 0.35);
-  padding: 6px 0;
+  border-top: 2px solid rgba(90, 37, 18, 0.4);
+  border-bottom: 2px solid rgba(90, 37, 18, 0.4);
+  padding: 8px 0;
 }
 
 .marauder-subtitle-ribbon {
@@ -3577,226 +3604,519 @@ html, body {
   background: #781c1d;
   color: #fef08a;
   font-family: var(--font-serif);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 2px;
-  padding: 3px 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  margin-bottom: 10px;
+  letter-spacing: 2.5px;
+  padding: 4px 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  margin-bottom: 12px;
 }
 
 .marauder-dedication {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   font-style: italic;
   color: #451a03;
-  margin: 6px 0 4px;
+  margin: 8px 0 6px;
 }
 
 .marauder-recipient-name {
   display: block;
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.45rem;
+  font-weight: 900;
   color: #781c1d;
-  letter-spacing: 1px;
-  margin-top: 2px;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
 .marauder-solemn-oath {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-style: italic;
   font-weight: 700;
   color: #92400e;
   letter-spacing: 0.6px;
-  margin-top: 6px;
+  margin: 8px 0 14px;
 }
 
-/* Huellitas del Merodeador caminando por el pasillo */
-.marauder-footsteps-corridor {
-  display: flex;
+/* Puertas plegables del castillo / Flaps */
+.marauder-flaps-preview {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   background: rgba(139, 69, 19, 0.08);
-  border-top: 1px dashed rgba(90, 37, 18, 0.3);
-  border-bottom: 1px dashed rgba(90, 37, 18, 0.3);
-  padding: 12px 14px;
-  margin: 18px 0;
-  border-radius: 6px;
-  gap: 8px;
+  border: 1.5px dashed rgba(90, 37, 18, 0.35);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
 }
 
-.marauder-trail {
+.flap-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.castle-linework {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
 }
 
-.trail-name-tag {
-  background: #fcf4dd;
+.castle-tower-icon {
+  font-size: 1.3rem;
+}
+
+.flap-label {
+  font-family: var(--font-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #4a1e0d;
+}
+
+.btn-unfold-parchment {
+  background: linear-gradient(135deg, #781c1d, #991b1b);
+  color: #fef08a;
+  border: 1.5px solid #d97706;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-unfold-parchment:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(180, 83, 9, 0.45);
+}
+
+/* ==========================================================================
+   PLANO ARQUITECTÓNICO & HUELLITAS ANIMADAS DEL MERODEADOR
+   ========================================================================== */
+.marauder-blueprint-section {
+  margin: 18px 0 24px;
+}
+
+.blueprint-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(110, 45, 20, 0.1);
+  border: 1px solid rgba(90, 37, 18, 0.35);
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+}
+
+.blueprint-title {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #5a2512;
+  text-transform: uppercase;
+}
+
+.compass-rose {
+  font-size: 1rem;
+}
+
+.marauder-map-blueprint-card {
+  position: relative;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(255, 252, 243, 0.9), rgba(243, 227, 190, 0.9)),
+    url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h30v30H0z' fill='none'/%3E%3Cpath d='M0 0l30 30M30 0L0 30' stroke='rgba(90,37,18,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+  border: 2px solid #6e2d14;
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(90, 37, 18, 0.15), 0 4px 14px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  overflow: hidden;
+}
+
+.blueprint-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Animaciones vivas de huellitas recorriendo el mapa */
+.animated-svg-footprints {
+  animation: svg-footprints-step 3.2s infinite ease-in-out;
+}
+
+.footprints-socrates {
+  animation-delay: 0s;
+}
+
+.footprints-sinay {
+  animation-delay: 0.8s;
+}
+
+.footprints-together {
+  animation-delay: 1.6s;
+}
+
+@keyframes svg-footprints-step {
+  0% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+}
+
+.blueprint-tags-overlay {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 0 8px;
+}
+
+.floating-map-tag {
+  background: #fdf6e4;
   border: 1px solid #78350f;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+}
+
+.floating-map-tag span {
   font-family: var(--font-serif);
   font-size: 0.72rem;
   font-weight: 700;
   color: #451a03;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.trail-steps {
-  font-size: 0.95rem;
-  letter-spacing: 4px;
-  color: #5a2512;
-  animation: steps-walk 2.2s infinite ease-in-out;
+.floating-map-tag.tag-sinay {
+  border-color: #781c1d;
 }
 
-@keyframes steps-walk {
-  0%, 100% { opacity: 0.55; transform: translateX(0); }
-  50% { opacity: 1; transform: translateX(4px); }
+.floating-map-tag.tag-sinay span {
+  color: #781c1d;
 }
 
-.marauder-meeting-hub {
+.floating-map-tag.tag-cabin {
+  background: #fef3c7;
+  border-color: #b45309;
+}
+
+.floating-map-tag.tag-cabin span {
+  color: #78350f;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   PESTAÑAS DE GALERÍA (CARICATURAS / FOTOS REALES)
+   ========================================================================== */
+.marauder-gallery-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px 0 16px;
+  flex-wrap: wrap;
+}
+
+.gallery-tab-btn {
+  background: #eed8ab;
+  color: #4a1e0d;
+  border: 1.5px solid #8b4513;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-family: var(--font-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.gallery-tab-btn:hover {
+  background: #faebc9;
+  border-color: #b45309;
+  transform: translateY(-1px);
+}
+
+.gallery-tab-btn.active {
+  background: linear-gradient(135deg, #781c1d 0%, #5b1415 100%);
+  color: #fef08a;
+  border-color: #d97706;
+  box-shadow: 0 4px 12px rgba(120, 28, 29, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.gallery-intro-banner {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.gallery-intro-banner span {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #63200f;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   VISTA 1: OBRAS MÁGICAS ESTILO CARICATURA / PELÍCULA DE HARRY POTTER
+   ========================================================================== */
+.marauder-art-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.marauder-art-card {
+  background: #fdfaf2;
+  border: 1.5px solid #c4a47c;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 6px 16px rgba(90, 37, 18, 0.18);
   display: flex;
   flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.marauder-art-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(90, 37, 18, 0.28);
+}
+
+.marauder-art-card.highlight-card {
+  border-color: #b45309;
+  box-shadow: 0 8px 20px rgba(180, 83, 9, 0.25);
+}
+
+.art-card-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+  z-index: 2;
+}
+
+.art-img-wrap {
+  width: 100%;
+  height: 220px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #110804;
+  position: relative;
+  cursor: pointer;
+}
+
+.art-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.art-img-wrap:hover img {
+  transform: scale(1.05);
+}
+
+.art-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 20, 8, 0.65);
+  color: #fef08a;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.art-img-wrap:hover .art-hover-overlay {
+  opacity: 1;
+}
+
+.art-card-details {
+  padding: 8px 4px 2px;
   text-align: center;
 }
 
-.meeting-crest {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: rgba(254, 243, 199, 0.75);
-  border: 1.5px solid #b45309;
-  border-radius: 10px;
-  padding: 4px 10px;
-}
-
-.meeting-heart {
-  font-size: 1.1rem;
-  animation: heart-throb 1.4s infinite ease-in-out;
-}
-
-@keyframes heart-throb {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.meeting-place {
+.art-card-title {
   font-family: var(--font-serif);
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #78350f;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #431407;
+  margin: 0 0 3px;
+  line-height: 1.25;
 }
 
-/* Galería de fotos dentro del mapa */
-.marauder-photos-grid {
+.art-card-desc {
+  font-family: var(--font-serif);
+  font-size: 0.74rem;
+  font-style: italic;
+  color: #5a2512;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   VISTA 2: ÁLBUM DE FOTOS REALES HECHIZADAS
+   ========================================================================== */
+.marauder-real-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin: 20px 0;
+  margin-bottom: 24px;
 }
 
-.marauder-photo-frame {
+.real-photo-polaroid {
   background: #fdfaf2;
-  border: 1px solid #c4a47c;
+  border: 1.5px solid #d4b886;
   border-radius: 6px;
-  padding: 7px 7px 10px;
-  box-shadow: 0 4px 12px rgba(90, 37, 18, 0.22);
+  padding: 6px 6px 10px;
+  box-shadow: 0 4px 14px rgba(90, 37, 18, 0.16);
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
-  transition: transform 0.2s ease;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.marauder-photo-frame:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(90, 37, 18, 0.32);
+.real-photo-polaroid:nth-child(even) {
+  transform: rotate(-1deg);
 }
 
-.marauder-photo-frame.highlight-frame {
+.real-photo-polaroid:nth-child(odd) {
+  transform: rotate(1deg);
+}
+
+.real-photo-polaroid:hover {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 0 10px 24px rgba(90, 37, 18, 0.32);
+  z-index: 5;
   border-color: #b45309;
-  box-shadow: 0 6px 16px rgba(180, 83, 9, 0.3);
 }
 
-.photo-pin {
+.real-photo-polaroid.highlight-polaroid {
+  border-color: #b45309;
+}
+
+.polaroid-pin {
   position: absolute;
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.9rem;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  font-size: 0.95rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  z-index: 2;
 }
 
-.photo-img-wrap {
+.polaroid-img-wrap {
   width: 100%;
   height: 140px;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #000;
+  background: #110804;
 }
 
-.photo-img-wrap img {
+.polaroid-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.04) brightness(0.97);
+  transition: transform 0.35s ease;
 }
 
-.photo-caption {
+.real-photo-polaroid:hover .polaroid-img-wrap img {
+  transform: scale(1.06);
+}
+
+.polaroid-caption {
   font-family: var(--font-serif);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-style: italic;
-  font-weight: 600;
-  color: #451a03;
+  font-weight: 700;
+  color: #4a1e0d;
   text-align: center;
   margin-top: 6px;
   line-height: 1.25;
 }
 
-/* Contenido de la Carta / Poema */
+/* ==========================================================================
+   CARTA DE AMOR & POEMA EN CALIGRAFÍA MINALIMA
+   ========================================================================== */
 .marauder-letter-content {
-  margin: 22px 0 16px;
-  padding: 16px 20px;
   background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(139, 69, 19, 0.25);
+  border: 1.5px solid rgba(139, 69, 19, 0.35);
   border-radius: 8px;
+  padding: 22px 20px;
+  margin: 20px 0;
+  position: relative;
 }
 
 .marauder-salutation {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: #601c0b;
-  margin-bottom: 12px;
-  border-bottom: 1px solid rgba(139, 69, 19, 0.2);
-  padding-bottom: 4px;
+  border-bottom: 1.5px solid rgba(139, 69, 19, 0.25);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.drop-cap-m {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  line-height: 0.85;
+  font-weight: 900;
+  color: #781c1d;
+  padding-right: 8px;
+  padding-top: 2px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .marauder-p {
   font-family: var(--font-serif);
-  font-size: 0.94rem;
-  line-height: 1.65;
+  font-size: 0.95rem;
+  line-height: 1.68;
   color: #2b1408;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: justify;
 }
 
 .marauder-p strong {
-  color: #781c1d;
+  color: #6e1c10;
+  font-weight: 800;
 }
 
 .marauder-signature-block {
-  margin-top: 18px;
-  text-align: right;
+  margin-top: 20px;
+  padding-top: 12px;
   border-top: 1px dashed rgba(139, 69, 19, 0.35);
-  padding-top: 10px;
+  text-align: right;
 }
 
 .marauder-closing {
@@ -3809,15 +4129,17 @@ html, body {
 
 .marauder-author-sig {
   font-family: var(--font-hand);
-  font-size: 1.55rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: #781c1d;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
-/* Sello oficial de Hogwarts y Mischief Managed */
+/* ==========================================================================
+   SELLO OFICIAL DE HOGWARTS Y TRAVESURA REALIZADA
+   ========================================================================== */
 .marauder-footer {
-  margin-top: 20px;
+  margin-top: 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3825,15 +4147,25 @@ html, body {
   text-align: center;
 }
 
-.marauder-seal-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.marauder-seal-badge-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.marauder-seal-badge-btn:hover {
+  transform: scale(1.1);
+}
+
+.marauder-seal-badge-btn:active {
+  transform: scale(0.95);
 }
 
 .wax-seal-large {
-  width: 58px;
-  height: 58px;
+  width: 62px;
+  height: 62px;
   background: radial-gradient(circle at 35% 35%, #a51d24, #7f1d1d 60%, #450a0a 100%);
   border-radius: 50%;
   border: 2px solid #b91c1c;
@@ -3847,7 +4179,7 @@ html, body {
 
 .seal-glyph {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #fef08a;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
@@ -3856,37 +4188,158 @@ html, body {
 
 .marauder-mischief-text {
   font-family: var(--font-serif);
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 0.86rem;
+  font-weight: 900;
   letter-spacing: 3px;
   color: #5a2512;
   text-transform: uppercase;
 }
 
+.marauder-tap-seal-hint {
+  font-family: var(--font-serif);
+  font-size: 0.74rem;
+  font-style: italic;
+  color: #78350f;
+  margin: 0;
+}
+
+/* ==========================================================================
+   MODAL LIGHTBOX PARA VER FOTOS Y OBRAS EN PANTALLA COMPLETA
+   ========================================================================== */
+.lightbox-dialog {
+  max-width: 90vw;
+  max-height: 90vh;
+  background: rgba(13, 6, 3, 0.95);
+  border: 2px solid #b45309;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(180, 83, 9, 0.3);
+  position: relative;
+}
+
+.lightbox-dialog .btn-close-modal {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: #fef08a;
+  font-size: 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.lightbox-image-container {
+  max-width: 100%;
+  max-height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(254, 240, 138, 0.3);
+}
+
+.lightbox-image-container img {
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.lightbox-caption {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  font-style: italic;
+  color: #fef08a;
+  text-align: center;
+  margin-top: 12px;
+  padding: 0 10px;
+  max-width: 650px;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD Y AJUSTES MÓVILES
+   ========================================================================== */
 @media (max-width: 680px) {
   .marauder-parchment-sheet {
-    padding: 20px 14px;
+    padding: 18px 12px;
   }
   .marauder-main-title {
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     letter-spacing: 2px;
   }
+  .marauder-authors-tag {
+    font-size: 0.95rem;
+    letter-spacing: 3px;
+  }
   .marauder-recipient-name {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
   }
-  .marauder-photos-grid {
+  .marauder-art-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 14px;
   }
-  .photo-img-wrap {
-    height: 180px;
+  .art-img-wrap {
+    height: 200px;
+  }
+  .marauder-real-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .polaroid-img-wrap {
+    height: 120px;
   }
   .marauder-p {
     font-size: 0.88rem;
     line-height: 1.55;
   }
-  .marauder-footsteps-corridor {
-    flex-direction: column;
-    gap: 10px;
+  .drop-cap-m {
+    font-size: 2.6rem;
   }
+  .marauder-flaps-preview {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .marauder-gallery-tabs {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .gallery-tab-btn {
+    width: 100%;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+}
+
+
+/* Toast mágico de Travesura Realizada */
+.mischief-toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #781c1d, #450a0a);
+  color: #fef08a;
+  border: 2px solid #b45309;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 119, 6, 0.5);
+  z-index: 999999;
+  animation: mischief-fade 2.2s forwards ease;
+  pointer-events: none;
+  text-align: center;
+}
+
+@keyframes mischief-fade {
+  0% { opacity: 0; transform: translate(-50%, 20px) scale(0.9); }
+  15% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -20px) scale(0.95); }
 }

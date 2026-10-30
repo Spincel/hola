@@ -693,11 +693,22 @@ class ConstellationApp {
       this.triggerYesCelebration();
     });
 
-    // 9. Desplegar el Mapa del Merodeador (Captura final con fotos y poema)
+    // 9. Desplegar el Mapa del Merodeador (Captura final con fotos, ilustraciones y poema)
     const marauderModal = document.getElementById("marauder-map-modal");
     const closeMarauderBtn = document.getElementById("close-marauder-modal");
     const saveMarauderPngBtn = document.getElementById("btn-save-marauder-image");
     const printMarauderBtn = document.getElementById("btn-print-marauder");
+    const toggleFlapsBtn = document.getElementById("btn-toggle-flaps");
+    const unfoldMapHeroBtn = document.getElementById("btn-unfold-map-hero");
+    const tabBtnCartoons = document.getElementById("tab-btn-cartoons");
+    const tabBtnRealPhotos = document.getElementById("tab-btn-real-photos");
+    const viewCartoons = document.getElementById("gallery-view-cartoons");
+    const viewRealPhotos = document.getElementById("gallery-view-real-photos");
+    const sealMischiefBtn = document.getElementById("btn-mischief-managed-seal");
+    const lightboxModal = document.getElementById("marauder-lightbox-modal");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const closeLightboxBtn = document.getElementById("close-lightbox-btn");
 
     document.getElementById("btn-download-capture").addEventListener("click", () => {
       sound.playSpellSuccess();
@@ -713,6 +724,91 @@ class ConstellationApp {
       closeMarauderBtn.addEventListener("click", () => {
         sound.playWandSwoosh();
         marauderModal.classList.add("hidden");
+      });
+    }
+
+    if (toggleFlapsBtn) {
+      toggleFlapsBtn.addEventListener("click", () => {
+        sound.playQuillScribe();
+        const facade = document.getElementById("marauder-cover-facade");
+        if (facade) {
+          const isHidden = facade.style.display === "none";
+          facade.style.display = isHidden ? "block" : "none";
+          toggleFlapsBtn.textContent = isHidden ? "📜 Ocultar Portada" : "📜 Mostrar Portada";
+        }
+      });
+    }
+
+    if (unfoldMapHeroBtn) {
+      unfoldMapHeroBtn.addEventListener("click", () => {
+        sound.playSpellSuccess();
+        triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
+        const blueprint = document.querySelector(".marauder-blueprint-section");
+        if (blueprint) {
+          blueprint.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    // Pestañas de galería (Diseños animados / Fotos reales)
+    if (tabBtnCartoons && tabBtnRealPhotos) {
+      tabBtnCartoons.addEventListener("click", () => {
+        sound.playQuillScribe();
+        tabBtnCartoons.classList.add("active");
+        tabBtnRealPhotos.classList.remove("active");
+        if (viewCartoons) viewCartoons.classList.remove("hidden");
+        if (viewRealPhotos) viewRealPhotos.classList.add("hidden");
+      });
+
+      tabBtnRealPhotos.addEventListener("click", () => {
+        sound.playQuillScribe();
+        tabBtnRealPhotos.classList.add("active");
+        tabBtnCartoons.classList.remove("active");
+        if (viewRealPhotos) viewRealPhotos.classList.remove("hidden");
+        if (viewCartoons) viewCartoons.classList.add("hidden");
+      });
+    }
+
+    // Lightbox para fotos y obras de arte
+    document.addEventListener("click", (e) => {
+      const target = e.target.closest("[data-lightbox]");
+      if (target && lightboxModal && lightboxImg) {
+        const imgSrc = target.getAttribute("data-lightbox");
+        const caption = target.getAttribute("data-caption") || "";
+        lightboxImg.src = imgSrc;
+        if (lightboxCaption) lightboxCaption.textContent = caption;
+        lightboxModal.classList.remove("hidden");
+        sound.playWandSwoosh();
+      }
+    });
+
+    if (closeLightboxBtn && lightboxModal) {
+      closeLightboxBtn.addEventListener("click", () => {
+        lightboxModal.classList.add("hidden");
+      });
+    }
+
+    if (lightboxModal) {
+      lightboxModal.addEventListener("click", (e) => {
+        if (e.target === lightboxModal) {
+          lightboxModal.classList.add("hidden");
+        }
+      });
+    }
+
+    // Travesura Realizada botón sello
+    if (sealMischiefBtn && marauderModal) {
+      sealMischiefBtn.addEventListener("click", () => {
+        sound.playSpellSuccess();
+        triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
+        const toast = document.createElement("div");
+        toast.className = "mischief-toast";
+        toast.textContent = "« Travesura Realizada... Te amo por siempre, Sinay » ⚡△⃒⃘";
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+          marauderModal.classList.add("hidden");
+        }, 2200);
       });
     }
 
@@ -1658,7 +1754,7 @@ class ConstellationApp {
     try {
       await document.fonts.ready;
 
-      // Cargar las 3 fotos de la pareja
+      // Cargar las 4 ilustraciones estilo caricatura y 2 fotos reales emblemáticas
       const loadImage = (src) =>
         new Promise((resolve) => {
           const img = new Image();
@@ -1668,186 +1764,207 @@ class ConstellationApp {
           img.src = src;
         });
 
-      const [imgAnden, imgPatronus, imgCabana] = await Promise.all([
-        loadImage("/photos/pareja_anden.jpg"),
-        loadImage("/photos/pareja_patronus.jpg"),
-        loadImage("/photos/pareja_cabana.jpg"),
+      const [artHogwarts, artPatronus, artCabana, artFamily, realGatsby, realKiss] = await Promise.all([
+        loadImage("/photos/couple/art_hogwarts_couple.jpg"),
+        loadImage("/photos/couple/art_patronus_couple.jpg"),
+        loadImage("/photos/couple/art_cabana_couple.jpg"),
+        loadImage("/photos/couple/art_family_magic.jpg"),
+        loadImage("/photos/couple/hp_foto_1.jpg"),
+        loadImage("/photos/couple/hp_foto_5.jpg"),
       ]);
 
-      // Lienzo de ultra alta definición (1400 x 2380 px)
+      // Lienzo de ultra alta definición (1500 x 3300 px)
       const canvas = document.createElement("canvas");
-      canvas.width = 1400;
-      canvas.height = 2380;
+      canvas.width = 1500;
+      canvas.height = 3300;
       const ctx = canvas.getContext("2d");
 
-      // 1. Fondo de pergamino envejecido
-      const bgGrad = ctx.createRadialGradient(700, 1190, 80, 700, 1190, 1300);
-      bgGrad.addColorStop(0, "#fefaf0");
-      bgGrad.addColorStop(0.5, "#f6e8c7");
-      bgGrad.addColorStop(0.85, "#e9d1a3");
-      bgGrad.addColorStop(1, "#d6bc8b");
+      // 1. Fondo de pergamino envejecido con textura cálida
+      const bgGrad = ctx.createRadialGradient(750, 1650, 100, 750, 1650, 1800);
+      bgGrad.addColorStop(0, "#fefcf5");
+      bgGrad.addColorStop(0.45, "#f6ebc9");
+      bgGrad.addColorStop(0.8, "#ead19e");
+      bgGrad.addColorStop(1, "#d4b47a");
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Manchas sutiles de pátina vintage
-      ctx.fillStyle = "rgba(100, 45, 15, 0.04)";
+      // Manchas sutiles de café/té y pátina de pergamino antiguo
+      ctx.fillStyle = "rgba(90, 37, 18, 0.04)";
       ctx.beginPath();
-      ctx.arc(140, 180, 120, 0, Math.PI * 2);
-      ctx.arc(1260, 2200, 160, 0, Math.PI * 2);
-      ctx.arc(1250, 300, 100, 0, Math.PI * 2);
+      ctx.arc(160, 200, 140, 0, Math.PI * 2);
+      ctx.arc(1340, 3100, 180, 0, Math.PI * 2);
+      ctx.arc(1320, 350, 120, 0, Math.PI * 2);
+      ctx.arc(120, 2900, 150, 0, Math.PI * 2);
       ctx.fill();
 
-      // Doble borde del Mapa del Merodeador
+      // Doble marco arquitectónico del Mapa del Merodeador
       ctx.strokeStyle = "#5a2512";
-      ctx.lineWidth = 4;
-      ctx.strokeRect(34, 34, canvas.width - 68, canvas.height - 68);
+      ctx.lineWidth = 4.5;
+      ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
 
-      ctx.strokeStyle = "rgba(90, 37, 18, 0.45)";
-      ctx.lineWidth = 1.8;
-      ctx.setLineDash([8, 6]);
-      ctx.strokeRect(46, 46, canvas.width - 92, canvas.height - 92);
+      ctx.strokeStyle = "rgba(90, 37, 18, 0.5)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([9, 6]);
+      ctx.strokeRect(48, 48, canvas.width - 96, canvas.height - 96);
       ctx.setLineDash([]);
 
       // Florituras en las 4 esquinas
       const corners = [
-        [60, 60],
-        [canvas.width - 60, 60],
-        [60, canvas.height - 60],
-        [canvas.width - 60, canvas.height - 60],
+        [64, 64],
+        [canvas.width - 64, 64],
+        [64, canvas.height - 64],
+        [canvas.width - 64, canvas.height - 64],
       ];
       ctx.fillStyle = "#78350f";
-      ctx.font = "bold 20px 'Playfair Display', Georgia, serif";
+      ctx.font = "bold 24px 'Playfair Display', Georgia, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       corners.forEach(([cx, cy]) => {
         ctx.fillText("✦", cx, cy);
       });
 
-      // 2. Encabezado del Mapa del Merodeador
+      // 2. Encabezado del Mapa del Merodeador (Estilo MinaLima)
       ctx.textAlign = "center";
       ctx.fillStyle = "#63200f";
-      ctx.font = "italic 21px 'Playfair Display', Georgia, serif";
-      ctx.fillText("« Los Merodeadores de Nuestro Destino se enorgullecen en presentar »", 700, 105);
+      ctx.font = "italic 22px 'Playfair Display', Georgia, serif";
+      ctx.fillText("« Los Creadores de Nuestro Destino Mágico se enorgullecen en presentar »", 750, 105);
 
-      // Línea superior del título
-      ctx.strokeStyle = "rgba(90, 37, 18, 0.35)";
-      ctx.lineWidth = 1.5;
+      ctx.fillStyle = "#781c1d";
+      ctx.font = "900 28px 'Playfair Display', Georgia, serif";
+      ctx.fillText("SÓCRATES & SINAY", 750, 145);
+
+      // Líneas ornamentales del título principal
+      ctx.strokeStyle = "rgba(90, 37, 18, 0.4)";
+      ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(180, 130);
-      ctx.lineTo(1220, 130);
+      ctx.moveTo(200, 168);
+      ctx.lineTo(1300, 168);
       ctx.stroke();
 
-      // Título Principal
       ctx.fillStyle = "#431407";
-      ctx.font = "900 50px 'Playfair Display', Georgia, serif";
-      ctx.fillText("EL MAPA DEL MERODEADOR", 700, 180);
+      ctx.font = "900 52px 'Playfair Display', Georgia, serif";
+      ctx.fillText("EL MAPA DEL MERODEADOR", 750, 218);
 
-      // Línea inferior del título
       ctx.beginPath();
-      ctx.moveTo(180, 202);
-      ctx.lineTo(1220, 202);
+      ctx.moveTo(200, 238);
+      ctx.lineTo(1300, 238);
       ctx.stroke();
 
       // Listón de subtítulo
       ctx.fillStyle = "#781c1d";
       ctx.beginPath();
-      ctx.roundRect(420, 222, 560, 36, 18);
+      ctx.roundRect(430, 256, 640, 38, 19);
       ctx.fill();
 
       ctx.fillStyle = "#fef08a";
-      ctx.font = "bold 17px 'Playfair Display', Georgia, serif";
-      ctx.fillText("DEL AMOR ETERNO & LOS PLANES SOÑADOS", 700, 246);
+      ctx.font = "bold 18px 'Playfair Display', Georgia, serif";
+      ctx.fillText("DEL AMOR ETERNO & LOS PLANES SOÑADOS", 750, 281);
 
-      // Dedicatoria a la esposa
+      // Dedicatoria
       ctx.fillStyle = "#451a03";
-      ctx.font = "italic 22px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Dedicado con toda el alma a la dueña absoluta de mi corazón:", 700, 298);
+      ctx.font = "italic 23px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Dedicado con toda el alma a la dueña absoluta de mi corazón:", 750, 332);
 
       ctx.fillStyle = "#781c1d";
-      ctx.font = "900 36px 'Playfair Display', Georgia, serif";
-      ctx.fillText("XÓCHITL SINAY BARBA CUEVAS", 700, 342);
+      ctx.font = "900 38px 'Playfair Display', Georgia, serif";
+      ctx.fillText("XÓCHITL SINAY BARBA CUEVAS", 750, 378);
 
       // Juramento solemne
       ctx.fillStyle = "#92400e";
-      ctx.font = "italic bold 21px 'Playfair Display', Georgia, serif";
-      ctx.fillText("« Juro solemnemente que mis intenciones son amarte siempre... Always »", 700, 385);
+      ctx.font = "italic bold 22px 'Playfair Display', Georgia, serif";
+      ctx.fillText("« Juro solemnemente que mis intenciones son amarte siempre... Always »", 750, 420);
 
       ctx.fillStyle = "#b45309";
-      ctx.font = "bold 18px 'Playfair Display', Georgia, serif";
-      ctx.fillText("✧ ─── ✦ ─── ⚡ ─── ✦ ─── ✧", 700, 416);
+      ctx.font = "bold 19px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✧ ─── ✦ ─── ⚡ ─── ✦ ─── ✧", 750, 448);
 
-      // 3. Pasillo del Mapa con Huellitas y Punto de Encuentro
-      ctx.fillStyle = "rgba(139, 69, 19, 0.08)";
-      ctx.fillRect(80, 436, 1240, 80);
+      // 3. Plano Arquitectónico de Hogwarts con Pasillos y Huellitas
+      const bpX = 80;
+      const bpY = 470;
+      const bpW = 1340;
+      const bpH = 180;
 
-      ctx.strokeStyle = "rgba(90, 37, 18, 0.35)";
-      ctx.lineWidth = 1.2;
-      ctx.setLineDash([6, 5]);
-      ctx.beginPath();
-      ctx.moveTo(80, 436);
-      ctx.lineTo(1320, 436);
-      ctx.moveTo(80, 516);
-      ctx.lineTo(1320, 516);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(139, 69, 19, 0.07)";
+      ctx.fillRect(bpX, bpY, bpW, bpH);
 
-      // Huellas de Xóchitl
+      ctx.strokeStyle = "#6e2d14";
+      ctx.lineWidth = 1.8;
+      ctx.strokeRect(bpX, bpY, bpW, bpH);
+
+      // Habitaciones del mapa
+      const drawRoom = (rx, ry, rw, rh, title, sub, isHighlight = false) => {
+        ctx.fillStyle = isHighlight ? "rgba(254, 243, 199, 0.8)" : "rgba(255, 255, 255, 0.55)";
+        ctx.fillRect(rx, ry, rw, rh);
+        ctx.strokeStyle = isHighlight ? "#b45309" : "#6e2d14";
+        ctx.lineWidth = isHighlight ? 2 : 1.2;
+        ctx.strokeRect(rx, ry, rw, rh);
+
+        ctx.fillStyle = isHighlight ? "#781c1d" : "#4a1e0d";
+        ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
+        ctx.fillText(title, rx + rw / 2, ry + 28);
+
+        ctx.fillStyle = isHighlight ? "#92400e" : "#7a3416";
+        ctx.font = "italic 13px 'Playfair Display', Georgia, serif";
+        ctx.fillText(sub, rx + rw / 2, ry + 48);
+      };
+
+      drawRoom(100, 485, 240, 65, "Andén 9 ¾", "El Inicio del Destino 🚂");
+      drawRoom(100, 565, 240, 65, "Torre de Astronomía", "Bajo el Cielo de Tepic 🌌");
+
+      drawRoom(520, 505, 460, 105, "Gran Salón de los Recuerdos 💕", "Donde Nuestros Destinos se Unieron", true);
+
+      drawRoom(1160, 485, 240, 65, "Galería Familiar", "Mayor Bendición ✨👨‍👩‍👧‍👧👶");
+      drawRoom(1160, 565, 240, 65, "Nuestra Cabaña", "Chimenea & Paz Eterna 🌲🏡🌧️", true);
+
+      // Huellas y etiquetas de los Merodeadores
+      ctx.fillStyle = "#5a2512";
+      ctx.font = "18px system-ui, sans-serif";
+      ctx.fillText("🐾  🐾  🐾", 410, 530);
+      ctx.fillText("🐾  🐾  🐾", 410, 595);
+      ctx.fillText("🐾🐾  🐾🐾  🐾🐾", 1070, 570);
+
+      // Etiquetas con nombres de Sócrates y Sinay
       ctx.fillStyle = "#fcf4dd";
-      ctx.fillRect(100, 452, 160, 30);
+      ctx.fillRect(360, 492, 110, 24);
       ctx.strokeStyle = "#78350f";
-      ctx.strokeRect(100, 452, 160, 30);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(360, 492, 110, 24);
       ctx.fillStyle = "#451a03";
-      ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Xóchitl Sinay 🐾", 180, 473);
-
-      ctx.font = "20px system-ui, sans-serif";
-      ctx.fillText("🐾   🐾   🐾", 330, 480);
-
-      // Punto de encuentro: La Cabaña Soñada
-      ctx.fillStyle = "#fef3c7";
-      ctx.beginPath();
-      ctx.roundRect(470, 448, 460, 56, 10);
-      ctx.fill();
-      ctx.strokeStyle = "#b45309";
-      ctx.stroke();
-
-      ctx.fillStyle = "#78350f";
-      ctx.font = "bold 18px 'Playfair Display', Georgia, serif";
-      ctx.fillText("💕  Nuestra Cabaña en el Bosque 🌲🏡🌧️  💕", 700, 483);
-
-      // Huellas del Esposo
-      ctx.font = "20px system-ui, sans-serif";
-      ctx.fillText("🐾   🐾   🐾", 1070, 480);
+      ctx.font = "bold 13px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Sócrates 🐾", 415, 508);
 
       ctx.fillStyle = "#fcf4dd";
-      ctx.fillRect(1140, 452, 160, 30);
-      ctx.strokeStyle = "#78350f";
-      ctx.strokeRect(1140, 452, 160, 30);
-      ctx.fillStyle = "#451a03";
-      ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Tu Esposo 🐾", 1220, 473);
+      ctx.fillRect(360, 608, 120, 24);
+      ctx.strokeStyle = "#781c1d";
+      ctx.strokeRect(360, 608, 120, 24);
+      ctx.fillStyle = "#781c1d";
+      ctx.fillText("Xóchitl Sinay 🐾", 420, 624);
 
-      // 4. Dibujar las 3 fotos en marcos polaroid vintage
-      const drawFramedPhoto = (img, x, y, w, h, pinSymbol, caption) => {
-        // Marco de papel polaroid
+      // 4. Sección 1: Ilustraciones Mágicas al Estilo Caricatura de Película
+      ctx.fillStyle = "#63200f";
+      ctx.font = "bold 19px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✦ ILUSTRACIONES MÁGICAS: NUESTRA HISTORIA AL ESTILO HARRY POTTER ✦", 750, 685);
+
+      const drawArtFrame = (img, x, y, w, h, pin, title, caption) => {
+        // Marco de cuadro vintage
         ctx.save();
-        ctx.shadowColor = "rgba(60, 30, 10, 0.25)";
+        ctx.shadowColor = "rgba(60, 30, 10, 0.28)";
         ctx.shadowBlur = 14;
         ctx.shadowOffsetY = 6;
         ctx.fillStyle = "#fdfaf2";
         ctx.beginPath();
-        ctx.roundRect(x - 10, y - 10, w + 20, h + 65, 8);
+        ctx.roundRect(x - 8, y - 8, w + 16, h + 68, 8);
         ctx.fill();
         ctx.strokeStyle = "#c4a47c";
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.8;
         ctx.stroke();
         ctx.restore();
 
-        // Foto recortada cover
+        // Imagen recortada cover
         if (img) {
           ctx.save();
           ctx.beginPath();
-          ctx.roundRect(x, y, w, h, 4);
+          ctx.roundRect(x, y, w, h, 6);
           ctx.clip();
 
           const imgRatio = img.width / img.height;
@@ -1867,106 +1984,131 @@ class ConstellationApp {
         }
 
         // Pin superior
-        ctx.font = "20px system-ui, sans-serif";
+        ctx.font = "22px system-ui, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(pinSymbol, x + w / 2, y - 14);
+        ctx.fillText(pin, x + w / 2, y - 12);
 
-        // Subtítulo de la foto
-        ctx.fillStyle = "#451a03";
-        ctx.font = "italic 15px 'Playfair Display', Georgia, serif";
-        ctx.fillText(caption, x + w / 2, y + h + 34);
+        // Título y texto de la obra
+        ctx.fillStyle = "#431407";
+        ctx.font = "bold 16px 'Playfair Display', Georgia, serif";
+        ctx.fillText(title, x + w / 2, y + h + 28);
+
+        ctx.fillStyle = "#5a2512";
+        ctx.font = "italic 13.5px 'Playfair Display', Georgia, serif";
+        ctx.fillText(caption, x + w / 2, y + h + 48);
       };
 
-      drawFramedPhoto(imgAnden, 80, 555, 380, 260, "⚡", "Andén 9 ¾ ✦ El Inicio de Nuestro Destino");
-      drawFramedPhoto(imgPatronus, 510, 545, 380, 270, "✨", "Expecto Patronum ✦ Always");
-      drawFramedPhoto(imgCabana, 940, 555, 380, 260, "🌲", "Nuestra Cabaña ✦ El Refugio Soñado");
+      // 4 Obras maestras estilo caricatura / Pixar
+      drawArtFrame(artHogwarts, 90, 725, 620, 340, "⚡", "Andén 9 ¾ ✦ El Inicio del Destino", "Juntos en Hogwarts con bufandas Gryffindor y amor eterno");
+      drawArtFrame(artPatronus, 790, 725, 620, 340, "✨", "Expecto Patronum ✦ Amor Infinito", "Eres mi pensamiento más feliz — Always");
+      drawArtFrame(artCabana, 90, 1165, 620, 340, "🌲", "Nuestra Cabaña Mágica ✦ El Refugio Soñado", "Chimenea, cerveza de mantequilla y nieve en los pinos");
+      drawArtFrame(artFamily, 790, 1165, 620, 340, "🏰", "Nuestra Familia ✦ La Mayor Bendición", "Nuestras hijas y nuestro bebé: la magia más grande de la vida");
 
-      // 5. Carta y Poema de Amor Completa
+      // 5. Sección 2: Recuerdos Reales Hechizados en Pergamino
+      ctx.fillStyle = "#63200f";
+      ctx.font = "bold 19px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✦ RECUERDOS REALES DE NUESTRA HISTORIA JUNTOS ✦", 750, 1610);
+
+      drawArtFrame(realGatsby, 140, 1650, 560, 310, "🎩", "Gatsby & La Magia de los Años 20", "Elegantes, cómplices y profundamente enamorados");
+      drawArtFrame(realKiss, 800, 1650, 560, 310, "💋", "El Beso que Paraliza el Tiempo", "Cuando el universo entero se detiene para nosotros dos");
+
+      // 6. Carta de Amor Completa en Caligrafía MinaLima
       const letterBoxX = 80;
-      const letterBoxY = 895;
-      const letterBoxW = 1240;
-      const letterBoxH = 1170;
+      const letterBoxY = 2055;
+      const letterBoxW = 1340;
+      const letterBoxH = 960;
 
-      ctx.fillStyle = "rgba(255, 255, 255, 0.48)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
       ctx.beginPath();
       ctx.roundRect(letterBoxX, letterBoxY, letterBoxW, letterBoxH, 12);
       ctx.fill();
-      ctx.strokeStyle = "rgba(139, 69, 19, 0.35)";
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = "rgba(139, 69, 19, 0.4)";
+      ctx.lineWidth = 1.8;
       ctx.stroke();
 
       // Saludo inicial
       ctx.textAlign = "left";
       ctx.fillStyle = "#601c0b";
-      ctx.font = "bold 28px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Para mi amada esposa, Xóchitl Sinay Barba Cuevas:", letterBoxX + 40, letterBoxY + 54);
+      ctx.font = "bold 29px 'Playfair Display', Georgia, serif";
+      ctx.fillText("Para mi amada esposa, Xóchitl Sinay Barba Cuevas:", letterBoxX + 44, letterBoxY + 54);
 
-      ctx.strokeStyle = "rgba(139, 69, 19, 0.25)";
+      ctx.strokeStyle = "rgba(139, 69, 19, 0.28)";
       ctx.beginPath();
-      ctx.moveTo(letterBoxX + 40, letterBoxY + 70);
-      ctx.lineTo(letterBoxX + letterBoxW - 40, letterBoxY + 70);
+      ctx.moveTo(letterBoxX + 44, letterBoxY + 70);
+      ctx.lineTo(letterBoxX + letterBoxW - 44, letterBoxY + 70);
       ctx.stroke();
 
-      // Envoltura de texto para los 4 párrafos
+      // Letra capitular decorativa 'M'
+      ctx.fillStyle = "#781c1d";
+      ctx.font = "900 64px 'Playfair Display', Georgia, serif";
+      ctx.fillText("M", letterBoxX + 44, letterBoxY + 140);
+
+      // Render de párrafos de amor
       const paragraphs = config.climax.letter.paragraphs;
       let textY = letterBoxY + 115;
       ctx.fillStyle = "#2b1408";
       ctx.font = "21px 'Playfair Display', Georgia, serif";
-      const maxLineWidth = letterBoxW - 80;
-      const lineHeight = 36;
+      const maxLineWidth = letterBoxW - 130;
+      const lineHeight = 35;
 
-      const renderParagraph = (text) => {
+      const renderParagraph = (text, isFirst = false) => {
+        const startX = isFirst ? letterBoxX + 115 : letterBoxX + 44;
         const words = text.split(" ");
         let line = "";
+        let currentX = startX;
+
         for (let i = 0; i < words.length; i++) {
           const testLine = line + (line ? " " : "") + words[i];
           const testWidth = ctx.measureText(testLine).width;
-          if (testWidth > maxLineWidth && i > 0) {
-            ctx.fillText(line, letterBoxX + 40, textY);
+          const currentLimit = currentX === startX && isFirst ? letterBoxW - 180 : maxLineWidth;
+
+          if (testWidth > currentLimit && i > 0) {
+            ctx.fillText(line, currentX, textY);
             line = words[i];
             textY += lineHeight;
+            currentX = letterBoxX + 44;
           } else {
             line = testLine;
           }
         }
-        ctx.fillText(line, letterBoxX + 40, textY);
-        textY += lineHeight + 22; // Espacio entre párrafos
+        ctx.fillText(line, currentX, textY);
+        textY += lineHeight + 20;
       };
 
-      paragraphs.forEach((p) => renderParagraph(p));
+      paragraphs.forEach((p, idx) => renderParagraph(p, idx === 0));
 
-      // Bloque de firma
-      textY = Math.max(textY, letterBoxY + letterBoxH - 140);
+      // Firma de amor
+      textY = Math.max(textY, letterBoxY + letterBoxH - 135);
       ctx.strokeStyle = "rgba(139, 69, 19, 0.35)";
-      ctx.setLineDash([6, 5]);
+      ctx.setLineDash([7, 5]);
       ctx.beginPath();
-      ctx.moveTo(letterBoxX + 40, textY);
-      ctx.lineTo(letterBoxX + letterBoxW - 40, textY);
+      ctx.moveTo(letterBoxX + 44, textY);
+      ctx.lineTo(letterBoxX + letterBoxW - 44, textY);
       ctx.stroke();
       ctx.setLineDash([]);
 
       ctx.textAlign = "right";
       ctx.fillStyle = "#63200f";
       ctx.font = "italic 22px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Por siempre tuyo, con todo mi amor y devoción — Always,", letterBoxX + letterBoxW - 40, textY + 40);
+      ctx.fillText("Por siempre tuyo, con todo mi amor y devoción — Always,", letterBoxX + letterBoxW - 44, textY + 40);
 
       ctx.fillStyle = "#781c1d";
       ctx.font = "bold 34px 'Caveat', cursive, Georgia, serif";
-      ctx.fillText("Tu esposo que piensa en ti en cada segundo y te ama con toda su alma", letterBoxX + letterBoxW - 40, textY + 85);
+      ctx.fillText("Tu esposo Sócrates que piensa en ti en cada segundo y te ama con toda su alma", letterBoxX + letterBoxW - 44, textY + 86);
 
-      // 6. Pie de Página: Sello de Cera de Hogwarts & Mischief Managed
-      const sealY = 2175;
+      // 7. Pie de Página: Sello de Cera de Hogwarts & Mischief Managed
+      const sealY = 3120;
       ctx.save();
-      ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
-      ctx.shadowBlur = 16;
+      ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
+      ctx.shadowBlur = 18;
       ctx.shadowOffsetY = 6;
-      const sealGrad = ctx.createRadialGradient(700, sealY, 10, 700, sealY, 44);
+      const sealGrad = ctx.createRadialGradient(750, sealY, 10, 750, sealY, 48);
       sealGrad.addColorStop(0, "#b91c1c");
       sealGrad.addColorStop(0.65, "#7f1d1d");
       sealGrad.addColorStop(1, "#450a0a");
       ctx.fillStyle = sealGrad;
       ctx.beginPath();
-      ctx.arc(700, sealY, 44, 0, Math.PI * 2);
+      ctx.arc(750, sealY, 48, 0, Math.PI * 2);
       ctx.fill();
       ctx.strokeStyle = "#991b1b";
       ctx.lineWidth = 3;
@@ -1975,20 +2117,20 @@ class ConstellationApp {
 
       ctx.textAlign = "center";
       ctx.fillStyle = "#fef08a";
-      ctx.font = "bold 24px 'Playfair Display', Georgia, serif";
-      ctx.fillText("⚡△⃒⃘", 700, sealY + 8);
+      ctx.font = "bold 26px 'Playfair Display', Georgia, serif";
+      ctx.fillText("⚡△⃒⃘", 750, sealY + 9);
 
       ctx.fillStyle = "#5a2512";
-      ctx.font = "900 20px 'Playfair Display', Georgia, serif";
-      ctx.fillText("✦ TRAVESURA REALIZADA ✦ MISCHIEF MANAGED ✦ ALWAYS ✦", 700, 2275);
+      ctx.font = "900 22px 'Playfair Display', Georgia, serif";
+      ctx.fillText("✦ TRAVESURA REALIZADA ✦ MISCHIEF MANAGED ✦ ALWAYS ✦", 750, 3215);
 
-      // 7. Descargar la imagen
+      // 8. Descargar la imagen
       canvas.toBlob((blob) => {
         if (!blob) return;
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "Mapa_del_Merodeador_Xochitl_Sinay.png";
+        a.download = "Mapa_del_Merodeador_Socrates_y_Xochitl_Sinay.png";
         document.body.appendChild(a);
         a.click();
         setTimeout(() => {
