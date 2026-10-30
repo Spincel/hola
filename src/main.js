@@ -214,6 +214,8 @@ class ConstellationApp {
     };
 
     if (envelopeScene && envelopeCard) {
+      let downTarget = null;
+
       envelopeScene.addEventListener("pointerdown", (e) => {
         if (envelopeOpened) return;
         isPointerDown = true;
@@ -225,12 +227,9 @@ class ConstellationApp {
         lastX = e.clientX;
         lastTime = performance.now();
         velocityX = 0;
+        downTarget = document.elementFromPoint(e.clientX, e.clientY) || e.target;
 
-        envelopeScene.classList.add("is-dragging");
         envelopeCard.style.transition = "none";
-        try {
-          envelopeScene.setPointerCapture(e.pointerId);
-        } catch (_) {}
       });
 
       envelopeScene.addEventListener("pointermove", (e) => {
@@ -239,8 +238,15 @@ class ConstellationApp {
         const dy = e.clientY - startY;
         const dist = Math.hypot(dx, dy);
 
-        if (dist > 5) {
+        if (dist > 6) {
           hasDragged = true;
+          envelopeScene.classList.add("is-dragging");
+          try {
+            if (!envelopeScene.hasPointerCapture(e.pointerId)) {
+              envelopeScene.setPointerCapture(e.pointerId);
+            }
+          } catch (_) {}
+
           const now = performance.now();
           const dt = now - lastTime;
           if (dt > 8) {
@@ -261,7 +267,9 @@ class ConstellationApp {
         isPointerDown = false;
         envelopeScene.classList.remove("is-dragging");
         try {
-          envelopeScene.releasePointerCapture(e.pointerId);
+          if (envelopeScene.hasPointerCapture(e.pointerId)) {
+            envelopeScene.releasePointerCapture(e.pointerId);
+          }
         } catch (_) {}
 
         if (hasDragged) {
@@ -273,10 +281,12 @@ class ConstellationApp {
           updateHint();
         } else {
           // Fue un clic o toque
-          const target = e.target;
-          const sealEl = target.closest("#btn-open-bottle");
-          const flipEnvelopeBtn = target.closest("#btn-flip-envelope");
-          const flipBackBtnEl = target.closest("#btn-flip-back");
+          const upTarget = document.elementFromPoint(e.clientX, e.clientY) || e.target;
+          const hit = downTarget || upTarget;
+
+          const sealEl = hit?.closest("#btn-open-bottle") || upTarget?.closest("#btn-open-bottle");
+          const flipEnvelopeBtn = hit?.closest("#btn-flip-envelope") || upTarget?.closest("#btn-flip-envelope");
+          const flipBackBtnEl = hit?.closest("#btn-flip-back") || upTarget?.closest("#btn-flip-back");
 
           if (sealEl) {
             openEnvelope(e);
@@ -288,7 +298,7 @@ class ConstellationApp {
             currentRotX = 0;
             updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
             updateHint();
-            sound.playClick();
+            if (sound) sound.playClick();
             return;
           }
 
@@ -297,7 +307,7 @@ class ConstellationApp {
             currentRotX = 0;
             updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
             updateHint();
-            sound.playClick();
+            if (sound) sound.playClick();
             return;
           }
 
@@ -311,12 +321,36 @@ class ConstellationApp {
           currentRotX = 0;
           updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
           updateHint();
-          sound.playClick();
+          if (sound) sound.playClick();
         }
       };
 
       envelopeScene.addEventListener("pointerup", handlePointerUp);
       envelopeScene.addEventListener("pointercancel", handlePointerUp);
+    }
+
+    if (flipBtn) {
+      flipBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+      flipBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentRotY = Math.floor(currentRotY / 360) * 360 + 180;
+        currentRotX = 0;
+        updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
+        updateHint();
+        if (sound) sound.playClick();
+      });
+    }
+
+    if (flipBackBtn) {
+      flipBackBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+      flipBackBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentRotY = Math.round(currentRotY / 360) * 360;
+        currentRotX = 0;
+        updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
+        updateHint();
+        if (sound) sound.playClick();
+      });
     }
 
     // 0B. Escritura mágica progresiva estilo Harry Potter al abrir el sobre
@@ -431,9 +465,10 @@ class ConstellationApp {
     };
 
     const openEnvelope = (e) => {
-      if (e) e.stopPropagation();
+      if (e) {
+        if (typeof e.stopPropagation === "function") e.stopPropagation();
+      }
       if (envelopeOpened) return;
-      envelopeOpened = true;
       envelopeOpened = true;
 
       sound.start();
@@ -485,7 +520,17 @@ class ConstellationApp {
 
     const sealBtn = document.getElementById("btn-open-bottle");
     if (sealBtn) {
-      sealBtn.addEventListener("click", openEnvelope);
+      sealBtn.addEventListener("pointerdown", (e) => {
+        e.stopPropagation();
+      });
+      sealBtn.addEventListener("pointerup", (e) => {
+        e.stopPropagation();
+        openEnvelope(e);
+      });
+      sealBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openEnvelope(e);
+      });
       sealBtn.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
