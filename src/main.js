@@ -178,10 +178,59 @@ class ConstellationApp {
       audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🌧️";
     });
 
-    // 0A. Abrir el Sobre Mágico de Hogwarts
+    // 0A. Sobre Mágico de Hogwarts Giratorio 3D
     let envelopeOpened = false;
+    let isEnvelopeFlipped = false;
 
-    const openEnvelope = () => {
+    const envelopeCard = document.getElementById("envelope-3d-card");
+    const flipBtn = document.getElementById("btn-flip-envelope");
+    const flipBackBtn = document.getElementById("btn-flip-back");
+    const frontFace = document.getElementById("envelope-front");
+    const hintLabel = document.getElementById("hint-text-label");
+
+    const flipEnvelope = (toBack = null) => {
+      if (envelopeOpened) return;
+      if (toBack === null) {
+        isEnvelopeFlipped = !isEnvelopeFlipped;
+      } else {
+        isEnvelopeFlipped = toBack;
+      }
+
+      if (envelopeCard) {
+        envelopeCard.classList.toggle("is-flipped", isEnvelopeFlipped);
+      }
+
+      if (hintLabel) {
+        hintLabel.textContent = isEnvelopeFlipped
+          ? "¡Toca el Gran Sello de Cera de Hogwarts para abrir la carta!"
+          : "Toca el sobre o el botón para girarlo y romper el sello de Hogwarts";
+      }
+
+      if (sound) sound.playClick();
+    };
+
+    if (flipBtn) {
+      flipBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        flipEnvelope(true);
+      });
+    }
+
+    if (frontFace) {
+      frontFace.addEventListener("click", () => {
+        flipEnvelope(true);
+      });
+    }
+
+    if (flipBackBtn) {
+      flipBackBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        flipEnvelope(false);
+      });
+    }
+
+    const openEnvelope = (e) => {
+      if (e) e.stopPropagation();
       if (envelopeOpened) return;
       envelopeOpened = true;
 
@@ -230,7 +279,15 @@ class ConstellationApp {
     };
 
     const sealBtn = document.getElementById("btn-open-bottle");
-    if (sealBtn) sealBtn.addEventListener("click", openEnvelope);
+    if (sealBtn) {
+      sealBtn.addEventListener("click", openEnvelope);
+      sealBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openEnvelope(e);
+        }
+      });
+    }
     const bottleInteractive = document.getElementById("bottle-interactive");
     if (bottleInteractive) bottleInteractive.addEventListener("click", openEnvelope);
 
