@@ -24,8 +24,8 @@ export const config = {
   // 3. Fase 0: El Sobre Mágico de Hogwarts (Bienvenida oficial)
   intro: {
     envelopeBadge: "✦ CARTA OFICIAL DE HOGWARTS ✦",
-    envelopeTo: "Sra. Xóchitl Sinay Barba Cuevas",
-    envelopeDesc: "La dueña absoluta del corazón y de la vida de su esposo",
+    envelopeTo: "Xóchitl Sinay Barba Cuevas",
+    envelopeDesc: "Destino: Andén 9 ¾ ✦ Expreso de Hogwarts",
     envelopeDest: "Destino: Andén 9 ¾ ✦ Expreso de Hogwarts",
     envelopeTapHint: "Toca el sello de cera de Hogwarts para romper el encantamiento y abrir ⚡🪄",
     unfoldedTitle: "¡Bienvenida a Nuestro Viaje Mágico, Mi Amor! ⚡🚂",
@@ -237,7 +237,7 @@ export const config = {
       salutation: "Para mi amada esposa, Xóchitl Sinay Barba Cuevas:",
       paragraphs: [
         "Mi amor, quise construir este rincón mágico para hacer una pausa en el tiempo y decirte algo que mi corazón siente con una fuerza inmensa en cada latido: te amo con toda mi alma, y no hay un solo día ni un solo instante en que no piense en ti.",
-        "Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.",
+        "Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Eres la dueña absoluta de mi corazón y de mi vida entera. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.",
         "Eres mi refugio y mi Patronus: esa luz invencible que disuelve cualquier nube gris. Hemos caminado juntos, soñado juntos y superado cualquier tormenta. Y hoy no quiero hablarte de la prisa del día a día, sino de nuestro futuro... de un plan hermoso que vamos a construir juntos con toda la ilusión.",
         "Sueño con el día en que nos escapemos a esa cabaña mágica en el bosque que tanto nos emociona, para escuchar la lluvia caer contra los cristales, acurrucarnos junto a la chimenea crepitante, disfrutar de una copa de vino y mirarnos a los ojos sabiendo que todo lo que necesitamos en este mundo es estar juntos...",
       ],

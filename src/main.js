@@ -132,6 +132,53 @@ class ConstellationApp {
 
     // 0A. Abrir el Sobre Mágico de Hogwarts
     let envelopeOpened = false;
+
+    const triggerMagicalSparkBurst = (centerX, centerY) => {
+      const container = document.body;
+
+      // 1. Onda expansiva mágica de Hogwarts
+      const shockwave = document.createElement("div");
+      shockwave.className = "magic-shockwave";
+      shockwave.style.left = `${centerX}px`;
+      shockwave.style.top = `${centerY}px`;
+      container.appendChild(shockwave);
+      setTimeout(() => shockwave.remove(), 1000);
+
+      // 2. Chispas luminosas, estrellas y runas mágicas
+      const sparkSymbols = ["✧", "✦", "⚡", "★", "·", "✦", "✧", "⋆"];
+      const colors = ["#facc15", "#fde047", "#fef08a", "#ffffff", "#f59e0b", "#38bdf8"];
+      const count = 48;
+
+      for (let i = 0; i < count; i++) {
+        const spark = document.createElement("div");
+        spark.className = "magic-spark-particle";
+
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.45;
+        const distance = 70 + Math.random() * 180;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        const rot = (Math.random() - 0.5) * 720;
+        const duration = 0.65 + Math.random() * 0.45;
+        const delay = Math.random() * 0.12;
+        const size = 12 + Math.random() * 18;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const symbol = sparkSymbols[Math.floor(Math.random() * sparkSymbols.length)];
+
+        spark.textContent = symbol;
+        spark.style.left = `${centerX}px`;
+        spark.style.top = `${centerY}px`;
+        spark.style.color = color;
+        spark.style.fontSize = `${size}px`;
+        spark.style.setProperty("--tx", `${tx}px`);
+        spark.style.setProperty("--ty", `${ty}px`);
+        spark.style.setProperty("--rot", `${rot}deg`);
+        spark.style.animation = `magic-spark-burst ${duration}s cubic-bezier(0.12, 0.8, 0.32, 1) ${delay}s forwards`;
+
+        container.appendChild(spark);
+        setTimeout(() => spark.remove(), (duration + delay) * 1000 + 100);
+      }
+    };
+
     const openEnvelope = () => {
       if (envelopeOpened) return;
       envelopeOpened = true;
@@ -142,6 +189,14 @@ class ConstellationApp {
       const seal = document.getElementById("btn-open-bottle");
       const flap = document.getElementById("envelope-flap");
       const flash = document.getElementById("supernova-flash");
+
+      let centerX = window.innerWidth / 2;
+      let centerY = window.innerHeight / 2;
+      if (seal) {
+        const rect = seal.getBoundingClientRect();
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top + rect.height / 2;
+      }
 
       if (seal) seal.classList.add("breaking");
 
@@ -160,13 +215,8 @@ class ConstellationApp {
         if (flap) flap.classList.add("open");
       }, 200);
 
-      // Chispas mágicas de bienvenida
-      confetti({
-        particleCount: 55,
-        spread: 80,
-        origin: { y: 0.5 },
-        colors: ["#f59e0b", "#facc15", "#38bdf8", "#fef08a", "#ffffff"],
-      });
+      // Estallido de magia pura, chispas y estelas de Hogwarts (sin confeti)
+      triggerMagicalSparkBurst(centerX, centerY);
 
       // El pergamino con la carta se revela
       setTimeout(() => {
