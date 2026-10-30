@@ -194,7 +194,7 @@
 
         <div class="envelope-hint" id="envelope-hint">
           <span class="hint-wand">🪄</span>
-          <span id="hint-text-label">Toca el sobre o el botón para girarlo y romper el sello de Hogwarts</span>
+          <span id="hint-text-label">Arrastra con el ratón para girar el sobre en 3D libremente</span>
         </div>
       </div>
 
@@ -211,17 +211,22 @@
           <div class="grimoire-flourish-bottom">✦ ─── London to Hogwarts ─── ✦</div>
         </div>
 
-        <div class="intro-parchment-body">
-          <p class="intro-lead-salutation">Para mi amada esposa, Xóchitl Sinay:</p>
-          <p class="intro-heart-owner">✦ La dueña absoluta de mi corazón y de mi vida entera ✦</p>
-          <p id="unfolded-subtitle" class="intro-letter-p">
-            Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento de mi día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida. Este viaje recorre 4 rincones mágicos de nuestro amor. Sigue cada estación para descubrir el gran plan a futuro que tengo reservado para los dos...
-          </p>
+        <div class="intro-parchment-body" id="intro-parchment-body">
+          <p class="intro-lead-salutation" id="intro-lead-salutation">Para mi amada esposa, Xóchitl Sinay:</p>
+          <p class="intro-heart-owner" id="intro-heart-owner">✦ La dueña absoluta de mi corazón y de mi vida entera ✦</p>
+          
+          <div id="intro-letter-container" class="intro-letter-container">
+            <div id="unfolded-subtitle" class="intro-letter-body"></div>
+            <span id="intro-magic-quill" class="magic-quill-cursor hidden">🪶</span>
+          </div>
         </div>
 
-        <button id="btn-start" class="btn-hogwarts-gold btn-pulse">
-          <span id="start-btn-text">Subir al Expreso de Hogwarts 🚂✨</span>
-        </button>
+        <div class="intro-actions-bar">
+          <button id="btn-skip-intro-typewriter" class="btn-text-link hidden" type="button">Saltar animación ⚡</button>
+          <button id="btn-start" class="btn-hogwarts-gold btn-pulse hidden">
+            <span id="start-btn-text">Subir al Expreso de Hogwarts 🚂✨</span>
+          </button>
+        </div>
       </div>
 
     </div>

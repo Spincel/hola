@@ -178,60 +178,262 @@ class ConstellationApp {
       audioBtn.querySelector(".audio-icon").textContent = isMuted ? "🔇" : "🌧️";
     });
 
-    // 0A. Sobre Mágico de Hogwarts Giratorio 3D
+    // 0A. Sobre Mágico de Hogwarts Giratorio 3D con Arrastre Libre
     let envelopeOpened = false;
-    let isEnvelopeFlipped = false;
+    let currentRotY = 0;
+    let currentRotX = 0;
+    let isPointerDown = false;
+    let hasDragged = false;
+    let startX = 0;
+    let startY = 0;
+    let startRotY = 0;
+    let startRotX = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocityX = 0;
 
+    const envelopeScene = document.getElementById("envelope-3d-scene");
     const envelopeCard = document.getElementById("envelope-3d-card");
     const flipBtn = document.getElementById("btn-flip-envelope");
     const flipBackBtn = document.getElementById("btn-flip-back");
-    const frontFace = document.getElementById("envelope-front");
     const hintLabel = document.getElementById("hint-text-label");
 
-    const flipEnvelope = (toBack = null) => {
-      if (envelopeOpened) return;
-      if (toBack === null) {
-        isEnvelopeFlipped = !isEnvelopeFlipped;
-      } else {
-        isEnvelopeFlipped = toBack;
-      }
-
-      if (envelopeCard) {
-        envelopeCard.classList.toggle("is-flipped", isEnvelopeFlipped);
-      }
-
-      if (hintLabel) {
-        hintLabel.textContent = isEnvelopeFlipped
-          ? "¡Toca el Gran Sello de Cera de Hogwarts para abrir la carta!"
-          : "Toca el sobre o el botón para girarlo y romper el sello de Hogwarts";
-      }
-
-      if (sound) sound.playClick();
+    const updateEnvelopeTransform = (transition = "") => {
+      if (!envelopeCard) return;
+      envelopeCard.style.transition = transition;
+      envelopeCard.style.transform = `rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg)`;
     };
 
-    if (flipBtn) {
-      flipBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        flipEnvelope(true);
+    const updateHint = () => {
+      if (!hintLabel) return;
+      const norm = ((currentRotY % 360) + 360) % 360;
+      const isBackVisible = norm > 75 && norm < 285;
+      hintLabel.textContent = isBackVisible
+        ? "✨ Toca el Gran Sello de Hogwarts para romper el encantamiento y abrir"
+        : "🪄 Arrastra con el ratón para girar el sobre en 3D libremente";
+    };
+
+    if (envelopeScene && envelopeCard) {
+      envelopeScene.addEventListener("pointerdown", (e) => {
+        if (envelopeOpened) return;
+        isPointerDown = true;
+        hasDragged = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        startRotY = currentRotY;
+        startRotX = currentRotX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velocityX = 0;
+
+        envelopeScene.classList.add("is-dragging");
+        envelopeCard.style.transition = "none";
+        try {
+          envelopeScene.setPointerCapture(e.pointerId);
+        } catch (_) {}
       });
+
+      envelopeScene.addEventListener("pointermove", (e) => {
+        if (!isPointerDown || envelopeOpened) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist > 5) {
+          hasDragged = true;
+          const now = performance.now();
+          const dt = now - lastTime;
+          if (dt > 8) {
+            velocityX = (e.clientX - lastX) / dt;
+          }
+          lastX = e.clientX;
+          lastTime = now;
+
+          currentRotY = startRotY + dx * 0.65;
+          currentRotX = Math.max(-22, Math.min(22, startRotX - dy * 0.22));
+          updateEnvelopeTransform("none");
+          updateHint();
+        }
+      });
+
+      const handlePointerUp = (e) => {
+        if (!isPointerDown) return;
+        isPointerDown = false;
+        envelopeScene.classList.remove("is-dragging");
+        try {
+          envelopeScene.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+
+        if (hasDragged) {
+          // Inercia suave y ajuste magnético a la cara más cercana
+          currentRotY += velocityX * 100;
+          currentRotY = Math.round(currentRotY / 180) * 180;
+          currentRotX = 0;
+          updateEnvelopeTransform("transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)");
+          updateHint();
+        } else {
+          // Fue un clic o toque
+          const target = e.target;
+          const sealEl = target.closest("#btn-open-bottle");
+          const flipEnvelopeBtn = target.closest("#btn-flip-envelope");
+          const flipBackBtnEl = target.closest("#btn-flip-back");
+
+          if (sealEl) {
+            openEnvelope(e);
+            return;
+          }
+
+          if (flipEnvelopeBtn) {
+            currentRotY = Math.floor(currentRotY / 360) * 360 + 180;
+            currentRotX = 0;
+            updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
+            updateHint();
+            sound.playClick();
+            return;
+          }
+
+          if (flipBackBtnEl) {
+            currentRotY = Math.round(currentRotY / 360) * 360;
+            currentRotX = 0;
+            updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
+            updateHint();
+            sound.playClick();
+            return;
+          }
+
+          // Clic sobre cualquier otra parte del sobre: alterna entre frente y reverso
+          const norm = ((currentRotY % 360) + 360) % 360;
+          if (norm > 75 && norm < 285) {
+            currentRotY = Math.round(currentRotY / 360) * 360;
+          } else {
+            currentRotY = Math.floor(currentRotY / 360) * 360 + 180;
+          }
+          currentRotX = 0;
+          updateEnvelopeTransform("transform 0.75s cubic-bezier(0.34, 1.25, 0.64, 1)");
+          updateHint();
+          sound.playClick();
+        }
+      };
+
+      envelopeScene.addEventListener("pointerup", handlePointerUp);
+      envelopeScene.addEventListener("pointercancel", handlePointerUp);
     }
 
-    if (frontFace) {
-      frontFace.addEventListener("click", () => {
-        flipEnvelope(true);
-      });
-    }
+    // 0B. Escritura mágica progresiva estilo Harry Potter al abrir el sobre
+    let introTypewriterInterval = null;
 
-    if (flipBackBtn) {
-      flipBackBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        flipEnvelope(false);
-      });
-    }
+    const startIntroTypewriter = () => {
+      const letterBody = document.getElementById("unfolded-subtitle");
+      const quill = document.getElementById("intro-magic-quill");
+      const skipBtn = document.getElementById("btn-skip-intro-typewriter");
+      const startBtn = document.getElementById("btn-start");
+      const unfoldedBox = document.getElementById("intro-unfolded-box");
+
+      if (introTypewriterInterval) {
+        clearInterval(introTypewriterInterval);
+        introTypewriterInterval = null;
+      }
+
+      if (!letterBody) return;
+
+      letterBody.innerHTML = "";
+      if (quill) quill.classList.remove("hidden");
+      if (skipBtn) skipBtn.classList.remove("hidden");
+      if (startBtn) startBtn.classList.add("hidden");
+
+      const paragraphs = [
+        "Hice todo esto para recordarte algo que late en mi pecho a cada instante: que pienso en ti en cada momento de mi día, que te amo con toda mi alma y que eres, sin duda alguna, lo mejor y más hermoso de toda mi vida.",
+        "Este viaje mágico recorre 4 rincones especiales de nuestro amor. Sigue cada estación para descubrir el gran plan a futuro que tengo reservado para los dos..."
+      ];
+
+      const finishIntroTypewriter = () => {
+        if (introTypewriterInterval) {
+          clearInterval(introTypewriterInterval);
+          introTypewriterInterval = null;
+        }
+        letterBody.innerHTML = paragraphs
+          .map((p) => `<p class="intro-letter-p">${p}</p>`)
+          .join("");
+        if (quill) quill.classList.add("hidden");
+        if (skipBtn) skipBtn.classList.add("hidden");
+        if (startBtn) {
+          startBtn.classList.remove("hidden");
+          startBtn.classList.add("btn-pulse");
+        }
+        sound.playRewardChord();
+      };
+
+      if (skipBtn) skipBtn.onclick = finishIntroTypewriter;
+      if (unfoldedBox) {
+        unfoldedBox.onclick = (e) => {
+          if (e.target.closest("#btn-start")) return;
+          if (introTypewriterInterval) {
+            finishIntroTypewriter();
+          }
+        };
+      }
+
+      let pIndex = 0;
+      let wIndex = 0;
+      let wordsInP = paragraphs[0].split(" ");
+
+      let currentPEl = document.createElement("p");
+      currentPEl.className = "intro-letter-p";
+      letterBody.appendChild(currentPEl);
+      if (quill) currentPEl.appendChild(quill);
+
+      let wordCounter = 0;
+
+      introTypewriterInterval = setInterval(() => {
+        if (pIndex >= paragraphs.length) {
+          finishIntroTypewriter();
+          return;
+        }
+
+        if (wIndex < wordsInP.length) {
+          const wordText = wordsInP[wIndex];
+          const span = document.createElement("span");
+          span.className = "ink-word magic-ink-glow";
+          span.textContent = (wIndex > 0 ? " " : "") + wordText;
+
+          if (quill && quill.parentElement === currentPEl) {
+            currentPEl.insertBefore(span, quill);
+          } else {
+            currentPEl.appendChild(span);
+          }
+
+          setTimeout(() => {
+            span.classList.remove("magic-ink-glow");
+          }, 300);
+
+          wordCounter++;
+          if (wordCounter % 3 === 0 && sound && typeof sound.playQuillScribe === "function") {
+            try {
+              sound.playQuillScribe();
+            } catch (_) {}
+          }
+
+          wIndex++;
+        } else {
+          pIndex++;
+          wIndex = 0;
+          if (pIndex < paragraphs.length) {
+            wordsInP = paragraphs[pIndex].split(" ");
+            currentPEl = document.createElement("p");
+            currentPEl.className = "intro-letter-p";
+            letterBody.appendChild(currentPEl);
+            if (quill) currentPEl.appendChild(quill);
+          } else {
+            finishIntroTypewriter();
+          }
+        }
+      }, 45);
+    };
 
     const openEnvelope = (e) => {
       if (e) e.stopPropagation();
       if (envelopeOpened) return;
+      envelopeOpened = true;
       envelopeOpened = true;
 
       sound.start();
@@ -269,12 +471,15 @@ class ConstellationApp {
       // Estallido de magia pura, chispas y estelas de Hogwarts (sin confeti)
       triggerMagicalSparkBurst(centerX, centerY);
 
-      // El pergamino con la carta se revela
+      // El pergamino con la carta se revela y empieza a escribirse mágicamente
       setTimeout(() => {
         const bottleBox = document.getElementById("intro-bottle-box");
         const unfoldedBox = document.getElementById("intro-unfolded-box");
         if (bottleBox) bottleBox.classList.add("hidden");
-        if (unfoldedBox) unfoldedBox.classList.remove("hidden");
+        if (unfoldedBox) {
+          unfoldedBox.classList.remove("hidden");
+          startIntroTypewriter();
+        }
       }, 720);
     };
 
