@@ -9,8 +9,56 @@ import { config } from "./config.js";
 import { sound } from "./audio.js";
 import { Starfield } from "./stars.js";
 
+// Estallido de chispas, runas luminosas y onda expansiva de Hogwarts
+export const triggerMagicalSparkBurst = (centerX, centerY) => {
+  const container = document.body;
+
+  // 1. Onda expansiva mágica de Hogwarts
+  const shockwave = document.createElement("div");
+  shockwave.className = "magic-shockwave";
+  shockwave.style.left = `${centerX}px`;
+  shockwave.style.top = `${centerY}px`;
+  container.appendChild(shockwave);
+  setTimeout(() => shockwave.remove(), 1000);
+
+  // 2. Chispas luminosas, estrellas y runas mágicas
+  const sparkSymbols = ["✧", "✦", "⚡", "★", "·", "✦", "✧", "⋆"];
+  const colors = ["#facc15", "#fde047", "#fef08a", "#ffffff", "#f59e0b", "#38bdf8"];
+  const count = 48;
+
+  for (let i = 0; i < count; i++) {
+    const spark = document.createElement("div");
+    spark.className = "magic-spark-particle";
+
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.45;
+    const distance = 70 + Math.random() * 180;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    const rot = (Math.random() - 0.5) * 720;
+    const duration = 0.65 + Math.random() * 0.45;
+    const delay = Math.random() * 0.12;
+    const size = 12 + Math.random() * 18;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const symbol = sparkSymbols[Math.floor(Math.random() * sparkSymbols.length)];
+
+    spark.textContent = symbol;
+    spark.style.left = `${centerX}px`;
+    spark.style.top = `${centerY}px`;
+    spark.style.color = color;
+    spark.style.fontSize = `${size}px`;
+    spark.style.setProperty("--tx", `${tx}px`);
+    spark.style.setProperty("--ty", `${ty}px`);
+    spark.style.setProperty("--rot", `${rot}deg`);
+    spark.style.animation = `magic-spark-burst ${duration}s cubic-bezier(0.12, 0.8, 0.32, 1) ${delay}s forwards`;
+
+    container.appendChild(spark);
+    setTimeout(() => spark.remove(), (duration + delay) * 1000 + 100);
+  }
+};
+
 class ConstellationApp {
   constructor() {
+    window.app = this;
     this.starfield = null;
     this.currentStageId = "scene-intro";
     this.collectedFragments = new Set();
@@ -133,52 +181,6 @@ class ConstellationApp {
     // 0A. Abrir el Sobre Mágico de Hogwarts
     let envelopeOpened = false;
 
-    const triggerMagicalSparkBurst = (centerX, centerY) => {
-      const container = document.body;
-
-      // 1. Onda expansiva mágica de Hogwarts
-      const shockwave = document.createElement("div");
-      shockwave.className = "magic-shockwave";
-      shockwave.style.left = `${centerX}px`;
-      shockwave.style.top = `${centerY}px`;
-      container.appendChild(shockwave);
-      setTimeout(() => shockwave.remove(), 1000);
-
-      // 2. Chispas luminosas, estrellas y runas mágicas
-      const sparkSymbols = ["✧", "✦", "⚡", "★", "·", "✦", "✧", "⋆"];
-      const colors = ["#facc15", "#fde047", "#fef08a", "#ffffff", "#f59e0b", "#38bdf8"];
-      const count = 48;
-
-      for (let i = 0; i < count; i++) {
-        const spark = document.createElement("div");
-        spark.className = "magic-spark-particle";
-
-        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.45;
-        const distance = 70 + Math.random() * 180;
-        const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance;
-        const rot = (Math.random() - 0.5) * 720;
-        const duration = 0.65 + Math.random() * 0.45;
-        const delay = Math.random() * 0.12;
-        const size = 12 + Math.random() * 18;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const symbol = sparkSymbols[Math.floor(Math.random() * sparkSymbols.length)];
-
-        spark.textContent = symbol;
-        spark.style.left = `${centerX}px`;
-        spark.style.top = `${centerY}px`;
-        spark.style.color = color;
-        spark.style.fontSize = `${size}px`;
-        spark.style.setProperty("--tx", `${tx}px`);
-        spark.style.setProperty("--ty", `${ty}px`);
-        spark.style.setProperty("--rot", `${rot}deg`);
-        spark.style.animation = `magic-spark-burst ${duration}s cubic-bezier(0.12, 0.8, 0.32, 1) ${delay}s forwards`;
-
-        container.appendChild(spark);
-        setTimeout(() => spark.remove(), (duration + delay) * 1000 + 100);
-      }
-    };
-
     const openEnvelope = () => {
       if (envelopeOpened) return;
       envelopeOpened = true;
@@ -249,7 +251,7 @@ class ConstellationApp {
       this.initMinigame2();
     });
 
-    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Cambio de escenografía al Giratiempo Dorado)
+    // 3. Avanzar de Recompensa 2 a Minijuego 3 (Encantamiento Patronus)
     document.getElementById("btn-to-m3").addEventListener("click", () => {
       this.setScenicBackground(3);
       if (this.starfield) this.starfield.setTheme("patronusCabin");
@@ -257,34 +259,48 @@ class ConstellationApp {
       this.initMinigame3();
     });
 
-    // 4. Avanzar de Recompensa 3 al Clímax (La Cabaña Mágica con chimenea y lluvia)
-    document.getElementById("btn-to-climax").addEventListener("click", () => {
-      this.setScenicBackground(4);
-      if (this.starfield) this.starfield.setTheme("patronusCabin");
-      this.showStage("scene-climax-pedestal");
-      this.initClimaxPedestal();
-    });
+    // 4. Avanzar de Recompensa 3 a Minijuego 4 (Rompecabezas Sagrado: Always)
+    const btnToM4 = document.getElementById("btn-to-m4");
+    if (btnToM4) {
+      btnToM4.addEventListener("click", () => {
+        this.setScenicBackground(3);
+        if (this.starfield) this.starfield.setTheme("patronusCabin");
+        this.showStage("scene-m4-play");
+        this.initMinigame4();
+      });
+    }
 
-    // 5. De la Carta a la Galería de Recuerdos
+    // 5. Avanzar de Recompensa 4 al Clímax (El Giratiempo 3D & La Fusión)
+    const btnToClimax = document.getElementById("btn-to-climax");
+    if (btnToClimax) {
+      btnToClimax.addEventListener("click", () => {
+        this.setScenicBackground(4);
+        if (this.starfield) this.starfield.setTheme("patronusCabin");
+        this.showStage("scene-climax-pedestal");
+        this.initClimaxPedestal();
+      });
+    }
+
+    // 6. De la Carta a la Galería de Recuerdos
     document.getElementById("btn-to-gallery").addEventListener("click", () => {
       this.setScenicBackground(4);
       this.showStage("scene-climax-gallery");
       this.initCarousel();
     });
 
-    // 6. De la Galería a la Gran Pregunta
+    // 7. De la Galería a la Gran Pregunta
     document.getElementById("btn-to-question").addEventListener("click", () => {
       this.setScenicBackground(4);
       this.showStage("scene-climax-question");
       this.initPlayfulNoButton();
     });
 
-    // 7. Botón "¡Sí!" final
+    // 8. Botón "¡Sí!" final
     document.getElementById("btn-yes").addEventListener("click", () => {
       this.triggerYesCelebration();
     });
 
-    // 8. Captura final
+    // 9. Captura final
     document.getElementById("btn-download-capture").addEventListener("click", () => {
       window.print();
     });
@@ -297,17 +313,11 @@ class ConstellationApp {
     const slot = document.getElementById(`slot-${id}`);
     if (slot) {
       slot.classList.add("collected");
+      const rect = slot.getBoundingClientRect();
+      triggerMagicalSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
     }
 
     sound.playRewardChord();
-
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.12 },
-      colors: ["#22c55e", "#f59e0b", "#f43f5e", "#fef08a", "#bae6fd"],
-      ticks: 180,
-    });
   }
 
   // ==================================================================
@@ -596,19 +606,12 @@ class ConstellationApp {
         burstEl.classList.remove("hidden");
       }
 
-      confetti({
-        particleCount: 75,
-        spread: 90,
-        origin: { y: 0.5 },
-        colors: ["#38bdf8", "#facc15", "#fef08a", "#ffffff", "#bae6fd"],
-      });
+      const rect = burstEl ? burstEl.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight * 0.45, width: 0, height: 0 };
+      triggerMagicalSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
       setTimeout(() => {
         this.collectFragment(3);
-        setTimeout(() => {
-          this.collectFragment(4);
-          this.showStage("scene-m3-reward");
-        }, 550);
+        this.showStage("scene-m3-reward");
       }, 1900);
     };
 
@@ -696,6 +699,89 @@ class ConstellationApp {
   }
 
   // ==================================================================
+  // ESTACIÓN IV: EL ROMPECABEZAS SAGRADO: ALWAYS ⚡△⃒⃘
+  // ==================================================================
+  initMinigame4() {
+    this.assembledRelics = new Set();
+    const countEl = document.getElementById("hallows-relics-count");
+    const bannerEl = document.getElementById("hallows-always-banner");
+    const msgEl = document.getElementById("relic-active-message");
+    const msgText = document.getElementById("relic-message-text");
+
+    if (countEl) countEl.textContent = "0";
+    if (bannerEl) bannerEl.classList.add("hidden");
+    if (msgEl) msgEl.classList.add("hidden");
+
+    const relicKeys = ["triangle", "circle", "wand"];
+
+    // Reiniciar piezas y botones
+    relicKeys.forEach((relicId) => {
+      const piece = document.getElementById(`hallows-piece-${relicId}`);
+      if (piece) piece.classList.add("hidden");
+
+      const btn = document.getElementById(`btn-relic-${relicId}`);
+      if (btn) btn.classList.remove("placed");
+    });
+
+    const relicsConfig = {
+      triangle: {
+        phrase: "«Eres mi refugio seguro y el lugar donde mi alma siempre encuentra paz.»",
+      },
+      circle: {
+        phrase: "«Pienso en ti en cada instante de mi día; vives en cada latido de mi corazón.»",
+      },
+      wand: {
+        phrase: "«Nuestro amor es la fuerza más pura e inquebrantable de este universo.»",
+      },
+    };
+
+    relicKeys.forEach((relicId) => {
+      const btn = document.getElementById(`btn-relic-${relicId}`);
+      if (!btn) return;
+
+      btn.onclick = () => {
+        if (this.assembledRelics.has(relicId)) return;
+        this.assembledRelics.add(relicId);
+
+        sound.playWandSwoosh();
+        btn.classList.add("placed");
+
+        const piece = document.getElementById(`hallows-piece-${relicId}`);
+        if (piece) piece.classList.remove("hidden");
+
+        if (countEl) countEl.textContent = this.assembledRelics.size.toString();
+
+        if (msgEl && msgText && relicsConfig[relicId]) {
+          msgText.textContent = relicsConfig[relicId].phrase;
+          msgEl.classList.remove("hidden");
+        }
+
+        // Si se han colocado las 3 reliquias
+        if (this.assembledRelics.size === 3) {
+          sound.playSpellSuccess();
+
+          if (bannerEl) {
+            bannerEl.classList.remove("hidden");
+          }
+
+          const svgEl = document.getElementById("hallows-svg");
+          if (svgEl) {
+            const rect = svgEl.getBoundingClientRect();
+            triggerMagicalSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          }
+
+          setTimeout(() => {
+            this.collectFragment(4);
+            setTimeout(() => {
+              this.showStage("scene-m4-reward");
+            }, 800);
+          }, 2200);
+        }
+      };
+    });
+  }
+
+  // ==================================================================
   // CLÍMAX: FUSIÓN DE FRAGMENTOS (EL GIRATIEMPO 3D & LA CARTA)
   // ==================================================================
   initClimaxPedestal() {
@@ -732,12 +818,7 @@ class ConstellationApp {
             setTimeout(() => flashEl.classList.add("hidden"), 800);
           }
 
-          confetti({
-            particleCount: 180,
-            spread: 100,
-            origin: { y: 0.5 },
-            colors: ["#f59e0b", "#facc15", "#38bdf8", "#fef08a", "#ffffff"],
-          });
+          triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
 
           this.showStage("scene-climax-letter");
           this.startTypewriter();
@@ -748,38 +829,114 @@ class ConstellationApp {
 
   startTypewriter() {
     const container = document.getElementById("letter-body");
+    const scrollArea = document.getElementById("letter-scroll-area");
+    const quill = document.getElementById("magic-quill-holder");
     const skipBtn = document.getElementById("btn-skip-typewriter");
     const toGalleryBtn = document.getElementById("btn-to-gallery");
+    const sigBox = document.getElementById("scroll-signature-box");
+
+    if (this.typewriterInterval) {
+      clearInterval(this.typewriterInterval);
+      this.typewriterInterval = null;
+    }
+
     container.innerHTML = "";
+    if (scrollArea) scrollArea.scrollTop = 0;
+    if (sigBox) sigBox.classList.add("hidden");
+    if (toGalleryBtn) toGalleryBtn.classList.add("hidden");
+    if (skipBtn) skipBtn.classList.remove("hidden");
+    if (quill) quill.classList.remove("hidden");
 
     const paragraphs = config.climax.letter.paragraphs;
-    const fullHtml = paragraphs.map((p) => `<p>${p}</p>`).join("");
-    const fullText = paragraphs.join("\n\n");
-
-    let charIndex = 0;
+    const fullHtml = paragraphs
+      .map((p) => `<p class="letter-parchment-p">${p}</p>`)
+      .join("");
 
     const finishTypewriter = () => {
-      clearInterval(this.typewriterInterval);
+      if (this.typewriterInterval) {
+        clearInterval(this.typewriterInterval);
+        this.typewriterInterval = null;
+      }
       container.innerHTML = fullHtml;
-      skipBtn.classList.add("hidden");
-      toGalleryBtn.classList.remove("hidden");
-      const scrollParent = container.parentElement;
-      if (scrollParent) scrollParent.scrollTop = scrollParent.scrollHeight;
+      if (quill) quill.classList.add("hidden");
+      if (skipBtn) skipBtn.classList.add("hidden");
+      if (sigBox) {
+        sigBox.classList.remove("hidden");
+        sigBox.classList.add("revealed");
+      }
+      if (toGalleryBtn) toGalleryBtn.classList.remove("hidden");
+      sound.playRewardChord();
     };
 
     skipBtn.onclick = finishTypewriter;
 
-    // Se escribe poco a poco palabra por palabra
+    // Crear la estructura para escritura automática mágica palabra por palabra
+    let currentPIndex = 0;
+    let currentWordIndex = 0;
+    let wordsInCurrentP = paragraphs[0].split(" ");
+
+    let currentPEl = document.createElement("p");
+    currentPEl.className = "letter-parchment-p";
+    container.appendChild(currentPEl);
+    if (quill) currentPEl.appendChild(quill);
+
+    let wordCounter = 0;
+
     this.typewriterInterval = setInterval(() => {
-      if (charIndex < fullText.length) {
-        charIndex += 2;
-        container.innerText = fullText.slice(0, charIndex);
-        const scrollParent = container.parentElement;
-        if (scrollParent) scrollParent.scrollTop = scrollParent.scrollHeight;
-      } else {
+      if (currentPIndex >= paragraphs.length) {
         finishTypewriter();
+        return;
       }
-    }, 28);
+
+      if (currentWordIndex < wordsInCurrentP.length) {
+        const wordText = wordsInCurrentP[currentWordIndex];
+        const span = document.createElement("span");
+        span.className = "ink-word magic-ink-glow";
+        span.textContent = (currentWordIndex > 0 ? " " : "") + wordText;
+
+        if (quill && quill.parentElement === currentPEl) {
+          currentPEl.insertBefore(span, quill);
+        } else {
+          currentPEl.appendChild(span);
+        }
+
+        setTimeout(() => {
+          span.classList.remove("magic-ink-glow");
+        }, 340);
+
+        wordCounter++;
+        if (wordCounter % 4 === 0) {
+          sound.playQuillScribe();
+        }
+
+        currentWordIndex++;
+
+        // Desplazamiento suave solo si el texto supera el 75% del área visible
+        if (scrollArea && quill) {
+          const scrollBottom = scrollArea.scrollTop + scrollArea.clientHeight;
+          const quillBottom = quill.offsetTop + quill.offsetHeight;
+          if (quillBottom > scrollBottom - 35) {
+            scrollArea.scrollTo({
+              top: quillBottom - scrollArea.clientHeight + 45,
+              behavior: "smooth",
+            });
+          }
+        }
+      } else {
+        // Pasar al siguiente párrafo
+        currentPIndex++;
+        if (currentPIndex < paragraphs.length) {
+          currentWordIndex = 0;
+          wordsInCurrentP = paragraphs[currentPIndex].split(" ");
+          currentPEl = document.createElement("p");
+          currentPEl.className = "letter-parchment-p";
+          container.appendChild(currentPEl);
+          if (quill) currentPEl.appendChild(quill);
+        } else {
+          finishTypewriter();
+        }
+      }
+    }, 55);
   }
 
   initCarousel() {

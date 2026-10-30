@@ -377,6 +377,33 @@ class ForestAudioSystem {
     osc.stop(now + 0.2);
   }
 
+  // Sonido de pluma mágica escribiendo con tinta en el pergamino
+  playQuillScribe() {
+    if (!this.ctx || this.isMuted) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const filter = this.ctx.createBiquadFilter();
+
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(580 + Math.random() * 260, now);
+
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(850, now);
+    filter.Q.setValueAtTime(2.5, now);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.02, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.sfxGain);
+
+    osc.start(now);
+    osc.stop(now + 0.1);
+  }
+
   // Estallido de éxito al completar el movimiento de varita
   playSpellSuccess() {
     if (!this.ctx) return;

@@ -352,22 +352,138 @@
     <div id="scene-m3-reward" class="stage-scene">
       <div class="glass-card compact-card">
         <div class="reward-preview-thumb">
-          <img src="/photos/modulo3.png" alt="Módulo III: El Giratiempo Mágico">
+          <img src="/photos/modulo3.png" alt="Módulo III: El Encantamiento Patronus">
         </div>
-        <div class="reward-icon-burst">⚡</div>
-        <h3 class="reward-title">¡Corazón del Patronus Completo!</h3>
-        <p class="reward-subtitle">Fragmentos III y IV: La Fuerza del Sauce y Always</p>
+        <div class="reward-icon-burst">🌲</div>
+        <h3 class="reward-title">¡Tercer Fragmento Recuperado!</h3>
+        <p class="reward-subtitle">Fragmento III: El Sauce Boxeador & El Patronus</p>
         <div class="poem-box">
           <p class="poem-line">Eres mi Patronus en la tormenta, mi calma y mi mayor alegría.</p>
           <p class="poem-line">La mujer que habita en mis pensamientos cada instante de mi día.</p>
-          <p class="poem-line">Ahora los 4 fragmentos giran en el tiempo para sellar una promesa eterna...</p>
+          <p class="poem-line">Con el encantamiento invocado, la luz plateada ilumina el camino a las Reliquias...</p>
         </div>
-        <button id="btn-to-climax" class="btn-hogwarts-gold btn-pulse">Activar el Giratiempo Mágico ⏳✨</button>
+        <button id="btn-to-m4" class="btn-hogwarts-gold btn-pulse">Avanzar al Rompecabezas Sagrado (Estación IV) →</button>
       </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4A: PEDESTAL DEL GIRATIEMPO REAL 3D -->
+    <!-- ESCENA 4A: MINIJUEGO 4 - EL ROMPECABEZAS SAGRADO: ALWAYS -->
+    <!-- ========================================== -->
+    <div id="scene-m4-play" class="stage-scene">
+      <div class="glass-card game-card hogwarts-spell-card-slate hallows-puzzle-card">
+        <div class="scene-header">
+          <span class="station-tag">Estación IV</span>
+          <h2 class="scene-title">El Rompecabezas Sagrado: Always ⚡△⃒⃘</h2>
+          <p class="scene-instruction">
+            Ensambla las 3 reliquias ancestrales que forjan el símbolo del amor eterno e inquebrantable:
+          </p>
+          <div class="counter-badge hogwarts-badge">
+            Reliquias ensambladas: <span id="hallows-relics-count">0</span> / 3
+          </div>
+        </div>
+
+        <div class="hallows-altar-container">
+          <div class="hallows-runic-circle">
+            <div class="hallows-orbit-ring"></div>
+
+            <svg id="hallows-svg" class="hallows-svg" viewBox="0 0 320 280">
+              <defs>
+                <filter id="hallows-glow-filter" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- Silueta guía del Triángulo (La Capa de la Invisibilidad) -->
+              <polygon id="hallows-slot-triangle" class="hallows-slot" 
+                       points="160,25 35,245 285,245" />
+
+              <!-- Silueta guía del Círculo (La Piedra de la Resurrección) -->
+              <circle id="hallows-slot-circle" class="hallows-slot" 
+                      cx="160" cy="172" r="72" />
+
+              <!-- Silueta guía de la Línea (La Varita de Saúco) -->
+              <line id="hallows-slot-wand" class="hallows-slot" 
+                    x1="160" y1="25" x2="160" y2="245" />
+
+              <!-- Piezas mágicas que se iluminan al ensamblar -->
+              <polygon id="hallows-piece-triangle" class="hallows-active-piece piece-triangle hidden" 
+                       points="160,25 35,245 285,245" filter="url(#hallows-glow-filter)" />
+              <circle id="hallows-piece-circle" class="hallows-active-piece piece-circle hidden" 
+                      cx="160" cy="172" r="72" filter="url(#hallows-glow-filter)" />
+              <line id="hallows-piece-wand" class="hallows-active-piece piece-wand hidden" 
+                    x1="160" y1="25" x2="160" y2="245" filter="url(#hallows-glow-filter)" />
+            </svg>
+
+            <!-- Banner ALWAYS resplandeciente -->
+            <div id="hallows-always-banner" class="hallows-always-banner hidden">
+              <span class="always-sparkles">✧ ✦ ⚡ ✦ ✧</span>
+              <span class="always-word">ALWAYS</span>
+              <span class="always-sub">✦ Después de todo este tiempo... Always ✦</span>
+            </div>
+          </div>
+
+          <!-- Selector de las 3 reliquias -->
+          <div class="hallows-relics-tray" id="hallows-relics-tray">
+            <button class="relic-stone-btn" id="btn-relic-triangle" data-relic="triangle">
+              <span class="relic-stone-icon">⏶</span>
+              <div class="relic-stone-info">
+                <span class="relic-stone-name">La Capa</span>
+                <span class="relic-stone-desc">Nuestro Refugio</span>
+              </div>
+            </button>
+
+            <button class="relic-stone-btn" id="btn-relic-circle" data-relic="circle">
+              <span class="relic-stone-icon">◯</span>
+              <div class="relic-stone-info">
+                <span class="relic-stone-name">La Piedra</span>
+                <span class="relic-stone-desc">En mi Mente</span>
+              </div>
+            </button>
+
+            <button class="relic-stone-btn" id="btn-relic-wand" data-relic="wand">
+              <span class="relic-stone-icon">┃</span>
+              <div class="relic-stone-info">
+                <span class="relic-stone-name">La Varita</span>
+                <span class="relic-stone-desc">Fuerza Eterna</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="relic-active-message hidden" id="relic-active-message">
+            <span id="relic-message-text"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ESCENA 4B: RECOMPENSA ESTACIÓN 4           -->
+    <!-- ========================================== -->
+    <div id="scene-m4-reward" class="stage-scene">
+      <div class="glass-card compact-card">
+        <div class="reward-preview-thumb">
+          <img src="/photos/pareja_cabana.jpg" alt="Módulo IV: Nuestra Cabaña Mágica y la Promesa Always">
+        </div>
+        <div class="reward-icon-burst">⚡</div>
+        <h3 class="reward-title">¡Cuarto Fragmento Recuperado!</h3>
+        <p class="reward-subtitle">Fragmento IV: Always & La Promesa Eterna</p>
+        <div class="poem-box">
+          <p class="poem-line">Después de todo este tiempo... Always.</p>
+          <p class="poem-line">No existe magia más profunda ni destino más certero</p>
+          <p class="poem-line">que amarte con toda mi alma cada instante de mi vida.</p>
+          <p class="poem-line">Los 4 fragmentos sagrados están listos para viajar a través del tiempo...</p>
+        </div>
+        <button id="btn-to-climax" class="btn-hogwarts-gold btn-pulse">✦ Activar el Giratiempo Mágico ⏳✨ (4 de 4) ✦</button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ESCENA 4C: PEDESTAL DEL GIRATIEMPO REAL 3D -->
     <!-- ========================================== -->
     <div id="scene-climax-pedestal" class="stage-scene">
       <div class="glass-card compact-card time-turner-card">
@@ -447,13 +563,17 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- ESCENA 4B: LA CARTA EN PERGAMINO DE HOGWARTS -->
-    <!-- (AQUÍ SE REVELA EL MENSAJE PARA XÓCHITL)   -->
+    <!-- ESCENA 5A: LA CARTA EN PERGAMINO DE HOGWARTS -->
+    <!-- (AQUÍ SE ESCRIBE EL MENSAJE MÁGICO PARA XÓCHITL) -->
     <!-- ========================================== -->
     <div id="scene-climax-letter" class="stage-scene">
       <div class="hogwarts-royal-scroll-card">
-        <!-- Remates de madera dorada del pergamino real -->
-        <div class="scroll-roller scroll-roller-top"></div>
+        <!-- Rodillo superior de madera con remates dorados -->
+        <div class="scroll-roller scroll-roller-top">
+          <div class="roller-spindle"></div>
+          <div class="roller-knob roller-knob-left"></div>
+          <div class="roller-knob roller-knob-right"></div>
+        </div>
 
         <div class="scroll-parchment-inner">
           <div class="scroll-crest-header">
@@ -467,11 +587,16 @@
 
           <div class="letter-salutation" id="letter-salutation">Para mi amada esposa, Xóchitl Sinay Barba Cuevas:</div>
 
-          <div class="letter-scroll-area">
+          <div class="letter-scroll-area" id="letter-scroll-area">
             <div class="letter-body" id="letter-body"></div>
+            <!-- Pluma Mágica de Vuela Pluma flotante que escribe -->
+            <div id="magic-quill-holder" class="magic-quill-holder">
+              <span class="magic-quill-feather">🪶</span>
+              <span class="magic-quill-spark">✧</span>
+            </div>
           </div>
 
-          <div class="scroll-signature-box">
+          <div class="scroll-signature-box" id="scroll-signature-box">
             <div class="signature-line">
               <span class="sig-title">Por siempre tuyo, con toda mi alma — Always:</span>
               <span class="sig-name">Tu esposo que piensa en ti a cada segundo</span>
@@ -487,7 +612,12 @@
           </div>
         </div>
 
-        <div class="scroll-roller scroll-roller-bottom"></div>
+        <!-- Rodillo inferior de madera con remates dorados -->
+        <div class="scroll-roller scroll-roller-bottom">
+          <div class="roller-spindle"></div>
+          <div class="roller-knob roller-knob-left"></div>
+          <div class="roller-knob roller-knob-right"></div>
+        </div>
       </div>
     </div>
 

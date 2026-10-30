@@ -214,18 +214,60 @@ export const config = {
     stationNumber: "Estación III",
     title: "El Encantamiento: Expecto Patronum",
     instructions:
-      "Desliza tu varita mágica siguiendo el trazo sagrado del encantamiento para conjurar la luz plateada que protege nuestro amor:",
+      "Mueve tu varita mágica siguiendo el trazo sagrado del encantamiento para invocar la luz plateada que protege nuestro amor:",
     spellName: "«Expecto Patronum — Always»",
-    rewardPoemTitle: "✦ Fragmentos III y IV: La Fuerza del Sauce y Always ✦",
+    rewardPoemTitle: "✦ Tercer Fragmento: El Sauce Boxeador & El Patronus ✦",
     rewardPoem: [
       "Eres mi Patronus en la tormenta, mi calma y mi mayor alegría.",
       "La mujer que habita en mis pensamientos cada instante de mi día.",
-      "Ahora los 4 fragmentos giran en el tiempo para sellar una promesa eterna...",
+      "Con el encantamiento invocado, la luz plateada ilumina el camino a las Reliquias...",
     ],
-    nextButtonText: "¡Unir los 4 Fragmentos Mágicos! ✨",
+    nextButtonText: "Avanzar al Rompecabezas Sagrado (Estación IV) →",
   },
 
-  // 8. Fase 4: El Clímax Espectacular (La Carta Mágica a Xóchitl Sinay)
+  // 8. Minijuego 4: «El Rompecabezas Sagrado: Las Reliquias de la Muerte & Always»
+  minigame4: {
+    stationNumber: "Estación IV",
+    title: "El Rompecabezas Sagrado: Always ⚡△⃒⃘",
+    instructions:
+      "Ensambla las 3 reliquias ancestrales que forjan el símbolo del amor eterno e inquebrantable:",
+    relics: [
+      {
+        id: "triangle",
+        symbol: "⏶",
+        name: "La Capa de la Invisibilidad",
+        shortName: "La Capa",
+        desc: "Nuestro Refugio Seguro",
+        phrase: "«Eres mi refugio seguro y el lugar donde mi alma siempre encuentra paz.»",
+      },
+      {
+        id: "circle",
+        symbol: "◯",
+        name: "La Piedra de la Resurrección",
+        shortName: "La Piedra",
+        desc: "En mi Mente a Cada Instante",
+        phrase: "«Pienso en ti en cada instante de mi día; vives en cada latido de mi corazón.»",
+      },
+      {
+        id: "wand",
+        symbol: "┃",
+        name: "La Varita de Saúco",
+        shortName: "La Varita",
+        desc: "Fuerza Inquebrantable",
+        phrase: "«Nuestro amor es la fuerza más pura e invencible de este universo.»",
+      },
+    ],
+    rewardPoemTitle: "✦ Cuarto Fragmento: Always & La Promesa Eterna ✦",
+    rewardPoem: [
+      "Después de todo este tiempo... Always.",
+      "No existe magia más profunda ni destino más certero",
+      "que amarte con toda mi alma cada instante de mi vida.",
+      "Los 4 fragmentos sagrados están listos para viajar a través del tiempo...",
+    ],
+    nextButtonText: "✦ Activar el Giratiempo Mágico ⏳✨ (4 de 4) ✦",
+  },
+
+  // 9. Fase Final: El Clímax Espectacular (El Giratiempo & La Carta en Pergamino)
   climax: {
     stationNumber: "El Clímax",
     title: "La Revelación",

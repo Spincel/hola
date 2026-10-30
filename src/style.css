@@ -2163,7 +2163,235 @@ html, body {
 }
 
 /* ====================================================================
-   ESTACIÓN 4B: LA CARTA EN PERGAMINO REAL DE HOGWARTS (SOLICITUD EXPLÍCITA)
+   ESTACIÓN 4A: MINIJUEGO 4 - EL ROMPECABEZAS SAGRADO: ALWAYS ⚡△⃒⃘
+   ==================================================================== */
+.hallows-puzzle-card {
+  max-width: 440px;
+}
+
+.hallows-altar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.hallows-runic-circle {
+  position: relative;
+  width: 250px;
+  height: 220px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hallows-orbit-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15), inset 0 0 20px rgba(245, 158, 11, 0.1);
+  animation: hallows-spin-ring 35s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hallows-spin-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hallows-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+}
+
+.hallows-slot {
+  fill: none;
+  stroke: rgba(212, 175, 55, 0.32);
+  stroke-dasharray: 6 5;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease;
+}
+
+.hallows-active-piece {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: relic-ignite 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hallows-active-piece.piece-triangle {
+  stroke: #facc15;
+  stroke-width: 4.5;
+  fill: rgba(245, 158, 11, 0.12);
+  filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.85));
+}
+
+.hallows-active-piece.piece-circle {
+  stroke: #38bdf8;
+  stroke-width: 4.5;
+  fill: rgba(56, 189, 248, 0.12);
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.85));
+}
+
+.hallows-active-piece.piece-wand {
+  stroke: #ffffff;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px #facc15);
+}
+
+@keyframes relic-ignite {
+  0% { opacity: 0; stroke-width: 8; transform: scale(1.15); filter: drop-shadow(0 0 25px #fff); }
+  100% { opacity: 1; stroke-width: 4.5; transform: scale(1); }
+}
+
+.hallows-always-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(15, 8, 4, 0.94) 30%, rgba(20, 10, 5, 0.75) 75%, transparent 100%);
+  padding: 10px 20px;
+  border-radius: 20px;
+  z-index: 5;
+  animation: banner-burst 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes banner-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.always-sparkles {
+  font-size: 0.85rem;
+  color: #facc15;
+  letter-spacing: 4px;
+}
+
+.always-word {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #fef08a;
+  text-shadow: 
+    0 0 14px rgba(245, 158, 11, 0.9),
+    0 0 28px rgba(245, 158, 11, 0.6),
+    0 0 45px #38bdf8;
+  margin: 2px 0;
+}
+
+.always-sub {
+  font-family: var(--font-serif);
+  font-size: 0.74rem;
+  font-style: italic;
+  color: #fed7aa;
+  letter-spacing: 0.6px;
+}
+
+.hallows-relics-tray {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 380px;
+  margin: 6px auto;
+}
+
+.relic-stone-btn {
+  background: linear-gradient(135deg, rgba(35, 20, 12, 0.92) 0%, rgba(18, 9, 5, 0.96) 100%);
+  border: 1.5px solid #d4af37;
+  border-radius: 12px;
+  padding: 10px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(254, 240, 138, 0.2);
+}
+
+.relic-stone-btn:hover:not(.placed) {
+  transform: translateY(-3px) scale(1.03);
+  border-color: #fef08a;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7), 0 0 16px rgba(245, 158, 11, 0.5);
+  background: linear-gradient(135deg, rgba(48, 28, 16, 0.94) 0%, rgba(28, 14, 8, 0.98) 100%);
+}
+
+.relic-stone-btn:active:not(.placed) {
+  transform: scale(0.96);
+}
+
+.relic-stone-btn.placed {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: linear-gradient(135deg, rgba(20, 40, 25, 0.8) 0%, rgba(10, 25, 15, 0.9) 100%);
+  opacity: 0.65;
+  cursor: default;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+}
+
+.relic-stone-icon {
+  font-size: 1.6rem;
+  color: #facc15;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.relic-stone-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.relic-stone-name {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fef08a;
+  letter-spacing: 0.3px;
+}
+
+.relic-stone-desc {
+  font-size: 0.66rem;
+  color: #cbd5e1;
+  font-style: italic;
+  margin-top: 1px;
+}
+
+.relic-active-message {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px dashed rgba(245, 158, 11, 0.45);
+  border-radius: 10px;
+  font-family: var(--font-serif);
+  font-size: 0.86rem;
+  font-style: italic;
+  color: #fef08a;
+  text-align: center;
+  line-height: 1.35;
+  animation: message-reveal 0.35s ease-out;
+  max-width: 380px;
+}
+
+@keyframes message-reveal {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ====================================================================
+   ESTACIÓN 5A: LA CARTA EN PERGAMINO REAL DE HOGWARTS (SOLICITUD EXPLÍCITA)
    ==================================================================== */
 .hogwarts-royal-scroll-card {
   position: relative;
@@ -2175,33 +2403,63 @@ html, body {
   animation: parchment-unfold 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Rodillos de madera dorada arriba y abajo del pergamino */
+/* Rodillos de madera noble torneada con remates de latón dorado */
 .scroll-roller {
-  height: 12px;
-  background: linear-gradient(90deg, #b8860b 0%, #daa520 25%, #fef08a 50%, #daa520 75%, #b8860b 100%);
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  height: 18px;
   position: relative;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.roller-spindle {
+  width: 100%;
+  height: 14px;
+  background: linear-gradient(180deg, #5c2b0c 0%, #3e1906 45%, #2a0f03 100%);
+  border-radius: 7px;
+  border-top: 1.5px solid #d4af37;
+  border-bottom: 1px solid #1a0802;
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(254, 240, 138, 0.5);
+}
+
+.roller-knob {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle at 35% 35%, #fef08a 0%, #daa520 45%, #b8860b 80%, #5c3a09 100%);
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+}
+
+.roller-knob-left { left: -10px; }
+.roller-knob-right { right: -10px; }
+
 .scroll-roller-top {
-  margin-bottom: -4px;
+  margin-bottom: -5px;
 }
 
 .scroll-roller-bottom {
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 .scroll-parchment-inner {
-  background: linear-gradient(135deg, #fdf8ee 0%, #f6ecdb 40%, #e9d6b5 100%);
-  border-left: 3px solid #b8860b;
-  border-right: 3px solid #b8860b;
-  padding: 22px 20px 18px;
+  background: 
+    radial-gradient(circle at 50% 30%, #fffdf8 0%, #f7eed7 50%, #ebdaa8 100%);
+  border-left: 3.5px solid #b8860b;
+  border-right: 3.5px solid #b8860b;
+  padding: 20px 18px 16px;
   box-sizing: border-box;
   box-shadow: 
-    inset 0 0 45px rgba(139, 69, 19, 0.18),
-    0 10px 30px rgba(0, 0, 0, 0.7);
+    inset 0 0 50px rgba(139, 69, 19, 0.22),
+    inset 0 0 15px rgba(92, 45, 12, 0.25),
+    0 12px 36px rgba(0, 0, 0, 0.75);
   position: relative;
   z-index: 4;
 }
@@ -2210,13 +2468,13 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 .scroll-wax-seal {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   background: radial-gradient(circle at 35% 35%, #a51d24, #7f1d1d 60%, #450a0a 100%);
   border-radius: 50%;
   border: 2px solid #b91c1c;
@@ -2224,18 +2482,19 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.4);
   line-height: 1;
 }
 
 .scroll-wax-seal .seal-bolt {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #fef08a;
+  filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.8));
 }
 
 .scroll-wax-seal .seal-h {
   font-family: var(--font-serif);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   font-weight: 800;
   color: #fef08a;
   letter-spacing: 1px;
@@ -2243,16 +2502,16 @@ html, body {
 
 .scroll-title-ornament {
   color: #b8860b;
-  font-size: 0.8rem;
-  margin-top: 6px;
+  font-size: 0.82rem;
+  margin-top: 5px;
   letter-spacing: 3px;
 }
 
 .scroll-station-tag {
   font-family: var(--font-serif);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
   color: #78350f;
   margin-top: 2px;
@@ -2260,20 +2519,24 @@ html, body {
 
 .letter-salutation {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: #14532d; /* Verde esmeralda de Hogwarts */
+  font-size: 1.18rem;
+  color: #14532d;
   font-weight: 800;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
-  margin-bottom: 12px;
-  border-bottom: 1px dashed rgba(184, 134, 11, 0.4);
-  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed rgba(184, 134, 11, 0.45);
+  padding-bottom: 5px;
+  text-align: center;
 }
 
 .letter-scroll-area {
-  max-height: 44vh;
+  max-height: 46vh;
+  min-height: 220px;
   overflow-y: auto;
   padding-right: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  position: relative;
+  scroll-behavior: smooth;
 }
 
 .letter-scroll-area::-webkit-scrollbar {
@@ -2281,30 +2544,82 @@ html, body {
 }
 
 .letter-scroll-area::-webkit-scrollbar-thumb {
-  background: rgba(184, 134, 11, 0.45);
+  background: rgba(184, 134, 11, 0.5);
   border-radius: 4px;
 }
 
 .letter-body {
   font-family: var(--font-serif);
-  font-size: 0.98rem;
-  color: #2e1065; /* Tinta sepia oscura caligráfica */
+  font-size: 0.97rem;
+  color: #241208;
   line-height: 1.75;
-  white-space: pre-wrap;
   text-align: left;
 }
 
-.letter-body p {
+.letter-parchment-p {
   margin-bottom: 12px;
+  position: relative;
+}
+
+/* Pluma mágica que escribe en tiempo real */
+.magic-quill-holder {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 4px;
+  pointer-events: none;
+  animation: quill-scribing 0.6s infinite ease-in-out alternate;
+  transform-origin: bottom left;
+}
+
+.magic-quill-feather {
+  font-size: 1.4rem;
+  transform: rotate(-18deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 6px rgba(245, 158, 11, 0.8));
+}
+
+.magic-quill-spark {
+  font-size: 0.85rem;
+  color: #facc15;
+  margin-left: -3px;
+  animation: spark-twinkle 0.7s infinite alternate;
+}
+
+@keyframes quill-scribing {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-3px) rotate(4deg); }
+}
+
+.ink-word {
+  display: inline;
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+  color: #261105;
+}
+
+.ink-word.magic-ink-glow {
+  color: #b45309;
+  text-shadow: 
+    0 0 10px rgba(245, 158, 11, 0.95),
+    0 0 4px #fef08a,
+    0 0 1px #fff;
 }
 
 .scroll-signature-box {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px dashed rgba(184, 134, 11, 0.4);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(184, 134, 11, 0.45);
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.scroll-signature-box.revealed {
+  animation: sig-fade-in 0.8s ease-out;
+}
+
+@keyframes sig-fade-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .signature-line {
@@ -2315,14 +2630,14 @@ html, body {
 
 .sig-title {
   font-family: var(--font-serif);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-style: italic;
   color: #78350f;
 }
 
 .sig-name {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 800;
   color: #14532d;
 }
@@ -2337,7 +2652,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .btn-text-link {
