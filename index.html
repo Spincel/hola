@@ -9,10 +9,10 @@
   <meta property="og:description" content="Una travesía inolvidable a través de la magia y un plan a futuro para Xóchitl Sinay.">
   <meta property="og:type" content="website">
 
-  <!-- Fuentes de Google: Playfair Display, Plus Jakarta Sans, Caveat -->
+  <!-- Fuentes de Google: Cinzel, Cinzel Decorative, Playfair Display, Plus Jakarta Sans, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/src/style.css">
 </head>
@@ -925,112 +925,339 @@
             <div class="marauder-blueprint-section">
               <div class="blueprint-header-bar">
                 <span class="compass-rose">🧭</span>
-                <span class="blueprint-title">Plano Sagrado del Castillo de Nuestro Amor — Corredores & Pasadizos</span>
+                <span class="blueprint-title">Plano Sagrado del Castillo de Hogwarts — Corredores, Pasadizos & Nuestra Familia</span>
                 <span class="compass-rose">🧭</span>
               </div>
 
-              <!-- SVG del plano arquitectónico con habitaciones y huellitas vivas -->
+              <!-- SVG del plano arquitectónico auténtico del Mapa del Merodeador con huellas humanas de la familia -->
               <div class="marauder-map-blueprint-card">
-                <svg viewBox="0 0 700 240" class="blueprint-canvas" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Muros del castillo -->
-                  <rect x="20" y="20" width="660" height="200" fill="none" stroke="#6e2d14" stroke-width="2" />
-                  <rect x="25" y="25" width="650" height="190" fill="none" stroke="#8b4513" stroke-width="0.8" stroke-dasharray="3,3" />
+                <svg viewBox="0 0 860 380" class="blueprint-canvas" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <!-- Huella izquierda de calzado humano adulto (estilo Mapa del Merodeador de MinaLima) -->
+                    <g id="human-foot-left">
+                      <!-- Suela curvada del zapato con detalle de suela y tacón -->
+                      <path d="M -4,-3 C -5,-10 -1,-16 5.5,-16 C 11.5,-16 14.5,-10 13.5,-3 C 12,-3.5 8.5,-3.8 5,-3.8 C 1.5,-3.8 -2.5,-3.5 -4,-3 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                      <path d="M -4,-3 C -4.8,3.5 -0.5,8.5 4.5,9 C 8.5,8.8 12,4.5 13.5,-3 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                      <!-- Tacón del zapato -->
+                      <path d="M -2.5,12 C -2.8,10 0.8,9 5,9 C 9,9 12.5,10 12.5,12 C 12.5,16 9,18 5,18 C 0.8,18 -2.5,16 -2.5,12 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                    </g>
 
-                  <!-- Habitaciones / Áreas -->
-                  <!-- Sala 1: Andén 9 3/4 -->
-                  <rect x="40" y="40" width="160" height="70" fill="rgba(110,45,20,0.06)" stroke="#6e2d14" stroke-width="1.2" />
-                  <text x="120" y="68" font-family="'Playfair Display', serif" font-size="11" font-weight="bold" fill="#4a1e0d" text-anchor="middle">Andén 9 ¾</text>
-                  <text x="120" y="86" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#7a3416" text-anchor="middle">El Inicio del Viaje 🚂</text>
+                    <!-- Huella derecha de calzado humano adulto -->
+                    <g id="human-foot-right">
+                      <path d="M 4,-3 C 5,-10 1,-16 -5.5,-16 C -11.5,-16 -14.5,-10 -13.5,-3 C -12,-3.5 -8.5,-3.8 -5,-3.8 C -1.5,-3.8 2.5,-3.5 4,-3 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                      <path d="M 4,-3 C 4.8,3.5 0.5,8.5 -4.5,9 C -8.5,8.8 -12,4.5 -13.5,-3 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                      <path d="M 2.5,12 C 2.8,10 -0.8,9 -5,9 C -9,9 -12.5,10 -12.5,12 C -12.5,16 -9,18 -5,18 C -0.8,18 2.5,16 2.5,12 Z" fill="#381305" stroke="#1f0902" stroke-width="0.8" />
+                    </g>
 
-                  <!-- Sala 2: Torre de Astronomía (Tepic) -->
-                  <rect x="40" y="130" width="160" height="70" fill="rgba(110,45,20,0.06)" stroke="#6e2d14" stroke-width="1.2" />
-                  <text x="120" y="158" font-family="'Playfair Display', serif" font-size="11" font-weight="bold" fill="#4a1e0d" text-anchor="middle">Torre de Astronomía</text>
-                  <text x="120" y="176" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#7a3416" text-anchor="middle">Bajo las Estrellas de Tepic 🌌</text>
+                    <!-- Huella izquierda de bebé (Said 🐾) con pequeños deditos -->
+                    <g id="baby-foot-left">
+                      <ellipse cx="2" cy="-4" rx="6" ry="7.5" fill="#781c1d" stroke="#450a0a" stroke-width="0.6" />
+                      <ellipse cx="2" cy="7" rx="4.5" ry="4" fill="#781c1d" stroke="#450a0a" stroke-width="0.6" />
+                      <circle cx="-3" cy="-11" r="2" fill="#781c1d" />
+                      <circle cx="0.5" cy="-12.5" r="1.7" fill="#781c1d" />
+                      <circle cx="4" cy="-12" r="1.5" fill="#781c1d" />
+                      <circle cx="7" cy="-10.5" r="1.3" fill="#781c1d" />
+                    </g>
 
-                  <!-- Sala Central: El Gran Salón de Nuestro Amor -->
-                  <circle cx="350" cy="120" r="54" fill="rgba(254,243,199,0.5)" stroke="#9c3f1a" stroke-width="1.5" stroke-dasharray="5,3" />
-                  <text x="350" y="112" font-family="'Playfair Display', serif" font-size="12" font-weight="bold" fill="#781c1d" text-anchor="middle">Gran Salón de los Recuerdos</text>
-                  <text x="350" y="128" font-family="'Playfair Display', serif" font-size="10" font-style="italic" fill="#4a1e0d" text-anchor="middle">Donde Nuestros Destinos se Unieron 💕</text>
+                    <!-- Huella derecha de bebé (Said 🐾) -->
+                    <g id="baby-foot-right">
+                      <ellipse cx="-2" cy="-4" rx="6" ry="7.5" fill="#781c1d" stroke="#450a0a" stroke-width="0.6" />
+                      <ellipse cx="-2" cy="7" rx="4.5" ry="4" fill="#781c1d" stroke="#450a0a" stroke-width="0.6" />
+                      <circle cx="3" cy="-11" r="2" fill="#781c1d" />
+                      <circle cx="-0.5" cy="-12.5" r="1.7" fill="#781c1d" />
+                      <circle cx="-4" cy="-12" r="1.5" fill="#781c1d" />
+                      <circle cx="-7" cy="-10.5" r="1.3" fill="#781c1d" />
+                    </g>
 
-                  <!-- Sala 3: Galería Familiar -->
-                  <rect x="500" y="40" width="160" height="70" fill="rgba(110,45,20,0.06)" stroke="#6e2d14" stroke-width="1.2" />
-                  <text x="580" y="68" font-family="'Playfair Display', serif" font-size="11" font-weight="bold" fill="#4a1e0d" text-anchor="middle">Galería de la Familia</text>
-                  <text x="580" y="86" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#7a3416" text-anchor="middle">Nuestro Mayor Tesoro ✨👨‍👩‍👧‍👧👶</text>
+                    <!-- Patrón de trama de muros antiguos de piedra -->
+                    <pattern id="gothic-hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                      <line x1="0" y1="0" x2="0" y2="8" stroke="#5a2512" stroke-width="0.8" opacity="0.12" />
+                    </pattern>
+                  </defs>
 
-                  <!-- Sala 4: Nuestra Cabaña en el Bosque (Destino Final) -->
-                  <rect x="500" y="130" width="160" height="70" fill="rgba(180,83,9,0.12)" stroke="#b45309" stroke-width="1.8" />
-                  <text x="580" y="158" font-family="'Playfair Display', serif" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">Nuestra Cabaña en el Bosque</text>
-                  <text x="580" y="176" font-family="'Playfair Display', serif" font-size="9.5" font-style="italic" font-weight="bold" fill="#92400e" text-anchor="middle">Chimenea & Paz Eterna 🌲🏡🌧️</text>
+                  <!-- Borde perimetral del plano del castillo -->
+                  <rect x="15" y="15" width="830" height="350" fill="rgba(254,250,240,0.4)" stroke="#5a2512" stroke-width="2.5" />
+                  <rect x="20" y="20" width="820" height="340" fill="url(#gothic-hatch)" stroke="#8b4513" stroke-width="1" stroke-dasharray="4,4" />
 
-                  <!-- Pasillos que conectan -->
-                  <!-- Corredor Oeste -> Centro -->
-                  <path d="M 200,75 L 296,120" stroke="#7a3416" stroke-width="1.5" stroke-dasharray="4,4" fill="none" />
-                  <path d="M 200,165 L 296,120" stroke="#7a3416" stroke-width="1.5" stroke-dasharray="4,4" fill="none" />
-
-                  <!-- Corredor Centro -> Este -->
-                  <path d="M 404,120 L 500,75" stroke="#7a3416" stroke-width="1.5" stroke-dasharray="4,4" fill="none" />
-                  <path d="M 404,120 L 500,165" stroke="#b45309" stroke-width="2" stroke-dasharray="5,4" fill="none" />
-
-                  <!-- Huellitas animadas SVG de Sócrates y Sinay -->
-                  <!-- Sócrates saliendo desde Andén 9 3/4 -->
-                  <g class="animated-svg-footprints footprints-socrates">
-                    <text x="215" y="78" font-size="12" fill="#5a2512" opacity="0.85">🐾</text>
-                    <text x="245" y="93" font-size="12" fill="#5a2512" opacity="0.85">🐾</text>
-                    <text x="275" y="108" font-size="12" fill="#5a2512" opacity="0.85">🐾</text>
+                  <!-- Rosa de los vientos arquitectónica -->
+                  <g transform="translate(800, 48) scale(0.65)" opacity="0.75">
+                    <circle cx="0" cy="0" r="28" fill="none" stroke="#5a2512" stroke-width="1.2" stroke-dasharray="2,2" />
+                    <polygon points="0,-32 7,-8 0,-14" fill="#781c1d" />
+                    <polygon points="0,-32 -7,-8 0,-14" fill="#5a2512" />
+                    <polygon points="0,32 7,8 0,14" fill="#5a2512" />
+                    <polygon points="0,32 -7,8 0,14" fill="#781c1d" />
+                    <polygon points="32,0 8,7 14,0" fill="#5a2512" />
+                    <polygon points="-32,0 -8,-7 -14,0" fill="#5a2512" />
+                    <text x="0" y="-36" font-family="'Cinzel', 'Playfair Display', serif" font-size="12" font-weight="bold" fill="#781c1d" text-anchor="middle">N</text>
                   </g>
 
-                  <!-- Sinay saliendo desde la Torre de Astronomía -->
-                  <g class="animated-svg-footprints footprints-sinay">
-                    <text x="215" y="160" font-size="12" fill="#781c1d" opacity="0.85">🐾</text>
-                    <text x="245" y="145" font-size="12" fill="#781c1d" opacity="0.85">🐾</text>
-                    <text x="275" y="130" font-size="12" fill="#781c1d" opacity="0.85">🐾</text>
+                  <!-- ============================================== -->
+                  <!-- HABITACIONES Y CÁMARAS DEL CASTILLO DE HOGWARTS -->
+                  <!-- ============================================== -->
+
+                  <!-- 1. Andén 9 ¾ (Noroeste) -->
+                  <g class="castle-chamber">
+                    <rect x="35" y="32" width="185" height="75" fill="rgba(255,255,255,0.7)" stroke="#5a2512" stroke-width="1.8" />
+                    <rect x="38" y="35" width="179" height="69" fill="none" stroke="#8b4513" stroke-width="0.8" stroke-dasharray="3,3" />
+                    <line x1="45" y1="92" x2="210" y2="92" stroke="#6e2d14" stroke-width="2.5" stroke-dasharray="6,4" />
+                    <text x="127" y="58" font-family="'Cinzel', 'Playfair Display', serif" font-size="12" font-weight="bold" fill="#4a1e0d" text-anchor="middle">ANDÉN 9 ¾</text>
+                    <text x="127" y="74" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#78350f" text-anchor="middle">El Inicio del Viaje 🚂</text>
                   </g>
 
-                  <!-- Juntos caminando hacia Nuestra Cabaña -->
-                  <g class="animated-svg-footprints footprints-together">
-                    <text x="420" y="135" font-size="13" fill="#8b4513">🐾🐾</text>
-                    <text x="450" y="145" font-size="13" fill="#8b4513">🐾🐾</text>
-                    <text x="480" y="155" font-size="13" fill="#8b4513">🐾🐾</text>
+                  <!-- 2. Torre de Gryffindor & Pasadizo de los Tapices (Oeste) -->
+                  <g class="castle-chamber">
+                    <rect x="35" y="125" width="185" height="90" fill="rgba(255,255,255,0.7)" stroke="#5a2512" stroke-width="1.8" />
+                    <!-- Torre circular saliente -->
+                    <circle cx="35" cy="170" r="22" fill="rgba(254,243,199,0.85)" stroke="#5a2512" stroke-width="1.5" />
+                    <path d="M 22,170 A 13 13 0 0 1 48 170" fill="none" stroke="#781c1d" stroke-width="1.2" stroke-dasharray="2,2" />
+                    <text x="135" y="156" font-family="'Cinzel', 'Playfair Display', serif" font-size="11.5" font-weight="bold" fill="#781c1d" text-anchor="middle">TORRE DE GRYFFINDOR</text>
+                    <text x="135" y="172" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#5a2512" text-anchor="middle">Devoción & Valentía 🦁</text>
+                    <text x="135" y="188" font-family="'Playfair Display', serif" font-size="8.5" fill="#8b4513" text-anchor="middle">« Pasadizo de los Tapices »</text>
+                  </g>
+
+                  <!-- 3. Torre de Astronomía & Biblioteca Encantada (Sudoeste) -->
+                  <g class="castle-chamber">
+                    <rect x="35" y="235" width="185" height="105" fill="rgba(255,255,255,0.7)" stroke="#5a2512" stroke-width="1.8" />
+                    <circle cx="127" cy="275" r="18" fill="none" stroke="#78350f" stroke-width="1" stroke-dasharray="3,3" />
+                    <text x="127" y="278" font-family="'Cinzel', 'Playfair Display', serif" font-size="10" font-weight="bold" fill="#781c1d" text-anchor="middle">✧ 🌌 ✧</text>
+                    <text x="127" y="306" font-family="'Cinzel', 'Playfair Display', serif" font-size="11" font-weight="bold" fill="#4a1e0d" text-anchor="middle">TORRE DE ASTRONOMÍA</text>
+                    <text x="127" y="322" font-family="'Playfair Display', serif" font-size="9" font-style="italic" fill="#78350f" text-anchor="middle">Bajo las Estrellas de Tepic 🌌</text>
+                  </g>
+
+                  <!-- 4. EL GRAN SALÓN CEREMONIAL DE NUESTRO AMOR (Centro majestuoso) -->
+                  <g class="castle-chamber chamber-great-hall">
+                    <rect x="270" y="70" width="300" height="230" rx="8" fill="rgba(254,243,199,0.75)" stroke="#781c1d" stroke-width="2.2" />
+                    <!-- Columnas góticas y arcos interiores -->
+                    <circle cx="310" cy="110" r="7" fill="#781c1d" opacity="0.3" />
+                    <circle cx="530" cy="110" r="7" fill="#781c1d" opacity="0.3" />
+                    <circle cx="310" cy="250" r="7" fill="#781c1d" opacity="0.3" />
+                    <circle cx="530" cy="250" r="7" fill="#781c1d" opacity="0.3" />
+                    <!-- Arcos conopiales decorativos -->
+                    <path d="M 310,110 Q 420,80 530,110" fill="none" stroke="#8b4513" stroke-width="1.2" stroke-dasharray="4,3" />
+                    <path d="M 310,250 Q 420,280 530,250" fill="none" stroke="#8b4513" stroke-width="1.2" stroke-dasharray="4,3" />
+                    <!-- Chimenea del Gran Salón -->
+                    <rect x="390" y="72" width="60" height="12" fill="#781c1d" opacity="0.8" />
+                    <!-- Centro del salón -->
+                    <circle cx="420" cy="175" r="48" fill="rgba(255,255,255,0.6)" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5,4" />
+                    <text x="420" y="155" font-family="'Cinzel Decorative', 'Cinzel', serif" font-size="13" font-weight="bold" fill="#781c1d" text-anchor="middle">GRAN SALÓN</text>
+                    <text x="420" y="172" font-family="'Cinzel', 'Playfair Display', serif" font-size="10.5" font-weight="bold" fill="#4a1e0d" text-anchor="middle">DE LOS RECUERDOS</text>
+                    <text x="420" y="190" font-family="'Playfair Display', serif" font-size="9.5" font-style="italic" fill="#78350f" text-anchor="middle">Donde Nuestros Destinos se Unieron 💕</text>
+                    <text x="420" y="206" font-family="'Playfair Display', serif" font-size="9" fill="#92400e" text-anchor="middle">✦ Punto de Encuentro Eterno ✦</text>
+                  </g>
+
+                  <!-- 5. Galería Sagrada de Nuestra Familia (Noreste) -->
+                  <g class="castle-chamber">
+                    <rect x="625" y="32" width="195" height="115" fill="rgba(255,255,255,0.7)" stroke="#5a2512" stroke-width="1.8" />
+                    <rect x="629" y="36" width="187" height="107" fill="none" stroke="#8b4513" stroke-width="0.8" stroke-dasharray="3,3" />
+                    <text x="722" y="62" font-family="'Cinzel', 'Playfair Display', serif" font-size="11.5" font-weight="bold" fill="#781c1d" text-anchor="middle">GALERÍA DE LA FAMILIA</text>
+                    <text x="722" y="80" font-family="'Playfair Display', serif" font-size="9.5" font-style="italic" fill="#4a1e0d" text-anchor="middle">Nuestro Mayor Tesoro ✨</text>
+                    <text x="722" y="98" font-family="'Playfair Display', serif" font-size="10.5" fill="#78350f" text-anchor="middle">Sioned ✧ Said ✧ Saly</text>
+                    <text x="722" y="118" font-family="'Playfair Display', serif" font-size="8.5" font-style="italic" fill="#92400e" text-anchor="middle">« Amor que se multiplica »</text>
+                  </g>
+
+                  <!-- 6. NUESTRA CABAÑA EN EL BOSQUE (Sureste - Destino Soñado) -->
+                  <g class="castle-chamber chamber-cabin">
+                    <rect x="625" y="175" width="195" height="165" rx="8" fill="rgba(254,243,199,0.9)" stroke="#b45309" stroke-width="2.5" />
+                    <!-- Pinos y vegetación del bosque prohibido -->
+                    <text x="645" y="210" font-size="16">🌲</text>
+                    <text x="785" y="210" font-size="16">🌲</text>
+                    <text x="645" y="315" font-size="16">🌲</text>
+                    <text x="785" y="315" font-size="16">🌲</text>
+                    <!-- Cabaña icono central -->
+                    <circle cx="722" cy="245" r="32" fill="rgba(255,255,255,0.85)" stroke="#78350f" stroke-width="1.5" />
+                    <text x="722" y="252" font-size="24" text-anchor="middle">🏡</text>
+                    <text x="722" y="286" font-family="'Cinzel', 'Playfair Display', serif" font-size="11.5" font-weight="bold" fill="#781c1d" text-anchor="middle">NUESTRA CABAÑA</text>
+                    <text x="722" y="302" font-family="'Playfair Display', serif" font-size="9" font-style="italic" font-weight="bold" fill="#92400e" text-anchor="middle">EN EL BOSQUE</text>
+                    <text x="722" y="318" font-family="'Playfair Display', serif" font-size="8.5" fill="#4a1e0d" text-anchor="middle">Chimenea, Lluvia & Paz Eterna 🌧️🍷</text>
+                  </g>
+
+                  <!-- ============================================== -->
+                  <!-- PASILLOS, CORREDORES Y PASADIZOS SECRETOS      -->
+                  <!-- ============================================== -->
+                  <!-- Pasillo Gryffindor -> Gran Salón -->
+                  <path d="M 220,165 L 270,165" stroke="#6e2d14" stroke-width="2" stroke-dasharray="4,3" fill="none" />
+                  <path d="M 220,180 L 270,180" stroke="#6e2d14" stroke-width="1" stroke-dasharray="2,2" fill="none" />
+
+                  <!-- Pasillo Andén 9 3/4 -> Gran Salón -->
+                  <path d="M 220,70 Q 245,70 270,105" stroke="#6e2d14" stroke-width="2" stroke-dasharray="4,3" fill="none" />
+
+                  <!-- Pasillo Astronomía -> Gran Salón -->
+                  <path d="M 220,285 Q 245,285 270,240" stroke="#6e2d14" stroke-width="2" stroke-dasharray="4,3" fill="none" />
+
+                  <!-- Pasillo Gran Salón -> Galería Familiar -->
+                  <path d="M 570,120 Q 600,105 625,95" stroke="#6e2d14" stroke-width="2" stroke-dasharray="4,3" fill="none" />
+
+                  <!-- Gran Pasadizo Secreto: Gran Salón -> Nuestra Cabaña -->
+                  <path d="M 570,210 Q 595,225 625,240" stroke="#b45309" stroke-width="2.5" stroke-dasharray="5,4" fill="none" />
+
+                  <!-- ============================================== -->
+                  <!-- PISADAS HUMANAS REALES ANIMADAS DE LA FAMILIA  -->
+                  <!-- (Aparecen secuencialmente caminando por el mapa)-->
+                  <!-- ============================================== -->
+
+                  <!-- 1. PISADAS DE SÓCRATES (Saliendo de Gryffindor, pasando al Gran Salón y camino a la Cabaña) -->
+                  <g class="marauder-footsteps-group group-socrates">
+                    <!-- Paso 1 (izq) -->
+                    <g class="map-step step-s-1" transform="translate(200, 162) rotate(85) scale(0.75)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 2 (der) -->
+                    <g class="map-step step-s-2" transform="translate(225, 172) rotate(85) scale(0.75)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 3 (izq) -->
+                    <g class="map-step step-s-3" transform="translate(250, 164) rotate(88) scale(0.75)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 4 (der) -->
+                    <g class="map-step step-s-4" transform="translate(280, 172) rotate(88) scale(0.75)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 5 (izq en el Gran Salón) -->
+                    <g class="map-step step-s-5" transform="translate(340, 168) rotate(90) scale(0.75)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 6 (der) -->
+                    <g class="map-step step-s-6" transform="translate(370, 176) rotate(90) scale(0.75)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 7 (izq rumbo a la Cabaña) -->
+                    <g class="map-step step-s-7" transform="translate(565, 204) rotate(115) scale(0.75)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 8 (der hacia la Cabaña) -->
+                    <g class="map-step step-s-8" transform="translate(595, 222) rotate(115) scale(0.75)"><use href="#human-foot-right" /></g>
+                  </g>
+
+                  <!-- 2. PISADAS DE XÓCHITL SINAY (Caminando por el Gran Salón hacia la Cabaña junto a Sócrates) -->
+                  <g class="marauder-footsteps-group group-sinay">
+                    <!-- Paso 1 (izq) -->
+                    <g class="map-step step-x-1" transform="translate(290, 140) rotate(75) scale(0.72)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 2 (der) -->
+                    <g class="map-step step-x-2" transform="translate(320, 148) rotate(78) scale(0.72)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 3 (izq al centro) -->
+                    <g class="map-step step-x-3" transform="translate(355, 145) rotate(85) scale(0.72)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 4 (der) -->
+                    <g class="map-step step-x-4" transform="translate(385, 155) rotate(85) scale(0.72)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 5 (izq junto a Sócrates) -->
+                    <g class="map-step step-x-5" transform="translate(540, 195) rotate(110) scale(0.72)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 6 (der) -->
+                    <g class="map-step step-x-6" transform="translate(570, 215) rotate(110) scale(0.72)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 7 (izq entrando a la Cabaña) -->
+                    <g class="map-step step-x-7" transform="translate(615, 242) rotate(115) scale(0.72)"><use href="#human-foot-left" /></g>
+                  </g>
+
+                  <!-- 3. PISADAS DE SIONED (Hija mayor - Recorriendo la Torre de Astronomía hacia el Claustro y la Galería) -->
+                  <g class="marauder-footsteps-group group-sioned">
+                    <!-- Paso 1 (izq) -->
+                    <g class="map-step step-d-1" transform="translate(195, 270) rotate(55) scale(0.68)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 2 (der) -->
+                    <g class="map-step step-d-2" transform="translate(220, 255) rotate(55) scale(0.68)"><use href="#human-foot-right" /></g>
+                    <!-- Paso 3 (izq) -->
+                    <g class="map-step step-d-3" transform="translate(245, 240) rotate(50) scale(0.68)"><use href="#human-foot-left" /></g>
+                    <!-- Paso 4 (der entrando al Gran Salón) -->
+                    <g class="map-step step-d-4" transform="translate(275, 230) rotate(50) scale(0.68)"><use href="#human-foot-right" /></g>
+                  </g>
+
+                  <!-- 4. PISADAS DE SAID (Bebé varón 👶 - Huellitas pequeñas y adorables saliendo de la Galería hacia papá y mamá) -->
+                  <g class="marauder-footsteps-group group-said">
+                    <!-- Pasito 1 de bebé (izq) -->
+                    <g class="map-step step-b-1" transform="translate(635, 115) rotate(220) scale(0.7)"><use href="#baby-foot-left" /></g>
+                    <!-- Pasito 2 de bebé (der) -->
+                    <g class="map-step step-b-2" transform="translate(615, 126) rotate(220) scale(0.7)"><use href="#baby-foot-right" /></g>
+                    <!-- Pasito 3 de bebé (izq) -->
+                    <g class="map-step step-b-3" transform="translate(595, 138) rotate(225) scale(0.7)"><use href="#baby-foot-left" /></g>
+                    <!-- Pasito 4 de bebé (der) -->
+                    <g class="map-step step-b-4" transform="translate(575, 150) rotate(225) scale(0.7)"><use href="#baby-foot-right" /></g>
+                  </g>
+
+                  <!-- 5. PISADAS DE SALY (Hija pequeña 👧 - Pasitos alegres recorriendo el Corredor Central) -->
+                  <g class="marauder-footsteps-group group-saly">
+                    <!-- Pasito 1 (izq) -->
+                    <g class="map-step step-y-1" transform="translate(510, 85) rotate(160) scale(0.62)"><use href="#human-foot-left" /></g>
+                    <!-- Pasito 2 (der) -->
+                    <g class="map-step step-y-2" transform="translate(485, 96) rotate(160) scale(0.62)"><use href="#human-foot-right" /></g>
+                    <!-- Pasito 3 (izq) -->
+                    <g class="map-step step-y-3" transform="translate(460, 110) rotate(165) scale(0.62)"><use href="#human-foot-left" /></g>
+                    <!-- Pasito 4 (der) -->
+                    <g class="map-step step-y-4" transform="translate(435, 125) rotate(170) scale(0.62)"><use href="#human-foot-right" /></g>
+                  </g>
+
+                  <!-- ============================================== -->
+                  <!-- CARTELAS FLOTANTES DE LOS MERODEADORES (SVG)   -->
+                  <!-- ============================================== -->
+                  <!-- Cartela Sócrates -->
+                  <g class="svg-map-tag tag-socrates-svg">
+                    <rect x="235" y="136" width="105" height="22" rx="4" fill="#fdf6e4" stroke="#78350f" stroke-width="1.3" />
+                    <text x="287" y="151" font-family="'Cinzel', 'Playfair Display', serif" font-size="10.5" font-weight="bold" fill="#4a1e0d" text-anchor="middle">Sócrates 👣</text>
+                  </g>
+
+                  <!-- Cartela Xóchitl Sinay -->
+                  <g class="svg-map-tag tag-sinay-svg">
+                    <rect x="345" y="112" width="125" height="22" rx="4" fill="#fef2f2" stroke="#781c1d" stroke-width="1.3" />
+                    <text x="407" y="127" font-family="'Cinzel', 'Playfair Display', serif" font-size="10.5" font-weight="bold" fill="#781c1d" text-anchor="middle">Xóchitl Sinay 👣</text>
+                  </g>
+
+                  <!-- Cartela Sioned -->
+                  <g class="svg-map-tag tag-sioned-svg">
+                    <rect x="200" y="208" width="95" height="20" rx="4" fill="#fdf8e8" stroke="#854d0e" stroke-width="1.2" />
+                    <text x="247" y="222" font-family="'Cinzel', 'Playfair Display', serif" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Sioned 👣</text>
+                  </g>
+
+                  <!-- Cartela Said (bebé) -->
+                  <g class="svg-map-tag tag-said-svg">
+                    <rect x="560" y="88" width="110" height="20" rx="4" fill="#fef9c3" stroke="#a16207" stroke-width="1.2" />
+                    <text x="615" y="102" font-family="'Cinzel', 'Playfair Display', serif" font-size="9.5" font-weight="bold" fill="#854d0e" text-anchor="middle">Said 👣 (bebé)</text>
+                  </g>
+
+                  <!-- Cartela Saly -->
+                  <g class="svg-map-tag tag-saly-svg">
+                    <rect x="445" y="50" width="85" height="20" rx="4" fill="#fdf8e8" stroke="#854d0e" stroke-width="1.2" />
+                    <text x="487" y="64" font-family="'Cinzel', 'Playfair Display', serif" font-size="9.5" font-weight="bold" fill="#713f12" text-anchor="middle">Saly 👣</text>
+                  </g>
+
+                  <!-- Cartela Cabaña Prometida -->
+                  <g class="svg-map-tag tag-cabin-svg">
+                    <rect x="645" y="185" width="160" height="24" rx="5" fill="#fef3c7" stroke="#b45309" stroke-width="1.5" />
+                    <text x="725" y="201" font-family="'Cinzel', 'Playfair Display', serif" font-size="10.5" font-weight="bold" fill="#78350f" text-anchor="middle">Nuestra Cabaña 🌲🏡</text>
                   </g>
                 </svg>
 
-                <!-- Etiquetas flotantes de los Merodeadores en el mapa -->
-                <div class="blueprint-tags-overlay">
-                  <div class="floating-map-tag tag-sinay">
-                    <span>Xóchitl Sinay 🐾</span>
-                  </div>
-                  <div class="floating-map-tag tag-socrates">
-                    <span>Sócrates 🐾</span>
-                  </div>
-                  <div class="floating-map-tag tag-cabin">
-                    <span>Nuestra Cabaña 🌲🏡</span>
-                  </div>
+                <!-- Resumen interactivo de los Merodeadores presentes en el mapa -->
+                <div class="blueprint-family-roster">
+                  <span class="roster-badge"><strong class="roster-tag">Merodeadores en el Castillo:</strong> Sócrates 👣 • Xóchitl Sinay 👣 • Sioned 👣 • Said 👣 (bebé) • Saly 👣 ➔ Hacia Nuestra Cabaña 🌲🏡</span>
                 </div>
               </div>
             </div>
 
-            <!-- SELECTOR DE VISTAS MÁGICAS (CARICATURAS / FOTOS REALES) -->
-            <div class="marauder-gallery-tabs">
-              <button id="tab-btn-cartoons" class="gallery-tab-btn active">
-                ✨ Diseños Mágicos Animados (Estilo Película)
+            <!-- ============================================================== -->
+            <!-- LOS 4 BOTONES DE NAVEGACIÓN SAGRADOS DEL MAPA DEL MERODEADOR  -->
+            <!-- ============================================================== -->
+            <div class="marauder-nav-hub" id="marauder-nav-hub">
+              <button id="tab-btn-cartoons" class="marauder-hub-btn active" title="Ver ilustraciones animadas con magia de Hogwarts">
+                <span class="hub-btn-icon">✨</span>
+                <span class="hub-btn-label">Diseños Mágicos Animados</span>
+                <span class="hub-btn-sub">Estilo Película Harry Potter</span>
               </button>
-              <button id="tab-btn-real-photos" class="gallery-tab-btn">
-                📸 Álbum de Recuerdos Reales Hechizados
+              <button id="tab-btn-real-photos" class="marauder-hub-btn" title="Ver las 9 fotos familiares en pergamino antiguo">
+                <span class="hub-btn-icon">📸</span>
+                <span class="hub-btn-label">Álbum de Recuerdos Hechizados</span>
+                <span class="hub-btn-sub">Fotos Reales Vivas de la Familia</span>
+              </button>
+              <button id="tab-btn-letter" class="marauder-hub-btn" title="Leer la carta completa de amor dedicada a Sinay">
+                <span class="hub-btn-icon">📜</span>
+                <span class="hub-btn-label">Pergamino de la Carta de Amor</span>
+                <span class="hub-btn-sub">Palabras Sagradas a Xóchitl Sinay</span>
+              </button>
+              <button id="tab-btn-mischief" class="marauder-hub-btn hub-btn-mischief" title="Sellar el mapa con Travesura Realizada y declarar tu amor">
+                <span class="hub-btn-icon">⚡</span>
+                <span class="hub-btn-label">Travesura Realizada</span>
+                <span class="hub-btn-sub">Cerrar con Efecto Mágico 💖</span>
               </button>
             </div>
 
-            <!-- VISTA 1: DISEÑOS MÁGICOS ESTILO CARICATURA / PELÍCULA DE HARRY POTTER -->
+            <!-- ============================================================== -->
+            <!-- VISTA 1: DISEÑOS MÁGICOS ANIMADOS (FOTOS QUE SE MUEVEN EN HOGWARTS) -->
+            <!-- ============================================================== -->
             <div id="gallery-view-cartoons" class="marauder-gallery-view">
               <div class="gallery-intro-banner">
-                <span>✦ Ilustraciones mágicas exclusivas inspiradas en nuestra historia de amor & familia ✦</span>
+                <span>✦ Ilustraciones mágicas exclusivas animadas como los retratos vivientes de Hogwarts ✦</span>
               </div>
               <div class="marauder-art-grid">
                 <!-- Obra 1: Pareja en Hogwarts con Bufandas Gryffindor -->
-                <div class="marauder-art-card">
+                <div class="marauder-art-card living-portrait-card">
                   <div class="art-card-pin">⚡</div>
-                  <div class="art-img-wrap" data-lightbox="/photos/couple/art_hogwarts_couple.jpg" data-caption="Andén 9 ¾ & Castillo de Hogwarts: Sócrates y Sinay bajo el cielo estrellado con destellos de amor mágico">
-                    <img src="/photos/couple/art_hogwarts_couple.jpg" alt="Sócrates y Sinay con bufandas de Hogwarts frente al castillo">
-                    <div class="art-hover-overlay">🔍 Ver en Detalle</div>
+                  <div class="art-img-wrap living-portrait-wrapper" data-lightbox="/photos/couple/art_hogwarts_couple.jpg" data-caption="Andén 9 ¾ & Castillo de Hogwarts: Sócrates y Sinay bajo el cielo estrellado con destellos de amor mágico">
+                    <img src="/photos/couple/art_hogwarts_couple.jpg" alt="Sócrates y Sinay con bufandas de Hogwarts frente al castillo" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
+                    <div class="art-hover-overlay">🔍 Ver Retrato en Detalle</div>
                   </div>
                   <div class="art-card-details">
                     <h3 class="art-card-title">Andén 9 ¾ ✦ El Inicio del Destino</h3>
@@ -1039,11 +1266,13 @@
                 </div>
 
                 <!-- Obra 2: Pareja con el Ciervo y Cierva Patronus -->
-                <div class="marauder-art-card highlight-card">
+                <div class="marauder-art-card living-portrait-card highlight-card">
                   <div class="art-card-pin">✨</div>
-                  <div class="art-img-wrap" data-lightbox="/photos/couple/art_patronus_couple.jpg" data-caption="Expecto Patronum: Sócrates y Sinay invocando su amor más puro, encarnado en el ciervo y la cierva Patronus">
-                    <img src="/photos/couple/art_patronus_couple.jpg" alt="Sócrates y Sinay con sus varitas y el Patronus de Ciervo y Cierva">
-                    <div class="art-hover-overlay">🔍 Ver en Detalle</div>
+                  <div class="art-img-wrap living-portrait-wrapper" data-lightbox="/photos/couple/art_patronus_couple.jpg" data-caption="Expecto Patronum: Sócrates y Sinay invocando su amor más puro, encarnado en el ciervo y la cierva Patronus">
+                    <img src="/photos/couple/art_patronus_couple.jpg" alt="Sócrates y Sinay con sus varitas y el Patronus de Ciervo y Cierva" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
+                    <div class="art-hover-overlay">🔍 Ver Retrato en Detalle</div>
                   </div>
                   <div class="art-card-details">
                     <h3 class="art-card-title">Expecto Patronum ✦ Amor Infinito</h3>
@@ -1052,11 +1281,13 @@
                 </div>
 
                 <!-- Obra 3: Nuestra Cabaña Mágica en el Bosque -->
-                <div class="marauder-art-card highlight-card">
+                <div class="marauder-art-card living-portrait-card highlight-card">
                   <div class="art-card-pin">🌲</div>
-                  <div class="art-img-wrap" data-lightbox="/photos/couple/art_cabana_couple.jpg" data-caption="Nuestra Cabaña en el Bosque: Acurrucados junto a la chimenea crepitante con cerveza de mantequilla y nieve en las ventanas">
-                    <img src="/photos/couple/art_cabana_couple.jpg" alt="Sócrates y Sinay en la cabaña de madera junto a la chimenea con cervezas de mantequilla">
-                    <div class="art-hover-overlay">🔍 Ver en Detalle</div>
+                  <div class="art-img-wrap living-portrait-wrapper" data-lightbox="/photos/couple/art_cabana_couple.jpg" data-caption="Nuestra Cabaña en el Bosque: Acurrucados junto a la chimenea crepitante con cerveza de mantequilla y nieve en las ventanas">
+                    <img src="/photos/couple/art_cabana_couple.jpg" alt="Sócrates y Sinay en la cabaña de madera junto a la chimenea con cervezas de mantequilla" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
+                    <div class="art-hover-overlay">🔍 Ver Retrato en Detalle</div>
                   </div>
                   <div class="art-card-details">
                     <h3 class="art-card-title">Nuestra Cabaña ✦ El Refugio Soñado</h3>
@@ -1065,11 +1296,13 @@
                 </div>
 
                 <!-- Obra 4: Toda la Familia Mágica -->
-                <div class="marauder-art-card">
+                <div class="marauder-art-card living-portrait-card">
                   <div class="art-card-pin">🏰</div>
-                  <div class="art-img-wrap" data-lightbox="/photos/couple/art_family_magic.jpg" data-caption="Nuestra Hermosa Familia Mágica: Sócrates, Sinay, sus dos hijas y el bebé reunidos en Hogwarts con velas flotantes y lechuzas">
-                    <img src="/photos/couple/art_family_magic.jpg" alt="Sócrates, Sinay, sus dos hijas y el bebé vestidos de magos frente a la chimenea de Hogwarts">
-                    <div class="art-hover-overlay">🔍 Ver en Detalle</div>
+                  <div class="art-img-wrap living-portrait-wrapper" data-lightbox="/photos/couple/art_family_magic.jpg" data-caption="Nuestra Hermosa Familia Mágica: Sócrates, Sinay, sus dos hijas y el bebé reunidos en Hogwarts con velas flotantes y lechuzas">
+                    <img src="/photos/couple/art_family_magic.jpg" alt="Sócrates, Sinay, sus dos hijas y el bebé vestidos de magos frente a la chimenea de Hogwarts" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
+                    <div class="art-hover-overlay">🔍 Ver Retrato en Detalle</div>
                   </div>
                   <div class="art-card-details">
                     <h3 class="art-card-title">Nuestra Familia ✦ La Mayor Bendición</h3>
@@ -1079,120 +1312,149 @@
               </div>
             </div>
 
-            <!-- VISTA 2: ÁLBUM DE FOTOS REALES CON EFECTOS DE HARRY POTTER -->
+            <!-- ============================================================== -->
+            <!-- VISTA 2: ÁLBUM DE FOTOS REALES HECHIZADAS (RETRATOS VIVIENTES) -->
+            <!-- ============================================================== -->
             <div id="gallery-view-real-photos" class="marauder-gallery-view hidden">
               <div class="gallery-intro-banner">
-                <span>✦ Álbum de fotos reales de nuestra vida juntos, hechizadas en pergamino antiguo de Hogwarts ✦</span>
+                <span>✦ Álbum de fotos reales de nuestra vida juntos, hechizadas con sutil movimiento de Hogwarts ✦</span>
               </div>
               <div class="marauder-real-grid">
                 <!-- Foto 1 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_1.jpg" data-caption="Gatsby & La Magia de los Años 20: Elegantes, cómplices y enamorados">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_1.jpg" data-caption="Gatsby & La Magia de los Años 20: Elegantes, cómplices y enamorados">
                   <div class="polaroid-pin">⚡</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_1.jpg" alt="Gatsby y la magia de los años 20" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_1.jpg" alt="Gatsby y la magia de los años 20" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Gatsby & La Magia de los Años 20</div>
                 </div>
 
                 <!-- Foto 2 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_2.jpg" data-caption="Sinay y Sócrates: Nuestro destino escrito en las estrellas">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_2.jpg" data-caption="Sinay y Sócrates: Nuestro destino escrito en las estrellas">
                   <div class="polaroid-pin">✨</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_2.jpg" alt="Figuras Sinay y Sócrates" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_2.jpg" alt="Figuras Sinay y Sócrates" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Nuestro Destino Escrito en las Estrellas</div>
                 </div>
 
                 <!-- Foto 3 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_3.jpg" data-caption="Sonrisas que Iluminan Mi Mundo: Cada café y cada charla a tu lado">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_3.jpg" data-caption="Sonrisas que Iluminan Mi Mundo: Cada café y cada charla a tu lado">
                   <div class="polaroid-pin">☕</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_3.jpg" alt="Sonrisas que iluminan mi mundo" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_3.jpg" alt="Sonrisas que iluminan mi mundo" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Sonrisas que Iluminan Mi Mundo</div>
                 </div>
 
                 <!-- Foto 4 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_4.jpg" data-caption="Amor de Madre: Luz radiante que guía nuestra familia">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_4.jpg" data-caption="Amor de Madre: Luz radiante que guía nuestra familia">
                   <div class="polaroid-pin">🌸</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_4.jpg" alt="Amor de madre, luz de nuestra vida" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_4.jpg" alt="Amor de madre, luz de nuestra vida" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Amor de Madre, Luz de Nuestra Vida</div>
                 </div>
 
                 <!-- Foto 5 -->
-                <div class="real-photo-polaroid highlight-polaroid" data-lightbox="/photos/couple/hp_foto_5.jpg" data-caption="El Beso que Paraliza el Tiempo: Cuando el universo entero se detiene para nosotros dos">
+                <div class="real-photo-polaroid living-portrait-card highlight-polaroid" data-lightbox="/photos/couple/hp_foto_5.jpg" data-caption="El Beso que Paraliza el Tiempo: Cuando el universo entero se detiene para nosotros dos">
                   <div class="polaroid-pin">💋</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_5.jpg" alt="El beso que paraliza el tiempo" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_5.jpg" alt="El beso que paraliza el tiempo" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">El Beso que Paraliza el Tiempo</div>
                 </div>
 
                 <!-- Foto 6 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_6.jpg" data-caption="Bajo el Atardecer de Tepic: Mirando desde lo alto la ciudad donde florece nuestro amor">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_6.jpg" data-caption="Bajo el Atardecer de Tepic: Mirando desde lo alto la ciudad donde florece nuestro amor">
                   <div class="polaroid-pin">🌄</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_6.jpg" alt="Bajo el atardecer de Tepic" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_6.jpg" alt="Bajo el atardecer de Tepic" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Bajo el Atardecer de Tepic</div>
                 </div>
 
                 <!-- Foto 7 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_7.jpg" data-caption="La Alegría de Caminar Juntos: Tu mirada cálida que me da fuerza cada día">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_7.jpg" data-caption="La Alegría de Caminar Juntos: Tu mirada cálida que me da fuerza cada día">
                   <div class="polaroid-pin">☀️</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_7.jpg" alt="La alegría de caminar juntos" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_7.jpg" alt="La alegría de caminar juntos" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">La Alegría de Caminar Juntos</div>
                 </div>
 
                 <!-- Foto 8 -->
-                <div class="real-photo-polaroid highlight-polaroid" data-lightbox="/photos/couple/hp_foto_8.jpg" data-caption="Nuestra Tribu Sagrada en el Mar: Risas, olas y la felicidad más pura">
+                <div class="real-photo-polaroid living-portrait-card highlight-polaroid" data-lightbox="/photos/couple/hp_foto_8.jpg" data-caption="Nuestra Tribu Sagrada en el Mar: Risas, olas y la felicidad más pura">
                   <div class="polaroid-pin">🌊</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_8.jpg" alt="Nuestra tribu sagrada en el mar" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_8.jpg" alt="Nuestra tribu sagrada en el mar" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">Nuestra Tribu Sagrada en el Mar</div>
                 </div>
 
                 <!-- Foto 9 -->
-                <div class="real-photo-polaroid" data-lightbox="/photos/couple/hp_foto_9.jpg" data-caption="La Dulce Espera de Nuestra Mayor Bendición: La vida multiplicada en amor">
+                <div class="real-photo-polaroid living-portrait-card" data-lightbox="/photos/couple/hp_foto_9.jpg" data-caption="La Dulce Espera de Nuestra Mayor Bendición: La vida multiplicada en amor">
                   <div class="polaroid-pin">🌿</div>
-                  <div class="polaroid-img-wrap">
-                    <img src="/photos/couple/hp_foto_9.jpg" alt="La dulce espera de nuestra mayor bendición" loading="lazy">
+                  <div class="polaroid-img-wrap living-portrait-wrapper">
+                    <img src="/photos/couple/hp_foto_9.jpg" alt="La dulce espera de nuestra mayor bendición" loading="lazy" class="living-portrait-img">
+                    <div class="living-portrait-shimmer"></div>
+                    <div class="living-portrait-sparkles"></div>
                   </div>
                   <div class="polaroid-caption">La Dulce Espera de Nuestra Mayor Bendición</div>
                 </div>
               </div>
             </div>
 
-            <!-- POEMA Y CARTA DE AMOR COMPLETA EN CALIGRAFÍA MINALIMA -->
-            <div class="marauder-letter-content">
-              <div class="marauder-salutation">
-                Para mi amada esposa, Xóchitl Sinay Barba Cuevas:
-              </div>
+            <!-- ============================================================== -->
+            <!-- VISTA 3: PERGAMINO DE LA CARTA DE AMOR COMPLETA                -->
+            <!-- ============================================================== -->
+            <div id="gallery-view-letter" class="marauder-gallery-view">
+              <div class="marauder-letter-content">
+                <div class="marauder-letter-crest">
+                  <span class="crest-sigil">✦ ─── ⚡ ─── ✦</span>
+                  <div class="letter-station-seal">Decreto Oficial de Amor Eterno ✦ Hogwarts</div>
+                </div>
 
-              <p class="marauder-p">
-                <span class="drop-cap-m">M</span>i amor, quise construir este rincón mágico para hacer una pausa en el tiempo y decirte algo que mi corazón siente con una fuerza inmensa en cada latido: <strong>te amo con toda mi alma, y no hay un solo día ni un solo instante en que no piense en ti.</strong>
-              </p>
+                <div class="marauder-salutation">
+                  Para mi amada esposa, Xóchitl Sinay Barba Cuevas:
+                </div>
 
-              <p class="marauder-p">
-                Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Eres la dueña absoluta de mi corazón y de mi vida entera. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.
-              </p>
+                <p class="marauder-p">
+                  <span class="drop-cap-m">M</span>i amor, quise construir este rincón mágico para hacer una pausa en el tiempo y decirte algo que mi corazón siente con una fuerza inmensa en cada latido: <strong>te amo con toda mi alma, y no hay un solo día ni un solo instante en que no piense en ti.</strong>
+                </p>
 
-              <p class="marauder-p">
-                Eres mi refugio y mi Patronus: esa luz invencible que disuelve cualquier nube gris. Hemos caminado juntos, soñado juntos y superado cualquier tormenta. Y hoy no quiero hablarte de la prisa del día a día, sino de nuestro futuro... de un plan hermoso que vamos a construir juntos con toda la ilusión.
-              </p>
+                <p class="marauder-p">
+                  Pienso en ti en cada momento de mi rutina: en tu sonrisa que me llena de paz, en tu mirada tierna, en tu inteligencia brillante que tanto admiro, y en esa calidez única que convierte cualquier lugar en nuestro hogar. Eres la dueña absoluta de mi corazón y de mi vida entera. Tenerte como mi esposa es, sin dudarlo ni un milisegundo, lo mejor y más valioso que me ha pasado en toda la vida.
+                </p>
 
-              <p class="marauder-p">
-                Sueño con el día en que nos escapemos a esa cabaña mágica en el bosque que tanto nos emociona, para escuchar la lluvia caer contra los cristales, acurrucarnos junto a la chimenea crepitante, disfrutar de una copa de vino y mirarnos a los ojos sabiendo que todo lo que necesitamos en este mundo es estar juntos...
-              </p>
+                <p class="marauder-p">
+                  Eres mi refugio y mi Patronus: esa luz invencible que disuelve cualquier nube gris. Hemos caminado juntos, soñado juntos y superado cualquier tormenta. Y hoy no quiero hablarte de la prisa del día a día, sino de nuestro futuro... de un plan hermoso que vamos a construir juntos con toda la ilusión.
+                </p>
 
-              <div class="marauder-signature-block">
-                <div class="marauder-closing">Por siempre tuyo, con todo mi amor y devoción — Always,</div>
-                <div class="marauder-author-sig">Tu esposo Sócrates que piensa en ti en cada segundo y te ama con toda su alma</div>
+                <p class="marauder-p">
+                  Sueño con el día en que nos escapemos a esa cabaña mágica en el bosque que tanto nos emociona, para escuchar la lluvia caer contra los cristales, acurrucarnos junto a la chimenea crepitante, disfrutar de una copa de vino y mirarnos a los ojos sabiendo que todo lo que necesitamos en este mundo es estar juntos...
+                </p>
+
+                <div class="marauder-signature-block">
+                  <div class="marauder-closing">Por siempre tuyo, con todo mi amor y devoción — Always,</div>
+                  <div class="marauder-author-sig">Tu esposo Sócrates que piensa en ti en cada segundo y te ama con toda su alma</div>
+                </div>
               </div>
             </div>
 
@@ -1208,6 +1470,36 @@
               </div>
               <p class="marauder-tap-seal-hint">« Toca el sello de cera para sellar el mapa con amor eterno »</p>
             </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- OVERLAY CINEMÁTICO: TRAVESURA REALIZADA & DECLARACIÓN TE AMO   -->
+    <!-- ============================================================== -->
+    <div id="travesura-magica-overlay" class="travesura-magica-overlay hidden" aria-hidden="true">
+      <div class="travesura-backdrop"></div>
+      <div class="travesura-stardust"></div>
+      <div class="travesura-wand-flash"></div>
+      <div class="travesura-modal-card">
+        <div class="travesura-crest-icon">⚡ △⃒⃘ ⚡</div>
+        <h1 class="travesura-title">TRAVESURA REALIZADA</h1>
+        <div class="travesura-ornament-line">✦ ────── ⚡ ────── ✦</div>
+        <h2 class="travesura-love-declaration">TE AMO CON TODA MI ALMA, XÓCHITL SINAY</h2>
+        <p class="travesura-love-phrase">« No existe tren, reloj ni distancia en este mundo que pueda apartar tu recuerdo de mi mente. Vives en cada latido de mi corazón. »</p>
+        <div class="travesura-always-box">
+          <span class="always-sparkle-l">✧</span>
+          <span class="always-main-text">ALWAYS</span>
+          <span class="always-sparkle-r">✧</span>
+        </div>
+        <p class="travesura-author-sub">Tu esposo Sócrates que piensa en ti en cada segundo</p>
+        <button id="btn-close-travesura-overlay" class="btn-travesura-done">
+          ✨ Cerrar Mapa con Amor Mágico 🪄
+        </button>
+      </div>
+    </div>
 
           </div>
         </div>

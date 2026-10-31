@@ -3921,10 +3921,10 @@ html, body {
 }
 
 /* ==========================================================================
-   PLANO ARQUITECTÓNICO & HUELLITAS ANIMADAS DEL MERODEADOR
+   PLANO ARQUITECTÓNICO & HUELLITAS HUMANAS VIVAS DEL MAPA DEL MERODEADOR
    ========================================================================== */
 .marauder-blueprint-section {
-  margin: 18px 0 24px;
+  margin: 18px 0 22px;
 }
 
 .blueprint-header-bar {
@@ -3932,35 +3932,38 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(110, 45, 20, 0.1);
-  border: 1px solid rgba(90, 37, 18, 0.35);
+  background: rgba(110, 45, 20, 0.12);
+  border: 1.5px solid rgba(90, 37, 18, 0.4);
   border-radius: 6px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   margin-bottom: 10px;
 }
 
 .blueprint-title {
-  font-family: var(--font-serif);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #5a2512;
+  font-family: 'Cinzel', var(--font-serif);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #4a1e0d;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .compass-rose {
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .marauder-map-blueprint-card {
   position: relative;
   background: 
-    radial-gradient(circle at 50% 50%, rgba(255, 252, 243, 0.9), rgba(243, 227, 190, 0.9)),
-    url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h30v30H0z' fill='none'/%3E%3Cpath d='M0 0l30 30M30 0L0 30' stroke='rgba(90,37,18,0.03)' stroke-width='1'/%3E%3C/svg%3E");
-  border: 2px solid #6e2d14;
-  border-radius: 8px;
-  box-shadow: inset 0 0 20px rgba(90, 37, 18, 0.15), 0 4px 14px rgba(0, 0, 0, 0.12);
-  padding: 8px;
+    radial-gradient(circle at 50% 50%, rgba(255, 252, 243, 0.95), rgba(243, 227, 190, 0.92)),
+    url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h30v30H0z' fill='none'/%3E%3Cpath d='M0 0l30 30M30 0L0 30' stroke='rgba(90,37,18,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  border: 2.5px solid #5a2512;
+  border-radius: 10px;
+  box-shadow: 
+    inset 0 0 25px rgba(90, 37, 18, 0.18),
+    0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 10px;
   overflow: hidden;
 }
 
@@ -3970,129 +3973,327 @@ html, body {
   display: block;
 }
 
-/* Animaciones vivas de huellitas recorriendo el mapa */
-.animated-svg-footprints {
-  animation: svg-footprints-step 3.2s infinite ease-in-out;
+/* ==========================================================================
+   ANIMACIÓN SECUENCIAL DE PISADAS HUMANAS DEL MAPA DEL MERODEADOR
+   (Aparecen paso a paso dejando una estela como en la película de Harry Potter)
+   ========================================================================== */
+.map-step {
+  animation: step-human-cadence 3.6s infinite ease-in-out;
+  opacity: 0.75;
 }
 
-.footprints-socrates {
-  animation-delay: 0s;
-}
-
-.footprints-sinay {
-  animation-delay: 0.8s;
-}
-
-.footprints-together {
-  animation-delay: 1.6s;
-}
-
-@keyframes svg-footprints-step {
+@keyframes step-human-cadence {
   0% {
-    opacity: 0.2;
-    transform: translateY(0);
+    opacity: 0.18;
   }
-  50% {
+  14% {
     opacity: 1;
-    transform: translateY(-2px);
+    filter: drop-shadow(0 1px 3px rgba(60, 20, 10, 0.75));
+  }
+  75% {
+    opacity: 0.88;
+  }
+  92% {
+    opacity: 0.3;
   }
   100% {
-    opacity: 0.2;
-    transform: translateY(0);
+    opacity: 0.18;
   }
 }
 
-.blueprint-tags-overlay {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-  padding: 0 8px;
+/* 1. Sócrates: 8 pasos secuenciales */
+.step-s-1 { animation-delay: 0.0s; }
+.step-s-2 { animation-delay: 0.35s; }
+.step-s-3 { animation-delay: 0.70s; }
+.step-s-4 { animation-delay: 1.05s; }
+.step-s-5 { animation-delay: 1.40s; }
+.step-s-6 { animation-delay: 1.75s; }
+.step-s-7 { animation-delay: 2.10s; }
+.step-s-8 { animation-delay: 2.45s; }
+
+/* 2. Xóchitl Sinay: 7 pasos secuenciales */
+.step-x-1 { animation-delay: 0.20s; }
+.step-x-2 { animation-delay: 0.55s; }
+.step-x-3 { animation-delay: 0.90s; }
+.step-x-4 { animation-delay: 1.25s; }
+.step-x-5 { animation-delay: 1.60s; }
+.step-x-6 { animation-delay: 1.95s; }
+.step-x-7 { animation-delay: 2.30s; }
+
+/* 3. Sioned (Hija mayor): 4 pasos secuenciales */
+.step-d-1 { animation-delay: 0.30s; }
+.step-d-2 { animation-delay: 0.75s; }
+.step-d-3 { animation-delay: 1.20s; }
+.step-d-4 { animation-delay: 1.65s; }
+
+/* 4. Said (Bebé varón): 4 pasitos secuenciales */
+.step-b-1 { animation-delay: 0.15s; }
+.step-b-2 { animation-delay: 0.60s; }
+.step-b-3 { animation-delay: 1.05s; }
+.step-b-4 { animation-delay: 1.50s; }
+
+/* 5. Saly (Hija pequeña): 4 pasitos secuenciales */
+.step-y-1 { animation-delay: 0.40s; }
+.step-y-2 { animation-delay: 0.85s; }
+.step-y-3 { animation-delay: 1.30s; }
+.step-y-4 { animation-delay: 1.75s; }
+
+/* Cartelas flotantes en SVG */
+.svg-map-tag {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+  cursor: pointer;
+  transition: opacity 0.25s ease;
 }
 
-.floating-map-tag {
-  background: #fdf6e4;
-  border: 1px solid #78350f;
-  padding: 3px 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+.svg-map-tag:hover {
+  filter: drop-shadow(0 3px 6px rgba(120, 28, 29, 0.45));
 }
 
-.floating-map-tag span {
+.blueprint-family-roster {
+  margin-top: 10px;
+  background: rgba(254, 243, 199, 0.85);
+  border: 1px solid #b45309;
+  border-radius: 6px;
+  padding: 6px 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.roster-badge {
   font-family: var(--font-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #451a03;
+  font-size: 0.76rem;
+  color: #4a1e0d;
+  line-height: 1.4;
 }
 
-.floating-map-tag.tag-sinay {
-  border-color: #781c1d;
-}
-
-.floating-map-tag.tag-sinay span {
+.roster-tag {
   color: #781c1d;
-}
-
-.floating-map-tag.tag-cabin {
-  background: #fef3c7;
-  border-color: #b45309;
-}
-
-.floating-map-tag.tag-cabin span {
-  color: #78350f;
   font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 /* ==========================================================================
-   PESTAÑAS DE GALERÍA (CARICATURAS / FOTOS REALES)
+   LOS 4 BOTONES DE NAVEGACIÓN DEL MAPA DEL MERODEADOR (HUB DE BOTONES)
    ========================================================================== */
-.marauder-gallery-tabs {
-  display: flex;
-  justify-content: center;
+.marauder-nav-hub {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  margin: 22px 0 16px;
-  flex-wrap: wrap;
+  margin: 22px 0 20px;
 }
 
-.gallery-tab-btn {
-  background: #eed8ab;
-  color: #4a1e0d;
-  border: 1.5px solid #8b4513;
+.marauder-hub-btn {
+  background: linear-gradient(180deg, #fbf2dc 0%, #edd8ab 100%);
+  border: 1.8px solid #8b4513;
   border-radius: 8px;
-  padding: 8px 18px;
-  font-family: var(--font-serif);
-  font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-}
-
-.gallery-tab-btn:hover {
-  background: #faebc9;
-  border-color: #b45309;
-  transform: translateY(-1px);
-}
-
-.gallery-tab-btn.active {
-  background: linear-gradient(135deg, #781c1d 0%, #5b1415 100%);
-  color: #fef08a;
-  border-color: #d97706;
-  box-shadow: 0 4px 12px rgba(120, 28, 29, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.25);
-}
-
-.gallery-intro-banner {
+  box-shadow: 0 3px 8px rgba(90, 37, 18, 0.18);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   text-align: center;
-  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
 }
 
-.gallery-intro-banner span {
+.marauder-hub-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transition: left 0.5s ease;
+}
+
+.marauder-hub-btn:hover::before {
+  left: 100%;
+}
+
+.marauder-hub-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #fdf8e8 0%, #f6e6be 100%);
+  border-color: #b45309;
+  box-shadow: 0 6px 14px rgba(90, 37, 18, 0.28);
+}
+
+.marauder-hub-btn.active {
+  background: linear-gradient(135deg, #781c1d 0%, #450a0a 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 4px 14px rgba(120, 28, 29, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.marauder-hub-btn.active .hub-btn-label {
+  color: #fef08a;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.marauder-hub-btn.active .hub-btn-sub {
+  color: #fde68a;
+}
+
+/* Botón 4 especial: Travesura Realizada */
+.marauder-hub-btn.hub-btn-mischief {
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #b45309;
+  border-width: 2px;
+}
+
+.marauder-hub-btn.hub-btn-mischief:hover {
+  background: linear-gradient(180deg, #781c1d 0%, #5a1213 100%);
+  border-color: #fbbf24;
+}
+
+.marauder-hub-btn.hub-btn-mischief:hover .hub-btn-label {
+  color: #fef08a;
+}
+
+.marauder-hub-btn.hub-btn-mischief:hover .hub-btn-sub {
+  color: #fde68a;
+}
+
+.hub-btn-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.hub-btn-label {
+  font-family: 'Cinzel', var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #4a1e0d;
+  letter-spacing: 0.4px;
+  line-height: 1.25;
+}
+
+.hub-btn-sub {
   font-family: var(--font-serif);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-style: italic;
-  font-weight: 600;
-  color: #63200f;
-  letter-spacing: 0.5px;
+  color: #78350f;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   LIVING PORTRAITS: RETRATOS VIVOS DE HARRY POTTER
+   (Fotografías e ilustraciones que se mueven suavemente como en Hogwarts)
+   ========================================================================== */
+.living-portrait-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0f0704;
+}
+
+.living-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: living-portrait-motion 9s ease-in-out infinite alternate,
+             living-portrait-tilt 14s ease-in-out infinite alternate;
+  transform-origin: center 42%;
+  will-change: transform;
+}
+
+/* Movimiento sutil y orgánico de respiración y presencia viva */
+@keyframes living-portrait-motion {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  30% {
+    transform: scale(1.026) translate3d(1.5px, -2px, 0);
+  }
+  65% {
+    transform: scale(1.014) translate3d(-1px, 1.2px, 0);
+  }
+  100% {
+    transform: scale(1.034) translate3d(0.5px, -1.8px, 0);
+  }
+}
+
+/* Sutil balanceo de ángulo como un cuadro o periódico mágico */
+@keyframes living-portrait-tilt {
+  0% {
+    rotate: -0.55deg;
+  }
+  50% {
+    rotate: 0.65deg;
+  }
+  100% {
+    rotate: -0.35deg;
+  }
+}
+
+/* Shimmer / Destello de luz mágica que recorre la foto periódicamente */
+.living-portrait-shimmer {
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    rgba(254, 240, 138, 0.12) 45%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(254, 240, 138, 0.12) 55%,
+    transparent 68%
+  );
+  transform: translateX(-160%) rotate(25deg);
+  animation: living-shimmer-sweep 7.5s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes living-shimmer-sweep {
+  0%, 35% {
+    transform: translateX(-160%) rotate(25deg);
+  }
+  65%, 100% {
+    transform: translateX(160%) rotate(25deg);
+  }
+}
+
+/* Partículas de destellos mágicos suspendidas sobre el lienzo */
+.living-portrait-sparkles {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1.5px 1.5px at 18% 25%, rgba(254, 240, 138, 0.8), transparent),
+    radial-gradient(2px 2px at 82% 35%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1.5px 1.5px at 65% 78%, rgba(254, 240, 138, 0.75), transparent),
+    radial-gradient(2px 2px at 28% 70%, rgba(255, 250, 200, 0.8), transparent);
+  opacity: 0.45;
+  animation: living-sparkles-drift 5s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes living-sparkles-drift {
+  0% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.75;
+    transform: translateY(-4px);
+  }
+}
+
+/* Al pasar el cursor, el retrato cobra vida más evidente */
+.living-portrait-card:hover .living-portrait-img {
+  animation-duration: 4.5s;
+  transform: scale(1.055) translate3d(0, -2px, 0);
+}
+
+.living-portrait-card:hover .living-portrait-shimmer {
+  animation-duration: 4s;
+}
+
+.living-portrait-card:hover .living-portrait-sparkles {
+  opacity: 0.9;
 }
 
 /* ==========================================================================
@@ -4107,7 +4308,7 @@ html, body {
 
 .marauder-art-card {
   background: #fdfaf2;
-  border: 1.5px solid #c4a47c;
+  border: 1.8px solid #c4a47c;
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 6px 16px rgba(90, 37, 18, 0.18);
@@ -4132,31 +4333,19 @@ html, body {
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
-  z-index: 2;
+  z-index: 5;
 }
 
 .art-img-wrap {
   width: 100%;
-  height: 220px;
+  height: 230px;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #110804;
+  border: 1.5px solid rgba(139, 69, 19, 0.3);
   position: relative;
   cursor: pointer;
-}
-
-.art-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.art-img-wrap:hover img {
-  transform: scale(1.05);
 }
 
 .art-hover-overlay {
@@ -4164,7 +4353,7 @@ html, body {
   inset: 0;
   background: rgba(43, 20, 8, 0.65);
   color: #fef08a;
-  font-family: var(--font-serif);
+  font-family: 'Cinzel', var(--font-serif);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -4173,6 +4362,7 @@ html, body {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.25s ease;
+  z-index: 4;
 }
 
 .art-img-wrap:hover .art-hover-overlay {
@@ -4185,7 +4375,7 @@ html, body {
 }
 
 .art-card-title {
-  font-family: var(--font-serif);
+  font-family: 'Cinzel', var(--font-serif);
   font-size: 0.88rem;
   font-weight: 800;
   color: #431407;
@@ -4236,7 +4426,7 @@ html, body {
 .real-photo-polaroid:hover {
   transform: scale(1.05) rotate(0deg);
   box-shadow: 0 10px 24px rgba(90, 37, 18, 0.32);
-  z-index: 5;
+  z-index: 10;
   border-color: #b45309;
 }
 
@@ -4251,32 +4441,20 @@ html, body {
   transform: translateX(-50%);
   font-size: 0.95rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
-  z-index: 2;
+  z-index: 5;
 }
 
 .polaroid-img-wrap {
   width: 100%;
-  height: 140px;
+  height: 145px;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #110804;
-}
-
-.polaroid-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
-
-.real-photo-polaroid:hover .polaroid-img-wrap img {
-  transform: scale(1.06);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .polaroid-caption {
   font-family: var(--font-serif);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-style: italic;
   font-weight: 700;
   color: #4a1e0d;
@@ -4286,19 +4464,42 @@ html, body {
 }
 
 /* ==========================================================================
-   CARTA DE AMOR & POEMA EN CALIGRAFÍA MINALIMA
+   VISTA 3: PERGAMINO DE LA CARTA DE AMOR & POEMA EN CALIGRAFÍA MINALIMA
    ========================================================================== */
 .marauder-letter-content {
-  background: rgba(255, 255, 255, 0.45);
-  border: 1.5px solid rgba(139, 69, 19, 0.35);
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(139, 69, 19, 0.4);
   border-radius: 8px;
-  padding: 22px 20px;
-  margin: 20px 0;
+  padding: 24px 22px;
+  margin: 18px 0;
   position: relative;
+  box-shadow: inset 0 0 18px rgba(139, 69, 19, 0.1);
+}
+
+.marauder-letter-crest {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.crest-sigil {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  color: #781c1d;
+  font-weight: bold;
+}
+
+.letter-station-seal {
+  font-family: 'Cinzel', var(--font-serif);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #78350f;
+  margin-top: 3px;
+  font-weight: 700;
 }
 
 .marauder-salutation {
-  font-family: var(--font-serif);
+  font-family: 'Cinzel', var(--font-serif);
   font-size: 1.25rem;
   font-weight: 800;
   color: #601c0b;
@@ -4309,8 +4510,8 @@ html, body {
 
 .drop-cap-m {
   float: left;
-  font-family: var(--font-serif);
-  font-size: 3.2rem;
+  font-family: 'Cinzel Decorative', var(--font-serif);
+  font-size: 3.4rem;
   line-height: 0.85;
   font-weight: 900;
   color: #781c1d;
@@ -4350,7 +4551,7 @@ html, body {
 
 .marauder-author-sig {
   font-family: var(--font-hand);
-  font-size: 1.65rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: #781c1d;
   margin-top: 4px;
@@ -4385,8 +4586,8 @@ html, body {
 }
 
 .wax-seal-large {
-  width: 62px;
-  height: 62px;
+  width: 66px;
+  height: 66px;
   background: radial-gradient(circle at 35% 35%, #a51d24, #7f1d1d 60%, #450a0a 100%);
   border-radius: 50%;
   border: 2px solid #b91c1c;
@@ -4394,13 +4595,13 @@ html, body {
   align-items: center;
   justify-content: center;
   box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.5),
+    0 6px 18px rgba(0, 0, 0, 0.5),
     inset 0 2px 4px rgba(255, 255, 255, 0.25);
 }
 
 .seal-glyph {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #fef08a;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
@@ -4408,7 +4609,7 @@ html, body {
 }
 
 .marauder-mischief-text {
-  font-family: var(--font-serif);
+  font-family: 'Cinzel', var(--font-serif);
   font-size: 0.86rem;
   font-weight: 900;
   letter-spacing: 3px;
@@ -4425,61 +4626,179 @@ html, body {
 }
 
 /* ==========================================================================
-   MODAL LIGHTBOX PARA VER FOTOS Y OBRAS EN PANTALLA COMPLETA
+   OVERLAY CINEMÁTICO: TRAVESURA REALIZADA & DECLARACIÓN "TE AMO"
+   (Aparece a pantalla completa con letras Harry Potter y destellos dorados)
    ========================================================================== */
-.lightbox-dialog {
-  max-width: 90vw;
-  max-height: 90vh;
-  background: rgba(13, 6, 3, 0.95);
-  border: 2px solid #b45309;
-  border-radius: 12px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(180, 83, 9, 0.3);
-  position: relative;
-}
-
-.lightbox-dialog .btn-close-modal {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  color: #fef08a;
-  font-size: 1.3rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.lightbox-image-container {
-  max-width: 100%;
-  max-height: 72vh;
+.travesura-magica-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid rgba(254, 240, 138, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
-.lightbox-image-container img {
-  max-width: 100%;
-  max-height: 72vh;
-  object-fit: contain;
-  border-radius: 6px;
+.travesura-magica-overlay:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.lightbox-caption {
-  font-family: var(--font-serif);
-  font-size: 0.92rem;
-  font-style: italic;
-  color: #fef08a;
+.travesura-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(30, 10, 6, 0.94), rgba(10, 3, 2, 0.98));
+  backdrop-filter: blur(10px);
+}
+
+.travesura-stardust {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, #fef08a, transparent),
+    radial-gradient(2.5px 2.5px at 80% 20%, #facc15, transparent),
+    radial-gradient(2px 2px at 30% 80%, #ffffff, transparent),
+    radial-gradient(3px 3px at 70% 75%, #f59e0b, transparent);
+  animation: travesura-star-pulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes travesura-star-pulse {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.05); }
+}
+
+.travesura-modal-card {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  width: 90%;
+  background: 
+    radial-gradient(circle at 50% 30%, #2b0f0b, #150604 80%);
+  border: 2.5px solid #d97706;
+  border-radius: 16px;
+  padding: 36px 28px;
   text-align: center;
-  margin-top: 12px;
-  padding: 0 10px;
-  max-width: 650px;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(217, 119, 6, 0.4),
+    inset 0 0 25px rgba(245, 158, 11, 0.15);
+  animation: travesura-pop 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes travesura-pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.travesura-crest-icon {
+  font-size: 2rem;
+  color: #fef08a;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 10px rgba(254, 240, 138, 0.7));
+}
+
+.travesura-title {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fef08a;
+  letter-spacing: 4px;
+  margin: 0 0 8px;
+  text-shadow: 
+    0 0 20px rgba(254, 240, 138, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.travesura-ornament-line {
+  font-size: 0.9rem;
+  color: #d97706;
+  margin-bottom: 14px;
+}
+
+.travesura-love-declaration {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin: 0 0 14px;
+  line-height: 1.35;
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.7),
+    0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.travesura-love-phrase {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #fde68a;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  padding: 0 12px;
+}
+
+.travesura-always-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(120, 28, 29, 0.55);
+  border: 1.5px solid #f59e0b;
+  border-radius: 30px;
+  padding: 6px 24px;
+  margin-bottom: 14px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+}
+
+.always-main-text {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #fef08a;
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.8);
+}
+
+.always-sparkle-l,
+.always-sparkle-r {
+  color: #facc15;
+  font-size: 1rem;
+}
+
+.travesura-author-sub {
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  color: #fca5a5;
+  margin: 0 0 24px;
+}
+
+.btn-travesura-done {
+  background: linear-gradient(135deg, #781c1d 0%, #450a0a 100%);
+  color: #fef08a;
+  border: 2px solid #f59e0b;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-family: 'Cinzel', var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(245, 158, 11, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-travesura-done:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #991b1b 0%, #5a0c0c 100%);
+  border-color: #fde047;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(254, 240, 138, 0.7);
 }
 
 /* ==========================================================================
@@ -4487,7 +4806,17 @@ html, body {
    ========================================================================== */
 @media (max-width: 680px) {
   .marauder-parchment-sheet {
-    padding: 18px 12px;
+    padding: 16px 10px;
+  }
+  .marauder-nav-hub {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .hub-btn-label {
+    font-size: 0.74rem;
+  }
+  .hub-btn-sub {
+    display: none;
   }
   .marauder-main-title {
     font-size: 1.55rem;
@@ -4525,42 +4854,14 @@ html, body {
     grid-template-columns: 1fr;
     gap: 8px;
   }
-  .marauder-gallery-tabs {
-    flex-direction: column;
-    gap: 6px;
+  .travesura-title {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
   }
-  .gallery-tab-btn {
-    width: 100%;
-    padding: 7px 12px;
-    font-size: 0.78rem;
+  .travesura-love-declaration {
+    font-size: 1.15rem;
   }
-}
-
-
-/* Toast mágico de Travesura Realizada */
-.mischief-toast {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #781c1d, #450a0a);
-  color: #fef08a;
-  border: 2px solid #b45309;
-  border-radius: 30px;
-  padding: 12px 28px;
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 700;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 119, 6, 0.5);
-  z-index: 999999;
-  animation: mischief-fade 2.2s forwards ease;
-  pointer-events: none;
-  text-align: center;
-}
-
-@keyframes mischief-fade {
-  0% { opacity: 0; transform: translate(-50%, 20px) scale(0.9); }
-  15% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-  80% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -20px) scale(0.95); }
+  .travesura-modal-card {
+    padding: 24px 16px;
+  }
 }

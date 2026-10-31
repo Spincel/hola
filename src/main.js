@@ -758,9 +758,14 @@ class ConstellationApp {
     const unfoldMapHeroBtn = document.getElementById("btn-unfold-map-hero");
     const tabBtnCartoons = document.getElementById("tab-btn-cartoons");
     const tabBtnRealPhotos = document.getElementById("tab-btn-real-photos");
+    const tabBtnLetter = document.getElementById("tab-btn-letter");
+    const tabBtnMischief = document.getElementById("tab-btn-mischief");
     const viewCartoons = document.getElementById("gallery-view-cartoons");
     const viewRealPhotos = document.getElementById("gallery-view-real-photos");
+    const viewLetter = document.getElementById("gallery-view-letter");
     const sealMischiefBtn = document.getElementById("btn-mischief-managed-seal");
+    const travesuraOverlay = document.getElementById("travesura-magica-overlay");
+    const closeTravesuraOverlayBtn = document.getElementById("btn-close-travesura-overlay");
     const lightboxModal = document.getElementById("marauder-lightbox-modal");
     const lightboxImg = document.getElementById("lightbox-img");
     const lightboxCaption = document.getElementById("lightbox-caption");
@@ -776,10 +781,57 @@ class ConstellationApp {
       }
     });
 
+    // Función mágica de cierre: « TRAVESURA REALIZADA & TE AMO »
+    let travesuraTimer = null;
+    const triggerMischiefManagedSequence = () => {
+      sound.playSpellSuccess();
+      sound.playRewardChord();
+      triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
+      triggerMagicalSparkBurst(window.innerWidth / 3, window.innerHeight / 2);
+      triggerMagicalSparkBurst((2 * window.innerWidth) / 3, window.innerHeight / 2);
+
+      if (travesuraOverlay) {
+        travesuraOverlay.classList.remove("hidden");
+        travesuraOverlay.setAttribute("aria-hidden", "false");
+      }
+
+      if (travesuraTimer) clearTimeout(travesuraTimer);
+      travesuraTimer = setTimeout(() => {
+        if (travesuraOverlay && !travesuraOverlay.classList.contains("hidden")) {
+          travesuraOverlay.classList.add("hidden");
+          travesuraOverlay.setAttribute("aria-hidden", "true");
+          if (marauderModal) marauderModal.classList.add("hidden");
+        }
+      }, 4800);
+    };
+
+    if (closeTravesuraOverlayBtn) {
+      closeTravesuraOverlayBtn.addEventListener("click", () => {
+        sound.playWandSwoosh();
+        if (travesuraTimer) clearTimeout(travesuraTimer);
+        if (travesuraOverlay) {
+          travesuraOverlay.classList.add("hidden");
+          travesuraOverlay.setAttribute("aria-hidden", "true");
+        }
+        if (marauderModal) marauderModal.classList.add("hidden");
+      });
+    }
+
+    if (tabBtnMischief) {
+      tabBtnMischief.addEventListener("click", () => {
+        triggerMischiefManagedSequence();
+      });
+    }
+
     if (closeMarauderBtn && marauderModal) {
       closeMarauderBtn.addEventListener("click", () => {
-        sound.playWandSwoosh();
-        marauderModal.classList.add("hidden");
+        triggerMischiefManagedSequence();
+      });
+    }
+
+    if (sealMischiefBtn) {
+      sealMischiefBtn.addEventListener("click", () => {
+        triggerMischiefManagedSequence();
       });
     }
 
@@ -806,22 +858,40 @@ class ConstellationApp {
       });
     }
 
-    // Pestañas de galería (Diseños animados / Fotos reales)
-    if (tabBtnCartoons && tabBtnRealPhotos) {
-      tabBtnCartoons.addEventListener("click", () => {
-        sound.playQuillScribe();
-        tabBtnCartoons.classList.add("active");
-        tabBtnRealPhotos.classList.remove("active");
-        if (viewCartoons) viewCartoons.classList.remove("hidden");
-        if (viewRealPhotos) viewRealPhotos.classList.add("hidden");
+    // Navegación de los 3 paneles de contenido (Diseños, Fotos, Carta)
+    const setActiveHubTab = (activeBtn, activeView) => {
+      [tabBtnCartoons, tabBtnRealPhotos, tabBtnLetter].forEach((btn) => {
+        if (btn) btn.classList.remove("active");
+      });
+      [viewCartoons, viewRealPhotos, viewLetter].forEach((view) => {
+        if (view) view.classList.add("hidden");
       });
 
+      if (activeBtn) activeBtn.classList.add("active");
+      if (activeView) activeView.classList.remove("hidden");
+
+      sound.playQuillScribe();
+      triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 3);
+    };
+
+    if (tabBtnCartoons) {
+      tabBtnCartoons.addEventListener("click", () => {
+        setActiveHubTab(tabBtnCartoons, viewCartoons);
+        if (viewCartoons) viewCartoons.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    }
+
+    if (tabBtnRealPhotos) {
       tabBtnRealPhotos.addEventListener("click", () => {
-        sound.playQuillScribe();
-        tabBtnRealPhotos.classList.add("active");
-        tabBtnCartoons.classList.remove("active");
-        if (viewRealPhotos) viewRealPhotos.classList.remove("hidden");
-        if (viewCartoons) viewCartoons.classList.add("hidden");
+        setActiveHubTab(tabBtnRealPhotos, viewRealPhotos);
+        if (viewRealPhotos) viewRealPhotos.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    }
+
+    if (tabBtnLetter) {
+      tabBtnLetter.addEventListener("click", () => {
+        setActiveHubTab(tabBtnLetter, viewLetter);
+        if (viewLetter) viewLetter.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     }
 
@@ -849,22 +919,6 @@ class ConstellationApp {
         if (e.target === lightboxModal) {
           lightboxModal.classList.add("hidden");
         }
-      });
-    }
-
-    // Travesura Realizada botón sello
-    if (sealMischiefBtn && marauderModal) {
-      sealMischiefBtn.addEventListener("click", () => {
-        sound.playSpellSuccess();
-        triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2);
-        const toast = document.createElement("div");
-        toast.className = "mischief-toast";
-        toast.textContent = "« Travesura Realizada... Te amo por siempre, Sinay » ⚡△⃒⃘";
-        document.body.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-          marauderModal.classList.add("hidden");
-        }, 2200);
       });
     }
 
@@ -1972,29 +2026,38 @@ class ConstellationApp {
       drawRoom(1160, 485, 240, 65, "Galería Familiar", "Mayor Bendición ✨👨‍👩‍👧‍👧👶");
       drawRoom(1160, 565, 240, 65, "Nuestra Cabaña", "Chimenea & Paz Eterna 🌲🏡🌧️", true);
 
-      // Huellas y etiquetas de los Merodeadores
+      // Huellas y etiquetas de los 5 miembros de la familia en el plano
       ctx.fillStyle = "#5a2512";
       ctx.font = "18px system-ui, sans-serif";
-      ctx.fillText("🐾  🐾  🐾", 410, 530);
-      ctx.fillText("🐾  🐾  🐾", 410, 595);
-      ctx.fillText("🐾🐾  🐾🐾  🐾🐾", 1070, 570);
+      // Pasos de Sócrates y Sinay
+      ctx.fillText("👣  👣  👣", 390, 525);
+      ctx.fillText("👣  👣  👣", 480, 585);
+      // Pasos de Sioned y Saly
+      ctx.fillText("👣  👣", 390, 605);
+      ctx.fillText("👣  👣", 1010, 515);
+      // Pasitos de Said (bebé)
+      ctx.fillText("🐾 🐾", 1020, 555);
+      // Hacia Nuestra Cabaña
+      ctx.fillText("👣👣  👣👣", 1100, 600);
 
-      // Etiquetas con nombres de Sócrates y Sinay
-      ctx.fillStyle = "#fcf4dd";
-      ctx.fillRect(360, 492, 110, 24);
-      ctx.strokeStyle = "#78350f";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(360, 492, 110, 24);
-      ctx.fillStyle = "#451a03";
-      ctx.font = "bold 13px 'Playfair Display', Georgia, serif";
-      ctx.fillText("Sócrates 🐾", 415, 508);
+      // Función auxiliar para dibujar cartela de pergamino del mapa
+      const drawMapTag = (tx, ty, tw, th, text, color = "#451a03", border = "#78350f") => {
+        ctx.fillStyle = "#fcf6e4";
+        ctx.fillRect(tx, ty, tw, th);
+        ctx.strokeStyle = border;
+        ctx.lineWidth = 1.2;
+        ctx.strokeRect(tx, ty, tw, th);
+        ctx.fillStyle = color;
+        ctx.font = "bold 13px 'Cinzel', 'Playfair Display', Georgia, serif";
+        ctx.fillText(text, tx + tw / 2, ty + th / 2 + 5);
+      };
 
-      ctx.fillStyle = "#fcf4dd";
-      ctx.fillRect(360, 608, 120, 24);
-      ctx.strokeStyle = "#781c1d";
-      ctx.strokeRect(360, 608, 120, 24);
-      ctx.fillStyle = "#781c1d";
-      ctx.fillText("Xóchitl Sinay 🐾", 420, 624);
+      drawMapTag(350, 492, 115, 24, "Sócrates 👣", "#451a03", "#78350f");
+      drawMapTag(440, 560, 130, 24, "Xóchitl Sinay 👣", "#781c1d", "#781c1d");
+      drawMapTag(350, 615, 105, 24, "Sioned 👣", "#713f12", "#854d0e");
+      drawMapTag(980, 495, 115, 24, "Said 👣 (bebé)", "#854d0e", "#a16207");
+      drawMapTag(980, 565, 95, 24, "Saly 👣", "#713f12", "#854d0e");
+      drawMapTag(1135, 632, 140, 24, "Nuestra Cabaña 🌲🏡", "#78350f", "#b45309");
 
       // 4. Sección 1: Ilustraciones Mágicas al Estilo Caricatura de Película
       ctx.fillStyle = "#63200f";
