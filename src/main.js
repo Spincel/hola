@@ -440,7 +440,7 @@ class ConstellationApp {
     }
 
     // 0B. Escritura mágica progresiva estilo Harry Potter al abrir el sobre
-    let introTypewriterInterval = null;
+    let introTypewriterTimeout = null;
 
     const startIntroTypewriter = () => {
       const letterBody = document.getElementById("unfolded-subtitle");
@@ -449,9 +449,9 @@ class ConstellationApp {
       const startBtn = document.getElementById("btn-start");
       const unfoldedBox = document.getElementById("intro-unfolded-box");
 
-      if (introTypewriterInterval) {
-        clearInterval(introTypewriterInterval);
-        introTypewriterInterval = null;
+      if (introTypewriterTimeout) {
+        clearTimeout(introTypewriterTimeout);
+        introTypewriterTimeout = null;
       }
 
       if (!letterBody) return;
@@ -467,9 +467,9 @@ class ConstellationApp {
       ];
 
       const finishIntroTypewriter = () => {
-        if (introTypewriterInterval) {
-          clearInterval(introTypewriterInterval);
-          introTypewriterInterval = null;
+        if (introTypewriterTimeout) {
+          clearTimeout(introTypewriterTimeout);
+          introTypewriterTimeout = null;
         }
         letterBody.innerHTML = paragraphs
           .map((p) => `<p class="intro-letter-p">${p}</p>`)
@@ -487,7 +487,7 @@ class ConstellationApp {
       if (unfoldedBox) {
         unfoldedBox.onclick = (e) => {
           if (e.target.closest("#btn-start")) return;
-          if (introTypewriterInterval) {
+          if (introTypewriterTimeout) {
             finishIntroTypewriter();
           }
         };
@@ -504,7 +504,7 @@ class ConstellationApp {
 
       let wordCounter = 0;
 
-      introTypewriterInterval = setInterval(() => {
+      const typeNextWord = () => {
         if (pIndex >= paragraphs.length) {
           finishIntroTypewriter();
           return;
@@ -524,7 +524,7 @@ class ConstellationApp {
 
           setTimeout(() => {
             span.classList.remove("magic-ink-glow");
-          }, 300);
+          }, 380);
 
           wordCounter++;
           if (wordCounter % 3 === 0 && sound && typeof sound.playQuillScribe === "function") {
@@ -534,6 +534,16 @@ class ConstellationApp {
           }
 
           wIndex++;
+
+          // Ritmo pausado y romántico: base 130ms, con pausas naturales tras comas o puntos
+          let delay = 130;
+          if (wordText.endsWith(",") || wordText.endsWith(";")) {
+            delay = 240;
+          } else if (wordText.endsWith(".") || wordText.endsWith("...") || wordText.endsWith(":")) {
+            delay = 380;
+          }
+
+          introTypewriterTimeout = setTimeout(typeNextWord, delay);
         } else {
           pIndex++;
           wIndex = 0;
@@ -543,11 +553,14 @@ class ConstellationApp {
             currentPEl.className = "intro-letter-p";
             letterBody.appendChild(currentPEl);
             if (quill) currentPEl.appendChild(quill);
+            introTypewriterTimeout = setTimeout(typeNextWord, 420);
           } else {
             finishIntroTypewriter();
           }
         }
-      }, 45);
+      };
+
+      typeNextWord();
     };
 
     const openEnvelope = (e) => {
@@ -562,6 +575,9 @@ class ConstellationApp {
 
       const seal = document.getElementById("btn-open-bottle");
       const flap = document.getElementById("envelope-flap");
+      const innerLetter = document.getElementById("envelope-inner-letter");
+      const bottleBox = document.getElementById("intro-bottle-box");
+      const unfoldedBox = document.getElementById("intro-unfolded-box");
       const flash = document.getElementById("supernova-flash");
 
       let centerX = window.innerWidth / 2;
@@ -572,9 +588,11 @@ class ConstellationApp {
         centerY = rect.top + rect.height / 2;
       }
 
+      // 1. Sello se rompe con magia y chispas doradas
       if (seal) seal.classList.add("breaking");
+      triggerMagicalSparkBurst(centerX, centerY);
 
-      // Flash breve cálido mágico
+      // Flash sutil cálido
       if (flash) {
         flash.classList.remove("hidden");
         flash.classList.add("active");
@@ -584,24 +602,62 @@ class ConstellationApp {
         }, 320);
       }
 
-      // Solapa se abre en 3D
+      // 2. A los 350ms la solapa superior del sobre se abre y desdobla hacia arriba en 3D
       setTimeout(() => {
         if (flap) flap.classList.add("open");
-      }, 200);
+      }, 350);
 
-      // Estallido de magia pura, chispas y estelas de Hogwarts (sin confeti)
-      triggerMagicalSparkBurst(centerX, centerY);
-
-      // El pergamino con la carta se revela y empieza a escribirse mágicamente
+      // 3. A los 950ms la hoja interior de la carta se desliza y desdobla emergiendo del sobre
       setTimeout(() => {
-        const bottleBox = document.getElementById("intro-bottle-box");
-        const unfoldedBox = document.getElementById("intro-unfolded-box");
+        if (innerLetter) innerLetter.classList.add("sliding-out");
+        sound.playWandSwoosh();
+        triggerMagicalSparkBurst(centerX, centerY - 60);
+      }, 950);
+
+      // 4. A los 2200ms el sobre se expande y disuelve en humo mágico
+      setTimeout(() => {
+        if (bottleBox) bottleBox.classList.add("unfolding-out");
+      }, 2200);
+
+      // 5. A los 2800ms se muestra el pergamino completo desplegado
+      setTimeout(() => {
         if (bottleBox) bottleBox.classList.add("hidden");
         if (unfoldedBox) {
           unfoldedBox.classList.remove("hidden");
-          startIntroTypewriter();
+          sound.playRewardChord();
+          triggerMagicalSparkBurst(window.innerWidth / 2, window.innerHeight / 2 - 80);
         }
-      }, 720);
+
+        // 6. Revelado mágico de los títulos con humo y brillo encantado
+        setTimeout(() => {
+          const fTop = document.getElementById("intro-flourish-top");
+          if (fTop) fTop.classList.add("magic-title-appear");
+        }, 350);
+
+        setTimeout(() => {
+          const title = document.getElementById("unfolded-title");
+          if (title) title.classList.add("magic-title-appear");
+          sound.playSpellSuccess();
+        }, 700);
+
+        setTimeout(() => {
+          const fBottom = document.getElementById("intro-flourish-bottom");
+          const salutation = document.getElementById("intro-lead-salutation");
+          if (fBottom) fBottom.classList.add("magic-title-appear");
+          if (salutation) salutation.classList.add("magic-title-appear");
+        }, 1100);
+
+        setTimeout(() => {
+          const heartOwner = document.getElementById("intro-heart-owner");
+          if (heartOwner) heartOwner.classList.add("magic-title-appear");
+        }, 1500);
+
+        // 7. A los 2000ms tras abrir el pergamino, inicia la escritura mágica pausada
+        setTimeout(() => {
+          startIntroTypewriter();
+        }, 2000);
+
+      }, 2800);
     };
 
     const sealBtn = document.getElementById("btn-open-bottle");

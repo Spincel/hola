@@ -107,6 +107,19 @@
 
             <!-- CARA 2: EL REVERSO (PLIEGUES Y EL AUTÉNTICO SELLO DE CERA DE HOGWARTS) -->
             <div class="envelope-face envelope-back" id="envelope-back">
+              <!-- Hoja interior de pergamino que se desdobla y emerge al abrir el sobre -->
+              <div class="envelope-inner-letter" id="envelope-inner-letter">
+                <div class="inner-letter-paper">
+                  <div class="inner-letter-crest">⚡ 🏰 ⚡</div>
+                  <div class="inner-letter-heading">HOGWARTS ✦ EXPRESS</div>
+                  <div class="inner-letter-lines">
+                    <span class="iline l1"></span>
+                    <span class="iline l2"></span>
+                    <span class="iline l3"></span>
+                  </div>
+                </div>
+              </div>
+
               <!-- Pliegues del sobre -->
               <div class="envelope-fold fold-left"></div>
               <div class="envelope-fold fold-right"></div>
@@ -200,20 +213,27 @@
 
       <!-- Estado B: El Pergamino desplegado con la carta que inicia el viaje -->
       <div id="intro-unfolded-box" class="parchment-grimoire-card intro-parchment-card hidden">
+        <!-- Velo de humo y niebla mágica que se disipa -->
+        <div class="intro-magic-smoke" id="intro-magic-smoke">
+          <div class="smoke-cloud cloud-1"></div>
+          <div class="smoke-cloud cloud-2"></div>
+          <div class="smoke-cloud cloud-3"></div>
+        </div>
+
         <div class="grimoire-bookmark">
           <span class="bookmark-station">Hogwarts</span>
           <span class="bookmark-title">Andén 9 ¾</span>
         </div>
 
         <div class="grimoire-header">
-          <div class="grimoire-flourish">❧ ✧ ⚡ ✧ ☙</div>
-          <h1 class="grimoire-step-title" id="unfolded-title">¡Bienvenida a Nuestro Viaje Mágico, Mi Amor! ⚡🚂</h1>
-          <div class="grimoire-flourish-bottom">✦ ─── London to Hogwarts ─── ✦</div>
+          <div class="grimoire-flourish magic-reveal-init" id="intro-flourish-top">❧ ✧ ⚡ ✧ ☙</div>
+          <h1 class="grimoire-step-title magic-reveal-init" id="unfolded-title">¡Bienvenida a Nuestro Viaje Mágico, Mi Amor! ⚡🚂</h1>
+          <div class="grimoire-flourish-bottom magic-reveal-init" id="intro-flourish-bottom">✦ ─── London to Hogwarts ─── ✦</div>
         </div>
 
         <div class="intro-parchment-body" id="intro-parchment-body">
-          <p class="intro-lead-salutation" id="intro-lead-salutation">Para mi amada esposa, Xóchitl Sinay:</p>
-          <p class="intro-heart-owner" id="intro-heart-owner">✦ La dueña absoluta de mi corazón y de mi vida entera ✦</p>
+          <p class="intro-lead-salutation magic-reveal-init" id="intro-lead-salutation">Para mi amada esposa, Xóchitl Sinay:</p>
+          <p class="intro-heart-owner magic-reveal-init" id="intro-heart-owner">✦ La dueña absoluta de mi corazón y de mi vida entera ✦</p>
           
           <div id="intro-letter-container" class="intro-letter-container">
             <div id="unfolded-subtitle" class="intro-letter-body"></div>
